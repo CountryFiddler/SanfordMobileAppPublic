@@ -1,10 +1,28 @@
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
+import HomeScreen from './src/screens/HomeScreen';
+import AddCustomerScreen from './src/screens/AddCustomerScreen';
+
+const navigator = createStackNavigator(
+  {
+    Home: HomeScreen,
+    AddCustomer: AddCustomerScreen,
+  },
+  {
+    initialRouteName: 'Home',
+    defaultNavigationOptions: {
+      title: 'Sanford Irrigation',
+    },
+  },
+);
+export default createAppContainer(navigator);
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
  *
  * @format
  * @flow strict-local
- */
+
 
 import React from 'react';
 import type {Node} from 'react';
@@ -109,4 +127,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default App;*/
