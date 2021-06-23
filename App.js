@@ -2,11 +2,13 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import AddCustomerScreen from './src/screens/AddCustomerScreen';
+//import AddCustomer from './src/components/AddCustomer';
 
 const navigator = createStackNavigator(
   {
     Home: HomeScreen,
     AddCustomer: AddCustomerScreen,
+    //AddCustomerComponent: AddCustomer,
   },
   {
     initialRouteName: 'Home',

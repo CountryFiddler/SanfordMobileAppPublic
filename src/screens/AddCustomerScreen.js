@@ -8,6 +8,7 @@ import {
   render,
 } from 'react-native';
 import React, {Component} from 'react';
+
 import {addCustomer} from '../../api/FirestoreApi';
 
 class AddCustomerScreen extends Component {
