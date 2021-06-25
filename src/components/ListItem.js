@@ -3,17 +3,8 @@ import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 const ListItem = props => {
   const content = (
-    <View style={styles.content}>
-      <View style={styles.textView}>
-        <Text style={styles.text}>{props.item.name}</Text>
-      </View>
-      <View style={styles.imageView}>
-        <Image
-          style={styles.image}
-          source={{uri: props.item.link}}
-          resizeMode="stretch"
-        />
-      </View>
+    <View style={styles.textView}>
+      <Text style={styles.text}>{props.item.name}</Text>
     </View>
   );
 

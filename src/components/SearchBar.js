@@ -14,10 +14,37 @@ import {getCustomers} from '../../api/FirestoreApi';
 import DropDownSearch from './DropDownSearch';
 import {SearchBar} from 'react-native-screens';
 import {contains} from '../../api/SearchingApi';
-import _ from 'lodash';
 import ListItem from './ListItem';
+import _ from 'lodash';
+import firebase from 'react-native-firebase'; /*{searching && (
+        <DropDownSearch
+          onPress={() => setSearching(false)}
+          dataSource={filtered}
+        />
+      )}
+    </View>
+  );
+}
 
-/*class CustomerSearchBar extends Component {
+const styles = StyleSheet.create({
+  container: {
+    // justifyContent: 'center',
+    //alignItems: 'center',
+    marginTop: '20%',
+    flex: 1,
+  },
+  textInput: {
+    alignSelf: 'center',
+    backgroundColor: '#BFBFBF',
+    width: '85%',
+    borderRadius: 5,
+    height: 50,
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingHorizontal: 10,
+  },
+});
+*/ /*class CustomerSearchBar extends Component {
   state = {
     loading: false,
     data: [],
@@ -156,35 +183,38 @@ const styles = StyleSheet.create({
           List of data
         </Text>
       </View>
- */
-/*}
-      {/* and at the end of view */
-
-export default function Bob() {
+ */ /*}
+      {/* and at the end of view */ /*export default function Bob() {
   const [dataSource] = useState([]);
-  const [customerList, setCustomerList] = useState([]);
+  //const [customerList, setCustomerList] = useState([]);
   const [colors] = useState(['#84DCC6', '#FEC8C8', '#F7E4CF', '#E8DEF3']);
-  const [filtered, setFiltered] = useState(customerList);
+  const [filtered, setFiltered] = useState(dataSource);
   const [searching, setSearching] = useState(false);
 
-  useEffect(() => {
+  /*useEffect(() => {
     getData();
   });
 
   function getData() {
     getCustomers(customersRetrieved);
-  }
-
+  }*/ /*
   function customersRetrieved(customerList) {
     //setCustomerList(customerList);
-    setCustomerList(customerList);
+    console.log(customerList);
+    this.setState(prevState => ({
+      dataSource: (prevState.dataSource = customerList),
+    }));
   }
+  useEffect(() => {
+    getCustomers(customersRetrieved);
+  });
+
   const onSearch = text => {
     if (text) {
       setSearching(true);
       const temp = text.toLowerCase();
 
-      const tempList = customerList.filter(item => {
+      const tempList = dataSource.filter(item => {
         if (item.match(temp)) {
           return item;
         }
@@ -192,7 +222,7 @@ export default function Bob() {
       setFiltered(tempList);
     } else {
       setSearching(false);
-      setFiltered(customerList);
+      setFiltered(dataSource);
     }
   };
   return (
@@ -204,19 +234,85 @@ export default function Bob() {
         onChangeText={onSearch}
       />
       <FlatList
-        data={customerList}
+        data={dataSource}
         keyExtractor={item => item.id}
         renderItem={({item}) => <ListItem item={item} />}
       />
-      {/* your components can stay here like anything */}
-      {searching && (
-        <DropDownSearch
-          onPress={() => setSearching(false)}
-          dataSource={filtered}
+      {/* your components can stay here like anything */
+/*import ListItem from './ListItem'; /*}*/
+class CustomerSearchBar extends Component {
+  state = {
+    customerList: [],
+    filteredCustomers: [],
+    searching: false,
+  };
+
+  /*useEffect(() => {
+    getData();
+  });
+
+  function getData() {
+    getCustomers(customersRetrieved);
+  }*/
+
+  customersRetrieved = customerList => {
+    //setCustomerList(customerList);
+    console.log(customerList);
+    this.setState(prevState => ({
+      customerList: (prevState.customerList = customerList),
+    }));
+  };
+
+  componentDidMount() {
+    getCustomers(this.customersRetrieved);
+  }
+
+  searchUser(textToSearch) {
+    if (textToSearch) {
+      this.setState({searching: true});
+      this.setState({
+        filteredCustomers: this.state.customerList.filter(customer =>
+          customer.toLowerCase().includes(textToSearch.toLowerCase()),
+        ),
+      });
+    } else {
+      this.setState({searching: false});
+    }
+  }
+
+  /*const onSearch = text => {
+    if (text) {
+      setSearching(true);
+      const temp = text.toLowerCase();
+
+      const tempList = dataSource.filter(item => {
+        if (item.match(temp)) {
+          return item;
+        }
+      });
+      setFiltered(tempList);
+    } else {
+      setSearching(false);
+      setFiltered(dataSource);
+    }
+  };*/
+  render() {
+    return (
+      <View style={styles.container}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Search Customer"
+          placeholderTextColor="white"
+          onChangeText={text => {
+            this.searchUser(text);
+          }}
         />
-      )}
-    </View>
-  );
+        {this.state.searching && (
+          <DropDownSearch dataSource={this.state.filteredCustomers} />
+        )}
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -237,3 +333,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
 });
+
+export default CustomerSearchBar;

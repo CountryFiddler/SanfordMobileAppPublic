@@ -1,4 +1,4 @@
-import firebase from 'react-native-firebase';
+import firebase, {firestore} from 'react-native-firebase';
 
 export function addCustomer(customer, addComplete) {
   firebase
@@ -16,14 +16,18 @@ export function addCustomer(customer, addComplete) {
 
 export async function getCustomers(customersRetrieved) {
   var customerList = [];
-  var snapshot = await firebase.firestore().collect('Customers').get();
-
-  snapshot.forEach(doc => {
-    console.log('doc added');
-    const customerName = doc.data().name;
-    customerList.push(customerName);
-  });
-
+  // Need to use firestore(). firebase().firestore() only read the docs,
+  // it did not store them in customerList
+  firestore()
+    .collection('Customers')
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        console.log('doc added');
+        const customerName = doc.data().name;
+        customerList.push(customerName);
+      });
+    });
   console.log('bob', customerList);
   customersRetrieved(customerList);
 }
