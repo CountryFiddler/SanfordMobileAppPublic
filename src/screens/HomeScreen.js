@@ -7,6 +7,11 @@ const HomeScreen = props => {
   return (
     <View>
       <CustomerSearchBar />
+      <Button
+        onPress={() => props.navigation.navigate('AddCustomer')}
+        title="Add Customer"
+        style={styles.textStyle}
+      />
     </View>
   );
 };
