@@ -2,12 +2,14 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import AddCustomerScreen from './src/screens/AddCustomerScreen';
+import CustomerScreen from './src/screens/CustomerScreen';
 //import AddCustomer from './src/components/AddCustomer';
 
 const navigator = createStackNavigator(
   {
     Home: HomeScreen,
     AddCustomer: AddCustomerScreen,
+    Customer: CustomerScreen,
     //AddCustomerComponent: AddCustomer,
   },
   {

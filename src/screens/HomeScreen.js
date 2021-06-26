@@ -6,7 +6,7 @@ const HomeScreen = props => {
   const [searchTerm, setTerm] = useState('');
   return (
     <View style={styles.homePageContainer}>
-      <CustomerSearchBar />
+      <CustomerSearchBar navigation={props.navigation} />
       <Button
         onPress={() => props.navigation.navigate('AddCustomer')}
         title="Add Customer"

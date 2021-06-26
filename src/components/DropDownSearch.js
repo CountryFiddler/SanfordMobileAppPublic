@@ -7,29 +7,43 @@ import {
   Text,
   TextInput,
   render,
+  Button,
 } from 'react-native';
 
-export default function DropDownSearch(props) {
-  const {dataSource} = props;
-  return (
-    <TouchableOpacity onPress={props.onPress} style={styles.container}>
-      <View style={styles.subContainer}>
-        {dataSource.length ? (
-          dataSource.map(item => {
-            return (
-              <View style={styles.itemView}>
-                <Text style={styles.itemText}>{item}</Text>
-              </View>
-            );
-          })
-        ) : (
-          <View style={styles.itemView}>
-            <Text style={styles.itemText}>No search items matched</Text>
-          </View>
-        )}
-      </View>
-    </TouchableOpacity>
-  );
+class DropDownSearch extends Component {
+  //const {customers} = customerList;
+  // const {navigation} = navigationProp.navigate('Customer');
+  render() {
+    return (
+      <TouchableOpacity
+        onPress={this.props.customerList.onPress}
+        style={styles.container}>
+        <View style={styles.subContainer}>
+          {this.props.customerList.length ? (
+            this.props.customerList.map(customer => {
+              return (
+                <View style={styles.itemView}>
+                  <Button
+                    style={styles.itemText}
+                    title={customer.searchText}
+                    onPress={() =>
+                      this.props.navigation.navigate('Customer', {
+                        customerName: customer.name,
+                      })
+                    }
+                  />
+                </View>
+              );
+            })
+          ) : (
+            <View style={styles.itemView}>
+              <Text style={styles.itemText}>No search items matched</Text>
+            </View>
+          )}
+        </View>
+      </TouchableOpacity>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -85,3 +99,5 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
+
+export default DropDownSearch;
