@@ -14,8 +14,12 @@ export function addCustomer(customer, addComplete) {
     .catch(error => console.log(error));
 }
 
-export async function getCustomers(customersRetrieved) {
-  var customerList = [];
+export async function getCustomers(
+  customerNamesRetrieved,
+  customerAddressesRetrieved,
+) {
+  var listCustomerNames = [];
+  var listCustomerAddresses = [];
   // Need to use firestore(). firebase().firestore() only read the docs,
   // it did not store them in customerList
   firestore()
@@ -24,10 +28,13 @@ export async function getCustomers(customersRetrieved) {
     .then(snapshot => {
       snapshot.forEach(doc => {
         console.log('doc added');
-        const customerName = doc.data().name;
-        customerList.push(customerName);
+        const customerName = doc.data().name + '\n' + doc.data().address;
+        const customerAddress = doc.data().address;
+        listCustomerNames.push(customerName);
+        listCustomerAddresses.push(customerAddress);
+        console.log(customerAddress);
       });
     });
-  console.log('bob', customerList);
-  customersRetrieved(customerList);
+  customerNamesRetrieved(listCustomerNames);
+  customerAddressesRetrieved(listCustomerAddresses);
 }

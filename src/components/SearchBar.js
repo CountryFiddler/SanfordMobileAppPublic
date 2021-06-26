@@ -242,8 +242,10 @@ const styles = StyleSheet.create({
 /*import ListItem from './ListItem'; /*}*/
 class CustomerSearchBar extends Component {
   state = {
-    customerList: [],
-    filteredCustomers: [],
+    customerNamesList: [],
+    customerAddressesList: [],
+    filteredCustomerNames: [],
+    filteredCustomerAddresses: [],
     searching: false,
   };
 
@@ -255,29 +257,44 @@ class CustomerSearchBar extends Component {
     getCustomers(customersRetrieved);
   }*/
 
-  customersRetrieved = customerList => {
-    //setCustomerList(customerList);
-    console.log(customerList);
+  customerNamesRetrieved = customerNamesList => {
+    console.log(customerNamesList);
     this.setState(prevState => ({
-      customerList: (prevState.customerList = customerList),
+      customerNamesList: (prevState.customerNamesList = customerNamesList),
+    }));
+  };
+
+  customerAddressesRetrieved = customerAddressesList => {
+    console.log(customerAddressesList);
+    this.setState(prevState => ({
+      customerAddressesList: (prevState.customerAddressesList = customerAddressesList),
     }));
   };
 
   componentDidMount() {
-    getCustomers(this.customersRetrieved);
+    getCustomers(this.customerNamesRetrieved, this.customerAddressesRetrieved);
   }
 
   searchUser(textToSearch) {
     if (textToSearch) {
       this.setState({searching: true});
       this.setState({
-        filteredCustomers: this.state.customerList.filter(customer =>
+        filteredCustomerNames: this.state.customerNamesList.filter(customer =>
           customer.toLowerCase().includes(textToSearch.toLowerCase()),
         ),
       });
+      // Something is wrong in the logic here
+      /*if (this.state.filteredCustomers.length <= 0) {
+        this.setState({
+          filteredCustomers: this.state.customerAddressesList.filter(customer =>
+            customer.toLowerCase().includes(textToSearch.toLowerCase()),
+          ),
+        });
+      }*/
     } else {
       this.setState({searching: false});
     }
+    //console.log(this.state.filteredCustomers.length);
   }
 
   /*const onSearch = text => {
@@ -308,7 +325,7 @@ class CustomerSearchBar extends Component {
           }}
         />
         {this.state.searching && (
-          <DropDownSearch dataSource={this.state.filteredCustomers} />
+          <DropDownSearch dataSource={this.state.filteredCustomerNames} />
         )}
       </View>
     );

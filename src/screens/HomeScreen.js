@@ -5,12 +5,12 @@ import CustomerSearchBar from '../components/SearchBar';
 const HomeScreen = props => {
   const [searchTerm, setTerm] = useState('');
   return (
-    <View>
+    <View style={styles.homePageContainer}>
       <CustomerSearchBar />
       <Button
         onPress={() => props.navigation.navigate('AddCustomer')}
         title="Add Customer"
-        style={styles.textStyle}
+        style={(styles.textStyle, styles.addCustomerButton)}
       />
     </View>
   );
@@ -21,13 +21,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'black',
   },
+  homePageContainer: {
+    flex: 1,
+  },
   textStyle: {
     fontSize: 30,
     textAlign: 'center',
+    //alignSelf: 'center',
   },
-
   addCustomerButton: {
-    marginVertical: 8,
+    //position: 'absolute',
+    marginTop: 50,
   },
 });
 

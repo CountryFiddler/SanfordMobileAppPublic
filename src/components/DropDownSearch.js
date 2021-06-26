@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   },
   itemView: {
     backgroundColor: 'white',
-    height: 30,
+    height: 70,
     width: '90%',
     //marginBottom: 10,
     justifyContent: 'center',
