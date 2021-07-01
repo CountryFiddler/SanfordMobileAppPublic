@@ -1,9 +1,16 @@
+/**
+ * Home Screen
+ * 7-1-21
+ * The page contains a search bar to search for customers and a link
+ * to go to the Add Customers Page. */
+
+// Import Statements
 import React, {useState} from 'react';
 import {Text, StyleSheet, View, Button} from 'react-native';
-import CustomerSearchBar from '../components/SearchBar';
+import CustomerSearchBar from '../components/CustomerSearchBar';
 
+// Start of Home Screen Display
 const HomeScreen = props => {
-  const [searchTerm, setTerm] = useState('');
   return (
     <View style={styles.homePageContainer}>
       <CustomerSearchBar navigation={props.navigation} />
@@ -15,7 +22,9 @@ const HomeScreen = props => {
     </View>
   );
 };
+// End of Home Screen Display
 
+// Start of StylingSheet
 const styles = StyleSheet.create({
   headerStyle: {
     borderWidth: 1,
@@ -36,4 +45,3 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreen;
-//<SearchBar term={searchTerm} onTermChange={newTerm => setTerm(newTerm)} />

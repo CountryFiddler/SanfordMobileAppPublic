@@ -1,18 +1,32 @@
+/**
+ * File Name: DropDownSearch.js
+ *
+ * Author: Ethan Gordash
+ * Date: July 1st, 2021
+ * Sanford Irrigation Mobile App
+ *
+ * Description: This class helps the CustomerSearchBar class in that it
+ * displays the customers that match the text entered in the search bar. If
+ * a customer is selected by the user, they are then redirected to the Customer
+ * Screen, which will contain all the information about the customer the
+ * user chose.
+ *
+ * Purpose: Shows users the customers that match their search and allows them
+ * to choose a customer to look at.
+ */
 import React, {Component} from 'react';
 import {
   TouchableOpacity,
   StyleSheet,
+  // May need this later
   ScrollView,
   View,
   Text,
-  TextInput,
-  render,
   Button,
 } from 'react-native';
 
 class DropDownSearch extends Component {
-  //const {customers} = customerList;
-  // const {navigation} = navigationProp.navigate('Customer');
+  // Start of displaying the Drop Down Search
   render() {
     return (
       <TouchableOpacity
@@ -20,6 +34,11 @@ class DropDownSearch extends Component {
         style={styles.container}>
         <View style={styles.subContainer}>
           {this.props.customerList.length ? (
+            // Map customers into the dropdown search
+            // searchText is the text shown for each customer button.
+            // See FirestoreApi.js for more information on searchText.
+            // If a customer is selected, then the user is directed
+            // to the customer page for that customer.
             this.props.customerList.map(customer => {
               return (
                 <View style={styles.itemView}>
@@ -29,9 +48,6 @@ class DropDownSearch extends Component {
                     onPress={() =>
                       this.props.navigation.navigate('Customer', {
                         customer: customer,
-                        //customerFirstName: customer.firstName,
-                        //customerLastName: customer.lastName,
-                        //customerAddress: customer.address,
                         navigation: this.props.navigation,
                       })
                     }
@@ -40,16 +56,20 @@ class DropDownSearch extends Component {
               );
             })
           ) : (
+            // If there are no matches for customers and what the user entered
+            // then we display the message "No Customers Found"
             <View style={styles.itemView}>
-              <Text style={styles.itemText}>No search items matched</Text>
+              <Text style={styles.itemText}>No Customers Found</Text>
             </View>
           )}
         </View>
       </TouchableOpacity>
     );
   }
+  // End of displaying the Drop Down Search
 }
 
+// Start of the stylesheet
 const styles = StyleSheet.create({
   container: {
     //position: 'absolute',
@@ -103,5 +123,6 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
+// End of the stylesheet
 
 export default DropDownSearch;
