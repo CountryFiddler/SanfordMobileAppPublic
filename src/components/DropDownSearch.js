@@ -28,7 +28,10 @@ class DropDownSearch extends Component {
                     title={customer.searchText}
                     onPress={() =>
                       this.props.navigation.navigate('Customer', {
-                        customerName: customer.name,
+                        customerFirstName: customer.firstName,
+                        customerLastName: customer.lastName,
+                        customerAddress: customer.address,
+                        navigation: this.props.navigation,
                       })
                     }
                   />

@@ -2,6 +2,7 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import AddCustomerScreen from './src/screens/AddCustomerScreen';
+import EditCustomerScreen from './src/screens/EditCustomerScreen';
 import CustomerScreen from './src/screens/CustomerScreen';
 //import AddCustomer from './src/components/AddCustomer';
 
@@ -9,6 +10,7 @@ const navigator = createStackNavigator(
   {
     Home: HomeScreen,
     AddCustomer: AddCustomerScreen,
+    EditCustomer: EditCustomerScreen,
     Customer: CustomerScreen,
     //AddCustomerComponent: AddCustomer,
   },

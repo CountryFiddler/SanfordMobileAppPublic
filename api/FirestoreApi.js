@@ -4,10 +4,12 @@ export function addCustomer(customer, addComplete) {
   firebase
     .firestore()
     .collection('Customers')
-    .add({
-      name: customer.name,
+    .doc(customer.id)
+    .set({
+      firstName: customer.firstName,
+      lastName: customer.lastName,
       address: customer.address,
-      //createdAt: firestore.FieldValue.serverTimestamp(),
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     })
     .then(snapshot => snapshot.get())
     .then(customerData => addComplete(customerData.data()))
@@ -25,11 +27,29 @@ export async function getCustomers(customersRetrieved) {
     .then(snapshot => {
       snapshot.forEach(doc => {
         customers.push({
-          name: doc.data().name,
+          firstName: doc.data().firstName,
+          lastName: doc.data().lastName,
           address: doc.data().address,
-          searchText: doc.data().name + '\n' + doc.data().address,
+          id: doc.id,
+          searchText:
+            doc.data().firstName +
+            ' ' +
+            doc.data().lastName +
+            '\n' +
+            doc.data().address,
         });
       });
     });
   customersRetrieved(customers);
+}
+
+export function updateCustomer(customer, updateComplete) {
+  firebase
+    .firestore()
+    .collection('Customers')
+    .set(customer)
+    .doc(customer.id)
+    //.then(snapshot => snapshot.get())
+    .then(() => updateComplete(customer))
+    .catch(error => console.log(error));
 }
