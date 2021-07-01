@@ -12,55 +12,71 @@ import React, {Component} from 'react';
 import {addCustomer, updateCustomer} from '../../api/FirestoreApi';
 
 class AddOrEditCustomer extends Component {
-  submitCustomerInfo(navigation, AddScreen, EditScreen) {
-    this.state.currentCustomerID =
-      this.state.currentCustomerFirstName +
-      ' ' +
-      this.state.currentCustomerLastName +
-      ' ' +
-      this.state.currentCustomerAddress;
+  submitCustomerInfo(navigation, AddScreen, EditScreen, customer) {
+    this.checkForNullTextEntries(customer);
     if (AddScreen) {
       addCustomer({
         firstName: this.state.currentCustomerFirstName,
         lastName: this.state.currentCustomerLastName,
         address: this.state.currentCustomerAddress,
-        id: this.state.currentCustomerID,
+        //id: this.state.currentCustomerID,
       });
       navigation.navigate('Home');
     }
     if (EditScreen) {
-      updateCustomer({
-        //firstName: this.state.currentCustomerFirstName,
-        //lastName: this.state.currentCustomerLastName,
-        //address: this.state.currentCustomerAddress,
-      });
+      this.state.currentCustomerID = customer.id;
+      console.log(customer.id);
+      customer.firstName = this.state.currentCustomerFirstName;
+      customer.lastName = this.state.currentCustomerLastName;
+      customer.address = this.state.currentCustomerAddress;
+      customer.searchText =
+        this.state.currentCustomerFirstName +
+        ' ' +
+        this.state.currentCustomerLastName +
+        '\n' +
+        this.state.currentCustomerAddress;
+      updateCustomer(
+        customer,
+        navigation.navigate('Customer',{customer: customer}),
+      );
     }
   }
 
-  findCustomerFirstNamePlaceholder(AddScreen, EditScreen, customerFirstName) {
+  checkForNullTextEntries(customer) {
+    if (this.state.currentCustomerFirstName == null) {
+      this.state.currentCustomerFirstName = customer.firstName;
+    }
+    if (this.state.currentCustomerLastName == null) {
+      this.state.currentCustomerLastName = customer.lastName;
+    }
+    if (this.state.currentCustomerAddress == null) {
+      this.state.currentCustomerAddress = customer.address;
+    }
+  }
+  findCustomerFirstNamePlaceholder(AddScreen, EditScreen, customer) {
     if (AddScreen) {
       this.state.customerFirstNamePlaceholder = 'Customer First Name';
     }
     if (EditScreen) {
-      this.state.customerFirstNamePlaceholder = customerFirstName;
+      this.state.customerFirstNamePlaceholder = customer.firstName;
     }
   }
 
-  findCustomerLastNamePlaceholder(AddScreen, EditScreen, customerLastName) {
+  findCustomerLastNamePlaceholder(AddScreen, EditScreen, customer) {
     if (AddScreen) {
       this.state.customerLastNamePlaceholder = 'Customer Last Name';
     }
     if (EditScreen) {
-      this.state.customerLastNamePlaceholder = customerLastName;
+      this.state.customerLastNamePlaceholder = customer.lastName;
     }
   }
 
-  findCustomerAddressPlaceholder(AddScreen, EditScreen, customerAddress) {
+  findCustomerAddressPlaceholder(AddScreen, EditScreen, customer) {
     if (AddScreen) {
       this.state.customerAddressPlaceholder = 'Customer Address';
     }
     if (EditScreen) {
-      this.state.customerAddressPlaceholder = customerAddress;
+      this.state.customerAddressPlaceholder = customer.address;
     }
   }
 
@@ -75,28 +91,27 @@ class AddOrEditCustomer extends Component {
   };
 
   render() {
-    const customerFirstName = this.props.navigation.getParam(
-      'customerFirstName',
-    );
-    const customerLastName = this.props.navigation.getParam('customerLastName');
-    const customerAddress = this.props.navigation.getParam('customerAddress');
+    const customer = this.props.navigation.getParam('customer');
+    /*this.state.currentCustomerFirstName = customer.firstName;
+    this.state.currentCustomerLastName = customer.lastName;
+    this.state.currentCustomerAddress = customer.address;*/
     const {navigation} = this.props;
     this.findCustomerFirstNamePlaceholder(
       this.props.AddScreen,
       this.props.EditScreen,
-      customerFirstName,
+      customer,
     );
 
     this.findCustomerLastNamePlaceholder(
       this.props.AddScreen,
       this.props.EditScreen,
-      customerLastName,
+      customer,
     );
 
     this.findCustomerAddressPlaceholder(
       this.props.AddScreen,
       this.props.EditScreen,
-      customerAddress,
+      customer,
     );
     return (
       <SafeAreaView>
@@ -135,6 +150,7 @@ class AddOrEditCustomer extends Component {
                 navigation,
                 this.props.AddScreen,
                 this.props.EditScreen,
+                customer,
               )
             }
           />

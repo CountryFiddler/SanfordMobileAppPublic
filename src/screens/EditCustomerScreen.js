@@ -7,9 +7,7 @@ const EditCustomerScreen = props => {
   return (
     <View style={styles.homePageContainer}>
       <AddOrEditCustomer
-        customerFirstName={props.customerFirstName}
-        customerLastName={props.customerLastName}
-        customerAddress={props.customerAddress}
+        customer={props.customer}
         navigation={props.navigation}
         AddScreen={false}
         EditScreen={true}

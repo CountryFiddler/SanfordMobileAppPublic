@@ -9,6 +9,12 @@ export function addCustomer(customer, addComplete) {
       firstName: customer.firstName,
       lastName: customer.lastName,
       address: customer.address,
+      addressHistory: firebase.firestore.FieldValue.arrayUnion(
+        customer.address,
+      ),
+      nameHistory: firebase.firestore.FieldValue.arrayUnion(
+        customer.firstName + ' ' + customer.lastName,
+      ),
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     })
     .then(snapshot => snapshot.get())
@@ -43,13 +49,24 @@ export async function getCustomers(customersRetrieved) {
   customersRetrieved(customers);
 }
 
-export function updateCustomer(customer, updateComplete) {
+export function updateCustomer(customer) {
   firebase
     .firestore()
     .collection('Customers')
-    .set(customer)
     .doc(customer.id)
-    //.then(snapshot => snapshot.get())
-    .then(() => updateComplete(customer))
+    .update({
+      firstName: customer.firstName,
+      lastName: customer.lastName,
+      address: customer.address,
+      //searchText: customer.searchText,
+      addressHistory: firebase.firestore.FieldValue.arrayUnion(
+        customer.address,
+      ),
+      nameHistory: firebase.firestore.FieldValue.arrayUnion(
+        customer.firstName + ' ' + customer.lastName,
+      ),
+    })
+    // I think this updates the database quicker???
+    .then(snapshot => snapshot.get())
     .catch(error => console.log(error));
 }
