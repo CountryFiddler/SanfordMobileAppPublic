@@ -16,7 +16,7 @@
 // Import Statements
 import React, {useState} from 'react';
 import {Text, StyleSheet, View, Button} from 'react-native';
-import AddOrEditCustomer from '../components/AddCustomer';
+import AddOrEditCustomer from '../components/AddOrEditCustomer';
 
 const EditCustomerScreen = props => {
   // Start of the display for Edit Customer Screen

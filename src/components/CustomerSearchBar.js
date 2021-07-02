@@ -101,6 +101,7 @@ class CustomerSearchBar extends Component {
     return (
       <View style={styles.container}>
         <TextInput
+          // This is the actual search bar
           style={styles.textInput}
           placeholder="Search Customer"
           placeholderTextColor="white"
@@ -110,6 +111,7 @@ class CustomerSearchBar extends Component {
         />
         {this.state.searching && (
           <DropDownSearch
+            // This the drop down search that appears as a user is searching
             customerList={this.state.filteredCustomers}
             navigation={this.props.navigation}
           />

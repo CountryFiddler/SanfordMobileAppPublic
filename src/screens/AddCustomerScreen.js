@@ -24,7 +24,7 @@ import {
   render,
 } from 'react-native';
 import React, {Component} from 'react';
-import AddOrEditCustomer from '../components/AddCustomer';
+import AddOrEditCustomer from '../components/AddOrEditCustomer';
 
 const AddCustomerScreen = props => {
   // Start of the display for Add Customer Screen

@@ -4,6 +4,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import AddCustomerScreen from './src/screens/AddCustomerScreen';
 import EditCustomerScreen from './src/screens/EditCustomerScreen';
 import CustomerScreen from './src/screens/CustomerScreen';
+import TimerInfoScreen from './src/screens/TimerInfoScreen';
 //import AddCustomer from './src/components/AddCustomer';
 
 const navigator = createStackNavigator(
@@ -12,6 +13,7 @@ const navigator = createStackNavigator(
     AddCustomer: AddCustomerScreen,
     EditCustomer: EditCustomerScreen,
     Customer: CustomerScreen,
+    TimerInfo: TimerInfoScreen,
     //AddCustomerComponent: AddCustomer,
   },
   {

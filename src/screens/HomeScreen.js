@@ -1,9 +1,16 @@
 /**
- * Home Screen
- * 7-1-21
- * The page contains a search bar to search for customers and a link
- * to go to the Add Customers Page. */
-
+ * File Name: HomeScreen.js
+ *
+ * Author: Ethan Gordash
+ * Date: July 1st, 2021
+ * Sanford Irrigation Mobile App
+ *
+ * Description: This screen allows users to search for an existing customer
+ * or navigate to the screen to add a new custoemr to the database.
+ *
+ * Purpose: Provides users with the ability to search for customers in the
+ * database and navigate to the screen to add new customers.
+ */
 // Import Statements
 import React, {useState} from 'react';
 import {Text, StyleSheet, View, Button} from 'react-native';
