@@ -10,13 +10,22 @@ import {Text, StyleSheet, View, Button} from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
 
 // Start of Home Screen Display
-const TimerInfoScreen = props => {
+const TimerSelectionScreen = props => {
   const customer = props.navigation.getParam('customer');
   return (
     <View style={styles.homePageContainer}>
       <Text>{customer.firstName}</Text>
       <Text>{customer.lastName}</Text>
       <Text>{customer.address}</Text>
+      <Button
+        onPress={() =>
+          props.navigation.navigate('AddTimer', {
+            customer: customer,
+            navigation: props.navigation,
+          })
+        }
+        title={'Add Timer'}
+      />
     </View>
   );
 };
@@ -42,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TimerInfoScreen;
+export default TimerSelectionScreen;

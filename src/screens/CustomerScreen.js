@@ -43,7 +43,7 @@ const CustomerScreen = props => {
         // is redirected to the Timer Info Screen
         onPress={() =>
           // Pass navigation and customer as props to the Edit Customer Screen
-          props.navigation.navigate('TimerInfo', {
+          props.navigation.navigate('TimerSelection', {
             customer: customer,
           })
         }

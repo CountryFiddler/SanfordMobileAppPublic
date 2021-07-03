@@ -29,7 +29,7 @@ export function addCustomer(customer, addComplete) {
     .collection('Timer')
     .doc()
     .set({
-      type: null,
+      timerType: null,
       numPrograms: null,
       numZones: null,
     })
@@ -84,5 +84,26 @@ export function updateCustomer(customer) {
     })
     // I think this updates the database quicker???
     .then(snapshot => snapshot.get())
+    .catch(error => console.log(error));
+}
+
+// Start of Timer adding and getting functions
+export function addTimer(customer, timer, addComplete) {
+  const docRef = firebase
+    .firestore()
+    .collection('Customers')
+    // Is customer.id needed here?
+    .doc(customer.id);
+
+  docRef
+    .collection('Timer')
+    .doc()
+    .set({
+      timerType: timer.timerType,
+      numPrograms: timer.numPrograms,
+      numZones: timer.numZones,
+    })
+    .then(snapshot => snapshot.get())
+    .then(customerData => addComplete(customerData.data()))
     .catch(error => console.log(error));
 }
