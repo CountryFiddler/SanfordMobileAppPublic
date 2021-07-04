@@ -14,28 +14,6 @@ import TimerSelection from '../components/TimerSelection';
 
 // Start of Home Screen Display
 const TimerSelectionScreen = props => {
-  /*state = {
-    timerList: [],
-    bob: [],
-  };
-
-  timersRetrieved = retrievedTimerList => {
-    /*this.setState(prevState => ({
-      timerList: (prevState.timerList = retrievedTimerList),
-    }));*/ /*
-    this.setState({timerList: retrievedTimerList});
-  };
-  componentDidMount() {
-    getTimers(this.props.navigation.getParam('customer'), this.timersRetrieved);
-  }
-
-  //console.log(this.state.timerList.length);
-  render() {
-    //getTimers(this.props.navigation.getParam('customer'), this.timersRetrieved);
-    //console.log(this.state.timerList.length);
-    const customer = this.props.navigation.getParam('customer');
-    //alert(this.state.timerList[0]);
-  */
   const customer = props.navigation.getParam('customer');
   const timers = props.navigation.getParam('timers');
   return (
