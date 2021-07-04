@@ -5,18 +5,46 @@
  * to go to the Add Customers Page. */
 
 // Import Statements
-import React, {useState} from 'react';
+import React, {Component, useState} from 'react';
 import {Text, StyleSheet, View, Button} from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
+import {getTimerInfo} from '../../api/TimerApi';
+import {getTimers} from '../../api/FirestoreApi';
+import TimerSelection from '../components/TimerSelection';
 
 // Start of Home Screen Display
 const TimerSelectionScreen = props => {
+  /*state = {
+    timerList: [],
+    bob: [],
+  };
+
+  timersRetrieved = retrievedTimerList => {
+    /*this.setState(prevState => ({
+      timerList: (prevState.timerList = retrievedTimerList),
+    }));*/ /*
+    this.setState({timerList: retrievedTimerList});
+  };
+  componentDidMount() {
+    getTimers(this.props.navigation.getParam('customer'), this.timersRetrieved);
+  }
+
+  //console.log(this.state.timerList.length);
+  render() {
+    //getTimers(this.props.navigation.getParam('customer'), this.timersRetrieved);
+    //console.log(this.state.timerList.length);
+    const customer = this.props.navigation.getParam('customer');
+    //alert(this.state.timerList[0]);
+  */
   const customer = props.navigation.getParam('customer');
+  const timers = props.navigation.getParam('timers');
   return (
     <View style={styles.homePageContainer}>
-      <Text>{customer.firstName}</Text>
-      <Text>{customer.lastName}</Text>
-      <Text>{customer.address}</Text>
+      <TimerSelection
+        customer={customer}
+        timerList={timers}
+        navigation={props.navigation}
+      />
       <Button
         onPress={() =>
           props.navigation.navigate('AddTimer', {

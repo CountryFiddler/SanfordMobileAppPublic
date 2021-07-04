@@ -55,6 +55,7 @@ class CustomerSearchBar extends Component {
    */
   componentDidMount() {
     getCustomers(this.customersRetrieved);
+    //console.log(this.state.customersList.length);
   }
 
   /**
@@ -78,6 +79,7 @@ class CustomerSearchBar extends Component {
     // If the user starts typing into the search bar, enter into this condition
     if (textToSearch) {
       this.setState({searching: true});
+      //console.log(this.state.customersList.length);
       // Filter the customers. Also make the text lower case so it does not
       // matter if the user types in upper case or lower case.
       this.setState({
@@ -90,6 +92,7 @@ class CustomerSearchBar extends Component {
             .includes(textToSearch.toLowerCase()),
         ),
       });
+      //console.log(this.state.customersList.length);
       // If the user is not typing, set searching to false
     } else {
       this.setState({searching: false});
@@ -98,6 +101,8 @@ class CustomerSearchBar extends Component {
 
   // Start of displaying the customer search bar
   render() {
+    //console.log(this.state.customersList.length);
+    //alert(this.state.customersList.length);
     return (
       <View style={styles.container}>
         <TextInput

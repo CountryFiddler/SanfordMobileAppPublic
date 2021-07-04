@@ -107,3 +107,33 @@ export function addTimer(customer, timer, addComplete) {
     .then(customerData => addComplete(customerData.data()))
     .catch(error => console.log(error));
 }
+
+export function getTimers(customer) {
+  var timersList = [];
+  var counter = 0;
+  const docRef = firestore()
+    .collection('Customers')
+    // Is customer.id needed here?
+    .doc(customer.id);
+  //console.log(customer.id);
+  //console.log(docRef);
+  docRef
+    .collection('Timer')
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        timersList.push({
+          timerType: doc.data().timerType,
+          numPrograms: doc.data().numPrograms,
+          numZones: doc.data().numZones,
+          id: doc.id,
+        });
+        //alert(timersList.length);
+        //counter++;
+      });
+    });
+  // alert(timersList.length);
+ // timersRetrieved(timersList);
+  return timersList;
+  // alert(timersList.length);
+}

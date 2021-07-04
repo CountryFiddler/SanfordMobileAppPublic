@@ -16,11 +16,13 @@
 import React, {useState} from 'react';
 import {Text, StyleSheet, View, Button} from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
+import {getTimers} from '../../api/FirestoreApi';
 
 const CustomerScreen = props => {
   // Get the customer the user selected from the drop down menu when they
   // searched for a customer
   const customer = props.navigation.getParam('customer');
+  const timers = getTimers(customer);
   // Start of the display for Customer Screen
   return (
     <View>
@@ -45,6 +47,7 @@ const CustomerScreen = props => {
           // Pass navigation and customer as props to the Edit Customer Screen
           props.navigation.navigate('TimerSelection', {
             customer: customer,
+            timers: timers,
           })
         }
         title="Timer"
