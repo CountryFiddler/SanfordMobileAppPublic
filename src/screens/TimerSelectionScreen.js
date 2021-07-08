@@ -6,7 +6,7 @@
 
 // Import Statements
 import React, {Component, useState} from 'react';
-import {Text, StyleSheet, View, Button} from 'react-native';
+import {Text, StyleSheet, View, Button, Alert} from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import {getTimerInfo} from '../../api/TimerApi';
 import {getTimers} from '../../api/FirestoreApi';
@@ -16,6 +16,7 @@ import TimerSelection from '../components/TimerSelection';
 const TimerSelectionScreen = props => {
   const customer = props.navigation.getParam('customer');
   const timers = props.navigation.getParam('timers');
+  //const timers = getTimers(customer);
   return (
     <View style={styles.homePageContainer}>
       <TimerSelection

@@ -22,11 +22,12 @@ import {
   ScrollView,
   View,
   Text,
-  Button, Alert,
-} from "react-native";
+  Button,
+  Alert,
+} from 'react-native';
 import {getCustomers, getTimers} from '../../api/FirestoreApi';
 
-const TimerSelection = props => {
+const NotesNavigator = props => {
   // Start of displaying the Drop Down Search
   //console.log(props.timerList.length);
   //console.log(this.state.timerList);
@@ -35,22 +36,22 @@ const TimerSelection = props => {
       //onPress={this.props.timerList.onPress}
       style={styles.container}>
       <View style={styles.subContainer}>
-        {props.timerList.length ? (
+        {props.notes.length ? (
           // Map customers into the dropdown search
           // searchText is the text shown for each customer button.
           // See FirestoreApi.js for more information on searchText.
           // If a customer is selected, then the user is directed
           // to the customer page for that customer.
-          props.timerList.map(timer => {
+          props.notes.map(notes => {
             return (
               <View style={styles.itemView}>
                 <Button
                   style={styles.itemText}
-                  title={timer.timerType}
+                  title={notes.title}
                   onPress={() =>
-                    props.navigation.navigate('TimerInfo', {
+                    props.navigation.navigate('UtilityNote', {
                       customer: props.customer,
-                      timer: timer,
+                      notes: notes,
                       navigation: props.navigation,
                     })
                   }
@@ -127,4 +128,4 @@ const styles = StyleSheet.create({
 });
 // End of the stylesheet
 
-export default TimerSelection;
+export default NotesNavigator;

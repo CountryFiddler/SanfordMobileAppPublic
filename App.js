@@ -6,6 +6,11 @@ import EditCustomerScreen from './src/screens/EditCustomerScreen';
 import CustomerScreen from './src/screens/CustomerScreen';
 import TimerSelectionScreen from './src/screens/TimerSelectionScreen';
 import AddTimerScreen from './src/screens/AddTimerScreen';
+import TimerInfoScreen from './src/screens/TimerInfoScreen';
+import EditTimerInfoScreen from './src/screens/EditTimerInfoScreen';
+import TimerNotesNavigatorScreen from './src/screens/TimerNotesNavigator';
+import UtilityNoteScreen from './src/screens/UtilityNoteScreen';
+import AddNoteScreen from './src/screens/AddNoteScreen';
 //import AddCustomer from './src/components/AddCustomer';
 
 const navigator = createStackNavigator(
@@ -16,6 +21,11 @@ const navigator = createStackNavigator(
     Customer: CustomerScreen,
     TimerSelection: TimerSelectionScreen,
     AddTimer: AddTimerScreen,
+    TimerInfo: TimerInfoScreen,
+    EditTimer: EditTimerInfoScreen,
+    TimerNotesNavigator: TimerNotesNavigatorScreen,
+    UtilityNote: UtilityNoteScreen,
+    AddNote: AddNoteScreen,
     //AddCustomerComponent: AddCustomer,
   },
   {

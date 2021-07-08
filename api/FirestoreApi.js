@@ -24,18 +24,6 @@ export function addCustomer(customer, addComplete) {
     .then(snapshot => snapshot.get())
     .then(customerData => addComplete(customerData.data()))
     .catch(error => console.log(error));
-
-  docRef
-    .collection('Timer')
-    .doc()
-    .set({
-      timerType: null,
-      numPrograms: null,
-      numZones: null,
-    })
-    .then(snapshot => snapshot.get())
-    .then(customerData => addComplete(customerData.data()))
-    .catch(error => console.log(error));
 }
 
 export async function getCustomers(customersRetrieved) {
@@ -94,9 +82,9 @@ export function addTimer(customer, timer, addComplete) {
     .collection('Customers')
     // Is customer.id needed here?
     .doc(customer.id);
-
+  console.log(customer.id);
   docRef
-    .collection('Timer')
+    .collection('Timers')
     .doc()
     .set({
       timerType: timer.timerType,
@@ -106,8 +94,32 @@ export function addTimer(customer, timer, addComplete) {
     .then(snapshot => snapshot.get())
     .then(customerData => addComplete(customerData.data()))
     .catch(error => console.log(error));
+  console.log(timer.timerType);
 }
 
+export function updateTimers(customer, timer) {
+  firebase
+    .firestore()
+    .collection('Customers')
+    .doc(customer.id)
+    .collection('Timers')
+    .doc(timer.id)
+    .update({
+      timerType: timer.timerType,
+      numPrograms: timer.numPrograms,
+      numZones: timer.numZones,
+      //searchText: customer.searchText,
+      //addressHistory: firebase.firestore.FieldValue.arrayUnion(
+      //customer.address,
+      // ),
+      //nameHistory: firebase.firestore.FieldValue.arrayUnion(
+      // customer.firstName + ' ' + customer.lastName,
+      //),
+    })
+    // I think this updates the database quicker???
+    .then(snapshot => snapshot.get())
+    .catch(error => console.log(error));
+}
 export function getTimers(customer) {
   var timersList = [];
   var counter = 0;
@@ -118,7 +130,7 @@ export function getTimers(customer) {
   //console.log(customer.id);
   //console.log(docRef);
   docRef
-    .collection('Timer')
+    .collection('Timers')
     .get()
     .then(snapshot => {
       snapshot.forEach(doc => {
@@ -127,13 +139,74 @@ export function getTimers(customer) {
           numPrograms: doc.data().numPrograms,
           numZones: doc.data().numZones,
           id: doc.id,
+          customerID: customer.id,
         });
         //alert(timersList.length);
         //counter++;
       });
     });
   // alert(timersList.length);
- // timersRetrieved(timersList);
+  // timersRetrieved(timersList);
   return timersList;
+  // alert(timersList.length);
+}
+
+// Start of Timer adding and getting functions
+export function addNote(
+  customer,
+  utilityType,
+  utility,
+  utilityNote,
+  addComplete,
+) {
+  const docRef = firebase
+    .firestore()
+    .collection('Customers')
+    // Is customer.id needed here?
+    .doc(customer.id)
+    .collection(utilityType)
+    .doc(utility.id);
+
+  docRef
+    .collection('TimerNotes')
+    .doc()
+    .set({
+      title: utilityNote.noteTitle,
+      noteText: utilityNote.noteText,
+    })
+    .then(snapshot => snapshot.get())
+    .then(customerData => addComplete(customerData.data()))
+    .catch(error => console.log(error));
+}
+
+export function getTimerNotes(customer, timer) {
+  var timerNotesList = [];
+  var counter = 0;
+  const docRef = firestore()
+    .collection('Customers')
+    // Is customer.id needed here?
+    .doc(customer.id)
+    .collection('Timers')
+    .doc(timer.id);
+  //console.log(customer.id);
+  //console.log(docRef);
+  docRef
+    .collection('TimerNotes')
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        timerNotesList.push({
+          title: doc.data().title,
+          noteText: doc.data().noteText,
+          timerID: doc.id,
+          customerID: customer.id,
+        });
+        //alert(timersList.length);
+        //counter++;
+      });
+    });
+  // alert(timersList.length);
+  // timersRetrieved(timersList);
+  return timerNotesList;
   // alert(timersList.length);
 }
