@@ -20,18 +20,59 @@ import {
   Button,
   SafeAreaView,
   TextInput,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
-import { submitNote, submitTimerInfo } from "../../api/TimerApi";
-
+import {submitNote, submitTimerInfo} from '../../api/TimerApi';
+import UploadNoteImage from '../components/UploadNoteImage';
+import {launchImageLibrary} from 'react-native-image-picker';
+import {UploadImage} from '../../api/FirestoreApi';
 // Start of Home Screen Display
 const AddNoteScreen = props => {
-  // Start of Add Timer Screen Display
   const customer = props.navigation.getParam('customer');
   const utilityType = props.navigation.getParam('utilityType');
   const utility = props.navigation.getParam('utility');
   const [noteTitle, setNoteTitle] = useState(null);
   const [noteText, setNoteText] = useState(null);
+  const [images, setImage] = useState([]);
+  const [imageRefs, setImages] = useState([]);
+  //const [uploading, setUploading] = useState(false);
+  //const [transferred, setTransferred] = useState(0);
+  const selectImage = () => {
+    const options = {
+      maxWidth: 2000,
+      maxHeight: 2000,
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    launchImageLibrary(options, response => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        const source = {uri: response.assets[0].uri};
+        const {uri} = source;
+        //console.log(source);
+        setImage(prevItems => [...prevItems, {source}]);
+        const imageRef =
+          customer.id +
+          '/' +
+          'TimerNotes' +
+          '/' +
+          uri.substring(uri.lastIndexOf('/') + 1);
+        setImages(prevItems => [...prevItems, {imageRef}]);
+        console.log(imageRefs);
+        console.log(images);
+      }
+    });
+  };
+  // Start of Add Timer Screen Display
   //const [numZones, setNumZones] = useState(null);
   return (
     <SafeAreaView>
@@ -51,44 +92,86 @@ const AddNoteScreen = props => {
           value={noteText}
           onChangeText={text => setNoteText(text)}
         />
-        <Button
-          // Submit button, when clicked submits the info entered by
-          // the user to the database
-          title="Submit"
-          onPress={() =>
-            submitNote(
-              customer,
-              utilityType,
-              utility,
-              noteTitle,
-              noteText,
-              props.navigation,
-            )
-          }
-        />
+        <SafeAreaView style={styles.container}>
+          <TouchableOpacity style={styles.selectButton} onPress={selectImage}>
+            <Text style={styles.buttonText}>Pick an image</Text>
+          </TouchableOpacity>
+          <View style={styles.imageContainer}>
+            {images.length
+              ? images.map(image => {
+                  return (
+                    <View style={styles.itemView}>
+                      <Image
+                        source={{uri: image.uri}}
+                        style={styles.imageBox}
+                      />
+                    </View>
+                  );
+                })
+              : null}
+            <TouchableOpacity
+              style={styles.uploadButton}
+              onPress={() =>
+                submitNote(
+                  customer,
+                  images,
+                  imageRefs,
+                  utilityType,
+                  utility,
+                  noteTitle,
+                  noteText,
+                  props.navigation,
+                )
+              }>
+              <Text style={styles.buttonText}>Submit Info</Text>
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
       </View>
     </SafeAreaView>
   );
 };
 // End of Home Screen Display
 
-// Start of StylingSheet
 const styles = StyleSheet.create({
-  headerStyle: {
-    borderWidth: 1,
-    borderColor: 'black',
-  },
-  homePageContainer: {
+  container: {
     flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#bbded6',
   },
-  textStyle: {
-    fontSize: 30,
-    textAlign: 'center',
-    //alignSelf: 'center',
+  selectButton: {
+    borderRadius: 5,
+    width: 150,
+    height: 50,
+    backgroundColor: '#8ac6d1',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  addCustomerButton: {
-    //position: 'absolute',
-    marginTop: 50,
+  uploadButton: {
+    borderRadius: 5,
+    width: 150,
+    height: 50,
+    backgroundColor: '#ffb6b9',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  imageContainer: {
+    marginTop: 30,
+    marginBottom: 50,
+    alignItems: 'center',
+  },
+  progressBarContainer: {
+    marginTop: 20,
+  },
+  imageBox: {
+    width: 300,
+    height: 300,
   },
 });
 // End of Home Screen Display

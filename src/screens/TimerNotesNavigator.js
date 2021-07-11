@@ -24,7 +24,11 @@ const TimerNotesNavigatorScreen = props => {
   const customer = props.navigation.getParam('customer');
   return (
     <View style={styles.homePageContainer}>
-      <NotesNavigator notes={timerNotes} customer={customer} />
+      <NotesNavigator
+        notes={timerNotes}
+        customer={customer}
+        navigation={props.navigation}
+      />
       <Button
         // If the Timer button is pressed, then the user
         // is redirected to the Timer Info Screen

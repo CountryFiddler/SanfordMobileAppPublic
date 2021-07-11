@@ -1,5 +1,8 @@
 //TODO Add comments to FirestoreApi
 import firebase, {firestore} from 'react-native-firebase';
+import {Alert, Platform} from 'react-native';
+import storage from '@react-native-firebase/storage';
+import {useState} from 'react';
 
 export function addCustomer(customer, addComplete) {
   const docRef = firebase
@@ -157,6 +160,7 @@ export function addNote(
   utilityType,
   utility,
   utilityNote,
+  imageRefs,
   addComplete,
 ) {
   const docRef = firebase
@@ -172,7 +176,12 @@ export function addNote(
     .doc()
     .set({
       title: utilityNote.noteTitle,
-      noteText: utilityNote.noteText,
+      noteContent: [
+        {
+          noteText: utilityNote.noteText,
+          imageRef: imageRefs,
+        },
+      ],
     })
     .then(snapshot => snapshot.get())
     .then(customerData => addComplete(customerData.data()))
@@ -209,4 +218,34 @@ export function getTimerNotes(customer, timer) {
   // timersRetrieved(timersList);
   return timerNotesList;
   // alert(timersList.length);
+}
+
+export async function UploadImage(images, customer) {
+  var counter = 0;
+  //const [image, setImage] = useState(null);
+  //const [uploading, setUploading] = useState(false);
+  // const [transferred, setTransferred] = useState(0);
+  console.log(images);
+  while (counter < images.length) {
+    const {uri} = images[counter].source;
+    const filename = uri.substring(uri.lastIndexOf('/') + 1);
+    const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+    const task = storage()
+      .ref(customer.id + '/' + 'TimerNotes' + '/' + filename)
+      .putFile(uploadUri);
+    // set progress state
+    task.on('state_changed', snapshot => {});
+    try {
+      await task;
+    } catch (e) {
+      console.error(e);
+    }
+    counter++;
+    Alert.alert(
+      'Photo uploaded!',
+      'Your photo has been uploaded to Firebase Cloud Storage!',
+    );
+  }
+  console.log('Done Adding Photos');
+  // setImage(null);
 }

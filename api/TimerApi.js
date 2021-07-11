@@ -1,5 +1,11 @@
 import firebase from 'react-native-firebase';
-import {addNote, addTimer, getTimers, updateTimers} from './FirestoreApi';
+import {
+  addNote,
+  addTimer,
+  getTimers,
+  updateTimers,
+  UploadImage,
+} from './FirestoreApi';
 
 export function submitTimerInfo(
   customer,
@@ -47,6 +53,8 @@ export function getTimerInfo(customer, setTimers) {
 
 export function submitNote(
   customer,
+  images,
+  imageRefs,
   utilityType,
   utility,
   noteTitle,
@@ -56,7 +64,8 @@ export function submitNote(
   var utilityNote = {noteTitle, noteText};
   utilityNote.noteTitle = noteTitle;
   utilityNote.noteText = noteText;
-  console.log(utility.id);
-  console.log(utilityNote.noteTitle);
-  addNote(customer, utilityType, utility, utilityNote, navigation);
+  console.log(images[0]);
+  UploadImage(images, customer);
+  addNote(customer, utilityType, utility, utilityNote, imageRefs, navigation);
+  navigation.navigate('UtilityNoteScreen');
 }
