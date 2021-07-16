@@ -42,16 +42,16 @@ const NotesNavigator = props => {
           // See FirestoreApi.js for more information on searchText.
           // If a customer is selected, then the user is directed
           // to the customer page for that customer.
-          props.notes.map(notes => {
+          props.notes.map(note => {
             return (
               <View style={styles.itemView}>
                 <Button
                   style={styles.itemText}
-                  title={notes.title}
+                  title={note.title}
                   onPress={() =>
                     props.navigation.navigate('UtilityNote', {
                       customer: props.customer,
-                      notes: notes,
+                      note: note,
                       navigation: props.navigation,
                     })
                   }

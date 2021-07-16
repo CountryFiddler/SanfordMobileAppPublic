@@ -24,6 +24,7 @@ const TimerInfoScreen = props => {
   const timer = props.navigation.getParam('timer');
   const navigation = props.navigation;
   const timerNotes = getTimerNotes(customer, timer);
+  console.log(timerNotes);
   return (
     <View style={styles.homePageContainer}>
       <Text>{timer.timerType} </Text>

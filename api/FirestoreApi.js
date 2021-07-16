@@ -161,6 +161,7 @@ export function addNote(
   utility,
   utilityNote,
   imageRefs,
+  numImages,
   addComplete,
 ) {
   const docRef = firebase
@@ -176,9 +177,10 @@ export function addNote(
     .doc()
     .set({
       title: utilityNote.noteTitle,
-      noteContent: [
+      noteText: utilityNote.noteText,
+      numImages: numImages,
+      imageRefs: [
         {
-          noteText: utilityNote.noteText,
           imageRef: imageRefs,
         },
       ],
@@ -189,7 +191,7 @@ export function addNote(
 }
 
 export function getTimerNotes(customer, timer) {
-  var timerNotesList = [];
+  var notesList = [];
   var counter = 0;
   const docRef = firestore()
     .collection('Customers')
@@ -197,6 +199,74 @@ export function getTimerNotes(customer, timer) {
     .doc(customer.id)
     .collection('Timers')
     .doc(timer.id);
+  //console.log(customer.id);
+  //console.log(docRef);
+  //const notes = firestore.collection('TimerNotes').doc();
+  docRef
+    .collection('TimerNotes')
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        notesList.push({
+          title: doc.data().title,
+          noteText: doc.data().noteText,
+          utilityID: timer.id,
+          customerID: customer.id,
+          noteID: doc.id,
+          numImages: doc.data().numImages,
+          images: doc.data().imageRefs[0].imageRef,
+        });
+        //console.log(notesList.images.imageRef);
+        //alert(timersList.length);
+        //counter++;
+      });
+    });
+  // alert(timersList.length);
+  // timersRetrieved(timersList);
+  return notesList;
+  // alert(timersList.length);
+}
+
+export async function UploadImage(images, customer) {
+  var counter = 0;
+  //const [image, setImage] = useState(null);
+  //const [uploading, setUploading] = useState(false);
+  // const [transferred, setTransferred] = useState(0);
+  //console.log(images);
+  while (counter < images.length) {
+    const {uri} = images[counter].source;
+    const filename = uri.substring(uri.lastIndexOf('/') + 1);
+    const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+    const task = storage()
+      .ref(customer.id + '/' + 'TimerNotes' + '/' + filename)
+      .putFile(uploadUri);
+    // set progress state
+    task.on('state_changed', snapshot => {});
+    try {
+      await task;
+    } catch (e) {
+      console.error(e);
+    }
+    counter++;
+    Alert.alert(
+      'Photo uploaded!',
+      'Your photo has been uploaded to Firebase Cloud Storage!',
+    );
+  }
+  console.log('Done Adding Photos');
+  // setImage(null);
+}
+
+export function getUtilityNote(customer, utility, utilityNote) {
+  var timerNotesList = [];
+  var counter = 0;
+  const docRef = firestore()
+    .collection('Customers')
+    // Is customer.id needed here?
+    .doc(customer.id)
+    .collection('Timers')
+    .doc(utility.id)
+    .collection(utilityNote.utilityNoteType);
   //console.log(customer.id);
   //console.log(docRef);
   docRef
@@ -220,32 +290,11 @@ export function getTimerNotes(customer, timer) {
   // alert(timersList.length);
 }
 
-export async function UploadImage(images, customer) {
-  var counter = 0;
-  //const [image, setImage] = useState(null);
-  //const [uploading, setUploading] = useState(false);
-  // const [transferred, setTransferred] = useState(0);
-  console.log(images);
-  while (counter < images.length) {
-    const {uri} = images[counter].source;
-    const filename = uri.substring(uri.lastIndexOf('/') + 1);
-    const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
-    const task = storage()
-      .ref(customer.id + '/' + 'TimerNotes' + '/' + filename)
-      .putFile(uploadUri);
-    // set progress state
-    task.on('state_changed', snapshot => {});
-    try {
-      await task;
-    } catch (e) {
-      console.error(e);
-    }
-    counter++;
-    Alert.alert(
-      'Photo uploaded!',
-      'Your photo has been uploaded to Firebase Cloud Storage!',
-    );
-  }
-  console.log('Done Adding Photos');
-  // setImage(null);
+export function getImageURL(note) {
+  var imageRef = storage().ref('/' + note.imageRef);
+  imageRef.getDownloadURL().then(url => {
+    return url;
+    //setTestImage(url);
+    //console.log(imageURL);
+  });
 }

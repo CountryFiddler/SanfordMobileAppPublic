@@ -28,9 +28,11 @@ import {submitNote, submitTimerInfo} from '../../api/TimerApi';
 import UploadNoteImage from '../components/UploadNoteImage';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {UploadImage} from '../../api/FirestoreApi';
+import {storage} from 'react-native-firebase';
 // Start of Home Screen Display
 const AddNoteScreen = props => {
   const customer = props.navigation.getParam('customer');
+  const [numImages, setNumImages] = useState(0);
   const utilityType = props.navigation.getParam('utilityType');
   const utility = props.navigation.getParam('utility');
   const [noteTitle, setNoteTitle] = useState(null);
@@ -67,6 +69,7 @@ const AddNoteScreen = props => {
           '/' +
           uri.substring(uri.lastIndexOf('/') + 1);
         setImages(prevItems => [...prevItems, {imageRef}]);
+        setNumImages(numImages + 1);
         console.log(imageRefs);
         console.log(images);
       }
@@ -114,6 +117,7 @@ const AddNoteScreen = props => {
               onPress={() =>
                 submitNote(
                   customer,
+                  numImages,
                   images,
                   imageRefs,
                   utilityType,
@@ -135,7 +139,8 @@ const AddNoteScreen = props => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // Dont have flex 1, this messes up Android
+    //flex: 1,
     alignItems: 'center',
     backgroundColor: '#bbded6',
   },

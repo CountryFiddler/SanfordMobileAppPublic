@@ -53,6 +53,7 @@ export function getTimerInfo(customer, setTimers) {
 
 export function submitNote(
   customer,
+  numImages,
   images,
   imageRefs,
   utilityType,
@@ -66,6 +67,14 @@ export function submitNote(
   utilityNote.noteText = noteText;
   console.log(images[0]);
   UploadImage(images, customer);
-  addNote(customer, utilityType, utility, utilityNote, imageRefs, navigation);
+  addNote(
+    customer,
+    utilityType,
+    utility,
+    utilityNote,
+    imageRefs,
+    numImages,
+    navigation,
+  );
   navigation.navigate('UtilityNoteScreen');
 }
