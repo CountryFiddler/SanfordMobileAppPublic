@@ -21,8 +21,8 @@ import {
   SafeAreaView,
   TextInput,
   TouchableOpacity,
-  Image,
-} from 'react-native';
+  Image, ScrollView,
+} from "react-native";
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import {submitNote, submitTimerInfo} from '../../api/TimerApi';
 import UploadNoteImage from '../components/UploadNoteImage';
@@ -68,8 +68,10 @@ const AddNoteScreen = props => {
           'TimerNotes' +
           '/' +
           uri.substring(uri.lastIndexOf('/') + 1);
-        setImages(prevItems => [...prevItems, {imageRef}]);
-        setNumImages(numImages + 1);
+        if (images.length < 20) {
+          setImages(prevItems => [...prevItems, {imageRef}]);
+          setNumImages(numImages + 1);
+        }
         console.log(imageRefs);
         console.log(images);
       }
@@ -78,7 +80,7 @@ const AddNoteScreen = props => {
   // Start of Add Timer Screen Display
   //const [numZones, setNumZones] = useState(null);
   return (
-    <SafeAreaView>
+    <ScrollView>
       <View>
         <TextInput
           // Text Input Box for the customer's first name
@@ -132,7 +134,7 @@ const AddNoteScreen = props => {
           </View>
         </SafeAreaView>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 // End of Home Screen Display
