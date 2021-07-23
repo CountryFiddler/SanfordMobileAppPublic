@@ -28,6 +28,8 @@ const TimerNotesNavigatorScreen = props => {
         notes={timerNotes}
         customer={customer}
         navigation={props.navigation}
+        utilityType={'Timers'}
+        utility={timer}
       />
       <Button
         // If the Timer button is pressed, then the user

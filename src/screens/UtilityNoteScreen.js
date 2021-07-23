@@ -21,10 +21,14 @@ import {
   Image,
   ScrollView,
   render,
+  StatusBar,
+  SafeAreaView,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import {firestore, storage} from 'react-native-firebase';
 import {getImageURL} from '../../api/FirestoreApi';
+import EditNotePopup from '../components/EditNotePopup';
 
 // Start of Home Screen Display
 const UtilityNoteScreen = props => {

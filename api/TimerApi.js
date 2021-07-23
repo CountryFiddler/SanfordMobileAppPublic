@@ -3,6 +3,7 @@ import {
   addNote,
   addTimer,
   getTimers,
+  updateNote,
   updateTimers,
   UploadImage,
 } from './FirestoreApi';
@@ -52,6 +53,7 @@ export function getTimerInfo(customer, setTimers) {
 }
 
 export function submitNote(
+  isAddNote,
   customer,
   numImages,
   images,
@@ -60,21 +62,34 @@ export function submitNote(
   utility,
   noteTitle,
   noteText,
+  noteID,
   navigation,
 ) {
-  var utilityNote = {noteTitle, noteText};
+  var utilityNote = {noteTitle, noteText, noteID};
   utilityNote.noteTitle = noteTitle;
   utilityNote.noteText = noteText;
   console.log(images[0]);
   UploadImage(images, customer);
-  addNote(
-    customer,
-    utilityType,
-    utility,
-    utilityNote,
-    imageRefs,
-    numImages,
-    navigation,
-  );
+  if (isAddNote) {
+    addNote(
+      customer,
+      utilityType,
+      utility,
+      utilityNote,
+      imageRefs,
+      numImages,
+      navigation,
+    );
+  } else {
+    updateNote(
+      customer,
+      utilityType,
+      utility,
+      utilityNote,
+      imageRefs,
+      numImages,
+      navigation,
+    );
+  }
   navigation.navigate('UtilityNoteScreen');
 }

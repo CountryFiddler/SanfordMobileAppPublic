@@ -21,25 +21,30 @@ import {
   SafeAreaView,
   TextInput,
   TouchableOpacity,
-  Image, ScrollView,
-} from "react-native";
+  Image,
+  ScrollView,
+  StatusBar,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import {submitNote, submitTimerInfo} from '../../api/TimerApi';
 import UploadNoteImage from '../components/UploadNoteImage';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {UploadImage} from '../../api/FirestoreApi';
 import {storage} from 'react-native-firebase';
+import EditNotePopup from '../components/EditNotePopup';
 // Start of Home Screen Display
-const AddNoteScreen = props => {
-  const [isAddNote, setIsAddNote] = useState(true);
+const EditNoteScreen = props => {
+  const note = props.navigation.getParam('note');
+  const [isAddNote, setIsAddNote] = useState(false);
   const customer = props.navigation.getParam('customer');
-  const [numImages, setNumImages] = useState(0);
+  const [numImages, setNumImages] = useState(note.numImages);
   const utilityType = props.navigation.getParam('utilityType');
   const utility = props.navigation.getParam('utility');
-  const [noteTitle, setNoteTitle] = useState(null);
-  const [noteText, setNoteText] = useState(null);
+  const [noteTitle, setNoteTitle] = useState(note.title);
+  const [noteText, setNoteText] = useState(note.noteText);
   const [images, setImage] = useState([]);
-  const [imageRefs, setImages] = useState([]);
+  const [imageRefs, setImages] = useState(note.images);
   //const [uploading, setUploading] = useState(false);
   //const [transferred, setTransferred] = useState(0);
   const selectImage = () => {
@@ -61,8 +66,8 @@ const AddNoteScreen = props => {
       } else {
         const source = {uri: response.assets[0].uri};
         const {uri} = source;
-        //console.log(source);
         setImage(prevItems => [...prevItems, {source}]);
+        //TODO Change Image Ref to have the utility/utility notes
         const imageRef =
           customer.id +
           '/' +
@@ -80,6 +85,25 @@ const AddNoteScreen = props => {
   };
   // Start of Add Timer Screen Display
   //const [numZones, setNumZones] = useState(null);
+  const popupList = [
+    {
+      id: 1,
+      name: 'Delete Note',
+    },
+    {
+      id: 2,
+      name: 'Delete Photos',
+    },
+  ];
+  let popupRef = React.createRef();
+
+  const onShowPopup = () => {
+    popupRef.show();
+  };
+
+  const onClosePopup = () => {
+    popupRef.close();
+  };
   return (
     <ScrollView>
       <View>
@@ -98,6 +122,23 @@ const AddNoteScreen = props => {
           value={noteText}
           onChangeText={text => setNoteText(text)}
         />
+        <StatusBar barStyle={'dark-content'} />
+        <SafeAreaView style={styles.editButtonContainer}>
+          <TouchableWithoutFeedback onPress={onShowPopup}>
+            <Text style={styles.txtSize}>Options</Text>
+          </TouchableWithoutFeedback>
+          <EditNotePopup
+            title={'Options'}
+            ref={target => (popupRef = target)}
+            onTouchOutside={onClosePopup}
+            data={popupList}
+            customer={props.customer}
+            note={props.note}
+            navigation={props.navigation}
+            utilityType={props.utilityType}
+            utility={props.utility}
+          />
+        </SafeAreaView>
         <SafeAreaView style={styles.container}>
           <TouchableOpacity style={styles.selectButton} onPress={selectImage}>
             <Text style={styles.buttonText}>Pick an image</Text>
@@ -128,6 +169,7 @@ const AddNoteScreen = props => {
                   utility,
                   noteTitle,
                   noteText,
+                  note.noteID,
                   props.navigation,
                 )
               }>
@@ -185,4 +227,4 @@ const styles = StyleSheet.create({
 });
 // End of Home Screen Display
 
-export default AddNoteScreen;
+export default EditNoteScreen;

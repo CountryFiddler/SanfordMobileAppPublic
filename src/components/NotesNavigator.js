@@ -24,8 +24,20 @@ import {
   Text,
   Button,
   Alert,
+  StatusBar,
+  SafeAreaView,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import {getCustomers, getTimers} from '../../api/FirestoreApi';
+import {Platform} from 'react-native';
+import {
+  Menu,
+  MenuProvider,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from 'react-native-popup-menu';
+import EditNotePopup from './EditNotePopup';
 
 const NotesNavigator = props => {
   // Start of displaying the Drop Down Search
@@ -53,6 +65,18 @@ const NotesNavigator = props => {
                       customer: props.customer,
                       note: note,
                       navigation: props.navigation,
+                    })
+                  }
+                />
+                <Button
+                  title={'Edit'}
+                  onPress={() =>
+                    props.navigation.navigate('EditNote', {
+                      customer: props.customer,
+                      note: note,
+                      navigation: props.navigation,
+                      utilityType: props.utilityType,
+                      utility: props.utility,
                     })
                   }
                 />
@@ -84,6 +108,14 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
 
+  editButtonContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  txtSize: {
+    fontSize: 20,
+  },
   subContainer: {
     //backgroundColor: '#84DCC6',
     paddingTop: 5,
@@ -124,6 +156,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: 'white',
+  },
+  headerText: {
+    fontSize: 20,
+    margin: 10,
+    fontWeight: 'bold',
+  },
+  menuContent: {
+    color: '#000',
+    fontWeight: 'bold',
+    padding: 2,
+    fontSize: 20,
   },
 });
 // End of the stylesheet

@@ -190,6 +190,42 @@ export function addNote(
     .catch(error => console.log(error));
 }
 
+// Start of Timer adding and getting functions
+export function updateNote(
+  customer,
+  utilityType,
+  utility,
+  utilityNote,
+  imageRefs,
+  numImages,
+  addComplete,
+) {
+  const docRef = firebase
+    .firestore()
+    .collection('Customers')
+    // Is customer.id needed here?
+    .doc(customer.id)
+    .collection(utilityType)
+    .doc(utility.id);
+
+  docRef
+    .collection('TimerNotes')
+    .doc(utilityNote.noteID)
+    .update({
+      title: utilityNote.noteTitle,
+      noteText: utilityNote.noteText,
+      numImages: numImages,
+      imageRefs: [
+        {
+          imageRef: imageRefs,
+        },
+      ],
+    })
+    .then(snapshot => snapshot.get())
+    .then(customerData => addComplete(customerData.data()))
+    .catch(error => console.log(error));
+}
+
 export function getTimerNotes(customer, timer) {
   var notesList = [];
   var counter = 0;

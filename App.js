@@ -11,6 +11,7 @@ import EditTimerInfoScreen from './src/screens/EditTimerInfoScreen';
 import TimerNotesNavigatorScreen from './src/screens/TimerNotesNavigator';
 import UtilityNoteScreen from './src/screens/UtilityNoteScreen';
 import AddNoteScreen from './src/screens/AddNoteScreen';
+import EditNoteScreen from './src/screens/EditNoteScreen';
 //import AddCustomer from './src/components/AddCustomer';
 
 const navigator = createStackNavigator(
@@ -26,6 +27,7 @@ const navigator = createStackNavigator(
     TimerNotesNavigator: TimerNotesNavigatorScreen,
     UtilityNote: UtilityNoteScreen,
     AddNote: AddNoteScreen,
+    EditNote: EditNoteScreen,
     //AddCustomerComponent: AddCustomer,
   },
   {
