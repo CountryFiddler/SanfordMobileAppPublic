@@ -2,6 +2,7 @@ import firebase from 'react-native-firebase';
 import {
   addNote,
   addTimer,
+  deleteImage,
   getTimers,
   updateNote,
   updateTimers,
@@ -92,4 +93,21 @@ export function submitNote(
     );
   }
   navigation.navigate('UtilityNoteScreen');
+}
+export function deleteNoteMedia(
+  imagesToBeDeleted,
+  customer,
+  utilityNote,
+  utilityType,
+  utility,
+) {
+  for (var i = 0; i < imagesToBeDeleted.length; i++) {
+    deleteImage(
+      imagesToBeDeleted[i],
+      customer,
+      utilityNote,
+      utilityType,
+      utility,
+    );
+  }
 }

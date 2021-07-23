@@ -12,6 +12,7 @@ import TimerNotesNavigatorScreen from './src/screens/TimerNotesNavigator';
 import UtilityNoteScreen from './src/screens/UtilityNoteScreen';
 import AddNoteScreen from './src/screens/AddNoteScreen';
 import EditNoteScreen from './src/screens/EditNoteScreen';
+import DeleteNoteMediaScreen from './src/screens/DeleteNoteMediaScreen';
 //import AddCustomer from './src/components/AddCustomer';
 
 const navigator = createStackNavigator(
@@ -28,6 +29,7 @@ const navigator = createStackNavigator(
     UtilityNote: UtilityNoteScreen,
     AddNote: AddNoteScreen,
     EditNote: EditNoteScreen,
+    DeleteNoteMedia: DeleteNoteMediaScreen,
     //AddCustomerComponent: AddCustomer,
   },
   {

@@ -94,8 +94,7 @@ class EditNotePopup extends Component {
           style={{fontSize: 18, fontWeight: 'normal', color: '#182E44'}}
           title={item.name}
           onPress={() =>
-            // Change UtilityNote!!!
-            this.props.navigation.navigate('UtilityNote', {
+            this.props.navigation.navigate('DeleteNoteMedia', {
               customer: this.props.customer,
               note: this.props.note,
               navigation: this.props.navigation,

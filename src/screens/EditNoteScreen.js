@@ -45,6 +45,7 @@ const EditNoteScreen = props => {
   const [noteText, setNoteText] = useState(note.noteText);
   const [images, setImage] = useState([]);
   const [imageRefs, setImages] = useState(note.images);
+  console.log(note.numImages);
   //const [uploading, setUploading] = useState(false);
   //const [transferred, setTransferred] = useState(0);
   const selectImage = () => {
@@ -132,11 +133,11 @@ const EditNoteScreen = props => {
             ref={target => (popupRef = target)}
             onTouchOutside={onClosePopup}
             data={popupList}
-            customer={props.customer}
-            note={props.note}
+            customer={customer}
+            note={note}
             navigation={props.navigation}
-            utilityType={props.utilityType}
-            utility={props.utility}
+            utilityType={utilityType}
+            utility={utility}
           />
         </SafeAreaView>
         <SafeAreaView style={styles.container}>

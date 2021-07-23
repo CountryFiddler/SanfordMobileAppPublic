@@ -334,3 +334,33 @@ export function getImageURL(note) {
     //console.log(imageURL);
   });
 }
+
+export function deleteImage(
+  image,
+  customer,
+  utilityNote,
+  utilityType,
+  utility,
+) {
+  const docRef = firebase
+    .firestore()
+    .collection('Customers')
+    // Is customer.id needed here?
+    .doc(customer.id)
+    .collection(utilityType)
+    .doc(utility.id);
+
+  docRef
+    .collection('TimerNotes')
+    .doc(utilityNote.noteID)
+    .update({
+      imageRefs: [
+        {
+          imageRef: firebase.firestore.FieldValue.arrayRemove(image),
+        },
+      ],
+    })
+    .then(snapshot => snapshot.get())
+    //.then(customerData => addComplete(customerData.data()))
+    .catch(error => console.log(error));
+}
