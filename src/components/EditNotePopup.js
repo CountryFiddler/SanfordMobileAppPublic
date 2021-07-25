@@ -81,30 +81,60 @@ class EditNotePopup extends Component {
   };
 
   renderItem = ({item}) => {
-    return (
-      <View
-        style={{
-          height: 50,
-          flex: 1,
-          alignItems: 'flex-start',
-          justifyContent: 'center',
-          marginLeft: 50,
-        }}>
-        <Button
-          style={{fontSize: 18, fontWeight: 'normal', color: '#182E44'}}
-          title={item.name}
-          onPress={() =>
-            this.props.navigation.navigate('DeleteNoteMedia', {
-              customer: this.props.customer,
-              note: this.props.note,
-              navigation: this.props.navigation,
-              utilityType: this.props.utilityType,
-              utility: this.props.utility,
-            })
-          }
-        />
-      </View>
-    );
+    if (!item.deleteNote) {
+      return (
+        <View
+          style={{
+            height: 50,
+            flex: 1,
+            alignItems: 'flex-start',
+            justifyContent: 'center',
+            marginLeft: 50,
+          }}>
+          <Button
+            style={{fontSize: 18, fontWeight: 'normal', color: '#182E44'}}
+            title={item.name}
+            onPress={() =>
+              this.props.navigation.navigate('DeleteNoteMedia', {
+                customer: this.props.customer,
+                note: this.props.note,
+                navigation: this.props.navigation,
+                utilityType: this.props.utilityType,
+                utility: this.props.utility,
+              })
+            }
+          />
+        </View>
+      );
+    } else {
+      return (
+        <View
+          style={{
+            height: 50,
+            flex: 1,
+            alignItems: 'flex-start',
+            justifyContent: 'center',
+            marginLeft: 50,
+          }}>
+          <Button
+            style={{fontSize: 18, fontWeight: 'normal', color: '#182E44'}}
+            title={item.name}
+            onPress={() =>
+              this.props.navigation.navigate('DeleteContent', {
+                deleteCustomer: false,
+                deleteUtility: false,
+                deleteUtilityNote: true,
+                customer: this.props.customer,
+                utility: this.props.utility,
+                utilityNote: this.props.note,
+                contentToDelete: this.props.note.title,
+                prevScreen: 'EditNote',
+              })
+            }
+          />
+        </View>
+      );
+    }
   };
 
   renderSeparator = () => (

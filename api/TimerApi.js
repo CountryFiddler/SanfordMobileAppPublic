@@ -3,11 +3,12 @@ import {
   addNote,
   addTimer,
   deleteImage,
+  deleteImages, deleteUtilityNote,
   getTimers,
   updateNote,
   updateTimers,
   UploadImage,
-} from './FirestoreApi';
+} from "./FirestoreApi";
 
 export function submitTimerInfo(
   customer,
@@ -101,13 +102,51 @@ export function deleteNoteMedia(
   utilityType,
   utility,
 ) {
+  console.log(imagesToBeDeleted);
   for (var i = 0; i < imagesToBeDeleted.length; i++) {
-    deleteImage(
-      imagesToBeDeleted[i],
-      customer,
-      utilityNote,
-      utilityType,
-      utility,
-    );
+    for (var j = 0; j < utilityNote.images.length; j++) {
+      console.log(
+        'i = ' +
+          imagesToBeDeleted[i] +
+          ' j = ' +
+          utilityNote.images[j].imageRef,
+      );
+      if (imagesToBeDeleted[i] === utilityNote.images[j].imageRef) {
+        utilityNote.numImages = utilityNote.numImages - 1;
+        utilityNote.images.splice(j, 1);
+        deleteImage(imagesToBeDeleted[i]);
+        console.log('image deleted');
+        console.log(utilityNote.title);
+      }
+    }
+  }
+  updateNote(
+    customer,
+    utilityType,
+    utility,
+    utilityNote,
+    utilityNote.images,
+    utilityNote.numImages,
+  );
+}
+
+export function deleteContent(
+  isDeleteCustomer,
+  isDeleteUtility,
+  isDeleteUtilityNote,
+  customer,
+  utility,
+  utilityNote,
+  navigation,
+) {
+  if (isDeleteCustomer) {
+    // Call Delete Customer
+  }
+  if (isDeleteUtility) {
+    // Call Delete Utility
+  }
+  if (isDeleteUtilityNote) {
+    deleteUtilityNote(customer, utility, utilityNote);
+    //navigation.navigate()
   }
 }

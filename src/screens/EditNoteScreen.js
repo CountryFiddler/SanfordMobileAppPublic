@@ -90,10 +90,12 @@ const EditNoteScreen = props => {
     {
       id: 1,
       name: 'Delete Note',
+      deleteNote: true,
     },
     {
       id: 2,
       name: 'Delete Photos',
+      deleteNote: false,
     },
   ];
   let popupRef = React.createRef();

@@ -386,6 +386,7 @@ const DeleteNoteMediaScreen = props => {
     if (!isInImagesToDelete) {
       setImagesToDelete(prevItems => [...prevItems, imageRef]);
     }
+    console.log(note.images);
   }
 
   //console.log(testImage);

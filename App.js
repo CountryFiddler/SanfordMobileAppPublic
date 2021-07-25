@@ -13,6 +13,7 @@ import UtilityNoteScreen from './src/screens/UtilityNoteScreen';
 import AddNoteScreen from './src/screens/AddNoteScreen';
 import EditNoteScreen from './src/screens/EditNoteScreen';
 import DeleteNoteMediaScreen from './src/screens/DeleteNoteMediaScreen';
+import DeleteContentScreen from './src/screens/DeleteContentScreen';
 //import AddCustomer from './src/components/AddCustomer';
 
 const navigator = createStackNavigator(
@@ -30,6 +31,7 @@ const navigator = createStackNavigator(
     AddNote: AddNoteScreen,
     EditNote: EditNoteScreen,
     DeleteNoteMedia: DeleteNoteMediaScreen,
+    DeleteContent: DeleteContentScreen,
     //AddCustomerComponent: AddCustomer,
   },
   {

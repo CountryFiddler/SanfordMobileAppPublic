@@ -176,14 +176,10 @@ export function addNote(
     .collection('TimerNotes')
     .doc()
     .set({
-      title: utilityNote.noteTitle,
+      title: utilityNote.title,
       noteText: utilityNote.noteText,
       numImages: numImages,
-      imageRefs: [
-        {
-          imageRef: imageRefs,
-        },
-      ],
+      imageRefs: imageRefs,
     })
     .then(snapshot => snapshot.get())
     .then(customerData => addComplete(customerData.data()))
@@ -212,14 +208,10 @@ export function updateNote(
     .collection('TimerNotes')
     .doc(utilityNote.noteID)
     .update({
-      title: utilityNote.noteTitle,
+      title: utilityNote.title,
       noteText: utilityNote.noteText,
       numImages: numImages,
-      imageRefs: [
-        {
-          imageRef: imageRefs,
-        },
-      ],
+      imageRefs: imageRefs,
     })
     .then(snapshot => snapshot.get())
     .then(customerData => addComplete(customerData.data()))
@@ -250,7 +242,7 @@ export function getTimerNotes(customer, timer) {
           customerID: customer.id,
           noteID: doc.id,
           numImages: doc.data().numImages,
-          images: doc.data().imageRefs[0].imageRef,
+          images: doc.data().imageRefs,
         });
         //console.log(notesList.images.imageRef);
         //alert(timersList.length);
@@ -293,39 +285,6 @@ export async function UploadImage(images, customer) {
   // setImage(null);
 }
 
-export function getUtilityNote(customer, utility, utilityNote) {
-  var timerNotesList = [];
-  var counter = 0;
-  const docRef = firestore()
-    .collection('Customers')
-    // Is customer.id needed here?
-    .doc(customer.id)
-    .collection('Timers')
-    .doc(utility.id)
-    .collection(utilityNote.utilityNoteType);
-  //console.log(customer.id);
-  //console.log(docRef);
-  docRef
-    .collection('TimerNotes')
-    .get()
-    .then(snapshot => {
-      snapshot.forEach(doc => {
-        timerNotesList.push({
-          title: doc.data().title,
-          noteText: doc.data().noteText,
-          timerID: doc.id,
-          customerID: customer.id,
-        });
-        //alert(timersList.length);
-        //counter++;
-      });
-    });
-  // alert(timersList.length);
-  // timersRetrieved(timersList);
-  return timerNotesList;
-  // alert(timersList.length);
-}
-
 export function getImageURL(note) {
   var imageRef = storage().ref('/' + note.imageRef);
   imageRef.getDownloadURL().then(url => {
@@ -335,32 +294,35 @@ export function getImageURL(note) {
   });
 }
 
-export function deleteImage(
-  image,
-  customer,
-  utilityNote,
-  utilityType,
-  utility,
-) {
-  const docRef = firebase
-    .firestore()
+export function deleteImage(imageName) {
+  let imageRef = storage().ref('/' + imageName);
+  imageRef
+    .delete()
+    .then(() => {
+      console.log(`${imageName}has been deleted successfully.`);
+    })
+    .catch(e => console.log('error on image deletion => ', e));
+}
+
+export function deleteUtilityNote(customer, utility, utilityNote) {
+  for (var i = 0; i < utilityNote.images.length; i++) {
+    deleteImage(utilityNote.images[i].imageRef);
+  }
+  firestore()
     .collection('Customers')
     // Is customer.id needed here?
     .doc(customer.id)
-    .collection(utilityType)
-    .doc(utility.id);
-
-  docRef
+    .collection('Timers')
+    .doc(utility.id)
     .collection('TimerNotes')
     .doc(utilityNote.noteID)
-    .update({
-      imageRefs: [
-        {
-          imageRef: firebase.firestore.FieldValue.arrayRemove(image),
-        },
-      ],
+    .delete()
+    .then(() => {
+      console.log('Document successfully deleted!');
     })
-    .then(snapshot => snapshot.get())
-    //.then(customerData => addComplete(customerData.data()))
-    .catch(error => console.log(error));
+    .catch(error => {
+      console.error('Error removing document: ', error);
+    });
+  console.log(utilityNote.id);
+  console.log(utility.id);
 }

@@ -25,6 +25,7 @@ import {
   SafeAreaView,
   TouchableWithoutFeedback,
 } from 'react-native';
+
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import {firestore, storage} from 'react-native-firebase';
 import {getImageURL} from '../../api/FirestoreApi';

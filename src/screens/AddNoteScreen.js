@@ -51,7 +51,7 @@ const AddNoteScreen = props => {
         path: 'images',
       },
     };
-    launchImageLibrary(options, response => {
+    launchImageLibrary({ mediaType: "video" }, response => {
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else if (response.error) {
