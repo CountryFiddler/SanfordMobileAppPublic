@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
-import {UploadImage} from '../../api/FirestoreApi';
+import {UploadMedia} from '../../api/FirestoreApi';
 //import * as Progress from 'react-native-progress';
 
 export default function UploadNoteImage() {
@@ -78,7 +78,7 @@ export default function UploadNoteImage() {
         ) : null}
         <TouchableOpacity
           style={styles.uploadButton}
-          onPress={() => UploadImage(image)}>
+          onPress={() => UploadMedia(image)}>
           <Text style={styles.buttonText}>Upload image</Text>
         </TouchableOpacity>
       </View>

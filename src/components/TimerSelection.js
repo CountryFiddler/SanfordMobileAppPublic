@@ -22,8 +22,9 @@ import {
   ScrollView,
   View,
   Text,
-  Button, Alert,
-} from "react-native";
+  Button,
+  Alert,
+} from 'react-native';
 import {getCustomers, getTimers} from '../../api/FirestoreApi';
 
 const TimerSelection = props => {

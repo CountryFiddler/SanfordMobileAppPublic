@@ -30,7 +30,7 @@ import CustomerSearchBar from '../components/CustomerSearchBar';
 import {submitNote, submitTimerInfo} from '../../api/TimerApi';
 import UploadNoteImage from '../components/UploadNoteImage';
 import {launchImageLibrary} from 'react-native-image-picker';
-import {UploadImage} from '../../api/FirestoreApi';
+import {UploadMedia} from '../../api/FirestoreApi';
 import {storage} from 'react-native-firebase';
 import EditNotePopup from '../components/EditNotePopup';
 // Start of Home Screen Display
@@ -39,12 +39,15 @@ const EditNoteScreen = props => {
   const [isAddNote, setIsAddNote] = useState(false);
   const customer = props.navigation.getParam('customer');
   const [numImages, setNumImages] = useState(note.numImages);
+  const [numVideos, setNumVideos] = useState(note.numVideos);
   const utilityType = props.navigation.getParam('utilityType');
   const utility = props.navigation.getParam('utility');
   const [noteTitle, setNoteTitle] = useState(note.title);
   const [noteText, setNoteText] = useState(note.noteText);
   const [images, setImage] = useState([]);
   const [imageRefs, setImages] = useState(note.images);
+  const [videos, setVideos] = useState([]);
+  const [videoRefs, setVideoRefs] = useState(note.videos);
   console.log(note.numImages);
   //const [uploading, setUploading] = useState(false);
   //const [transferred, setTransferred] = useState(0);
@@ -81,6 +84,41 @@ const EditNoteScreen = props => {
         }
         console.log(imageRefs);
         console.log(images);
+      }
+    });
+  };
+
+  const selectVideo = () => {
+    const options = {
+      maxWidth: 2000,
+      maxHeight: 2000,
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    launchImageLibrary({mediaType: 'video'}, response => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        const source = {uri: response.assets[0].uri};
+        const {uri} = source;
+        setVideos(prevItems => [...prevItems, {source}]);
+        //TODO Change Image Ref to have the utility/utility notes
+        const videoRef =
+          customer.id +
+          '/' +
+          'TimerNotes' +
+          '/' +
+          uri.substring(uri.lastIndexOf('/') + 1);
+        if (videos.length < 20) {
+          setVideoRefs(prevItems => [...prevItems, {videoRef}]);
+          setNumVideos(numVideos + 1);
+        }
       }
     });
   };
@@ -146,6 +184,9 @@ const EditNoteScreen = props => {
           <TouchableOpacity style={styles.selectButton} onPress={selectImage}>
             <Text style={styles.buttonText}>Pick an image</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.selectButton} onPress={selectVideo}>
+            <Text style={styles.buttonText}>Pick a Video</Text>
+          </TouchableOpacity>
           <View style={styles.imageContainer}>
             {images.length
               ? images.map(image => {
@@ -166,8 +207,11 @@ const EditNoteScreen = props => {
                   isAddNote,
                   customer,
                   numImages,
+                  numVideos,
                   images,
                   imageRefs,
+                  videos,
+                  videoRefs,
                   utilityType,
                   utility,
                   noteTitle,

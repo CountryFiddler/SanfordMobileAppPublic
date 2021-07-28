@@ -21,25 +21,29 @@ import {
   SafeAreaView,
   TextInput,
   TouchableOpacity,
-  Image, ScrollView,
-} from "react-native";
+  Image,
+  ScrollView,
+} from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import {submitNote, submitTimerInfo} from '../../api/TimerApi';
 import UploadNoteImage from '../components/UploadNoteImage';
 import {launchImageLibrary} from 'react-native-image-picker';
-import {UploadImage} from '../../api/FirestoreApi';
+import {UploadMedia} from '../../api/FirestoreApi';
 import {storage} from 'react-native-firebase';
 // Start of Home Screen Display
 const AddNoteScreen = props => {
   const [isAddNote, setIsAddNote] = useState(true);
   const customer = props.navigation.getParam('customer');
   const [numImages, setNumImages] = useState(0);
+  const [numVideos, setNumVideos] = useState(0);
   const utilityType = props.navigation.getParam('utilityType');
   const utility = props.navigation.getParam('utility');
   const [noteTitle, setNoteTitle] = useState(null);
   const [noteText, setNoteText] = useState(null);
   const [images, setImage] = useState([]);
   const [imageRefs, setImages] = useState([]);
+  const [videos, setVideos] = useState([]);
+  const [videoRefs, setVideoRefs] = useState([]);
   //const [uploading, setUploading] = useState(false);
   //const [transferred, setTransferred] = useState(0);
   const selectImage = () => {
@@ -51,7 +55,7 @@ const AddNoteScreen = props => {
         path: 'images',
       },
     };
-    launchImageLibrary({ mediaType: "video" }, response => {
+    launchImageLibrary(options, response => {
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else if (response.error) {
@@ -75,6 +79,43 @@ const AddNoteScreen = props => {
         }
         console.log(imageRefs);
         console.log(images);
+      }
+    });
+  };
+
+  const selectVideo = () => {
+    const options = {
+      maxWidth: 2000,
+      maxHeight: 2000,
+      storageOptions: {
+        skipBackup: true,
+        path: 'video',
+      },
+    };
+    launchImageLibrary({ mediaType: "video" }, response => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        const source = {uri: response.assets[0].uri};
+        const {uri} = source;
+        //console.log(source);
+        setVideos(prevItems => [...prevItems, {source}]);
+        const videoRef =
+          customer.id +
+          '/' +
+          'TimerNotes' +
+          '/' +
+          uri.substring(uri.lastIndexOf('/') + 1);
+        if (videos.length < 20) {
+          setVideoRefs(prevItems => [...prevItems, {videoRef}]);
+          setNumVideos(numVideos + 1);
+        }
+        console.log(videoRefs);
+        console.log(videos);
       }
     });
   };
@@ -102,6 +143,9 @@ const AddNoteScreen = props => {
           <TouchableOpacity style={styles.selectButton} onPress={selectImage}>
             <Text style={styles.buttonText}>Pick an image</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.selectButton} onPress={selectVideo}>
+            <Text style={styles.buttonText}>Pick a video</Text>
+          </TouchableOpacity>
           <View style={styles.imageContainer}>
             {images.length
               ? images.map(image => {
@@ -122,8 +166,11 @@ const AddNoteScreen = props => {
                   isAddNote,
                   customer,
                   numImages,
+                  numVideos,
                   images,
                   imageRefs,
+                  videos,
+                  videoRefs,
                   utilityType,
                   utility,
                   noteTitle,

@@ -3,12 +3,13 @@ import {
   addNote,
   addTimer,
   deleteImage,
-  deleteImages, deleteUtilityNote,
+  deleteImages,
+  deleteUtilityNote,
   getTimers,
   updateNote,
   updateTimers,
-  UploadImage,
-} from "./FirestoreApi";
+  UploadMedia,
+} from './FirestoreApi';
 
 export function submitTimerInfo(
   customer,
@@ -58,8 +59,11 @@ export function submitNote(
   isAddNote,
   customer,
   numImages,
+  numVideos,
   images,
   imageRefs,
+  videos,
+  videoRefs,
   utilityType,
   utility,
   noteTitle,
@@ -70,8 +74,9 @@ export function submitNote(
   var utilityNote = {noteTitle, noteText, noteID};
   utilityNote.noteTitle = noteTitle;
   utilityNote.noteText = noteText;
-  console.log(images[0]);
-  UploadImage(images, customer);
+  console.log(videos[0]);
+  UploadMedia(images, customer);
+  UploadMedia(videos, customer);
   if (isAddNote) {
     addNote(
       customer,
@@ -80,9 +85,12 @@ export function submitNote(
       utilityNote,
       imageRefs,
       numImages,
+      videoRefs,
+      numVideos,
       navigation,
     );
   } else {
+    console.log(videoRefs);
     updateNote(
       customer,
       utilityType,
@@ -90,6 +98,8 @@ export function submitNote(
       utilityNote,
       imageRefs,
       numImages,
+      videoRefs,
+      numVideos,
       navigation,
     );
   }
@@ -102,18 +112,23 @@ export function deleteNoteMedia(
   utilityType,
   utility,
 ) {
-  console.log(imagesToBeDeleted);
+  console.log("Deleting Images");
   for (var i = 0; i < imagesToBeDeleted.length; i++) {
     for (var j = 0; j < utilityNote.images.length; j++) {
-      console.log(
-        'i = ' +
-          imagesToBeDeleted[i] +
-          ' j = ' +
-          utilityNote.images[j].imageRef,
-      );
       if (imagesToBeDeleted[i] === utilityNote.images[j].imageRef) {
         utilityNote.numImages = utilityNote.numImages - 1;
         utilityNote.images.splice(j, 1);
+        deleteImage(imagesToBeDeleted[i]);
+        console.log('image deleted');
+        console.log(utilityNote.title);
+      }
+    }
+    console.log(utilityNote.videos[0].videoRef);
+    //console.log(imagesToBeDeleted[0]);
+    for (var j = 0; j < utilityNote.videos.length; j++) {
+      if (imagesToBeDeleted[i] === utilityNote.videos[j].videoRef) {
+        utilityNote.numVideos = utilityNote.numVideos - 1;
+        utilityNote.videos.splice(j, 1);
         deleteImage(imagesToBeDeleted[i]);
         console.log('image deleted');
         console.log(utilityNote.title);
@@ -127,6 +142,8 @@ export function deleteNoteMedia(
     utilityNote,
     utilityNote.images,
     utilityNote.numImages,
+    utilityNote.videos,
+    utilityNote.numVideos,
   );
 }
 

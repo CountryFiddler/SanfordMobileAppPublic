@@ -162,6 +162,8 @@ export function addNote(
   utilityNote,
   imageRefs,
   numImages,
+  videoRefs,
+  numVideos,
   addComplete,
 ) {
   const docRef = firebase
@@ -180,6 +182,8 @@ export function addNote(
       noteText: utilityNote.noteText,
       numImages: numImages,
       imageRefs: imageRefs,
+      numVideos: numVideos,
+      videoRefs: videoRefs,
     })
     .then(snapshot => snapshot.get())
     .then(customerData => addComplete(customerData.data()))
@@ -194,6 +198,8 @@ export function updateNote(
   utilityNote,
   imageRefs,
   numImages,
+  videoRefs,
+  numVideos,
   addComplete,
 ) {
   const docRef = firebase
@@ -212,6 +218,8 @@ export function updateNote(
       noteText: utilityNote.noteText,
       numImages: numImages,
       imageRefs: imageRefs,
+      numVideos: numVideos,
+      videoRefs: videoRefs,
     })
     .then(snapshot => snapshot.get())
     .then(customerData => addComplete(customerData.data()))
@@ -243,6 +251,8 @@ export function getTimerNotes(customer, timer) {
           noteID: doc.id,
           numImages: doc.data().numImages,
           images: doc.data().imageRefs,
+          numVideos: doc.data().numVideos,
+          videos: doc.data().videoRefs,
         });
         //console.log(notesList.images.imageRef);
         //alert(timersList.length);
@@ -255,24 +265,27 @@ export function getTimerNotes(customer, timer) {
   // alert(timersList.length);
 }
 
-export async function UploadImage(images, customer) {
+export async function UploadMedia(media, customer) {
+  //console.log(media[counter].source);
   var counter = 0;
   //const [image, setImage] = useState(null);
   //const [uploading, setUploading] = useState(false);
   // const [transferred, setTransferred] = useState(0);
   //console.log(images);
-  while (counter < images.length) {
-    const {uri} = images[counter].source;
+  while (counter < media.length) {
+    const {uri} = media[counter].source;
     const filename = uri.substring(uri.lastIndexOf('/') + 1);
     const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
     const task = storage()
       .ref(customer.id + '/' + 'TimerNotes' + '/' + filename)
       .putFile(uploadUri);
+    console.log(uploadUri);
     // set progress state
     task.on('state_changed', snapshot => {});
     try {
       await task;
     } catch (e) {
+      console.log('Error: Upload failed');
       console.error(e);
     }
     counter++;
