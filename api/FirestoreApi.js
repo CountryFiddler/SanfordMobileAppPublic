@@ -143,6 +143,7 @@ export function getTimers(customer) {
           numZones: doc.data().numZones,
           id: doc.id,
           customerID: customer.id,
+          utilityType: 'Timers',
         });
         //alert(timersList.length);
         //counter++;
@@ -202,6 +203,7 @@ export function updateNote(
   numVideos,
   addComplete,
 ) {
+  console.log(imageRefs);
   const docRef = firebase
     .firestore()
     .collection('Customers')
@@ -253,6 +255,7 @@ export function getTimerNotes(customer, timer) {
           images: doc.data().imageRefs,
           numVideos: doc.data().numVideos,
           videos: doc.data().videoRefs,
+          noteType: 'TimerNotes',
         });
         //console.log(notesList.images.imageRef);
         //alert(timersList.length);
@@ -265,7 +268,7 @@ export function getTimerNotes(customer, timer) {
   // alert(timersList.length);
 }
 
-export async function UploadMedia(media, customer) {
+export async function UploadMedia(media, customer, utility, utilityNote) {
   //console.log(media[counter].source);
   var counter = 0;
   //const [image, setImage] = useState(null);
@@ -277,7 +280,19 @@ export async function UploadMedia(media, customer) {
     const filename = uri.substring(uri.lastIndexOf('/') + 1);
     const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
     const task = storage()
-      .ref(customer.id + '/' + 'TimerNotes' + '/' + filename)
+      .ref(
+        customer.id +
+          '/' +
+          utility.utilityType +
+          '/' +
+          utility.id +
+          '/' +
+          utilityNote.noteType +
+          '/' +
+          utilityNote.noteID +
+          '/' +
+          filename,
+      )
       .putFile(uploadUri);
     console.log(uploadUri);
     // set progress state

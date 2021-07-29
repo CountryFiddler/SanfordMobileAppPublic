@@ -4,11 +4,11 @@ import HomeScreen from './src/screens/HomeScreen';
 import AddCustomerScreen from './src/screens/AddCustomerScreen';
 import EditCustomerScreen from './src/screens/EditCustomerScreen';
 import CustomerScreen from './src/screens/CustomerScreen';
-import TimerSelectionScreen from './src/screens/TimerSelectionScreen';
+import UtilitySelectionScreen from './src/screens/UtilitySelectionScreen';
 import AddTimerScreen from './src/screens/AddTimerScreen';
 import TimerInfoScreen from './src/screens/TimerInfoScreen';
 import EditTimerInfoScreen from './src/screens/EditTimerInfoScreen';
-import TimerNotesNavigatorScreen from './src/screens/TimerNotesNavigator';
+import UtilityNotesNavigatorScreen from './src/screens/UtilityNotesNavigator';
 import UtilityNoteScreen from './src/screens/UtilityNoteScreen';
 import AddNoteScreen from './src/screens/AddNoteScreen';
 import EditNoteScreen from './src/screens/EditNoteScreen';
@@ -22,11 +22,11 @@ const navigator = createStackNavigator(
     AddCustomer: AddCustomerScreen,
     EditCustomer: EditCustomerScreen,
     Customer: CustomerScreen,
-    TimerSelection: TimerSelectionScreen,
+    UtilitySelectionScreen: UtilitySelectionScreen,
     AddTimer: AddTimerScreen,
     TimerInfo: TimerInfoScreen,
     EditTimer: EditTimerInfoScreen,
-    TimerNotesNavigator: TimerNotesNavigatorScreen,
+    UtilityNotesNavigator: UtilityNotesNavigatorScreen,
     UtilityNote: UtilityNoteScreen,
     AddNote: AddNoteScreen,
     EditNote: EditNoteScreen,

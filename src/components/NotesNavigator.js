@@ -87,7 +87,7 @@ const NotesNavigator = props => {
           // If there are no matches for customers and what the user entered
           // then we display the message "No Customers Found"
           <View style={styles.itemView}>
-            <Text style={styles.itemText}>No Timers Found</Text>
+            <Text style={styles.itemText}>No Notes Found</Text>
           </View>
         )}
       </View>

@@ -72,11 +72,9 @@ export function submitNote(
   navigation,
 ) {
   var utilityNote = {noteTitle, noteText, noteID};
-  utilityNote.noteTitle = noteTitle;
+  utilityNote.title = noteTitle;
   utilityNote.noteText = noteText;
-  console.log(videos[0]);
-  UploadMedia(images, customer);
-  UploadMedia(videos, customer);
+  //console.log(videos[0]);
   if (isAddNote) {
     addNote(
       customer,
@@ -89,8 +87,10 @@ export function submitNote(
       numVideos,
       navigation,
     );
+    // Get Single Note
+    // Set The Remaining ImageRefs and VideoRefs
   } else {
-    console.log(videoRefs);
+    //onsole.log(videoRefs);
     updateNote(
       customer,
       utilityType,
@@ -103,7 +103,9 @@ export function submitNote(
       navigation,
     );
   }
-  navigation.navigate('UtilityNoteScreen');
+  UploadMedia(images, customer, utility, utilityNote);
+  UploadMedia(videos, customer, utility, utilityNote);
+  //navigation.navigate('UtilityNoteScreen');
 }
 export function deleteNoteMedia(
   imagesToBeDeleted,

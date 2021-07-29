@@ -18,18 +18,19 @@ import CustomerSearchBar from '../components/CustomerSearchBar';
 import NotesNavigator from '../components/NotesNavigator';
 
 // Start of Home Screen Display
-const TimerNotesNavigatorScreen = props => {
-  const timerNotes = props.navigation.getParam('timerNotes');
-  const timer = props.navigation.getParam('timer');
+const UtilityNotesNavigatorScreen = props => {
+  const utilityNotes = props.navigation.getParam('utilityNotes');
+  const utility = props.navigation.getParam('utility');
   const customer = props.navigation.getParam('customer');
+  const noteType = props.navigation.getParam('noteType');
   return (
     <View style={styles.homePageContainer}>
       <NotesNavigator
-        notes={timerNotes}
+        notes={utilityNotes}
         customer={customer}
         navigation={props.navigation}
-        utilityType={'Timers'}
-        utility={timer}
+        utilityType={utility.utilityType}
+        utility={utility}
       />
       <Button
         // If the Timer button is pressed, then the user
@@ -38,8 +39,9 @@ const TimerNotesNavigatorScreen = props => {
           // Pass navigation and customer as props to the Edit Customer Screen
           props.navigation.navigate('AddNote', {
             customer: customer,
-            utilityType: 'Timers',
-            utility: timer,
+            utilityType: utility.utilityType,
+            utility: utility,
+            noteType: noteType,
             //timers: timers,
           })
         }
@@ -70,4 +72,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TimerNotesNavigatorScreen;
+export default UtilityNotesNavigatorScreen;

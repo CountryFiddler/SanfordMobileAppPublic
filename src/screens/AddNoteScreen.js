@@ -30,158 +30,31 @@ import UploadNoteImage from '../components/UploadNoteImage';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {UploadMedia} from '../../api/FirestoreApi';
 import {storage} from 'react-native-firebase';
+import AddOrEditNote from '../components/AddOrEditNote';
 // Start of Home Screen Display
+
 const AddNoteScreen = props => {
-  const [isAddNote, setIsAddNote] = useState(true);
   const customer = props.navigation.getParam('customer');
-  const [numImages, setNumImages] = useState(0);
-  const [numVideos, setNumVideos] = useState(0);
   const utilityType = props.navigation.getParam('utilityType');
   const utility = props.navigation.getParam('utility');
-  const [noteTitle, setNoteTitle] = useState(null);
-  const [noteText, setNoteText] = useState(null);
-  const [images, setImage] = useState([]);
-  const [imageRefs, setImages] = useState([]);
-  const [videos, setVideos] = useState([]);
-  const [videoRefs, setVideoRefs] = useState([]);
-  //const [uploading, setUploading] = useState(false);
-  //const [transferred, setTransferred] = useState(0);
-  const selectImage = () => {
-    const options = {
-      maxWidth: 2000,
-      maxHeight: 2000,
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
-    };
-    launchImageLibrary(options, response => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        const source = {uri: response.assets[0].uri};
-        const {uri} = source;
-        //console.log(source);
-        setImage(prevItems => [...prevItems, {source}]);
-        const imageRef =
-          customer.id +
-          '/' +
-          'TimerNotes' +
-          '/' +
-          uri.substring(uri.lastIndexOf('/') + 1);
-        if (images.length < 20) {
-          setImages(prevItems => [...prevItems, {imageRef}]);
-          setNumImages(numImages + 1);
-        }
-        console.log(imageRefs);
-        console.log(images);
-      }
-    });
-  };
+  const noteType = props.navigation.getParam('noteType');
 
-  const selectVideo = () => {
-    const options = {
-      maxWidth: 2000,
-      maxHeight: 2000,
-      storageOptions: {
-        skipBackup: true,
-        path: 'video',
-      },
-    };
-    launchImageLibrary({ mediaType: "video" }, response => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        const source = {uri: response.assets[0].uri};
-        const {uri} = source;
-        //console.log(source);
-        setVideos(prevItems => [...prevItems, {source}]);
-        const videoRef =
-          customer.id +
-          '/' +
-          'TimerNotes' +
-          '/' +
-          uri.substring(uri.lastIndexOf('/') + 1);
-        if (videos.length < 20) {
-          setVideoRefs(prevItems => [...prevItems, {videoRef}]);
-          setNumVideos(numVideos + 1);
-        }
-        console.log(videoRefs);
-        console.log(videos);
-      }
-    });
-  };
   // Start of Add Timer Screen Display
   //const [numZones, setNumZones] = useState(null);
   return (
     <ScrollView>
       <View>
-        <TextInput
-          // Text Input Box for the customer's first name
-          placeholder={'Note Title'}
-          value={noteTitle}
-          // Displays the value that the user is entering into the text input
-          // For example, if the typed 'Bob', then 'Bob' is displayed in the
-          // Text Input Box
-          onChangeText={text => setNoteTitle(text)}
+        <AddOrEditNote
+          customer={customer}
+          utilityType={utilityType}
+          utility={utility}
+          isAddNote={true}
+          numImages={0}
+          numVideos={0}
+          navigation={props.navigation}
+          noteID={null}
+          noteType={noteType}
         />
-        <TextInput
-          // Text Input Box for the customer's last name
-          placeholder={'Number of Programs'}
-          value={noteText}
-          onChangeText={text => setNoteText(text)}
-        />
-        <SafeAreaView style={styles.container}>
-          <TouchableOpacity style={styles.selectButton} onPress={selectImage}>
-            <Text style={styles.buttonText}>Pick an image</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.selectButton} onPress={selectVideo}>
-            <Text style={styles.buttonText}>Pick a video</Text>
-          </TouchableOpacity>
-          <View style={styles.imageContainer}>
-            {images.length
-              ? images.map(image => {
-                  return (
-                    <View style={styles.itemView}>
-                      <Image
-                        source={{uri: image.uri}}
-                        style={styles.imageBox}
-                      />
-                    </View>
-                  );
-                })
-              : null}
-            <TouchableOpacity
-              style={styles.uploadButton}
-              onPress={() =>
-                submitNote(
-                  isAddNote,
-                  customer,
-                  numImages,
-                  numVideos,
-                  images,
-                  imageRefs,
-                  videos,
-                  videoRefs,
-                  utilityType,
-                  utility,
-                  noteTitle,
-                  noteText,
-                  props.navigation,
-                )
-              }>
-              <Text style={styles.buttonText}>Submit Info</Text>
-            </TouchableOpacity>
-          </View>
-        </SafeAreaView>
       </View>
     </ScrollView>
   );

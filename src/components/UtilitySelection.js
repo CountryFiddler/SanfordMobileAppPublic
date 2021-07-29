@@ -27,7 +27,7 @@ import {
 } from 'react-native';
 import {getCustomers, getTimers} from '../../api/FirestoreApi';
 
-const TimerSelection = props => {
+const UtilitySelection = props => {
   // Start of displaying the Drop Down Search
   //console.log(props.timerList.length);
   //console.log(this.state.timerList);
@@ -36,22 +36,22 @@ const TimerSelection = props => {
       //onPress={this.props.timerList.onPress}
       style={styles.container}>
       <View style={styles.subContainer}>
-        {props.timerList.length ? (
+        {props.utilityList.length ? (
           // Map customers into the dropdown search
           // searchText is the text shown for each customer button.
           // See FirestoreApi.js for more information on searchText.
           // If a customer is selected, then the user is directed
           // to the customer page for that customer.
-          props.timerList.map(timer => {
+          props.utilityList.map(utility => {
             return (
               <View style={styles.itemView}>
                 <Button
                   style={styles.itemText}
-                  title={timer.timerType}
+                  title={utility.timerType}
                   onPress={() =>
-                    props.navigation.navigate('TimerInfo', {
+                    props.navigation.navigate(props.utilityInfoScreen, {
                       customer: props.customer,
-                      timer: timer,
+                      utility: utility,
                       navigation: props.navigation,
                     })
                   }
@@ -63,7 +63,7 @@ const TimerSelection = props => {
           // If there are no matches for customers and what the user entered
           // then we display the message "No Customers Found"
           <View style={styles.itemView}>
-            <Text style={styles.itemText}>No Timers Found</Text>
+            <Text style={styles.itemText}>No {props.utilityType} Found</Text>
           </View>
         )}
       </View>
@@ -128,4 +128,4 @@ const styles = StyleSheet.create({
 });
 // End of the stylesheet
 
-export default TimerSelection;
+export default UtilitySelection;

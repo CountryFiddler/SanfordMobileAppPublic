@@ -21,7 +21,7 @@ import { getTimerNotes } from "../../api/FirestoreApi";
 // Start of Home Screen Display
 const TimerInfoScreen = props => {
   const customer = props.navigation.getParam('customer');
-  const timer = props.navigation.getParam('timer');
+  const timer = props.navigation.getParam('utility');
   const navigation = props.navigation;
   const timerNotes = getTimerNotes(customer, timer);
   console.log(timerNotes);
@@ -45,10 +45,11 @@ const TimerInfoScreen = props => {
         // is redirected to the Timer Info Screen
         onPress={() =>
           // Pass navigation and customer as props to the Edit Customer Screen
-          props.navigation.navigate('TimerNotesNavigator', {
+          props.navigation.navigate('UtilityNotesNavigator', {
             customer: customer,
-            timer: timer,
-            timerNotes: timerNotes,
+            utility: timer,
+            utilityNotes: timerNotes,
+            noteType: 'TimerNotes',
             //timers: timers,
           })
         }

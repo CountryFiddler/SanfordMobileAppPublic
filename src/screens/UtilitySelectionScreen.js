@@ -10,28 +10,38 @@ import {Text, StyleSheet, View, Button, Alert} from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import {getTimerInfo} from '../../api/TimerApi';
 import {getTimers} from '../../api/FirestoreApi';
-import TimerSelection from '../components/TimerSelection';
+import UtilitySelection from '../components/UtilitySelection';
 
 // Start of Home Screen Display
-const TimerSelectionScreen = props => {
+const UtilitySelectionScreen = props => {
   const customer = props.navigation.getParam('customer');
-  const timers = props.navigation.getParam('timers');
+  const utilityType = props.navigation.getParam('utilityType');
+  const utilities = props.navigation.getParam('utilities');
+  const addUtility = props.navigation.getParam('addUtilityScreen');
+  const addUtilityButtonTitle = props.navigation.getParam(
+    'addUtilityButtonTitle',
+  );
+  const utilityInfoScreenTitle = props.navigation.getParam(
+    'utilityInfoScreenTitle',
+  );
   //const timers = getTimers(customer);
   return (
     <View style={styles.homePageContainer}>
-      <TimerSelection
+      <UtilitySelection
         customer={customer}
-        timerList={timers}
+        utilityList={utilities}
+        utilityInfoScreen={utilityInfoScreenTitle}
         navigation={props.navigation}
+        utilityType={utilityType}
       />
       <Button
         onPress={() =>
-          props.navigation.navigate('AddTimer', {
+          props.navigation.navigate(addUtility, {
             customer: customer,
             navigation: props.navigation,
           })
         }
-        title={'Add Timer'}
+        title={addUtilityButtonTitle}
       />
     </View>
   );
@@ -58,4 +68,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TimerSelectionScreen;
+export default UtilitySelectionScreen;
