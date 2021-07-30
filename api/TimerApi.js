@@ -69,14 +69,48 @@ export function submitNote(
   noteTitle,
   noteText,
   noteID,
+  noteType,
   navigation,
 ) {
-  var utilityNote = {noteTitle, noteText, noteID};
+  var utilityNote = {noteTitle, noteText, noteID, noteType};
   utilityNote.title = noteTitle;
   utilityNote.noteText = noteText;
+  utilityNote.noteID = noteID;
+  utilityNote.noteType = noteType;
   //console.log(videos[0]);
   if (isAddNote) {
-    addNote(
+    utilityNote.noteID = addNote(
+      customer,
+      utilityType,
+      utility,
+      utilityNote,
+      imageRefs,
+      numImages,
+      videoRefs,
+      numVideos,
+      navigation,
+    );
+    console.log(utilityNote.noteID);
+    for (var i = 0; i < images.length; i++) {
+      const {uri} = images[i].source;
+      imageRefs[i].imageRef =
+        imageRefs[i].imageRef +
+        '/' +
+        utilityNote.noteID +
+        '/' +
+        uri.substring(uri.lastIndexOf('/') + 1);
+      //console.log(imageRefs[i].imageRef);
+    }
+    for (var j = 0; j < videos.length; j++) {
+      const {uri} = videos[i].source;
+      videoRefs[i].videoRef =
+        videoRefs[i].videoRef +
+        '/' +
+        utilityNote.noteID +
+        '/' +
+        uri.substring(uri.lastIndexOf('/') + 1);
+    }
+    updateNote(
       customer,
       utilityType,
       utility,
@@ -114,23 +148,23 @@ export function deleteNoteMedia(
   utilityType,
   utility,
 ) {
-  console.log("Deleting Images");
+  console.log('Deleting Images');
   for (var i = 0; i < imagesToBeDeleted.length; i++) {
-    for (var j = 0; j < utilityNote.images.length; j++) {
-      if (imagesToBeDeleted[i] === utilityNote.images[j].imageRef) {
+    for (var j = 0; j < utilityNote.imageRefs.length; j++) {
+      if (imagesToBeDeleted[i] === utilityNote.imageRefs[j].imageRef) {
         utilityNote.numImages = utilityNote.numImages - 1;
-        utilityNote.images.splice(j, 1);
+        utilityNote.imageRefs.splice(j, 1);
         deleteImage(imagesToBeDeleted[i]);
         console.log('image deleted');
         console.log(utilityNote.title);
       }
     }
-    console.log(utilityNote.videos[0].videoRef);
+    console.log(utilityNote.videoRefs[0].videoRef);
     //console.log(imagesToBeDeleted[0]);
-    for (var j = 0; j < utilityNote.videos.length; j++) {
-      if (imagesToBeDeleted[i] === utilityNote.videos[j].videoRef) {
+    for (var j = 0; j < utilityNote.videoRefs.length; j++) {
+      if (imagesToBeDeleted[i] === utilityNote.videoRefs[j].videoRef) {
         utilityNote.numVideos = utilityNote.numVideos - 1;
-        utilityNote.videos.splice(j, 1);
+        utilityNote.videoRefs.splice(j, 1);
         deleteImage(imagesToBeDeleted[i]);
         console.log('image deleted');
         console.log(utilityNote.title);
@@ -142,9 +176,9 @@ export function deleteNoteMedia(
     utilityType,
     utility,
     utilityNote,
-    utilityNote.images,
+    utilityNote.imageRefs,
     utilityNote.numImages,
-    utilityNote.videos,
+    utilityNote.videoRefs,
     utilityNote.numVideos,
   );
 }

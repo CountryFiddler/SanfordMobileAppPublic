@@ -173,11 +173,11 @@ export function addNote(
     // Is customer.id needed here?
     .doc(customer.id)
     .collection(utilityType)
-    .doc(utility.id);
+    .doc(utility.id)
+    .collection('TimerNotes')
+    .doc();
 
   docRef
-    .collection('TimerNotes')
-    .doc()
     .set({
       title: utilityNote.title,
       noteText: utilityNote.noteText,
@@ -189,6 +189,8 @@ export function addNote(
     .then(snapshot => snapshot.get())
     .then(customerData => addComplete(customerData.data()))
     .catch(error => console.log(error));
+  console.log(docRef);
+  return docRef.id;
 }
 
 // Start of Timer adding and getting functions
@@ -252,9 +254,9 @@ export function getTimerNotes(customer, timer) {
           customerID: customer.id,
           noteID: doc.id,
           numImages: doc.data().numImages,
-          images: doc.data().imageRefs,
+          imageRefs: doc.data().imageRefs,
           numVideos: doc.data().numVideos,
-          videos: doc.data().videoRefs,
+          videoRefs: doc.data().videoRefs,
           noteType: 'TimerNotes',
         });
         //console.log(notesList.images.imageRef);
@@ -281,7 +283,9 @@ export async function UploadMedia(media, customer, utility, utilityNote) {
     const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
     const task = storage()
       .ref(
-        customer.id +
+        'Customers' +
+          '/' +
+          customer.id +
           '/' +
           utility.utilityType +
           '/' +

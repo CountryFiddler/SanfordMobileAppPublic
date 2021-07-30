@@ -83,7 +83,7 @@ const NoteMedia = props => {
   // toString might be just it
   if (note.numImages > 0) {
     var imageRef1 = storage()
-      .ref('/' + note.imageRefs[0])
+      .ref('/' + note.imageRefs[0].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage1(url);
@@ -91,7 +91,7 @@ const NoteMedia = props => {
   }
   if (note.numImages > 1) {
     var imageRef2 = storage()
-      .ref('/' + note.imageRefs[1])
+      .ref('/' + note.imageRefs[1].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage2(url);
@@ -99,7 +99,7 @@ const NoteMedia = props => {
   }
   if (note.numImages > 2) {
     var imageRef3 = storage()
-      .ref('/' + note.imageRefs[2])
+      .ref('/' + note.imageRefs[2].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage3(url);
@@ -107,7 +107,7 @@ const NoteMedia = props => {
   }
   if (note.numImages > 3) {
     var imageRef = storage()
-      .ref('/' + note.imageRefs[3])
+      .ref('/' + note.imageRefs[3].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage4(url);
@@ -115,7 +115,7 @@ const NoteMedia = props => {
   }
   if (note.numImages > 4) {
     var imageRef = storage()
-      .ref('/' + note.imageRefs[4])
+      .ref('/' + note.imageRefs[4].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage5(url);
@@ -123,7 +123,7 @@ const NoteMedia = props => {
   }
   if (note.numImages > 5) {
     var imageRef = storage()
-      .ref('/' + note.imageRefs[5])
+      .ref('/' + note.imageRefs[5].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage6(url);
@@ -131,7 +131,7 @@ const NoteMedia = props => {
   }
   if (note.numImages > 6) {
     var imageRef = storage()
-      .ref('/' + note.imageRefs[6])
+      .ref('/' + note.imageRefs[6].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage7(url);
@@ -139,7 +139,7 @@ const NoteMedia = props => {
   }
   if (note.numImages > 7) {
     var imageRef = storage()
-      .ref('/' + note.imageRefs[7])
+      .ref('/' + note.imageRefs[7].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage8(url);
@@ -147,7 +147,7 @@ const NoteMedia = props => {
   }
   if (note.numImages > 8) {
     var imageRef = storage()
-      .ref('/' + note.imageRefs[8])
+      .ref('/' + note.imageRefs[8].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage9(url);
@@ -155,7 +155,7 @@ const NoteMedia = props => {
   }
   if (note.numImages > 9) {
     var imageRef = storage()
-      .ref('/' + note.imageRefs[9])
+      .ref('/' + note.imageRefs[9].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage10(url);
@@ -163,7 +163,7 @@ const NoteMedia = props => {
   }
   if (note.numImages > 10) {
     var imageRef = storage()
-      .ref('/' + note.imageRefs[10])
+      .ref('/' + note.imageRefs[10].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage11(url);
@@ -171,7 +171,7 @@ const NoteMedia = props => {
   }
   if (note.numImages > 11) {
     var imageRef = storage()
-      .ref('/' + note.imageRefs[11])
+      .ref('/' + note.imageRefs[11].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage12(url);
@@ -179,7 +179,7 @@ const NoteMedia = props => {
   }
   if (note.numImages > 12) {
     var imageRef = storage()
-      .ref('/' + note.imageRefs[12])
+      .ref('/' + note.imageRefs[12].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage13(url);
@@ -187,7 +187,7 @@ const NoteMedia = props => {
   }
   if (note.numImages > 13) {
     var imageRef = storage()
-      .ref('/' + note.imageRefs[13])
+      .ref('/' + note.imageRefs[13].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage14(url);
@@ -195,7 +195,7 @@ const NoteMedia = props => {
   }
   if (note.numImages > 14) {
     var imageRef = storage()
-      .ref('/' + note.imageRefs[14])
+      .ref('/' + note.imageRefs[14].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage15(url);
@@ -203,7 +203,7 @@ const NoteMedia = props => {
   }
   if (note.numImages > 15) {
     var imageRef = storage()
-      .ref('/' + note.imageRefs[15])
+      .ref('/' + note.imageRefs[15].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage16(url);
@@ -211,7 +211,7 @@ const NoteMedia = props => {
   }
   if (note.numImages > 16) {
     var imageRef = storage()
-      .ref('/' + note.imageRefs[16])
+      .ref('/' + note.imageRefs[16].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage17(url);
@@ -219,7 +219,7 @@ const NoteMedia = props => {
   }
   if (note.numImages > 17) {
     var imageRef = storage()
-      .ref('/' + note.imageRefs[17])
+      .ref('/' + note.imageRefs[17].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage18(url);
@@ -227,7 +227,7 @@ const NoteMedia = props => {
   }
   if (note.numImages > 18) {
     var imageRef = storage()
-      .ref('/' + note.imageRefs[18])
+      .ref('/' + note.imageRefs[18].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage19(url);
@@ -235,7 +235,7 @@ const NoteMedia = props => {
   }
   if (note.numImages > 19) {
     var imageRef = storage()
-      .ref('/' + note.imageRefs[19])
+      .ref('/' + note.imageRefs[19].imageRef)
       .getDownloadURL()
       .then(url => {
         setImage20(url);
@@ -244,7 +244,7 @@ const NoteMedia = props => {
 
   if (note.numVideos > 0) {
     var videoRef1 = storage()
-      .ref('/' + note.videoRefs[0])
+      .ref('/' + note.videoRefs[0].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo1(url);
@@ -252,7 +252,7 @@ const NoteMedia = props => {
   }
   if (note.numVideos > 1) {
     var videoRef2 = storage()
-      .ref('/' + note.videoRefs[1])
+      .ref('/' + note.videoRefs[1].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo2(url);
@@ -260,7 +260,7 @@ const NoteMedia = props => {
   }
   if (note.numVideos > 2) {
     var videoRef3 = storage()
-      .ref('/' + note.videoRefs[2])
+      .ref('/' + note.videoRefs[2].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo3(url);
@@ -268,7 +268,7 @@ const NoteMedia = props => {
   }
   if (note.numVideos > 3) {
     var videoRef4 = storage()
-      .ref('/' + note.videoRefs[3])
+      .ref('/' + note.videoRefs[3].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo4(url);
@@ -276,7 +276,7 @@ const NoteMedia = props => {
   }
   if (note.numVideos > 4) {
     var videoRef5 = storage()
-      .ref('/' + note.videoRefs[4])
+      .ref('/' + note.videoRefs[4].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo5(url);
@@ -284,7 +284,7 @@ const NoteMedia = props => {
   }
   if (note.numVideos > 5) {
     var videoRef6 = storage()
-      .ref('/' + note.videoRefs[5])
+      .ref('/' + note.videoRefs[5].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo6(url);
@@ -292,7 +292,7 @@ const NoteMedia = props => {
   }
   if (note.numVideos > 6) {
     var videoRef7 = storage()
-      .ref('/' + note.videoRefs[6])
+      .ref('/' + note.videoRefs[6].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo7(url);
@@ -300,7 +300,7 @@ const NoteMedia = props => {
   }
   if (note.numVideos > 7) {
     var videoRef8 = storage()
-      .ref('/' + note.videoRefs[7])
+      .ref('/' + note.videoRefs[7].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo8(url);
@@ -308,7 +308,7 @@ const NoteMedia = props => {
   }
   if (note.numVideos > 8) {
     var videoRef9 = storage()
-      .ref('/' + note.videoRefs[8])
+      .ref('/' + note.videoRefs[8].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo9(url);
@@ -316,7 +316,7 @@ const NoteMedia = props => {
   }
   if (note.numVideos > 9) {
     var videoRef10 = storage()
-      .ref('/' + note.videoRefs[9])
+      .ref('/' + note.videos[9].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo10(url);
@@ -324,7 +324,7 @@ const NoteMedia = props => {
   }
   if (note.numVideos > 10) {
     var videoRef11 = storage()
-      .ref('/' + note.videoRefs[10])
+      .ref('/' + note.videoRefs[10].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo11(url);
@@ -332,7 +332,7 @@ const NoteMedia = props => {
   }
   if (note.numVideos > 11) {
     var videoRef12 = storage()
-      .ref('/' + note.videoRefs[11])
+      .ref('/' + note.videoRefs[11].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo12(url);
@@ -340,7 +340,7 @@ const NoteMedia = props => {
   }
   if (note.numVideos > 12) {
     var videoRef13 = storage()
-      .ref('/' + note.videoRefs[12])
+      .ref('/' + note.videoRefs[12].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo13(url);
@@ -348,7 +348,7 @@ const NoteMedia = props => {
   }
   if (note.numVideos > 13) {
     var videoRef14 = storage()
-      .ref('/' + note.videoRefs[13])
+      .ref('/' + note.videoRefs[13].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo14(url);
@@ -356,7 +356,7 @@ const NoteMedia = props => {
   }
   if (note.numVideos > 14) {
     var videoRef15 = storage()
-      .ref('/' + note.videoRefs[14])
+      .ref('/' + note.videoRefs[14].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo15(url);
@@ -364,7 +364,7 @@ const NoteMedia = props => {
   }
   if (note.numVideos > 15) {
     var videoRef16 = storage()
-      .ref('/' + note.videoRefs[15])
+      .ref('/' + note.videoRefs[15].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo16(url);
@@ -372,7 +372,7 @@ const NoteMedia = props => {
   }
   if (note.numVideos > 16) {
     var videoRef17 = storage()
-      .ref('/' + note.videoRefs[16])
+      .ref('/' + note.videoRefs[16].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo17(url);
@@ -380,7 +380,7 @@ const NoteMedia = props => {
   }
   if (note.numVideos > 17) {
     var videoRef18 = storage()
-      .ref('/' + note.videoRefs[17])
+      .ref('/' + note.videoRefs[17].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo18(url);
@@ -388,7 +388,7 @@ const NoteMedia = props => {
   }
   if (note.numVideos > 18) {
     var videoRef19 = storage()
-      .ref('/' + note.videoRefs[18])
+      .ref('/' + note.videoRefs[18].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo19(url);
@@ -396,7 +396,7 @@ const NoteMedia = props => {
   }
   if (note.numVideos > 19) {
     var videoRef20 = storage()
-      .ref('/' + note.videoRefs[19])
+      .ref('/' + note.videoRefs[19].videoRef)
       .getDownloadURL()
       .then(url => {
         setVideo20(url);
@@ -430,7 +430,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[0])}
+              onPress={() => selectImageToDelete(note.imageRefs[0].imageRef)}
             />
           ) : null}
         </View>
@@ -445,7 +445,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[1])}
+              onPress={() => selectImageToDelete(note.imageRefs[1].imageRef)}
             />
           ) : null}
         </View>
@@ -460,7 +460,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[2])}
+              onPress={() => selectImageToDelete(note.imageRefs[2].imageRef)}
             />
           ) : null}
         </View>
@@ -475,7 +475,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[3])}
+              onPress={() => selectImageToDelete(note.imageRefs[3].imageRef)}
             />
           ) : null}
         </View>
@@ -490,7 +490,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[4])}
+              onPress={() => selectImageToDelete(note.imageRefs[4].imageRef)}
             />
           ) : null}
         </View>
@@ -505,7 +505,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[5])}
+              onPress={() => selectImageToDelete(note.imageRefs[5].imageRef)}
             />
           ) : null}
         </View>
@@ -520,7 +520,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[6])}
+              onPress={() => selectImageToDelete(note.imageRefs[6].imageRef)}
             />
           ) : null}
         </View>
@@ -535,7 +535,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[7])}
+              onPress={() => selectImageToDelete(note.imageRefs[7].imageRef)}
             />
           ) : null}
         </View>
@@ -550,7 +550,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[8])}
+              onPress={() => selectImageToDelete(note.imageRefs[8].imageRef)}
             />
           ) : null}
         </View>
@@ -565,7 +565,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[9])}
+              onPress={() => selectImageToDelete(note.imageRefs[9].imageRef)}
             />
           ) : null}
         </View>
@@ -580,7 +580,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[10])}
+              onPress={() => selectImageToDelete(note.imageRefs[10].imageRef)}
             />
           ) : null}
         </View>
@@ -595,7 +595,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[11])}
+              onPress={() => selectImageToDelete(note.imageRefs[11].imageRef)}
             />
           ) : null}
         </View>
@@ -610,7 +610,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[12])}
+              onPress={() => selectImageToDelete(note.imageRefs[12].imageRef)}
             />
           ) : null}
         </View>
@@ -625,7 +625,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[13])}
+              onPress={() => selectImageToDelete(note.imageRefs[13].imageRef)}
             />
           ) : null}
         </View>
@@ -640,7 +640,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[14])}
+              onPress={() => selectImageToDelete(note.imageRefs[14].imageRef)}
             />
           ) : null}
         </View>
@@ -655,7 +655,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[15])}
+              onPress={() => selectImageToDelete(note.imageRefs[15].imageRef)}
             />
           ) : null}
         </View>
@@ -670,7 +670,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[16])}
+              onPress={() => selectImageToDelete(note.imageRefs[16].imageRef)}
             />
           ) : null}
         </View>
@@ -685,7 +685,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[17])}
+              onPress={() => selectImageToDelete(note.imageRefs[17].imageRef)}
             />
           ) : null}
         </View>
@@ -700,7 +700,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[18])}
+              onPress={() => selectImageToDelete(note.imageRefs[18].imageRef)}
             />
           ) : null}
         </View>
@@ -715,7 +715,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[19])}
+              onPress={() => selectImageToDelete(note.imageRefs[19].imageRef)}
             />
           ) : null}
         </View>
@@ -724,6 +724,7 @@ const NoteMedia = props => {
   }
   function displayVideo1() {
     if (note.numVideos > 0) {
+      console.log(video1);
       return (
         <View>
           <Video
@@ -736,7 +737,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[0])}
+              onPress={() => selectImageToDelete(note.videoRefs[0].videoRef)}
             />
           ) : null}
         </View>
@@ -758,7 +759,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[1])}
+              onPress={() => selectImageToDelete(note.videoRefs[1].videoRef)}
             />
           ) : null}
         </View>
@@ -779,7 +780,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[2])}
+              onPress={() => selectImageToDelete(note.videoRefs[2].videoRef)}
             />
           ) : null}
         </View>
@@ -801,7 +802,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[3])}
+              onPress={() => selectImageToDelete(note.videoRefs[3].videoRef)}
             />
           ) : null}
         </View>
@@ -823,7 +824,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[4])}
+              onPress={() => selectImageToDelete(note.videoRefs[4].videoRef)}
             />
           ) : null}
         </View>
@@ -845,7 +846,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[5])}
+              onPress={() => selectImageToDelete(note.videoRefs[5].videoRef)}
             />
           ) : null}
         </View>
@@ -867,7 +868,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[6])}
+              onPress={() => selectImageToDelete(note.videoRefs[6].videoRef)}
             />
           ) : null}
         </View>
@@ -889,7 +890,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[7])}
+              onPress={() => selectImageToDelete(note.videoRefs[7].videoRef)}
             />
           ) : null}
         </View>
@@ -911,7 +912,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[8])}
+              onPress={() => selectImageToDelete(note.videoRefs[8].videoRef)}
             />
           ) : null}
         </View>
@@ -933,7 +934,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[9])}
+              onPress={() => selectImageToDelete(note.videoRefs[9].videoRef)}
             />
           ) : null}
         </View>
@@ -955,7 +956,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[10])}
+              onPress={() => selectImageToDelete(note.videoRefs[10].videoRef)}
             />
           ) : null}
         </View>
@@ -977,7 +978,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[11])}
+              onPress={() => selectImageToDelete(note.videoRefs[11].videoRef)}
             />
           ) : null}
         </View>
@@ -999,7 +1000,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[12])}
+              onPress={() => selectImageToDelete(note.videoRefs[12].videoRef)}
             />
           ) : null}
         </View>
@@ -1021,7 +1022,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[13])}
+              onPress={() => selectImageToDelete(note.videoRefs[13].videoRef)}
             />
           ) : null}
         </View>
@@ -1043,7 +1044,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[14])}
+              onPress={() => selectImageToDelete(note.videoRefs[14].videoRef)}
             />
           ) : null}
         </View>
@@ -1065,7 +1066,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[15])}
+              onPress={() => selectImageToDelete(note.videoRefs[15].videoRef)}
             />
           ) : null}
         </View>
@@ -1087,7 +1088,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[16])}
+              onPress={() => selectImageToDelete(note.videoRefs[16].videoRef)}
             />
           ) : null}
         </View>
@@ -1109,7 +1110,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[17])}
+              onPress={() => selectImageToDelete(note.videoRefs[17].videoRef)}
             />
           ) : null}
         </View>
@@ -1131,7 +1132,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[18])}
+              onPress={() => selectImageToDelete(note.videoRefs[18].videoRef)}
             />
           ) : null}
         </View>
@@ -1153,7 +1154,7 @@ const NoteMedia = props => {
           {isDeleteMedia ? (
             <Button
               title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[19])}
+              onPress={() => selectImageToDelete(note.videoRefs[19].videoRef)}
             />
           ) : null}
         </View>

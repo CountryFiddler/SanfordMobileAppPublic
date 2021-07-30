@@ -71,8 +71,8 @@ const AddOrEditNote = props => {
     currNote.numVideos = props.note.numVideos;
     currNote.titlePlaceholder = props.note.title;
     currNote.noteTextPlaceholder = props.note.noteText;
-    currNote.imageRefs = props.note.images;
-    currNote.videoRefs = props.note.videos;
+    currNote.imageRefs = props.note.imageRefs;
+    currNote.videoRefs = props.note.videoRefs;
     currNote.noteID = props.note.noteID;
   }
 
@@ -127,14 +127,16 @@ const AddOrEditNote = props => {
         setImages(prevItems => [...prevItems, {source}]);
         //TODO Change Image Ref to have the utility/utility notes
         let imageRef =
+          'Customers' +
+          '/' +
           customer.id +
           '/' +
           utility.utilityType +
           '/' +
           utility.id +
           '/' +
-          noteType +
-          '/';
+          noteType; // +
+        //'/';
         if (!isAddNote) {
           imageRef =
             imageRef +
@@ -145,8 +147,8 @@ const AddOrEditNote = props => {
         }
         //if (!addedImages && props.note.images )
         if (!isAddNote) {
-          if (!addedImages && props.note.images.length > 0) {
-            setImageRefs(props.note.images);
+          if (!addedImages && props.note.imageRefs.length > 0) {
+            setImageRefs(props.note.imageRefs);
             //setNumImages(numImages + props.note.numImages);
             console.log(props.note.numImages);
             console.log(numImages);
@@ -185,16 +187,28 @@ const AddOrEditNote = props => {
         const {uri} = source;
         setVideos(prevItems => [...prevItems, {source}]);
         //TODO Change Image Ref to have the utility/utility notes
-        const videoRef =
+        let videoRef =
+          'Customers' +
+          '/' +
           customer.id +
           '/' +
-          utilityType +
-          'TimerNotes' +
+          utility.utilityType +
           '/' +
-          uri.substring(uri.lastIndexOf('/') + 1);
+          utility.id +
+          '/' +
+          noteType; // +
+        //'/';
         if (!isAddNote) {
-          if (!addedVideos && props.note.videos !== null) {
-            setVideoRefs(props.note.videos);
+          videoRef =
+            videoRef +
+            '/' +
+            noteID +
+            '/' +
+            uri.substring(uri.lastIndexOf('/') + 1);
+        }
+        if (!isAddNote) {
+          if (!addedVideos && props.note.videoRefs !== null) {
+            setVideoRefs(props.note.videoRefs);
             //setNumVideos(props.note.numVideos);
             setAddedVideos(true);
           }
@@ -253,24 +267,27 @@ const AddOrEditNote = props => {
           onChangeText={text => setNoteText(text)}
         />
         <StatusBar barStyle={'dark-content'} />
-        {!isAddNote ? (
-          <SafeAreaView style={styles.editButtonContainer}>
-            <TouchableWithoutFeedback onPress={onShowPopup}>
-              <Text style={styles.txtSize}>Options</Text>
-            </TouchableWithoutFeedback>
-            <EditNotePopup
-              title={'Options'}
-              ref={target => (popupRef = target)}
-              onTouchOutside={onClosePopup}
-              data={popupList}
-              customer={customer}
-              note={currNote}
-              navigation={props.navigation}
-              utilityType={utilityType}
-              utility={utility}
-            />
-          </SafeAreaView>
-        ) : null}
+        {!isAddNote
+          ? (checkNullEntries(),
+            (
+              <SafeAreaView style={styles.editButtonContainer}>
+                <TouchableWithoutFeedback onPress={onShowPopup}>
+                  <Text style={styles.txtSize}>Options</Text>
+                </TouchableWithoutFeedback>
+                <EditNotePopup
+                  title={'Options'}
+                  ref={target => (popupRef = target)}
+                  onTouchOutside={onClosePopup}
+                  data={popupList}
+                  customer={customer}
+                  note={currNote}
+                  navigation={props.navigation}
+                  utilityType={utilityType}
+                  utility={utility}
+                />
+              </SafeAreaView>
+            ))
+          : null}
         <SafeAreaView style={styles.container}>
           <TouchableOpacity style={styles.selectButton} onPress={selectImage}>
             <Text style={styles.buttonText}>Pick an image</Text>
@@ -315,6 +332,7 @@ const AddOrEditNote = props => {
                           currNote.title,
                           currNote.noteText,
                           currNote.noteID,
+                          noteType,
                           props.navigation,
                         ))
                       : Alert.alert(
