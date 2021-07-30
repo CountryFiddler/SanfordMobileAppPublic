@@ -44,54 +44,56 @@ const NotesNavigator = props => {
   //console.log(props.timerList.length);
   //console.log(this.state.timerList);
   return (
-    <TouchableOpacity
-      //onPress={this.props.timerList.onPress}
-      style={styles.container}>
-      <View style={styles.subContainer}>
-        {props.notes.length ? (
-          // Map customers into the dropdown search
-          // searchText is the text shown for each customer button.
-          // See FirestoreApi.js for more information on searchText.
-          // If a customer is selected, then the user is directed
-          // to the customer page for that customer.
-          props.notes.map(note => {
-            return (
-              <View style={styles.itemView}>
-                <Button
-                  style={styles.itemText}
-                  title={note.title}
-                  onPress={() =>
-                    props.navigation.navigate('UtilityNote', {
-                      customer: props.customer,
-                      note: note,
-                      navigation: props.navigation,
-                    })
-                  }
-                />
-                <Button
-                  title={'Edit'}
-                  onPress={() =>
-                    props.navigation.navigate('EditNote', {
-                      customer: props.customer,
-                      note: note,
-                      navigation: props.navigation,
-                      utilityType: props.utilityType,
-                      utility: props.utility,
-                    })
-                  }
-                />
-              </View>
-            );
-          })
-        ) : (
-          // If there are no matches for customers and what the user entered
-          // then we display the message "No Customers Found"
-          <View style={styles.itemView}>
-            <Text style={styles.itemText}>No Notes Found</Text>
-          </View>
-        )}
-      </View>
-    </TouchableOpacity>
+    <ScrollView>
+      <TouchableOpacity
+        //onPress={this.props.timerList.onPress}
+        style={styles.container}>
+        <View style={styles.subContainer}>
+          {props.notes.length ? (
+            // Map customers into the dropdown search
+            // searchText is the text shown for each customer button.
+            // See FirestoreApi.js for more information on searchText.
+            // If a customer is selected, then the user is directed
+            // to the customer page for that customer.
+            props.notes.map(note => {
+              return (
+                <View style={styles.itemView}>
+                  <Button
+                    style={styles.itemText}
+                    title={note.title}
+                    onPress={() =>
+                      props.navigation.navigate('UtilityNote', {
+                        customer: props.customer,
+                        note: note,
+                        navigation: props.navigation,
+                      })
+                    }
+                  />
+                  <Button
+                    title={'Edit'}
+                    onPress={() =>
+                      props.navigation.navigate('EditNote', {
+                        customer: props.customer,
+                        note: note,
+                        navigation: props.navigation,
+                        utilityType: props.utilityType,
+                        utility: props.utility,
+                      })
+                    }
+                  />
+                </View>
+              );
+            })
+          ) : (
+            // If there are no matches for customers and what the user entered
+            // then we display the message "No Customers Found"
+            <View style={styles.itemView}>
+              <Text style={styles.itemText}>No Notes Found</Text>
+            </View>
+          )}
+        </View>
+      </TouchableOpacity>
+    </ScrollView>
   );
   // End of displaying the Drop Down Search
 };

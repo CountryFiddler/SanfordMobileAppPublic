@@ -26,14 +26,16 @@ import {
   StatusBar,
   TouchableWithoutFeedback,
   Alert,
+  Platform,
 } from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import {submitNote, submitTimerInfo} from '../../api/TimerApi';
 import UploadNoteImage from '../components/UploadNoteImage';
 import {launchImageLibrary} from 'react-native-image-picker';
-import {UploadMedia} from '../../api/FirestoreApi';
+import {addNote, updateNote, UploadMedia} from '../../api/FirestoreApi';
 import {storage} from 'react-native-firebase';
 import EditNotePopup from '../components/EditNotePopup';
+import * as Progress from 'react-native-progress';
 // Start of Home Screen Display
 const AddOrEditNote = props => {
   const currNote = {
@@ -55,6 +57,13 @@ const AddOrEditNote = props => {
   const utility = props.utility;
   const noteType = props.noteType;
   const noteID = props.noteID;
+  const [uploading, setUploading] = useState(false);
+  const [transferred, setTransferred] = useState(0);
+  const [uploadingImages, setUploadingImages] = useState(false);
+  const [uploadingVideos, setUploadingVideos] = useState(false);
+  const [mediaType, setMediaType] = useState('');
+  const [numMediaToUpload, setNumMediaToUpload] = useState(0);
+  const [mediaUploadCounter, setMediaUploadCounter] = useState(0);
   const [addedVideos, setAddedVideos] = useState(false);
   const [addedImages, setAddedImages] = useState(false);
   const [numImages, setNumImages] = useState(props.numImages);
@@ -75,7 +84,227 @@ const AddOrEditNote = props => {
     currNote.videoRefs = props.note.videoRefs;
     currNote.noteID = props.note.noteID;
   }
+  const submitNote = (
+    isAddNote,
+    customer,
+    numImages,
+    numVideos,
+    images,
+    imageRefs,
+    videos,
+    videoRefs,
+    utilityType,
+    utility,
+    noteTitle,
+    noteText,
+    noteID,
+    noteType,
+    navigation,
+  ) => {
+    var utilityNote = {noteTitle, noteText, noteID, noteType};
+    utilityNote.title = noteTitle;
+    utilityNote.noteText = noteText;
+    utilityNote.noteID = noteID;
+    utilityNote.noteType = noteType;
+    //console.log(videos[0]);
+    if (isAddNote) {
+      utilityNote.noteID = addNote(
+        customer,
+        utilityType,
+        utility,
+        utilityNote,
+        imageRefs,
+        numImages,
+        videoRefs,
+        numVideos,
+        navigation,
+      );
+      console.log(utilityNote.noteID);
+      for (var i = 0; i < images.length; i++) {
+        const {uri} = images[i].source;
+        imageRefs[i].imageRef =
+          imageRefs[i].imageRef +
+          '/' +
+          utilityNote.noteID +
+          '/' +
+          uri.substring(uri.lastIndexOf('/') + 1);
+        //console.log(imageRefs[i].imageRef);
+      }
+      for (var j = 0; j < videos.length; j++) {
+        const {uri} = videos[j].source;
+        videoRefs[j].videoRef =
+          videoRefs[j].videoRef +
+          '/' +
+          utilityNote.noteID +
+          '/' +
+          uri.substring(uri.lastIndexOf('/') + 1);
+      }
+      updateNote(
+        customer,
+        utilityType,
+        utility,
+        utilityNote,
+        imageRefs,
+        numImages,
+        videoRefs,
+        numVideos,
+        navigation,
+      );
+      // Get Single Note
+      // Set The Remaining ImageRefs and VideoRefs
+    } else {
+      //onsole.log(videoRefs);
+      updateNote(
+        customer,
+        utilityType,
+        utility,
+        utilityNote,
+        imageRefs,
+        numImages,
+        videoRefs,
+        numVideos,
+        navigation,
+      );
+    }
+    UploadMedia(
+      images,
+      videos,
+      customer,
+      utility,
+      utilityNote,
+    );
+    //mediaUploadCounter = 0
+    //navigation.navigate('UtilityNoteScreen');
+  };
 
+  const UploadMedia = async (
+    images,
+    videos,
+    customer,
+    utility,
+    utilityNote,
+  ) => {
+    console.log(uploading);
+    //console.log(media[counter].source);
+    var counter = 0;
+    //const [image, setImage] = useState(null);
+    //const [uploading, setUploading] = useState(false);
+    // const [transferred, setTransferred] = useState(0);
+    //console.log(images);
+    setMediaType('Image');
+    setNumMediaToUpload(numImages);
+    setMediaUploadCounter(1);
+    while (counter < images.length) {
+      setTransferred(0);
+
+      setUploading(true);
+      console.log(uploading);
+      const {uri} = images[counter].source;
+      const filename = uri.substring(uri.lastIndexOf('/') + 1);
+      const uploadUri =
+        Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+      const task = storage()
+        .ref(
+          'Customers' +
+            '/' +
+            customer.id +
+            '/' +
+            utility.utilityType +
+            '/' +
+            utility.id +
+            '/' +
+            utilityNote.noteType +
+            '/' +
+            utilityNote.noteID +
+            '/' +
+            filename,
+        )
+        .putFile(uploadUri);
+      console.log(uploadUri);
+      // set progress state
+      task.on('state_changed', snapshot => {
+        setTransferred(
+          Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 10000,
+        );
+      });
+      console.log(uploading);
+      try {
+        await task;
+      } catch (e) {
+        console.log('Error: Upload failed');
+        console.error(e);
+      }
+
+      counter++;
+      Alert.alert(
+        'Photo uploaded!',
+        'Your photo has been uploaded to Firebase Cloud Storage!',
+      );
+      setUploading(false);
+      setMediaUploadCounter(counter + 1);
+    }
+
+    counter = 0;
+    //const [image, setImage] = useState(null);
+    //const [uploading, setUploading] = useState(false);
+    // const [transferred, setTransferred] = useState(0);
+    //console.log(images);
+    setMediaType('Video');
+    setNumMediaToUpload(numVideos);
+    setMediaUploadCounter(1);
+    while (counter < videos.length) {
+      setTransferred(0);
+
+      setUploading(true);
+      console.log(uploading);
+      const {uri} = videos[counter].source;
+      const filename = uri.substring(uri.lastIndexOf('/') + 1);
+      const uploadUri =
+        Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+      const task = storage()
+        .ref(
+          'Customers' +
+            '/' +
+            customer.id +
+            '/' +
+            utility.utilityType +
+            '/' +
+            utility.id +
+            '/' +
+            utilityNote.noteType +
+            '/' +
+            utilityNote.noteID +
+            '/' +
+            filename,
+        )
+        .putFile(uploadUri);
+      console.log(uploadUri);
+      // set progress state
+      task.on('state_changed', snapshot => {
+        setTransferred(
+          Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 10000,
+        );
+      });
+      console.log(uploading);
+      try {
+        await task;
+      } catch (e) {
+        console.log('Error: Upload failed');
+        console.error(e);
+      }
+
+      counter++;
+      Alert.alert(
+        'Video uploaded!',
+        'Your video has been uploaded to Firebase Cloud Storage!',
+      );
+      setUploading(false);
+      setMediaUploadCounter(counter + 1);
+    }
+    //setUploading(false);
+    console.log('Done Adding Media');
+    // setImage(null);
+  };
   function checkNullEntries() {
     if (noteTitle === '' && !isAddNote) {
       currNote.title = currNote.titlePlaceholder;
@@ -248,6 +477,20 @@ const AddOrEditNote = props => {
   const onClosePopup = () => {
     popupRef.close();
   };
+
+  /** Code for displaying images while uploading
+   *             {images.length
+              ? images.map(image => {
+                  return (
+                    <View style={styles.itemView}>
+                      <Image
+                        source={{uri: image.uri}}
+                        style={styles.imageBox}
+                      />
+                    </View>
+                  );
+                })
+              : null}*/
   return (
     <ScrollView>
       <View>
@@ -296,53 +539,54 @@ const AddOrEditNote = props => {
             <Text style={styles.buttonText}>Pick a Video</Text>
           </TouchableOpacity>
           <View style={styles.imageContainer}>
-            {images.length
-              ? images.map(image => {
-                  return (
-                    <View style={styles.itemView}>
-                      <Image
-                        source={{uri: image.uri}}
-                        style={styles.imageBox}
-                      />
-                    </View>
-                  );
-                })
-              : null}
-            <TouchableOpacity
-              style={styles.uploadButton}
-              onPress={() => {
-                //console.log(noteTitle);
-                {
-                  (currNote.title = noteTitle),
-                    currNote.title !== '' || !isAddNote
-                      ? //console.log(noteTitle),
-                        (checkNullEntries(),
-                        setMedia(),
-                        submitNote(
-                          isAddNote,
-                          customer,
-                          currNote.numImages,
-                          currNote.numVideos,
-                          currNote.images,
-                          currNote.imageRefs,
-                          currNote.videos,
-                          currNote.videoRefs,
-                          utilityType,
-                          utility,
-                          currNote.title,
-                          currNote.noteText,
-                          currNote.noteID,
-                          noteType,
-                          props.navigation,
-                        ))
-                      : Alert.alert(
-                          'Please Enter A Note Title',
-                          'All notes must have a title',
-                        );
-                }
-              }}>
-              <Text style={styles.buttonText}>Submit Info</Text>
-            </TouchableOpacity>
+            {uploading ? (
+              <View style={styles.progressBarContainer}>
+                <Progress.Bar progress={transferred} width={300} />
+                <Text>
+                  {' '}
+                  {mediaType} {mediaUploadCounter} out of {numMediaToUpload} is
+                  being uploaded...
+                </Text>
+              </View>
+            ) : (
+              <TouchableOpacity
+                style={styles.uploadButton}
+                onPress={() => {
+                  //console.log(noteTitle);
+                  {
+                    (currNote.title = noteTitle),
+                      currNote.title !== '' || !isAddNote
+                        ? //console.log(noteTitle),
+                          (checkNullEntries(),
+                          //setUploading(true),
+                          console.log(uploading + 'bob'),
+                          setMedia(),
+                          submitNote(
+                            isAddNote,
+                            customer,
+                            currNote.numImages,
+                            currNote.numVideos,
+                            currNote.images,
+                            currNote.imageRefs,
+                            currNote.videos,
+                            currNote.videoRefs,
+                            utilityType,
+                            utility,
+                            currNote.title,
+                            currNote.noteText,
+                            currNote.noteID,
+                            noteType,
+                            props.navigation,
+                          ))
+                        : Alert.alert(
+                            'Please Enter A Note Title',
+                            'All notes must have a title',
+                          );
+                  }
+                }}>
+                <Text style={styles.buttonText}>Submit Info</Text>
+              </TouchableOpacity>
+            )}
           </View>
         </SafeAreaView>
       </View>
@@ -386,7 +630,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   progressBarContainer: {
-    marginTop: 20,
+    marginTop: 200,
   },
   imageBox: {
     width: 300,

@@ -270,52 +270,6 @@ export function getTimerNotes(customer, timer) {
   // alert(timersList.length);
 }
 
-export async function UploadMedia(media, customer, utility, utilityNote) {
-  //console.log(media[counter].source);
-  var counter = 0;
-  //const [image, setImage] = useState(null);
-  //const [uploading, setUploading] = useState(false);
-  // const [transferred, setTransferred] = useState(0);
-  //console.log(images);
-  while (counter < media.length) {
-    const {uri} = media[counter].source;
-    const filename = uri.substring(uri.lastIndexOf('/') + 1);
-    const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
-    const task = storage()
-      .ref(
-        'Customers' +
-          '/' +
-          customer.id +
-          '/' +
-          utility.utilityType +
-          '/' +
-          utility.id +
-          '/' +
-          utilityNote.noteType +
-          '/' +
-          utilityNote.noteID +
-          '/' +
-          filename,
-      )
-      .putFile(uploadUri);
-    console.log(uploadUri);
-    // set progress state
-    task.on('state_changed', snapshot => {});
-    try {
-      await task;
-    } catch (e) {
-      console.log('Error: Upload failed');
-      console.error(e);
-    }
-    counter++;
-    Alert.alert(
-      'Photo uploaded!',
-      'Your photo has been uploaded to Firebase Cloud Storage!',
-    );
-  }
-  console.log('Done Adding Photos');
-  // setImage(null);
-}
 
 export function getImageURL(note) {
   var imageRef = storage().ref('/' + note.imageRef);
