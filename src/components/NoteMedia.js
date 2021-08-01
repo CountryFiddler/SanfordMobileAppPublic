@@ -31,6 +31,7 @@ import {getImageURL, updateNote} from '../../api/FirestoreApi';
 import EditNotePopup from '../components/EditNotePopup';
 import {deleteNoteMedia} from '../../api/TimerApi';
 import Video from 'react-native-video';
+import CheckBox from 'react-native-checkbox';
 
 // Start of Home Screen Display
 const NoteMedia = props => {
@@ -74,6 +75,7 @@ const NoteMedia = props => {
   const [video18, setVideo18] = useState(null);
   const [video19, setVideo19] = useState(null);
   const [video20, setVideo20] = useState(null);
+  const [agree, setAgree] = useState(false);
   const [imagesToDelete, setImagesToDelete] = useState([]);
   const customer = props.customer;
   const utilityType = props.utilityType;
@@ -428,9 +430,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image1}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[0].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -443,9 +449,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image2}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[1].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[1].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -458,9 +468,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image3}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[2].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[2].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -473,9 +487,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image4}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[3].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[3].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -488,9 +506,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image5}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[4].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[4].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -503,9 +525,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image6}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[5].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[5].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -518,9 +544,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image7}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[6].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[6].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -533,9 +563,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image8}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[7].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[7].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -548,9 +582,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image9}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[8].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[8].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -563,9 +601,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image10}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[9].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[9].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -578,9 +620,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image11}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[10].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[10].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -593,9 +639,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image12}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[11].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[11].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -608,9 +658,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image13}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[12].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[12].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -623,9 +677,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image14}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[13].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[13].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -638,9 +696,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image15}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[14].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[14].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -653,9 +715,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image16}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[15].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[15].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -668,9 +734,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image17}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[16].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[16].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -683,9 +753,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image18}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[17].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[17].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -698,9 +772,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image19}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[18].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[18].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -713,9 +791,13 @@ const NoteMedia = props => {
         <View>
           <Image source={{uri: image20}} style={{width: 200, height: 300}} />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.imageRefs[19].imageRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.imageRefs[19].imageRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -735,9 +817,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[0].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[0].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -757,9 +843,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[1].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[1].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -778,9 +868,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[2].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[2].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -800,9 +894,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[3].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[3].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -822,9 +920,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[4].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[4].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -844,9 +946,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[5].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[5].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -866,9 +972,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[6].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[6].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -888,9 +998,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[7].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[7].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -910,9 +1024,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[8].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[8].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -932,9 +1050,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[9].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[9].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -954,9 +1076,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[10].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[10].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -976,9 +1102,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[11].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[11].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -998,9 +1128,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[12].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[12].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -1020,9 +1154,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[13].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[13].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -1042,9 +1180,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[14].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[14].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -1064,9 +1206,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[15].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[15].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -1086,9 +1232,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[16].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[16].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -1108,9 +1258,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[17].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[17].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -1130,9 +1284,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[18].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[18].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -1152,9 +1310,13 @@ const NoteMedia = props => {
             style={{width: 200, height: 300}}
           />
           {isDeleteMedia ? (
-            <Button
-              title={'Delete'}
-              onPress={() => selectImageToDelete(note.videoRefs[19].videoRef)}
+            <CheckBox
+              boxType={'square'}
+              label=""
+              value={agree}
+              onChange={() => (
+                selectImageToDelete(note.videoRefs[19].videoRef), setAgree(true)
+              )}
             />
           ) : null}
         </View>
@@ -1163,26 +1325,29 @@ const NoteMedia = props => {
   }
   function selectImageToDelete(imageRef) {
     var isInImagesToDelete = false;
-   /* for (var i = 0; i < note.images.length; i++) {
-      if (imageRef === note.images[i].imageRef) {
-        imagesToDelete.splice(i, 1, imageRef);
+    for (var i = 0; i < imagesToDelete.length; i++) {
+      if (imageRef === imagesToDelete[i]) {
+        console.log('Bob');
+        imagesToDelete.splice(i, 1);
+        //console.log(imagesToDelete.length);
         isInImagesToDelete = true;
       }
     }
     if (!isInImagesToDelete) {
       setImagesToDelete(prevItems => [...prevItems, imageRef]);
     }
-    isInImagesToDelete = false;
-    for (var i = 0; i < note.videos.length; i++) {
+    console.log(imagesToDelete.length);
+    /*isInImagesToDelete = false;
+    for (var i = 0; i < imagesToDelete.length; i++) {
       if (imageRef === note.videos[i].videoRef) {
         imagesToDelete.splice(i, 1, imageRef);
         isInImagesToDelete = true;
       }
-    }*/
+    }
     if (!isInImagesToDelete) {
       setImagesToDelete(prevItems => [...prevItems, imageRef]);
       //console.log(imagesToDelete);
-    }
+    }*/
   }
 
   //console.log(testImage);

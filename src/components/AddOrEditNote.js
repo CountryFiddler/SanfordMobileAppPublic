@@ -192,7 +192,7 @@ const AddOrEditNote = props => {
     // const [transferred, setTransferred] = useState(0);
     //console.log(images);
     setMediaType('Image');
-    setNumMediaToUpload(numImages);
+    setNumMediaToUpload(images.length);
     setMediaUploadCounter(1);
     while (counter < images.length) {
       setTransferred(0);
@@ -250,7 +250,7 @@ const AddOrEditNote = props => {
     // const [transferred, setTransferred] = useState(0);
     //console.log(images);
     setMediaType('Video');
-    setNumMediaToUpload(numVideos);
+    setNumMediaToUpload(videos.length);
     setMediaUploadCounter(1);
     while (counter < videos.length) {
       setTransferred(0);
