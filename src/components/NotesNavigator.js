@@ -78,6 +78,7 @@ const NotesNavigator = props => {
                         navigation: props.navigation,
                         utilityType: props.utilityType,
                         utility: props.utility,
+                        utilityNotes: props.notes,
                       })
                     }
                   />

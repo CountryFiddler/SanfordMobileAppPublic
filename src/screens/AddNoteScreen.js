@@ -38,6 +38,7 @@ const AddNoteScreen = props => {
   const utilityType = props.navigation.getParam('utilityType');
   const utility = props.navigation.getParam('utility');
   const noteType = props.navigation.getParam('noteType');
+  const utilityNotes = props.navigation.getParam('utilityNote');
 
   // Start of Add Timer Screen Display
   //const [numZones, setNumZones] = useState(null);
@@ -54,6 +55,7 @@ const AddNoteScreen = props => {
           navigation={props.navigation}
           noteID={null}
           noteType={noteType}
+          utilityNotes={utilityNotes}
         />
       </View>
     </ScrollView>

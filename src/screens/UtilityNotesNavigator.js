@@ -23,6 +23,7 @@ const UtilityNotesNavigatorScreen = props => {
   const utility = props.navigation.getParam('utility');
   const customer = props.navigation.getParam('customer');
   const noteType = props.navigation.getParam('noteType');
+  console.log(utilityNotes);
   return (
     <View style={styles.homePageContainer}>
       <NotesNavigator
@@ -42,6 +43,7 @@ const UtilityNotesNavigatorScreen = props => {
             utilityType: utility.utilityType,
             utility: utility,
             noteType: noteType,
+            utilityNotes: utilityNotes,
             //timers: timers,
           })
         }

@@ -82,6 +82,7 @@ const NoteMedia = props => {
   const utility = props.utility;
   const note = props.note;
   const isDeleteMedia = props.isDeleteMedia;
+  const navigation = props.navigation;
   // toString might be just it
   if (note.numImages > 0) {
     var imageRef1 = storage()
@@ -250,6 +251,7 @@ const NoteMedia = props => {
       .getDownloadURL()
       .then(url => {
         setVideo1(url);
+        console.log(url);
       });
   }
   if (note.numVideos > 1) {
@@ -814,7 +816,7 @@ const NoteMedia = props => {
             paused={true}
             repeat={true}
             source={{uri: video1}}
-            style={{width: 200, height: 300}}
+            style={{width: 500, height: 500}}
           />
           {isDeleteMedia ? (
             <CheckBox
@@ -1407,6 +1409,7 @@ const NoteMedia = props => {
                 note,
                 utilityType,
                 utility,
+                navigation,
               )
             }
           />

@@ -61,6 +61,7 @@ export function deleteNoteMedia(
   utilityNote,
   utilityType,
   utility,
+  navigation,
 ) {
   console.log('Deleting Images');
   for (var i = 0; i < imagesToBeDeleted.length; i++) {
@@ -73,7 +74,7 @@ export function deleteNoteMedia(
         console.log(utilityNote.title);
       }
     }
-    console.log(utilityNote.videoRefs[0].videoRef);
+  //  console.log(utilityNote.videoRefs[0].videoRef);
     //console.log(imagesToBeDeleted[0]);
     for (var j = 0; j < utilityNote.videoRefs.length; j++) {
       if (imagesToBeDeleted[i] === utilityNote.videoRefs[j].videoRef) {
@@ -95,6 +96,14 @@ export function deleteNoteMedia(
     utilityNote.videoRefs,
     utilityNote.numVideos,
   );
+  if (utilityType === 'Timers') {
+    navigation.navigate('TimerInfo', {
+      customer: customer,
+      utility: utility,
+      //utilityNotes: getTimerNotes(customer, utility),
+      //timers: timers,
+    });
+  }
 }
 
 export function deleteContent(

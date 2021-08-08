@@ -31,8 +31,9 @@ import {
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import {submitNote, submitTimerInfo} from '../../api/TimerApi';
 import UploadNoteImage from '../components/UploadNoteImage';
-import {launchImageLibrary} from 'react-native-image-picker';
-import {addNote, updateNote, UploadMedia} from '../../api/FirestoreApi';
+import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
+import { addNote, getTimerNotes, updateNote, UploadMedia } from "../../api/FirestoreApi";
 import {storage} from 'react-native-firebase';
 import EditNotePopup from '../components/EditNotePopup';
 import * as Progress from 'react-native-progress';
@@ -57,6 +58,9 @@ const AddOrEditNote = props => {
   const utility = props.utility;
   const noteType = props.noteType;
   const noteID = props.noteID;
+  const note = props.note;
+  //const utilityNotes = props.utilityNotes;
+  const utilityNotes = props.utilityNotes;
   const [uploading, setUploading] = useState(false);
   const [transferred, setTransferred] = useState(0);
   const [uploadingImages, setUploadingImages] = useState(false);
@@ -70,10 +74,12 @@ const AddOrEditNote = props => {
   const [numVideos, setNumVideos] = useState(props.numVideos);
   const [noteTitle, setNoteTitle] = useState('');
   const [noteText, setNoteText] = useState('');
-  const [images, setImages] = useState([]);
+  const [imagesToUpload, setImagesToUpload] = useState([]);
   const [imageRefs, setImageRefs] = useState([]);
-  const [videos, setVideos] = useState([]);
+  const [videosToUpload, setVideosToUpload] = useState([]);
   const [videoRefs, setVideoRefs] = useState([]);
+  const [testURI, setTestURI] = useState('');
+  const [source, setSource] = useState('');
   if (!isAddNote) {
     //setOldNote(props.note);
     currNote.numImages = props.note.numImages;
@@ -119,9 +125,11 @@ const AddOrEditNote = props => {
         numVideos,
         navigation,
       );
-      console.log(utilityNote.noteID);
+      //console.log(videoRefs[0].videoRef);
+      //console.log(utilityNote.noteID);
       for (var i = 0; i < images.length; i++) {
-        const {uri} = images[i].source;
+        const uri = images[i];
+        // console.log(uri);
         imageRefs[i].imageRef =
           imageRefs[i].imageRef +
           '/' +
@@ -131,13 +139,14 @@ const AddOrEditNote = props => {
         //console.log(imageRefs[i].imageRef);
       }
       for (var j = 0; j < videos.length; j++) {
-        const {uri} = videos[j].source;
+        const videoUri = videos[j];
+        console.log('Bob' + videos[j]);
         videoRefs[j].videoRef =
           videoRefs[j].videoRef +
           '/' +
           utilityNote.noteID +
           '/' +
-          uri.substring(uri.lastIndexOf('/') + 1);
+          videoUri.substring(videoUri.lastIndexOf('/') + 1);
       }
       updateNote(
         customer,
@@ -153,7 +162,6 @@ const AddOrEditNote = props => {
       // Get Single Note
       // Set The Remaining ImageRefs and VideoRefs
     } else {
-      //onsole.log(videoRefs);
       updateNote(
         customer,
         utilityType,
@@ -166,15 +174,8 @@ const AddOrEditNote = props => {
         navigation,
       );
     }
-    UploadMedia(
-      images,
-      videos,
-      customer,
-      utility,
-      utilityNote,
-    );
+    UploadMedia(images, videos, customer, utility, utilityNote);
     //mediaUploadCounter = 0
-    //navigation.navigate('UtilityNoteScreen');
   };
 
   const UploadMedia = async (
@@ -198,8 +199,8 @@ const AddOrEditNote = props => {
       setTransferred(0);
 
       setUploading(true);
-      console.log(uploading);
-      const {uri} = images[counter].source;
+      //console.log(uploading);
+      const uri = images[counter];
       const filename = uri.substring(uri.lastIndexOf('/') + 1);
       const uploadUri =
         Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
@@ -220,7 +221,7 @@ const AddOrEditNote = props => {
             filename,
         )
         .putFile(uploadUri);
-      console.log(uploadUri);
+      //  console.log(uploadUri);
       // set progress state
       task.on('state_changed', snapshot => {
         setTransferred(
@@ -256,8 +257,8 @@ const AddOrEditNote = props => {
       setTransferred(0);
 
       setUploading(true);
-      console.log(uploading);
-      const {uri} = videos[counter].source;
+      //  console.log(uploading);
+      const uri = videos[counter];
       const filename = uri.substring(uri.lastIndexOf('/') + 1);
       const uploadUri =
         Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
@@ -278,14 +279,14 @@ const AddOrEditNote = props => {
             filename,
         )
         .putFile(uploadUri);
-      console.log(uploadUri);
+      // console.log(uploadUri);
       // set progress state
       task.on('state_changed', snapshot => {
         setTransferred(
           Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 10000,
         );
       });
-      console.log(uploading);
+      // console.log(uploading);
       try {
         await task;
       } catch (e) {
@@ -304,11 +305,22 @@ const AddOrEditNote = props => {
     //setUploading(false);
     console.log('Done Adding Media');
     // setImage(null);
+    console.log(utilityType);
+    console.log(utilityType === 'Timers');
+    if (utilityType === 'Timers') {
+      props.navigation.navigate('TimerInfo', {
+        customer: customer,
+        utility: utility,
+        //utilityNotes: getTimerNotes(customer, utility),
+        noteType: noteType,
+        //timers: timers,
+      });
+    }
   };
+
   function checkNullEntries() {
     if (noteTitle === '' && !isAddNote) {
       currNote.title = currNote.titlePlaceholder;
-      console.log(currNote.titlePlaceholder);
     } else {
       currNote.title = noteTitle;
     }
@@ -325,16 +337,155 @@ const AddOrEditNote = props => {
       currNote.numImages = numImages;
       console.log(currNote.numImages);
     }
+    //console.log(videoRefs[0].videoRef);
     if (addedVideos) {
       currNote.videoRefs = videoRefs;
       currNote.numVideos = numVideos;
     }
-    currNote.images = images;
-    currNote.videos = videos;
+    currNote.images = imagesToUpload;
+    console.log(imagesToUpload.length);
+    currNote.videos = videosToUpload;
   }
   //const [uploading, setUploading] = useState(false);
   //const [transferred, setTransferred] = useState(0);
-  const selectImage = () => {
+  function selectImage() {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true,
+      multiple: true,
+    }).then(images => {
+      var numImagesCounter = props.numImages;
+      for (var i = 0; i < images.length; i++) {
+        setImagesToUpload(prevItems => [...prevItems, images[i].path]);
+        let imageRef =
+          'Customers' +
+          '/' +
+          customer.id +
+          '/' +
+          utility.utilityType +
+          '/' +
+          utility.id +
+          '/' +
+          noteType; // +
+        //'/';
+        if (!isAddNote) {
+          imageRef =
+            imageRef +
+            '/' +
+            noteID +
+            '/' +
+            images[i].path.substring(images[i].path.lastIndexOf('/') + 1);
+        }
+        if (!isAddNote) {
+          if (props.note.imageRefs.length > 0 && i < 1) {
+            setImageRefs(props.note.imageRefs);
+            setAddedImages(true);
+          }
+        }
+        if (imagesToUpload.length < 20) {
+          setImageRefs(prevItems => [...prevItems, {imageRef}]);
+          numImagesCounter++;
+          setNumImages(numImagesCounter);
+          setAddedImages(true);
+          console.log(addedImages);
+        }
+      }
+      props.onChange?.(images);
+    });
+  }
+
+  function selectImageFromCamera() {
+    ImagePicker.openCamera({
+      width: 300,
+      height: 400,
+      cropping: true,
+      //multiple: true,
+    }).then(image => {
+      var numImagesCounter = props.numImages;
+      setImagesToUpload(prevItems => [...prevItems, image.path]);
+      let imageRef =
+        'Customers' +
+        '/' +
+        customer.id +
+        '/' +
+        utility.utilityType +
+        '/' +
+        utility.id +
+        '/' +
+        noteType; // +
+      //'/';
+      if (!isAddNote) {
+        imageRef =
+          imageRef +
+          '/' +
+          noteID +
+          '/' +
+          image.path.substring(image.path.lastIndexOf('/') + 1);
+      }
+      if (!isAddNote) {
+        if (props.note.imageRefs.length > 0 && !addedImages) {
+          setImageRefs(props.note.imageRefs);
+          setAddedImages(true);
+        }
+      }
+      if (imagesToUpload.length < 20) {
+        setImageRefs(prevItems => [...prevItems, {imageRef}]);
+        numImagesCounter++;
+        setNumImages(numImagesCounter);
+        setAddedImages(true);
+        console.log(addedImages);
+      }
+      props.onChange?.(image);
+    });
+  }
+
+  function selectVideoFromCamera() {
+    ImagePicker.openCamera({
+      mediaType: 'video',
+      width: 300,
+      height: 400,
+      //cropping: true,
+      //multiple: true,
+    }).then(video => {
+      var numVideosCounter = props.numVideos;
+      setVideosToUpload(prevItems => [...prevItems, video.path]);
+      let videoRef =
+        'Customers' +
+        '/' +
+        customer.id +
+        '/' +
+        utility.utilityType +
+        '/' +
+        utility.id +
+        '/' +
+        noteType; // +
+      //'/';
+      if (!isAddNote) {
+        videoRef =
+          videoRef +
+          '/' +
+          noteID +
+          '/' +
+          video.path.substring(video.path.lastIndexOf('/') + 1);
+      }
+      if (!isAddNote) {
+        if (props.note.videoRefs.length > 0 && !addedVideos) {
+          setVideoRefs(props.note.videoRefs);
+          setAddedVideos(true);
+        }
+      }
+      if (videosToUpload.length < 20) {
+        setVideoRefs(prevItems => [...prevItems, {videoRef}]);
+        numVideosCounter++;
+        setNumImages(numVideosCounter);
+        setAddedVideos(true);
+        //console.log(addedImages);
+      }
+      props.onChange?.(video);
+    });
+  }
+  /*const selectImageFromCamera = () => {
     const options = {
       maxWidth: 2000,
       maxHeight: 2000,
@@ -343,9 +494,9 @@ const AddOrEditNote = props => {
         path: 'images',
       },
     };
-    launchImageLibrary(options, response => {
+    launchCamera(options, response => {
       if (response.didCancel) {
-        console.log('User cancelld image picker');
+        console.log('User cancelled image picker');
       } else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
       } else if (response.customButton) {
@@ -353,7 +504,7 @@ const AddOrEditNote = props => {
       } else {
         const source = {uri: response.assets[0].uri};
         const {uri} = source;
-        setImages(prevItems => [...prevItems, {source}]);
+        setImagesToUpload(prevItems => [...prevItems, {source}]);
         //TODO Change Image Ref to have the utility/utility notes
         let imageRef =
           'Customers' +
@@ -379,21 +530,21 @@ const AddOrEditNote = props => {
           if (!addedImages && props.note.imageRefs.length > 0) {
             setImageRefs(props.note.imageRefs);
             //setNumImages(numImages + props.note.numImages);
-            console.log(props.note.numImages);
+            console.log('Joey Tomatoes');
             console.log(numImages);
             setAddedImages(true);
           }
         }
-        if (images.length < 20) {
+        if (imagesToUpload.length < 20) {
           setImageRefs(prevItems => [...prevItems, {imageRef}]);
           //currNote.imageRefs = prevItems => [...prevItems, {imageRef}];
           setNumImages(numImages + 1);
-          console.log(numImages);
+          //console.log(numImages);
           setAddedImages(true);
         }
       }
     });
-  };
+  };*/
 
   const selectVideo = () => {
     const options = {
@@ -414,7 +565,7 @@ const AddOrEditNote = props => {
       } else {
         const source = {uri: response.assets[0].uri};
         const {uri} = source;
-        setVideos(prevItems => [...prevItems, {source}]);
+        setVideosToUpload(prevItems => [...prevItems, response.assets[0].uri]);
         //TODO Change Image Ref to have the utility/utility notes
         let videoRef =
           'Customers' +
@@ -442,7 +593,7 @@ const AddOrEditNote = props => {
             setAddedVideos(true);
           }
         }
-        if (videos.length < 20) {
+        if (videosToUpload.length < 20) {
           setVideoRefs(prevItems => [...prevItems, {videoRef}]);
           setNumVideos(numVideos + 1);
           console.log(numVideos);
@@ -538,6 +689,16 @@ const AddOrEditNote = props => {
           <TouchableOpacity style={styles.selectButton} onPress={selectVideo}>
             <Text style={styles.buttonText}>Pick a Video</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.selectButton}
+            onPress={selectImageFromCamera}>
+            <Text style={styles.buttonText}>Take a Picture</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.selectButton}
+            onPress={selectVideoFromCamera}>
+            <Text style={styles.buttonText}>Take a Video</Text>
+          </TouchableOpacity>
           <View style={styles.imageContainer}>
             {uploading ? (
               <View style={styles.progressBarContainer}>
@@ -559,8 +720,9 @@ const AddOrEditNote = props => {
                         ? //console.log(noteTitle),
                           (checkNullEntries(),
                           //setUploading(true),
-                          console.log(uploading + 'bob'),
+                          console.log('Giants' + addedVideos),
                           setMedia(),
+                          //  console.log(currNote.videoRefs[0].videoRef),
                           submitNote(
                             isAddNote,
                             customer,

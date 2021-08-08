@@ -41,6 +41,7 @@ const EditNoteScreen = props => {
   const customer = props.navigation.getParam('customer');
   const utilityType = props.navigation.getParam('utilityType');
   const utility = props.navigation.getParam('utility');
+  const utilityNotes = props.navigation.getParam('utilityNotes');
   console.log(note);
   return (
     <ScrollView>
@@ -56,6 +57,7 @@ const EditNoteScreen = props => {
           navigation={props.navigation}
           noteID={note.noteID}
           noteType={note.noteType}
+          utilityNotes={utilityNotes}
         />
       </View>
     </ScrollView>

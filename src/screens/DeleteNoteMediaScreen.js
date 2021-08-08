@@ -34,34 +34,10 @@ import NoteMedia from '../components/NoteMedia';
 
 // Start of Home Screen Display
 const DeleteNoteMediaScreen = props => {
-  const [isDeleteMedia, setIsDeleteMedia] = useState(true);
-  const [testImage, setTestImage] = useState(null);
-  const [image1, setImage1] = useState(null);
-  const [image2, setImage2] = useState(null);
-  const [image3, setImage3] = useState(null);
-  const [image4, setImage4] = useState(null);
-  const [image5, setImage5] = useState(null);
-  const [image6, setImage6] = useState(null);
-  const [image7, setImage7] = useState(null);
-  const [image8, setImage8] = useState(null);
-  const [image9, setImage9] = useState(null);
-  const [image10, setImage10] = useState(null);
-  const [image11, setImage11] = useState(null);
-  const [image12, setImage12] = useState(null);
-  const [image13, setImage13] = useState(null);
-  const [image14, setImage14] = useState(null);
-  const [image15, setImage15] = useState(null);
-  const [image16, setImage16] = useState(null);
-  const [image17, setImage17] = useState(null);
-  const [image18, setImage18] = useState(null);
-  const [image19, setImage19] = useState(null);
-  const [image20, setImage20] = useState(null);
   const [index, setIndex] = useState(-1);
-  const [imagesToDelete, setImagesToDelete] = useState([]);
   const customer = props.navigation.getParam('customer');
   const utilityType = props.navigation.getParam('utilityType');
   const utility = props.navigation.getParam('utility');
-  const incrementIndex = () => setIndex(index + 1);
   const note = props.navigation.getParam('note');
 
   //console.log(testImage);
@@ -76,6 +52,7 @@ const DeleteNoteMediaScreen = props => {
         utility={utility}
         note={note}
         isDeleteMedia={true}
+        navigation={props.navigation}
       />
     </ScrollView>
   );
