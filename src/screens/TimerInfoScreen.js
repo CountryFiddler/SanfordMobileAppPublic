@@ -17,13 +17,14 @@ import {Text, StyleSheet, View, Button} from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import BackHandler from 'react-native/Libraries/Utilities/BackHandler';
 import useFocusEffect from '@react-navigation/native';
-import { getTimerNotes } from "../../api/FirestoreApi";
+import { getNotes, getTimerNotes } from "../../api/FirestoreApi";
 // Start of Home Screen Display
 const TimerInfoScreen = props => {
   const customer = props.navigation.getParam('customer');
   const timer = props.navigation.getParam('utility');
   const navigation = props.navigation;
   const timerNotes = getTimerNotes(customer, timer);
+  const findTimerNotes = getNotes(customer, timer, 'FindTimerNotes');
   console.log(timerNotes);
   return (
     <View style={styles.homePageContainer}>
@@ -41,6 +42,19 @@ const TimerInfoScreen = props => {
         }
       />
       <Button
+        title={'Find Timer'}
+        onPress={() =>
+          props.navigation.navigate('UtilityNotesNavigator', {
+            customer: customer,
+            utility: timer,
+            utilityNotes: findTimerNotes,
+            noteType: 'FindTimerNotes',
+            screenTitle: 'Find Timer',
+            //timers: timers,
+          })
+        }
+      />
+      <Button
         // If the Timer button is pressed, then the user
         // is redirected to the Timer Info Screen
         onPress={() =>
@@ -50,6 +64,7 @@ const TimerInfoScreen = props => {
             utility: timer,
             utilityNotes: timerNotes,
             noteType: 'TimerNotes',
+            screenTitle: 'Timer Notes',
             //timers: timers,
           })
         }

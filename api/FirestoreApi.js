@@ -174,7 +174,7 @@ export function addNote(
     .doc(customer.id)
     .collection(utilityType)
     .doc(utility.id)
-    .collection('TimerNotes')
+    .collection(utilityNote.noteType)
     .doc();
 
   docRef
@@ -215,7 +215,7 @@ export function updateNote(
     .doc(utility.id);
 
   docRef
-    .collection('TimerNotes')
+    .collection(utilityNote.noteType)
     .doc(utilityNote.noteID)
     .update({
       title: utilityNote.title,
@@ -298,9 +298,9 @@ export function deleteUtilityNote(customer, utility, utilityNote) {
     .collection('Customers')
     // Is customer.id needed here?
     .doc(customer.id)
-    .collection('Timers')
+    .collection(utility.utilityType)
     .doc(utility.id)
-    .collection('TimerNotes')
+    .collection(utilityNote.noteType)
     .doc(utilityNote.noteID)
     .delete()
     .then(() => {
@@ -311,4 +311,43 @@ export function deleteUtilityNote(customer, utility, utilityNote) {
     });
   console.log(utilityNote.id);
   console.log(utility.id);
+}
+
+export function getNotes(customer, utility, noteType) {
+  var notes = [];
+  var counter = 0;
+  const docRef = firestore()
+    .collection('Customers')
+    // Is customer.id needed here?
+    .doc(customer.id)
+    .collection(utility.utilityType)
+    .doc(utility.id);
+  //console.log(customer.id);
+  //console.log(docRef);
+  //const notes = firestore.collection('TimerNotes').doc();
+  docRef
+    .collection(noteType)
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        notes.push({
+          title: doc.data().title,
+          noteText: doc.data().noteText,
+          utilityID: utility.id,
+          customerID: customer.id,
+          noteID: doc.id,
+          numImages: doc.data().numImages,
+          imageRefs: doc.data().imageRefs,
+          numVideos: doc.data().numVideos,
+          videoRefs: doc.data().videoRefs,
+          noteType: noteType,
+        });
+        //console.log(notesList.images.imageRef);
+        //alert(timersList.length);
+        //counter++;
+      });
+    });
+  // alert(timersList.length);
+  // timersRetrieved(timersList);
+  return notes;
 }

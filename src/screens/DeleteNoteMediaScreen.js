@@ -44,6 +44,7 @@ const DeleteNoteMediaScreen = props => {
   //imageURL = getImageURL(note.images[0].imageRef);
   // console.log(note.images[0].imageRef);
   // getURLS();
+  console.log('Ryan Bran ' + note.noteType);
   return (
     <ScrollView style={styles.homePageContainer}>
       <NoteMedia

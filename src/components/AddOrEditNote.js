@@ -33,7 +33,12 @@ import {submitNote, submitTimerInfo} from '../../api/TimerApi';
 import UploadNoteImage from '../components/UploadNoteImage';
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 import ImagePicker from 'react-native-image-crop-picker';
-import { addNote, getTimerNotes, updateNote, UploadMedia } from "../../api/FirestoreApi";
+import {
+  addNote,
+  getTimerNotes,
+  updateNote,
+  UploadMedia,
+} from '../../api/FirestoreApi';
 import {storage} from 'react-native-firebase';
 import EditNotePopup from '../components/EditNotePopup';
 import * as Progress from 'react-native-progress';
@@ -89,7 +94,9 @@ const AddOrEditNote = props => {
     currNote.imageRefs = props.note.imageRefs;
     currNote.videoRefs = props.note.videoRefs;
     currNote.noteID = props.note.noteID;
+    currNote.noteType = props.note.noteType;
   }
+  console.log('Ryan Braun ' + currNote.noteType);
   const submitNote = (
     isAddNote,
     customer,
@@ -174,7 +181,7 @@ const AddOrEditNote = props => {
         navigation,
       );
     }
-    UploadMedia(images, videos, customer, utility, utilityNote);
+    //  UploadMedia(images, videos, customer, utility, utilityNote);
     //mediaUploadCounter = 0
   };
 
@@ -311,9 +318,7 @@ const AddOrEditNote = props => {
       props.navigation.navigate('TimerInfo', {
         customer: customer,
         utility: utility,
-        //utilityNotes: getTimerNotes(customer, utility),
         noteType: noteType,
-        //timers: timers,
       });
     }
   };
@@ -331,6 +336,27 @@ const AddOrEditNote = props => {
     }
   }
 
+  function checkDuplicateImageRefs(ref) {
+    var contains = false;
+    for (var i = 0; i < imageRefs.length; i++) {
+      if (imageRefs[i].imageRef === ref) {
+        contains = true;
+        break;
+      }
+    }
+    return contains;
+  }
+
+  function checkDuplicateVideoRefs(ref) {
+    var contains = false;
+    for (var i = 0; i < numVideos; i++) {
+      if (videoRefs[i].videoRef === ref) {
+        contains = true;
+        break;
+      }
+    }
+    return contains;
+  }
   function setMedia() {
     if (addedImages) {
       currNote.imageRefs = imageRefs;
@@ -355,9 +381,8 @@ const AddOrEditNote = props => {
       cropping: true,
       multiple: true,
     }).then(images => {
-      var numImagesCounter = props.numImages;
+      var numImagesCounter = numImages;
       for (var i = 0; i < images.length; i++) {
-        setImagesToUpload(prevItems => [...prevItems, images[i].path]);
         let imageRef =
           'Customers' +
           '/' +
@@ -378,17 +403,23 @@ const AddOrEditNote = props => {
             images[i].path.substring(images[i].path.lastIndexOf('/') + 1);
         }
         if (!isAddNote) {
-          if (props.note.imageRefs.length > 0 && i < 1) {
+          if (props.note.imageRefs.length > 0 && !addedImages) {
             setImageRefs(props.note.imageRefs);
             setAddedImages(true);
           }
         }
-        if (imagesToUpload.length < 20) {
-          setImageRefs(prevItems => [...prevItems, {imageRef}]);
-          numImagesCounter++;
-          setNumImages(numImagesCounter);
-          setAddedImages(true);
-          console.log(addedImages);
+        if (imageRefs.length < 20) {
+          console.log(imageRefs.length);
+          //checkDuplicateRefs(imageRefs, numImages, imageRef)
+          if (!checkDuplicateImageRefs(imageRef)) {
+            setImagesToUpload(prevItems => [...prevItems, images[i].path]);
+            setImageRefs(prevItems => [...prevItems, { imageRef }]);
+            numImagesCounter++;
+            console.log(numImagesCounter);
+            setNumImages(numImagesCounter);
+            setAddedImages(true);
+            console.log(addedImages);
+          }
         }
       }
       props.onChange?.(images);
@@ -402,8 +433,7 @@ const AddOrEditNote = props => {
       cropping: true,
       //multiple: true,
     }).then(image => {
-      var numImagesCounter = props.numImages;
-      setImagesToUpload(prevItems => [...prevItems, image.path]);
+      var numImagesCounter = numImages;
       let imageRef =
         'Customers' +
         '/' +
@@ -429,12 +459,16 @@ const AddOrEditNote = props => {
           setAddedImages(true);
         }
       }
-      if (imagesToUpload.length < 20) {
-        setImageRefs(prevItems => [...prevItems, {imageRef}]);
-        numImagesCounter++;
-        setNumImages(numImagesCounter);
-        setAddedImages(true);
-        console.log(addedImages);
+      if (imageRefs.length < 20) {
+        console.log(imageRefs.length);
+        if (!checkDuplicateImageRefs(imageRef)) {
+          setImagesToUpload(prevItems => [...prevItems, image.path]);
+          setImageRefs(prevItems => [...prevItems, {imageRef}]);
+          numImagesCounter++;
+          setNumImages(numImagesCounter);
+          setAddedImages(true);
+          console.log(addedImages);
+        }
       }
       props.onChange?.(image);
     });

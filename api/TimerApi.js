@@ -63,7 +63,7 @@ export function deleteNoteMedia(
   utility,
   navigation,
 ) {
-  console.log('Deleting Images');
+  console.log('Deleting Images ' + utilityNote.noteType);
   for (var i = 0; i < imagesToBeDeleted.length; i++) {
     for (var j = 0; j < utilityNote.imageRefs.length; j++) {
       if (imagesToBeDeleted[i] === utilityNote.imageRefs[j].imageRef) {
@@ -74,7 +74,7 @@ export function deleteNoteMedia(
         console.log(utilityNote.title);
       }
     }
-  //  console.log(utilityNote.videoRefs[0].videoRef);
+    //  console.log(utilityNote.videoRefs[0].videoRef);
     //console.log(imagesToBeDeleted[0]);
     for (var j = 0; j < utilityNote.videoRefs.length; j++) {
       if (imagesToBeDeleted[i] === utilityNote.videoRefs[j].videoRef) {
@@ -114,6 +114,7 @@ export function deleteContent(
   utility,
   utilityNote,
   navigation,
+  navigationScreen,
 ) {
   if (isDeleteCustomer) {
     // Call Delete Customer
@@ -123,6 +124,12 @@ export function deleteContent(
   }
   if (isDeleteUtilityNote) {
     deleteUtilityNote(customer, utility, utilityNote);
-    //navigation.navigate()
+    if (utility.utilityType === 'Timers') {
+      navigation.navigate('TimerInfo', {
+        customer: customer,
+        utility: utility,
+        noteType: utilityNote.noteType,
+      });
+    }
   }
 }

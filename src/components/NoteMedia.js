@@ -84,7 +84,8 @@ const NoteMedia = props => {
   const isDeleteMedia = props.isDeleteMedia;
   const navigation = props.navigation;
   // toString might be just it
-  if (note.numImages > 0) {
+  if (note.imageRefs.length > 0) {
+    console.log('adljkdsafjkldfsjkldfs');
     var imageRef1 = storage()
       .ref('/' + note.imageRefs[0].imageRef)
       .getDownloadURL()
@@ -808,15 +809,16 @@ const NoteMedia = props => {
   }
   function displayVideo1() {
     if (note.numVideos > 0) {
-      console.log(video1);
+      console.log("Bob" + video1);
       return (
         <View>
           <Video
             controls={true}
-            paused={true}
+            //paused={true}
             repeat={true}
             source={{uri: video1}}
-            style={{width: 500, height: 500}}
+            style={{width: 200, height: 300}}
+            resizeMode={'contain'}
           />
           {isDeleteMedia ? (
             <CheckBox
@@ -1427,7 +1429,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
   },
   homePageContainer: {
-    flex: 1,
+    //flex: 1,
   },
   textStyle: {
     fontSize: 30,
@@ -1437,6 +1439,15 @@ const styles = StyleSheet.create({
   addCustomerButton: {
     //position: 'absolute',
     marginTop: 50,
+  },
+  mediaPlayer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    backgroundColor: 'black',
+    justifyContent: 'center',
   },
 });
 

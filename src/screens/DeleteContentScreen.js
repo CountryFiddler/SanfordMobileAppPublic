@@ -44,7 +44,7 @@ const DeleteContentScreen = props => {
             customer,
             utility,
             utilityNote,
-            prevScreen,
+            props.navigation,
           )
         }
         title={'Delete ' + contentToDelete}

@@ -75,6 +75,7 @@ const NotesNavigator = props => {
                       props.navigation.navigate('EditNote', {
                         customer: props.customer,
                         note: note,
+                        noteType: note.noteType,
                         navigation: props.navigation,
                         utilityType: props.utilityType,
                         utility: props.utility,
