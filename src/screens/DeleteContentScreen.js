@@ -15,7 +15,7 @@
 import React, {useState} from 'react';
 import {Text, StyleSheet, View, Button} from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
-import {deleteContent} from '../../api/TimerApi';
+import {deleteContent} from '../../api/UtilityApi';
 
 // Start of Home Screen Display
 const DeleteContentScreen = props => {

@@ -14,49 +14,45 @@
 // Import Statements
 import React, {useEffect, useState} from 'react';
 import {Text, StyleSheet, View, Button} from 'react-native';
-import CustomerSearchBar from '../components/CustomerSearchBar';
-import BackHandler from 'react-native/Libraries/Utilities/BackHandler';
-import useFocusEffect from '@react-navigation/native';
-import {getTimerNotes} from '../../api/TimerApi';
 import {getNotes} from '../../api/UtilityApi';
+import {getShutOffValveNotes} from '../../api/ShutOffValveApi';
 // Start of Home Screen Display
-const TimerInfoScreen = props => {
+const ShutOffValveInfoScreen = props => {
   const customer = props.navigation.getParam('customer');
-  const timer = props.navigation.getParam('utility');
+  const shutoffValve = props.navigation.getParam('utility');
   const navigation = props.navigation;
-  const timerNotes = getTimerNotes(customer, timer);
-  const findTimerNotes = getNotes(customer, timer, 'FindTimerNotes');
-  if (timer.numPrograms === '') {
-    timer.numPrograms = 'No Text Provided';
-  }
-  if (timer.numZones === '') {
-    timer.numZones = 'No Text Provided';
+  const shutoffValveNotes = getShutOffValveNotes(customer, shutoffValve);
+  const findShutOffValveNotes = getNotes(
+    customer,
+    shutoffValve,
+    'FindShutOffValveNotes',
+  );
+  if (shutoffValve.size === '') {
+    shutoffValve.size = 'No Text Provided';
   }
   return (
     <View style={styles.homePageContainer}>
-      <Text> {timer.type} </Text>
-      <Text> {timer.numPrograms}</Text>
-      <Text> {timer.numZones}</Text>
+      <Text> {shutoffValve.type} </Text>
+      <Text> {shutoffValve.size}</Text>
       <Button
-        title={'Edit Timer Info'}
+        title={'Edit Shut-Off Valve Info'}
         onPress={() =>
-          navigation.navigate('EditTimer', {
+          navigation.navigate('EditShutOff', {
             customer: customer,
-            timer: timer,
+            shutoffValve: shutoffValve,
             navigation: navigation,
           })
         }
       />
       <Button
-        title={'Find Timer'}
+        title={'Find Shut-Off Valve'}
         onPress={() =>
           props.navigation.navigate('UtilityNotesNavigator', {
             customer: customer,
-            utility: timer,
-            utilityNotes: findTimerNotes,
-            noteType: 'FindTimerNotes',
-            screenTitle: 'Find Timer',
-            //timers: timers,
+            utility: shutoffValve,
+            utilityNotes: findShutOffValveNotes,
+            noteType: 'FindShutOffValveNotes',
+            screenTitle: 'Find Shut-Off Valve',
           })
         }
       />
@@ -67,14 +63,13 @@ const TimerInfoScreen = props => {
           // Pass navigation and customer as props to the Edit Customer Screen
           props.navigation.navigate('UtilityNotesNavigator', {
             customer: customer,
-            utility: timer,
-            utilityNotes: timerNotes,
-            noteType: 'TimerNotes',
-            screenTitle: 'Timer Notes',
-            //timers: timers,
+            utility: shutoffValve,
+            utilityNotes: shutoffValveNotes,
+            noteType: 'ShutOffValveNotes',
+            screenTitle: 'Shut-Off Valve Notes',
           })
         }
-        title="Timer Notes"
+        title="Shut-Off Valve Notes"
       />
     </View>
   );
@@ -101,4 +96,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TimerInfoScreen;
+export default ShutOffValveInfoScreen;

@@ -15,14 +15,15 @@
 // Import Statements
 import React, {useState} from 'react';
 import {Text, StyleSheet, View, Button} from 'react-native';
-import CustomerSearchBar from '../components/CustomerSearchBar';
-import {getTimers} from '../../api/FirestoreApi';
+import {getTimers} from '../../api/TimerApi';
+import { getShutOffs } from "../../api/ShutOffValveApi";
 
 const CustomerScreen = props => {
   // Get the customer the user selected from the drop down menu when they
   // searched for a customer
   const customer = props.navigation.getParam('customer');
   const timers = getTimers(customer);
+  const shutoffValves = getShutOffs(customer);
   // Start of the display for Customer Screen
   return (
     <View>
@@ -52,9 +53,27 @@ const CustomerScreen = props => {
             addUtilityScreen: 'AddTimer',
             addUtilityButtonTitle: 'Add Timer',
             utilityInfoScreenTitle: 'TimerInfo',
+            utilityTypeText: 'Timers',
           })
         }
-        title="Timer"
+        title="Timers"
+      />
+      <Button
+        // If the Timer button is pressed, then the user
+        // is redirected to the Timer Info Screen
+        onPress={() =>
+          // Pass navigation and customer as props to the Edit Customer Screen
+          props.navigation.navigate('UtilitySelectionScreen', {
+            customer: customer,
+            utilityType: 'ShutOffValves',
+            utilities: shutoffValves,
+            addUtilityScreen: 'AddShutOff',
+            addUtilityButtonTitle: 'Add Shut-Off Valve',
+            utilityInfoScreenTitle: 'ShutOffInfo',
+            utilityTypeText: 'Shut-Off Valves',
+          })
+        }
+        title="Shut-Off Valves"
       />
     </View>
   );

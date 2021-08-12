@@ -16,6 +16,7 @@ import UtilitySelection from '../components/UtilitySelection';
 const UtilitySelectionScreen = props => {
   const customer = props.navigation.getParam('customer');
   const utilityType = props.navigation.getParam('utilityType');
+  const utilityTypeText = props.navigation.getParam('utilityTypeText');
   const utilities = props.navigation.getParam('utilities');
   const addUtility = props.navigation.getParam('addUtilityScreen');
   const addUtilityButtonTitle = props.navigation.getParam(
@@ -33,6 +34,7 @@ const UtilitySelectionScreen = props => {
         utilityInfoScreen={utilityInfoScreenTitle}
         navigation={props.navigation}
         utilityType={utilityType}
+        utilityTypeText={utilityTypeText}
       />
       <Button
         onPress={() =>

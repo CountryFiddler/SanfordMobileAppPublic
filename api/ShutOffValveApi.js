@@ -1,118 +1,100 @@
 import firebase, {firestore} from 'react-native-firebase';
 
-export function submitTimerInfo(
-  customer,
-  timerType,
-  numPrograms,
-  numZones,
-  navigation,
-) {
-  addTimer(customer, {
-    type: timerType,
-    numPrograms: numPrograms,
-    numZones: numZones,
+export function submitShutOffInfo(customer, shutoffType, size, navigation) {
+  console.log(shutoffType);
+  addShutOff(customer, {
+    type: shutoffType,
+    size: size,
   });
   navigation.navigate('Customer', {
     customer: customer,
   });
 }
 
-export function submitTimerChanges(
+export function submitShutOffChanges(
   customer,
-  timer,
-  currentTimerType,
-  currentNumPrograms,
-  currentNumZones,
+  shutoff,
+  currentShutOffType,
+  currentSize,
   navigation,
 ) {
-  if (currentTimerType.length > 0) {
-    timer.timerType = currentTimerType;
+  if (currentShutOffType.length > 0) {
+    shutoff.type = currentShutOffType;
   }
-  if (currentNumPrograms.length > 0) {
-    timer.numPrograms = currentNumPrograms;
+  if (currentSize.length > 0) {
+    shutoff.size = currentSize;
   }
-  if (currentNumZones.length > 0) {
-    timer.numZones = currentNumZones;
-  }
-  updateTimers(customer, timer);
-  navigation.navigate('TimerInfo', {
+  updateShutOffs(customer, shutoff);
+  navigation.navigate('ShutOffInfo', {
     customer: customer,
-    timer: timer,
+    shutoff: shutoff,
     navigation: navigation,
   });
 }
 
 // Start of Timer adding and getting functions
-export function addTimer(customer, timer, addComplete) {
-  const docRef = firebase
-    .firestore()
-    .collection('Customers')
-    .doc(customer.id);
+export function addShutOff(customer, shutoff, addComplete) {
+  const docRef = firebase.firestore().collection('Customers').doc(customer.id);
   console.log(customer.id);
   docRef
-    .collection('Timers')
+    .collection('ShutOffValves')
     .doc()
     .set({
+      type: shutoff.type,
+      size: shutoff.size,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      type: timer.type,
-      numPrograms: timer.numPrograms,
-      numZones: timer.numZones,
     })
     .then(snapshot => snapshot.get())
     .then(customerData => addComplete(customerData.data()))
     .catch(error => console.log(error));
 }
 
-export function updateTimers(customer, timer) {
+export function updateShutOffs(customer, shutoff) {
   firebase
     .firestore()
     .collection('Customers')
     .doc(customer.id)
-    .collection('Timers')
-    .doc(timer.id)
+    .collection('ShutOffValves')
+    .doc(shutoff.id)
     .update({
-      type: timer.type,
-      numPrograms: timer.numPrograms,
-      numZones: timer.numZones,
+      type: shutoff.type,
+      size: shutoff.size,
     })
     // I think this updates the database quicker???
     .then(snapshot => snapshot.get())
     .catch(error => console.log(error));
 }
 
-export function getTimers(customer) {
-  var timersList = [];
-  const docRef = firestore()
-    .collection('Customers')
-    .doc(customer.id);
+export function getShutOffs(customer) {
+  var shutOffValvesList = [];
+  const docRef = firestore().collection('Customers').doc(customer.id);
   docRef
-    .collection('Timers')
+    .collection('ShutOffValves')
     .orderBy('createdAt')
     .get()
     .then(snapshot => {
       snapshot.forEach(doc => {
-        timersList.push({
+        shutOffValvesList.push({
           type: doc.data().type,
-          numPrograms: doc.data().numPrograms,
-          numZones: doc.data().numZones,
+          size: doc.data().size,
           id: doc.id,
           customerID: customer.id,
-          utilityType: 'Timers',
+          utilityType: 'ShutOffValves',
         });
       });
     });
-  return timersList;
+  return shutOffValvesList;
 }
 
-export function getTimerNotes(customer, timer) {
+export function getShutOffValveNotes(customer, timer) {
   var notesList = [];
   const docRef = firestore()
     .collection('Customers')
     .doc(customer.id)
-    .collection('Timers')
+    .collection('ShutOffValves')
     .doc(timer.id);
   docRef
-    .collection('TimerNotes')
+    .collection('ShutOffValveNotes')
     .orderBy('createdAt')
     .get()
     .then(snapshot => {
@@ -127,7 +109,7 @@ export function getTimerNotes(customer, timer) {
           imageRefs: doc.data().imageRefs,
           numVideos: doc.data().numVideos,
           videoRefs: doc.data().videoRefs,
-          noteType: 'TimerNotes',
+          noteType: 'ShutOffValveNotes',
         });
       });
     });

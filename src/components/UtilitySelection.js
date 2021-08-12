@@ -32,42 +32,46 @@ const UtilitySelection = props => {
   //console.log(props.timerList.length);
   //console.log(this.state.timerList);
   return (
-    <TouchableOpacity
-      //onPress={this.props.timerList.onPress}
-      style={styles.container}>
-      <View style={styles.subContainer}>
-        {props.utilityList.length ? (
-          // Map customers into the dropdown search
-          // searchText is the text shown for each customer button.
-          // See FirestoreApi.js for more information on searchText.
-          // If a customer is selected, then the user is directed
-          // to the customer page for that customer.
-          props.utilityList.map(utility => {
-            return (
-              <View style={styles.itemView}>
-                <Button
-                  style={styles.itemText}
-                  title={utility.timerType}
-                  onPress={() =>
-                    props.navigation.navigate(props.utilityInfoScreen, {
-                      customer: props.customer,
-                      utility: utility,
-                      navigation: props.navigation,
-                    })
-                  }
-                />
-              </View>
-            );
-          })
-        ) : (
-          // If there are no matches for customers and what the user entered
-          // then we display the message "No Customers Found"
-          <View style={styles.itemView}>
-            <Text style={styles.itemText}>No {props.utilityType} Found</Text>
-          </View>
-        )}
-      </View>
-    </TouchableOpacity>
+    <ScrollView>
+      <TouchableOpacity
+        //onPress={this.props.timerList.onPress}
+        style={styles.container}>
+        <View style={styles.subContainer}>
+          {props.utilityList.length ? (
+            // Map customers into the dropdown search
+            // searchText is the text shown for each customer button.
+            // See FirestoreApi.js for more information on searchText.
+            // If a customer is selected, then the user is directed
+            // to the customer page for that customer.
+            props.utilityList.map(utility => {
+              return (
+                <View style={styles.itemView} key={utility.id}>
+                  <Button
+                    style={styles.itemText}
+                    title={utility.type}
+                    onPress={() =>
+                      props.navigation.navigate(props.utilityInfoScreen, {
+                        customer: props.customer,
+                        utility: utility,
+                        navigation: props.navigation,
+                      })
+                    }
+                  />
+                </View>
+              );
+            })
+          ) : (
+            // If there are no matches for customers and what the user entered
+            // then we display the message "No Customers Found"
+            <View style={styles.itemView}>
+              <Text style={styles.itemText}>
+                No {props.utilityTypeText} Found
+              </Text>
+            </View>
+          )}
+        </View>
+      </TouchableOpacity>
+    </ScrollView>
   );
   // End of displaying the Drop Down Search
 };

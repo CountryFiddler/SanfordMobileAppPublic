@@ -57,7 +57,7 @@ const NotesNavigator = props => {
             // to the customer page for that customer.
             props.notes.map(note => {
               return (
-                <View style={styles.itemView}>
+                <View style={styles.itemView} key={note.id}>
                   <Button
                     style={styles.itemText}
                     title={note.title}

@@ -38,7 +38,7 @@ import {
   getTimerNotes,
   updateNote,
   UploadMedia,
-} from '../../api/FirestoreApi';
+} from '../../api/UtilityApi';
 import {storage} from 'react-native-firebase';
 import EditNotePopup from '../components/EditNotePopup';
 import * as Progress from 'react-native-progress';
@@ -95,8 +95,10 @@ const AddOrEditNote = props => {
     currNote.videoRefs = props.note.videoRefs;
     currNote.noteID = props.note.noteID;
     currNote.noteType = props.note.noteType;
+    if (props.note.noteText === '') {
+      currNote.noteTextPlaceholder = 'Add Text';
+    }
   }
-  console.log('Ryan Braun ' + currNote.noteType);
   const submitNote = (
     isAddNote,
     customer,
@@ -181,7 +183,7 @@ const AddOrEditNote = props => {
         navigation,
       );
     }
-    //  UploadMedia(images, videos, customer, utility, utilityNote);
+    UploadMedia(images, videos, customer, utility, utilityNote);
     //mediaUploadCounter = 0
   };
 
@@ -413,7 +415,7 @@ const AddOrEditNote = props => {
           //checkDuplicateRefs(imageRefs, numImages, imageRef)
           if (!checkDuplicateImageRefs(imageRef)) {
             setImagesToUpload(prevItems => [...prevItems, images[i].path]);
-            setImageRefs(prevItems => [...prevItems, { imageRef }]);
+            setImageRefs(prevItems => [...prevItems, {imageRef}]);
             numImagesCounter++;
             console.log(numImagesCounter);
             setNumImages(numImagesCounter);

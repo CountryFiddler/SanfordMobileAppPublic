@@ -20,6 +20,7 @@ import {
   Button,
   TextInput,
   SafeAreaView,
+  Alert,
 } from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import {submitTimerInfo} from '../../api/TimerApi';
@@ -27,9 +28,17 @@ import {submitTimerInfo} from '../../api/TimerApi';
 // Start of Add Timer Screen Display
 const AddTimerScreen = props => {
   const customer = props.navigation.getParam('customer');
-  const [timerType, setTimerType] = useState(null);
-  const [numPrograms, setNumPrograms] = useState(null);
-  const [numZones, setNumZones] = useState(null);
+  const [timerType, setTimerType] = useState('');
+  const [numPrograms, setNumPrograms] = useState('');
+  const [numZones, setNumZones] = useState('');
+  function checkEmptySubmissions() {
+    if (timerType === '') {
+      Alert.alert('Please Specify the Timer Type (Rainbird, Hunter, etc...)');
+      return false;
+    } else {
+      return true;
+    }
+  }
   return (
     <SafeAreaView>
       <View>
@@ -58,15 +67,17 @@ const AddTimerScreen = props => {
           // Submit button, when clicked submits the info entered by
           // the user to the database
           title="Submit"
-          onPress={() =>
-            submitTimerInfo(
-              customer,
-              timerType,
-              numPrograms,
-              numZones,
-              props.navigation,
-            )
-          }
+          onPress={() => {
+            if (checkEmptySubmissions()) {
+              submitTimerInfo(
+                customer,
+                timerType,
+                numPrograms,
+                numZones,
+                props.navigation,
+              );
+            }
+          }}
         />
       </View>
     </SafeAreaView>

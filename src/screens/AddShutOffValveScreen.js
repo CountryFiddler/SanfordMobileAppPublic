@@ -14,72 +14,61 @@
 // Import Statements
 import React, {useState} from 'react';
 import {
-  Text,
   StyleSheet,
   View,
   Button,
-  SafeAreaView,
   TextInput,
+  SafeAreaView,
+  Alert,
 } from 'react-native';
-import CustomerSearchBar from '../components/CustomerSearchBar';
-import { addCustomer, getTimerNotes, updateCustomer } from "../../api/FirestoreApi";
-import {submitTimerChanges} from '../../api/TimerApi';
+import {submitShutOffInfo} from '../../api/ShutOffValveApi';
 
-// Start of Home Screen Display
-const EditTimerInfoScreen = props => {
-  // Get the customer from props (this is only if the user is coming
-  // from the Customer Screen)
+// Start of Add Timer Screen Display
+const AddShutOffValveScreen = props => {
   const customer = props.navigation.getParam('customer');
-  const timer = props.navigation.getParam('timer');
-  // Get the navigation prop
-  const navigation = props.navigation;
-  const [currentTimerType, setTimerType] = useState('');
-  const [currentNumPrograms, setNumPrograms] = useState('');
-  const [currentNumZones, setNumZones] = useState('');
+  const [shutoffType, setShutOffType] = useState('');
+  const [size, setSize] = useState('');
+  function checkEmptySubmissions() {
+    if (shutoffType === '') {
+      Alert.alert(
+        'Please Specify the Type of Shut-Off Valve (Ford, Ball, Gate, etc...)',
+      );
+      return false;
+    } else {
+      return true;
+    }
+  }
   return (
-    // Start of the display for adding or editing a customer
     <SafeAreaView>
       <View>
         <TextInput
           // Text Input Box for the customer's first name
-          placeholder={timer.type}
-          value={currentTimerType}
+          placeholder={'Shut-Off Type'}
+          value={shutoffType}
           // Displays the value that the user is entering into the text input
           // For example, if the typed 'Bob', then 'Bob' is displayed in the
           // Text Input Box
-          onChangeText={text => setTimerType(text)}
+          onChangeText={text => setShutOffType(text)}
         />
         <TextInput
           // Text Input Box for the customer's last name
-          placeholder={timer.numPrograms}
-          value={currentNumPrograms}
-          onChangeText={text => setNumPrograms(text)}
-        />
-        <TextInput
-          // Text Input Box for the customer's address
-          placeholder={timer.numZones}
-          value={currentNumZones}
-          onChangeText={text => setNumZones(text)}
+          placeholder={'Shut-Off Valve Size'}
+          value={size}
+          onChangeText={text => setSize(text)}
         />
         <Button
           // Submit button, when clicked submits the info entered by
           // the user to the database
           title="Submit"
-          onPress={() =>
-            submitTimerChanges(
-              customer,
-              timer,
-              currentTimerType,
-              currentNumPrograms,
-              currentNumZones,
-              navigation,
-            )
-          }
+          onPress={() => {
+            if (checkEmptySubmissions()) {
+              submitShutOffInfo(customer, shutoffType, size, props.navigation);
+            }
+          }}
         />
       </View>
     </SafeAreaView>
   );
-  // End of the display for adding or editing a customer
 };
 // End of Home Screen Display
 
@@ -103,4 +92,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EditTimerInfoScreen;
+export default AddShutOffValveScreen;

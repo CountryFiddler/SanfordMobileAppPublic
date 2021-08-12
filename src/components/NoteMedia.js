@@ -29,7 +29,7 @@ import CustomerSearchBar from '../components/CustomerSearchBar';
 import {firestore, storage} from 'react-native-firebase';
 import {getImageURL, updateNote} from '../../api/FirestoreApi';
 import EditNotePopup from '../components/EditNotePopup';
-import {deleteNoteMedia} from '../../api/TimerApi';
+import {deleteNoteMedia} from '../../api/UtilityApi';
 import Video from 'react-native-video';
 import CheckBox from 'react-native-checkbox';
 

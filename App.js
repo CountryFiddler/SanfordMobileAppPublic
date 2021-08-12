@@ -14,6 +14,9 @@ import AddNoteScreen from './src/screens/AddNoteScreen';
 import EditNoteScreen from './src/screens/EditNoteScreen';
 import DeleteNoteMediaScreen from './src/screens/DeleteNoteMediaScreen';
 import DeleteContentScreen from './src/screens/DeleteContentScreen';
+import ShutOffValveInfoScreen from './src/screens/ShutOffValveInfoScreen';
+import AddShutOffValveScreen from './src/screens/AddShutOffValveScreen';
+import EditShutOffValveInfoScreen from './src/screens/EditShutOffValveInfoScreen';
 //import AddCustomer from './src/components/AddCustomer';
 
 const navigator = createStackNavigator(
@@ -24,8 +27,11 @@ const navigator = createStackNavigator(
     Customer: CustomerScreen,
     UtilitySelectionScreen: UtilitySelectionScreen,
     AddTimer: AddTimerScreen,
+    AddShutOff: AddShutOffValveScreen,
     TimerInfo: TimerInfoScreen,
+    ShutOffInfo: ShutOffValveInfoScreen,
     EditTimer: EditTimerInfoScreen,
+    EditShutOff: EditShutOffValveInfoScreen,
     UtilityNotesNavigator: UtilityNotesNavigatorScreen,
     UtilityNote: UtilityNoteScreen,
     AddNote: AddNoteScreen,

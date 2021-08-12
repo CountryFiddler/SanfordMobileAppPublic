@@ -41,7 +41,7 @@ class DropDownSearch extends Component {
             // to the customer page for that customer.
             this.props.customerList.map(customer => {
               return (
-                <View style={styles.itemView}>
+                <View style={styles.itemView} key={customer.id}>
                   <Button
                     style={styles.itemText}
                     title={customer.searchText}
