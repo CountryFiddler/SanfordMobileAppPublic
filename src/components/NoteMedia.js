@@ -93,7 +93,7 @@ const NoteMedia = props => {
         setImage1(url);
       });
   }
-  if (note.numImages > 1) {
+  if (note.imageRefs.length > 1) {
     var imageRef2 = storage()
       .ref('/' + note.imageRefs[1].imageRef)
       .getDownloadURL()
@@ -101,7 +101,7 @@ const NoteMedia = props => {
         setImage2(url);
       });
   }
-  if (note.numImages > 2) {
+  if (note.imageRefs.length > 2) {
     var imageRef3 = storage()
       .ref('/' + note.imageRefs[2].imageRef)
       .getDownloadURL()
@@ -109,7 +109,7 @@ const NoteMedia = props => {
         setImage3(url);
       });
   }
-  if (note.numImages > 3) {
+  if (note.imageRefs.length > 3) {
     var imageRef = storage()
       .ref('/' + note.imageRefs[3].imageRef)
       .getDownloadURL()
@@ -117,7 +117,7 @@ const NoteMedia = props => {
         setImage4(url);
       });
   }
-  if (note.numImages > 4) {
+  if (note.imageRefs.length > 4) {
     var imageRef = storage()
       .ref('/' + note.imageRefs[4].imageRef)
       .getDownloadURL()
@@ -125,7 +125,7 @@ const NoteMedia = props => {
         setImage5(url);
       });
   }
-  if (note.numImages > 5) {
+  if (note.imageRefs.length > 5) {
     var imageRef = storage()
       .ref('/' + note.imageRefs[5].imageRef)
       .getDownloadURL()
@@ -133,7 +133,7 @@ const NoteMedia = props => {
         setImage6(url);
       });
   }
-  if (note.numImages > 6) {
+  if (note.imageRefs.length > 6) {
     var imageRef = storage()
       .ref('/' + note.imageRefs[6].imageRef)
       .getDownloadURL()
@@ -141,7 +141,7 @@ const NoteMedia = props => {
         setImage7(url);
       });
   }
-  if (note.numImages > 7) {
+  if (note.imageRefs.length > 7) {
     var imageRef = storage()
       .ref('/' + note.imageRefs[7].imageRef)
       .getDownloadURL()
@@ -149,7 +149,7 @@ const NoteMedia = props => {
         setImage8(url);
       });
   }
-  if (note.numImages > 8) {
+  if (note.imageRefs.length > 8) {
     var imageRef = storage()
       .ref('/' + note.imageRefs[8].imageRef)
       .getDownloadURL()
@@ -157,7 +157,7 @@ const NoteMedia = props => {
         setImage9(url);
       });
   }
-  if (note.numImages > 9) {
+  if (note.imageRefs.length > 9) {
     var imageRef = storage()
       .ref('/' + note.imageRefs[9].imageRef)
       .getDownloadURL()
@@ -165,7 +165,7 @@ const NoteMedia = props => {
         setImage10(url);
       });
   }
-  if (note.numImages > 10) {
+  if (note.imageRefs.length > 10) {
     var imageRef = storage()
       .ref('/' + note.imageRefs[10].imageRef)
       .getDownloadURL()
@@ -173,7 +173,7 @@ const NoteMedia = props => {
         setImage11(url);
       });
   }
-  if (note.numImages > 11) {
+  if (note.imageRefs.length > 11) {
     var imageRef = storage()
       .ref('/' + note.imageRefs[11].imageRef)
       .getDownloadURL()
@@ -181,7 +181,7 @@ const NoteMedia = props => {
         setImage12(url);
       });
   }
-  if (note.numImages > 12) {
+  if (note.imageRefs.length > 12) {
     var imageRef = storage()
       .ref('/' + note.imageRefs[12].imageRef)
       .getDownloadURL()
@@ -189,7 +189,7 @@ const NoteMedia = props => {
         setImage13(url);
       });
   }
-  if (note.numImages > 13) {
+  if (note.imageRefs.length > 13) {
     var imageRef = storage()
       .ref('/' + note.imageRefs[13].imageRef)
       .getDownloadURL()
@@ -197,7 +197,7 @@ const NoteMedia = props => {
         setImage14(url);
       });
   }
-  if (note.numImages > 14) {
+  if (note.imageRefs.length > 14) {
     var imageRef = storage()
       .ref('/' + note.imageRefs[14].imageRef)
       .getDownloadURL()
@@ -205,7 +205,7 @@ const NoteMedia = props => {
         setImage15(url);
       });
   }
-  if (note.numImages > 15) {
+  if (note.imageRefs.length > 15) {
     var imageRef = storage()
       .ref('/' + note.imageRefs[15].imageRef)
       .getDownloadURL()
@@ -213,7 +213,7 @@ const NoteMedia = props => {
         setImage16(url);
       });
   }
-  if (note.numImages > 16) {
+  if (note.imageRefs.length > 16) {
     var imageRef = storage()
       .ref('/' + note.imageRefs[16].imageRef)
       .getDownloadURL()
@@ -221,7 +221,7 @@ const NoteMedia = props => {
         setImage17(url);
       });
   }
-  if (note.numImages > 17) {
+  if (note.imageRefs.length > 17) {
     var imageRef = storage()
       .ref('/' + note.imageRefs[17].imageRef)
       .getDownloadURL()
@@ -229,7 +229,7 @@ const NoteMedia = props => {
         setImage18(url);
       });
   }
-  if (note.numImages > 18) {
+  if (note.imageRefs.length > 18) {
     var imageRef = storage()
       .ref('/' + note.imageRefs[18].imageRef)
       .getDownloadURL()
@@ -237,7 +237,7 @@ const NoteMedia = props => {
         setImage19(url);
       });
   }
-  if (note.numImages > 19) {
+  if (note.imageRefs.length > 19) {
     var imageRef = storage()
       .ref('/' + note.imageRefs[19].imageRef)
       .getDownloadURL()
@@ -246,7 +246,7 @@ const NoteMedia = props => {
       });
   }
 
-  if (note.numVideos > 0) {
+  if (note.videoRefs.length > 0) {
     var videoRef1 = storage()
       .ref('/' + note.videoRefs[0].videoRef)
       .getDownloadURL()
@@ -255,7 +255,7 @@ const NoteMedia = props => {
         console.log(url);
       });
   }
-  if (note.numVideos > 1) {
+  if (note.videoRefs.length > 1) {
     var videoRef2 = storage()
       .ref('/' + note.videoRefs[1].videoRef)
       .getDownloadURL()
@@ -263,7 +263,7 @@ const NoteMedia = props => {
         setVideo2(url);
       });
   }
-  if (note.numVideos > 2) {
+  if (note.videoRefs.length > 2) {
     var videoRef3 = storage()
       .ref('/' + note.videoRefs[2].videoRef)
       .getDownloadURL()
@@ -271,7 +271,7 @@ const NoteMedia = props => {
         setVideo3(url);
       });
   }
-  if (note.numVideos > 3) {
+  if (note.videoRefs.length > 3) {
     var videoRef4 = storage()
       .ref('/' + note.videoRefs[3].videoRef)
       .getDownloadURL()
@@ -279,7 +279,7 @@ const NoteMedia = props => {
         setVideo4(url);
       });
   }
-  if (note.numVideos > 4) {
+  if (note.videoRefs.length > 4) {
     var videoRef5 = storage()
       .ref('/' + note.videoRefs[4].videoRef)
       .getDownloadURL()
@@ -287,7 +287,7 @@ const NoteMedia = props => {
         setVideo5(url);
       });
   }
-  if (note.numVideos > 5) {
+  if (note.videoRefs.length > 5) {
     var videoRef6 = storage()
       .ref('/' + note.videoRefs[5].videoRef)
       .getDownloadURL()
@@ -295,7 +295,7 @@ const NoteMedia = props => {
         setVideo6(url);
       });
   }
-  if (note.numVideos > 6) {
+  if (note.videoRefs.length > 6) {
     var videoRef7 = storage()
       .ref('/' + note.videoRefs[6].videoRef)
       .getDownloadURL()
@@ -303,7 +303,7 @@ const NoteMedia = props => {
         setVideo7(url);
       });
   }
-  if (note.numVideos > 7) {
+  if (note.videoRefs.length > 7) {
     var videoRef8 = storage()
       .ref('/' + note.videoRefs[7].videoRef)
       .getDownloadURL()
@@ -311,7 +311,7 @@ const NoteMedia = props => {
         setVideo8(url);
       });
   }
-  if (note.numVideos > 8) {
+  if (note.videoRefs.length > 8) {
     var videoRef9 = storage()
       .ref('/' + note.videoRefs[8].videoRef)
       .getDownloadURL()
@@ -319,7 +319,7 @@ const NoteMedia = props => {
         setVideo9(url);
       });
   }
-  if (note.numVideos > 9) {
+  if (note.videoRefs.length > 9) {
     var videoRef10 = storage()
       .ref('/' + note.videos[9].videoRef)
       .getDownloadURL()
@@ -327,7 +327,7 @@ const NoteMedia = props => {
         setVideo10(url);
       });
   }
-  if (note.numVideos > 10) {
+  if (note.videoRefs.length > 10) {
     var videoRef11 = storage()
       .ref('/' + note.videoRefs[10].videoRef)
       .getDownloadURL()
@@ -335,7 +335,7 @@ const NoteMedia = props => {
         setVideo11(url);
       });
   }
-  if (note.numVideos > 11) {
+  if (note.videoRefs.length > 11) {
     var videoRef12 = storage()
       .ref('/' + note.videoRefs[11].videoRef)
       .getDownloadURL()
@@ -343,7 +343,7 @@ const NoteMedia = props => {
         setVideo12(url);
       });
   }
-  if (note.numVideos > 12) {
+  if (note.videoRefs.length > 12) {
     var videoRef13 = storage()
       .ref('/' + note.videoRefs[12].videoRef)
       .getDownloadURL()
@@ -351,7 +351,7 @@ const NoteMedia = props => {
         setVideo13(url);
       });
   }
-  if (note.numVideos > 13) {
+  if (note.videoRefs.length > 13) {
     var videoRef14 = storage()
       .ref('/' + note.videoRefs[13].videoRef)
       .getDownloadURL()
@@ -359,7 +359,7 @@ const NoteMedia = props => {
         setVideo14(url);
       });
   }
-  if (note.numVideos > 14) {
+  if (note.videoRefs.length > 14) {
     var videoRef15 = storage()
       .ref('/' + note.videoRefs[14].videoRef)
       .getDownloadURL()
@@ -367,7 +367,7 @@ const NoteMedia = props => {
         setVideo15(url);
       });
   }
-  if (note.numVideos > 15) {
+  if (note.videoRefs.length > 15) {
     var videoRef16 = storage()
       .ref('/' + note.videoRefs[15].videoRef)
       .getDownloadURL()
@@ -375,7 +375,7 @@ const NoteMedia = props => {
         setVideo16(url);
       });
   }
-  if (note.numVideos > 16) {
+  if (note.videoRefs.length > 16) {
     var videoRef17 = storage()
       .ref('/' + note.videoRefs[16].videoRef)
       .getDownloadURL()
@@ -383,7 +383,7 @@ const NoteMedia = props => {
         setVideo17(url);
       });
   }
-  if (note.numVideos > 17) {
+  if (note.videoRefs.length > 17) {
     var videoRef18 = storage()
       .ref('/' + note.videoRefs[17].videoRef)
       .getDownloadURL()
@@ -391,7 +391,7 @@ const NoteMedia = props => {
         setVideo18(url);
       });
   }
-  if (note.numVideos > 18) {
+  if (note.videoRefs.length > 18) {
     var videoRef19 = storage()
       .ref('/' + note.videoRefs[18].videoRef)
       .getDownloadURL()
@@ -399,7 +399,7 @@ const NoteMedia = props => {
         setVideo19(url);
       });
   }
-  if (note.numVideos > 19) {
+  if (note.videoRefs.length > 19) {
     var videoRef20 = storage()
       .ref('/' + note.videoRefs[19].videoRef)
       .getDownloadURL()
@@ -428,7 +428,7 @@ const NoteMedia = props => {
     .ref('/' + note.images[0].imageRef)
     .getDownloadURL();*/
   function displayImage1() {
-    if (note.numImages > 0) {
+    if (note.imageRefs.length > 0) {
       return (
         <View>
           <Image source={{uri: image1}} style={{width: 200, height: 300}} />
@@ -447,7 +447,7 @@ const NoteMedia = props => {
     }
   }
   function displayImage2() {
-    if (note.numImages > 1) {
+    if (note.imageRefs.length > 1) {
       return (
         <View>
           <Image source={{uri: image2}} style={{width: 200, height: 300}} />
@@ -466,7 +466,7 @@ const NoteMedia = props => {
     }
   }
   function displayImage3() {
-    if (note.numImages > 2) {
+    if (note.imageRefs.length > 2) {
       return (
         <View>
           <Image source={{uri: image3}} style={{width: 200, height: 300}} />
@@ -485,7 +485,7 @@ const NoteMedia = props => {
     }
   }
   function displayImage4() {
-    if (note.numImages > 3) {
+    if (note.imageRefs.length > 3) {
       return (
         <View>
           <Image source={{uri: image4}} style={{width: 200, height: 300}} />
@@ -504,7 +504,7 @@ const NoteMedia = props => {
     }
   }
   function displayImage5() {
-    if (note.numImages > 4) {
+    if (note.imageRefs.length > 4) {
       return (
         <View>
           <Image source={{uri: image5}} style={{width: 200, height: 300}} />
@@ -523,7 +523,7 @@ const NoteMedia = props => {
     }
   }
   function displayImage6() {
-    if (note.numImages > 5) {
+    if (note.imageRefs.length > 5) {
       return (
         <View>
           <Image source={{uri: image6}} style={{width: 200, height: 300}} />
@@ -542,7 +542,7 @@ const NoteMedia = props => {
     }
   }
   function displayImage7() {
-    if (note.numImages > 6) {
+    if (note.imageRefs.length > 6) {
       return (
         <View>
           <Image source={{uri: image7}} style={{width: 200, height: 300}} />
@@ -561,7 +561,7 @@ const NoteMedia = props => {
     }
   }
   function displayImage8() {
-    if (note.numImages > 7) {
+    if (note.imageRefs.length > 7) {
       return (
         <View>
           <Image source={{uri: image8}} style={{width: 200, height: 300}} />
@@ -580,7 +580,7 @@ const NoteMedia = props => {
     }
   }
   function displayImage9() {
-    if (note.numImages > 8) {
+    if (note.imageRefs.length > 8) {
       return (
         <View>
           <Image source={{uri: image9}} style={{width: 200, height: 300}} />
@@ -599,7 +599,7 @@ const NoteMedia = props => {
     }
   }
   function displayImage10() {
-    if (note.numImages > 9) {
+    if (note.imageRefs.length > 9) {
       return (
         <View>
           <Image source={{uri: image10}} style={{width: 200, height: 300}} />
@@ -618,7 +618,7 @@ const NoteMedia = props => {
     }
   }
   function displayImage11() {
-    if (note.numImages > 10) {
+    if (note.imageRefs.length > 10) {
       return (
         <View>
           <Image source={{uri: image11}} style={{width: 200, height: 300}} />
@@ -637,7 +637,7 @@ const NoteMedia = props => {
     }
   }
   function displayImage12() {
-    if (note.numImages > 11) {
+    if (note.imageRefs.length > 11) {
       return (
         <View>
           <Image source={{uri: image12}} style={{width: 200, height: 300}} />
@@ -656,7 +656,7 @@ const NoteMedia = props => {
     }
   }
   function displayImage13() {
-    if (note.numImages > 12) {
+    if (note.imageRefs.length > 12) {
       return (
         <View>
           <Image source={{uri: image13}} style={{width: 200, height: 300}} />
@@ -675,7 +675,7 @@ const NoteMedia = props => {
     }
   }
   function displayImage14() {
-    if (note.numImages > 13) {
+    if (note.imageRefs.length > 13) {
       return (
         <View>
           <Image source={{uri: image14}} style={{width: 200, height: 300}} />
@@ -694,7 +694,7 @@ const NoteMedia = props => {
     }
   }
   function displayImage15() {
-    if (note.numImages > 14) {
+    if (note.imageRefs.length > 14) {
       return (
         <View>
           <Image source={{uri: image15}} style={{width: 200, height: 300}} />
@@ -713,7 +713,7 @@ const NoteMedia = props => {
     }
   }
   function displayImage16() {
-    if (note.numImages > 15) {
+    if (note.imageRefs.length > 15) {
       return (
         <View>
           <Image source={{uri: image16}} style={{width: 200, height: 300}} />
@@ -732,7 +732,7 @@ const NoteMedia = props => {
     }
   }
   function displayImage17() {
-    if (note.numImages > 16) {
+    if (note.imageRefs.length > 16) {
       return (
         <View>
           <Image source={{uri: image17}} style={{width: 200, height: 300}} />
@@ -751,7 +751,7 @@ const NoteMedia = props => {
     }
   }
   function displayImage18() {
-    if (note.numImages > 17) {
+    if (note.imageRefs.length > 17) {
       return (
         <View>
           <Image source={{uri: image18}} style={{width: 200, height: 300}} />
@@ -770,7 +770,7 @@ const NoteMedia = props => {
     }
   }
   function displayImage19() {
-    if (note.numImages > 18) {
+    if (note.imageRefs.length > 18) {
       return (
         <View>
           <Image source={{uri: image19}} style={{width: 200, height: 300}} />
@@ -789,7 +789,7 @@ const NoteMedia = props => {
     }
   }
   function displayImage20() {
-    if (note.numImages > 19) {
+    if (note.imageRefs.length > 19) {
       return (
         <View>
           <Image source={{uri: image20}} style={{width: 200, height: 300}} />
@@ -808,13 +808,13 @@ const NoteMedia = props => {
     }
   }
   function displayVideo1() {
-    if (note.numVideos > 0) {
+    if (note.videoRefs.length > 0) {
       console.log("Bob" + video1);
       return (
         <View>
           <Video
             controls={true}
-            //paused={true}
+            paused={true}
             repeat={true}
             source={{uri: video1}}
             style={{width: 200, height: 300}}
@@ -836,13 +836,14 @@ const NoteMedia = props => {
   }
 
   function displayVideo2() {
-    if (note.numVideos > 1) {
+    if (note.videoRefs.length > 1) {
       return (
         <View>
           <Video
             controls={true}
             paused={true}
             repeat={true}
+            resizeMode={'contain'}
             source={{uri: video2}}
             style={{width: 200, height: 300}}
           />
@@ -861,7 +862,7 @@ const NoteMedia = props => {
     }
   }
   function displayVideo3() {
-    if (note.numVideos > 2) {
+    if (note.videoRefs.length > 2) {
       return (
         <View>
           <Video
@@ -887,7 +888,7 @@ const NoteMedia = props => {
   }
 
   function displayVideo4() {
-    if (note.numVideos > 3) {
+    if (note.videoRefs.length > 3) {
       return (
         <View>
           <Video
@@ -913,7 +914,7 @@ const NoteMedia = props => {
   }
 
   function displayVideo5() {
-    if (note.numVideos > 4) {
+    if (note.videoRefs.length > 4) {
       return (
         <View>
           <Video
@@ -939,7 +940,7 @@ const NoteMedia = props => {
   }
 
   function displayVideo6() {
-    if (note.numVideos > 5) {
+    if (note.videoRefs.length > 5) {
       return (
         <View>
           <Video
@@ -965,7 +966,7 @@ const NoteMedia = props => {
   }
 
   function displayVideo7() {
-    if (note.numVideos > 6) {
+    if (note.videoRefs.length > 6) {
       return (
         <View>
           <Video
@@ -991,7 +992,7 @@ const NoteMedia = props => {
   }
 
   function displayVideo8() {
-    if (note.numVideos > 7) {
+    if (note.videoRefs.length > 7) {
       return (
         <View>
           <Video
@@ -1017,7 +1018,7 @@ const NoteMedia = props => {
   }
 
   function displayVideo9() {
-    if (note.numVideos > 8) {
+    if (note.videoRefs.length > 8) {
       return (
         <View>
           <Video
@@ -1043,7 +1044,7 @@ const NoteMedia = props => {
   }
 
   function displayVideo10() {
-    if (note.numVideos > 9) {
+    if (note.videoRefs.length > 9) {
       return (
         <View>
           <Video
@@ -1069,7 +1070,7 @@ const NoteMedia = props => {
   }
 
   function displayVideo11() {
-    if (note.numVideos > 10) {
+    if (note.videoRefs.length > 10) {
       return (
         <View>
           <Video
@@ -1095,7 +1096,7 @@ const NoteMedia = props => {
   }
 
   function displayVideo12() {
-    if (note.numVideos > 11) {
+    if (note.videoRefs.length > 11) {
       return (
         <View>
           <Video
@@ -1121,7 +1122,7 @@ const NoteMedia = props => {
   }
 
   function displayVideo13() {
-    if (note.numVideos > 12) {
+    if (note.videoRefs.length > 12) {
       return (
         <View>
           <Video
@@ -1147,7 +1148,7 @@ const NoteMedia = props => {
   }
 
   function displayVideo14() {
-    if (note.numVideos > 13) {
+    if (note.videoRefs.length > 13) {
       return (
         <View>
           <Video
@@ -1173,7 +1174,7 @@ const NoteMedia = props => {
   }
 
   function displayVideo15() {
-    if (note.numVideos > 14) {
+    if (note.videoRefs.length > 14) {
       return (
         <View>
           <Video
@@ -1199,7 +1200,7 @@ const NoteMedia = props => {
   }
 
   function displayVideo16() {
-    if (note.numVideos > 15) {
+    if (note.videoRefs.length > 15) {
       return (
         <View>
           <Video
@@ -1225,7 +1226,7 @@ const NoteMedia = props => {
   }
 
   function displayVideo17() {
-    if (note.numVideos > 16) {
+    if (note.videoRefs.length > 16) {
       return (
         <View>
           <Video
@@ -1251,7 +1252,7 @@ const NoteMedia = props => {
   }
 
   function displayVideo18() {
-    if (note.numVideos > 17) {
+    if (note.videoRefs.length > 17) {
       return (
         <View>
           <Video
@@ -1277,7 +1278,7 @@ const NoteMedia = props => {
   }
 
   function displayVideo19() {
-    if (note.numVideos > 18) {
+    if (note.videoRefs.length > 18) {
       return (
         <View>
           <Video
@@ -1303,7 +1304,7 @@ const NoteMedia = props => {
   }
 
   function displayVideo20() {
-    if (note.numVideos > 19) {
+    if (note.videoRefs.length > 19) {
       return (
         <View>
           <Video

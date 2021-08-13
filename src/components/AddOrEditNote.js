@@ -378,56 +378,123 @@ const AddOrEditNote = props => {
   //const [transferred, setTransferred] = useState(0);
   function selectImage() {
     ImagePicker.openPicker({
+      mediaType: 'photo',
       width: 300,
       height: 400,
       cropping: true,
       multiple: true,
-    }).then(images => {
-      var numImagesCounter = numImages;
-      for (var i = 0; i < images.length; i++) {
-        let imageRef =
-          'Customers' +
-          '/' +
-          customer.id +
-          '/' +
-          utility.utilityType +
-          '/' +
-          utility.id +
-          '/' +
-          noteType; // +
-        //'/';
-        if (!isAddNote) {
-          imageRef =
-            imageRef +
+    })
+      .then(images => {
+        var numImagesCounter = numImages;
+        for (var i = 0; i < images.length; i++) {
+          let imageRef =
+            'Customers' +
             '/' +
-            noteID +
+            customer.id +
             '/' +
-            images[i].path.substring(images[i].path.lastIndexOf('/') + 1);
-        }
-        if (!isAddNote) {
-          if (props.note.imageRefs.length > 0 && !addedImages) {
-            setImageRefs(props.note.imageRefs);
-            setAddedImages(true);
+            utility.utilityType +
+            '/' +
+            utility.id +
+            '/' +
+            noteType; // +
+          //'/';
+          if (!isAddNote) {
+            imageRef =
+              imageRef +
+              '/' +
+              noteID +
+              '/' +
+              images[i].path.substring(images[i].path.lastIndexOf('/') + 1);
+          }
+          if (!isAddNote) {
+            if (props.note.imageRefs.length > 0 && !addedImages) {
+              setImageRefs(props.note.imageRefs);
+              setAddedImages(true);
+            }
+          }
+          if (imageRefs.length < 20) {
+            console.log(imageRefs.length);
+            //checkDuplicateRefs(imageRefs, numImages, imageRef)
+            if (!checkDuplicateImageRefs(imageRef)) {
+              setImagesToUpload(prevItems => [...prevItems, images[i].path]);
+              setImageRefs(prevItems => [...prevItems, {imageRef}]);
+              numImagesCounter++;
+              console.log(numImagesCounter);
+              setNumImages(numImagesCounter);
+              setAddedImages(true);
+              console.log(addedImages);
+            }
           }
         }
-        if (imageRefs.length < 20) {
-          console.log(imageRefs.length);
-          //checkDuplicateRefs(imageRefs, numImages, imageRef)
-          if (!checkDuplicateImageRefs(imageRef)) {
-            setImagesToUpload(prevItems => [...prevItems, images[i].path]);
-            setImageRefs(prevItems => [...prevItems, {imageRef}]);
-            numImagesCounter++;
-            console.log(numImagesCounter);
-            setNumImages(numImagesCounter);
-            setAddedImages(true);
-            console.log(addedImages);
-          }
+        props.onChange?.(images);
+      })
+      .catch(error => {
+        console.log(error);
+        if (error.code !== 'E_PICKER_CANCELLED') {
+          Alert.alert('Please Do Not Select Images From Other Apps');
         }
-      }
-      props.onChange?.(images);
-    });
+      });
   }
 
+  function selectVideo() {
+    ImagePicker.openPicker({
+      mediaType: 'video',
+      width: 300,
+      height: 400,
+      //cropping: true,
+      multiple: true,
+    })
+      .then(videos => {
+        var numVideosCounter = numVideos;
+        for (var i = 0; i < videos.length; i++) {
+          let videoRef =
+            'Customers' +
+            '/' +
+            customer.id +
+            '/' +
+            utility.utilityType +
+            '/' +
+            utility.id +
+            '/' +
+            noteType; // +
+          //'/';
+          if (!isAddNote) {
+            videoRef =
+              videoRef +
+              '/' +
+              noteID +
+              '/' +
+              videos[i].path.substring(videos[i].path.lastIndexOf('/') + 1);
+          }
+          if (!isAddNote) {
+            if (props.note.videoRefs.length > 0 && !addedVideos) {
+              setVideoRefs(props.note.videoRefs);
+              setAddedVideos(true);
+            }
+          }
+          if (videoRefs.length < 20) {
+            console.log(videoRefs.length);
+            //checkDuplicateRefs(imageRefs, numImages, imageRef)
+            if (!checkDuplicateImageRefs(videoRef)) {
+              setVideosToUpload(prevItems => [...prevItems, videos[i].path]);
+              setVideoRefs(prevItems => [...prevItems, {videoRef}]);
+              numVideosCounter++;
+              console.log(numVideosCounter);
+              setNumVideos(numVideosCounter);
+              setAddedVideos(true);
+              console.log(addedVideos);
+            }
+          }
+        }
+        props.onChange?.(videos);
+      })
+      .catch(error => {
+        console.log(error);
+        if (error.code !== 'E_PICKER_CANCELLED') {
+          Alert.alert('Please Do Not Select Images From Other Apps');
+        }
+      });
+  }
   function selectImageFromCamera() {
     ImagePicker.openCamera({
       width: 300,
@@ -582,7 +649,7 @@ const AddOrEditNote = props => {
     });
   };*/
 
-  const selectVideo = () => {
+  /*const selectVideo = () => {
     const options = {
       maxWidth: 2000,
       maxHeight: 2000,
@@ -640,7 +707,7 @@ const AddOrEditNote = props => {
         }
       }
     });
-  };
+  };*/
   // Start of Add Timer Screen Display
   //const [numZones, setNumZones] = useState(null);
   const popupList = [
