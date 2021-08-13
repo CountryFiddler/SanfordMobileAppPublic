@@ -1,5 +1,6 @@
 import firebase, {firestore} from 'react-native-firebase';
 import storage from '@react-native-firebase/storage';
+import {Alert} from 'react-native';
 
 export function deleteNoteMedia(
   imagesToBeDeleted,
@@ -22,7 +23,7 @@ export function deleteNoteMedia(
     }
     //  console.log(utilityNote.videoRefs[0].videoRef);
     //console.log(imagesToBeDeleted[0]);
-    for (var j = 0; j < utilityNote.videoRefs.length; j++) {
+    /*for (var j = 0; j < utilityNote.videoRefs.length; j++) {
       if (imagesToBeDeleted[i] === utilityNote.videoRefs[j].videoRef) {
         utilityNote.numVideos = utilityNote.numVideos - 1;
         utilityNote.videoRefs.splice(j, 1);
@@ -30,7 +31,7 @@ export function deleteNoteMedia(
         console.log('image deleted');
         console.log(utilityNote.title);
       }
-    }
+    }*/
   }
   updateNote(
     customer,
@@ -46,8 +47,18 @@ export function deleteNoteMedia(
     navigation.navigate('TimerInfo', {
       customer: customer,
       utility: utility,
-      //utilityNotes: getTimerNotes(customer, utility),
-      //timers: timers,
+    });
+  }
+  if (utilityType === 'ShutOffValves') {
+    navigation.navigate('ShutOffInfo', {
+      customer: customer,
+      utility: utility,
+    });
+  }
+  if (utilityType === 'SolenoidValves') {
+    navigation.navigate('SolenoidValvesInfo', {
+      customer: customer,
+      utility: utility,
     });
   }
 }
@@ -77,6 +88,20 @@ export function deleteContent(
         noteType: utilityNote.noteType,
       });
     }
+    if (utility.utilityType === 'ShutOffValves') {
+      navigation.navigate('ShutOffInfo', {
+        customer: customer,
+        utility: utility,
+        noteType: utilityNote.noteType,
+      });
+    }
+    if (utility.utilityType === 'SolenoidValves') {
+      navigation.navigate('SolenoidValvesInfo', {
+        customer: customer,
+        utility: utility,
+        noteType: utilityNote.noteType,
+      });
+    }
   }
 }
 
@@ -92,17 +117,18 @@ export function addNote(
   numVideos,
   addComplete,
 ) {
-  const docRef = firebase
+  var docRef = firebase
     .firestore()
     .collection('Customers')
     // Is customer.id needed here?
-    .doc(customer.id)
-    .collection(utilityType)
-    .doc(utility.id)
-    .collection(utilityNote.noteType)
-    .doc();
-
+    .doc(customer.id);
+  console.log(utilityNote.noteType);
+  if (utilityNote.noteType !== 'OtherNotes') {
+    docRef = docRef.collection(utilityType).doc(utility.id);
+  }
   docRef
+    .collection(utilityNote.noteType)
+    .doc()
     .set({
       title: utilityNote.title,
       noteText: utilityNote.noteText,
@@ -132,14 +158,14 @@ export function updateNote(
   addComplete,
 ) {
   console.log(imageRefs);
-  const docRef = firebase
+  var docRef = firebase
     .firestore()
     .collection('Customers')
     // Is customer.id needed here?
-    .doc(customer.id)
-    .collection(utilityType)
-    .doc(utility.id);
-
+    .doc(customer.id);
+  if (utilityNote.noteType !== 'OtherNotes') {
+    docRef = docRef.collection(utilityType).doc(utility.id);
+  }
   docRef
     .collection(utilityNote.noteType)
     .doc(utilityNote.noteID)
@@ -160,8 +186,6 @@ export function getImageURL(note) {
   var imageRef = storage().ref('/' + note.imageRef);
   imageRef.getDownloadURL().then(url => {
     return url;
-    //setTestImage(url);
-    //console.log(imageURL);
   });
 }
 
@@ -179,12 +203,14 @@ export function deleteUtilityNote(customer, utility, utilityNote) {
   for (var i = 0; i < utilityNote.images.length; i++) {
     deleteImage(utilityNote.images[i].imageRef);
   }
-  firestore()
+  var docRef = firestore()
     .collection('Customers')
     // Is customer.id needed here?
-    .doc(customer.id)
-    .collection(utility.utilityType)
-    .doc(utility.id)
+    .doc(customer.id);
+  if (utilityNote.noteType !== 'OtherNotes') {
+    docRef = docRef.collection(utility.utilityType).doc(utility.id);
+  }
+  docRef
     .collection(utilityNote.noteType)
     .doc(utilityNote.noteID)
     .delete()
@@ -194,22 +220,18 @@ export function deleteUtilityNote(customer, utility, utilityNote) {
     .catch(error => {
       console.error('Error removing document: ', error);
     });
-  console.log(utilityNote.id);
-  console.log(utility.id);
 }
 
 export function getNotes(customer, utility, noteType) {
   var notes = [];
   var counter = 0;
-  const docRef = firestore()
+  var docRef = firestore()
     .collection('Customers')
     // Is customer.id needed here?
-    .doc(customer.id)
-    .collection(utility.utilityType)
-    .doc(utility.id);
-  //console.log(customer.id);
-  //console.log(docRef);
-  //const notes = firestore.collection('TimerNotes').doc();
+    .doc(customer.id);
+  if (noteType !== 'OtherNotes') {
+    docRef = docRef.collection(utility.utilityType).doc(utility.id);
+  }
   docRef
     .collection(noteType)
     .orderBy('createdAt')
@@ -228,12 +250,7 @@ export function getNotes(customer, utility, noteType) {
           videoRefs: doc.data().videoRefs,
           noteType: noteType,
         });
-        //console.log(notesList.images.imageRef);
-        //alert(timersList.length);
-        //counter++;
       });
     });
-  // alert(timersList.length);
-  // timersRetrieved(timersList);
   return notes;
 }

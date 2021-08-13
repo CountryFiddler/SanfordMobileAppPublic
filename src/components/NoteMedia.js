@@ -246,7 +246,7 @@ const NoteMedia = props => {
       });
   }
 
-  if (note.videoRefs.length > 0) {
+ /* if (note.videoRefs.length > 0) {
     var videoRef1 = storage()
       .ref('/' + note.videoRefs[0].videoRef)
       .getDownloadURL()
@@ -807,7 +807,7 @@ const NoteMedia = props => {
       );
     }
   }
-  function displayVideo1() {
+  /*function displayVideo1() {
     if (note.videoRefs.length > 0) {
       console.log("Bob" + video1);
       return (
@@ -1328,6 +1328,26 @@ const NoteMedia = props => {
       );
     }
   }
+        <View>{displayVideo1()}</View>
+      <View>{displayVideo2()}</View>
+      <View>{displayVideo3()}</View>
+      <View>{displayVideo4()}</View>
+      <View>{displayVideo5()}</View>
+      <View>{displayVideo6()}</View>
+      <View>{displayVideo7()}</View>
+      <View>{displayVideo8()}</View>
+      <View>{displayVideo9()}</View>
+      <View>{displayVideo10()}</View>
+      <View>{displayVideo11()}</View>
+      <View>{displayVideo12()}</View>
+      <View>{displayVideo13()}</View>
+      <View>{displayVideo14()}</View>
+      <View>{displayVideo15()}</View>
+      <View>{displayVideo16()}</View>
+      <View>{displayVideo17()}</View>
+      <View>{displayVideo18()}</View>
+      <View>{displayVideo19()}</View>
+      <View>{displayVideo20()}</View>*/
   function selectImageToDelete(imageRef) {
     var isInImagesToDelete = false;
     for (var i = 0; i < imagesToDelete.length; i++) {
@@ -1381,26 +1401,6 @@ const NoteMedia = props => {
       <View>{displayImage18()}</View>
       <View>{displayImage19()}</View>
       <View>{displayImage20()}</View>
-      <View>{displayVideo1()}</View>
-      <View>{displayVideo2()}</View>
-      <View>{displayVideo3()}</View>
-      <View>{displayVideo4()}</View>
-      <View>{displayVideo5()}</View>
-      <View>{displayVideo6()}</View>
-      <View>{displayVideo7()}</View>
-      <View>{displayVideo8()}</View>
-      <View>{displayVideo9()}</View>
-      <View>{displayVideo10()}</View>
-      <View>{displayVideo11()}</View>
-      <View>{displayVideo12()}</View>
-      <View>{displayVideo13()}</View>
-      <View>{displayVideo14()}</View>
-      <View>{displayVideo15()}</View>
-      <View>{displayVideo16()}</View>
-      <View>{displayVideo17()}</View>
-      <View>{displayVideo18()}</View>
-      <View>{displayVideo19()}</View>
-      <View>{displayVideo20()}</View>
       <View>
         {isDeleteMedia ? (
           <Button

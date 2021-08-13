@@ -113,7 +113,7 @@ export function getTimerNotes(customer, timer) {
     .doc(timer.id);
   docRef
     .collection('TimerNotes')
-    .orderBy('createdAt')
+    .orderBy('createdAt', 'desc')
     .get()
     .then(snapshot => {
       snapshot.forEach(doc => {

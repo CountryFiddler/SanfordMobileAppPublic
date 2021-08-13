@@ -44,11 +44,17 @@ const UtilitySelection = props => {
             // If a customer is selected, then the user is directed
             // to the customer page for that customer.
             props.utilityList.map(utility => {
+              var utilityTitle
+              if (props.utilityType === 'SolenoidValves') {
+                utilityTitle = utility.location;
+              } else {
+                utilityTitle = utility.type;
+              }
               return (
                 <View style={styles.itemView} key={utility.id}>
                   <Button
                     style={styles.itemText}
-                    title={utility.type}
+                    title={utilityTitle}
                     onPress={() =>
                       props.navigation.navigate(props.utilityInfoScreen, {
                         customer: props.customer,

@@ -16,7 +16,8 @@
 import React, {useState} from 'react';
 import {Text, StyleSheet, View, Button} from 'react-native';
 import {getTimers} from '../../api/TimerApi';
-import { getShutOffs } from "../../api/ShutOffValveApi";
+import {getShutOffs} from '../../api/ShutOffValveApi';
+import {getSolenoidValves} from '../../api/SolenoidValveApi';
 
 const CustomerScreen = props => {
   // Get the customer the user selected from the drop down menu when they
@@ -24,6 +25,7 @@ const CustomerScreen = props => {
   const customer = props.navigation.getParam('customer');
   const timers = getTimers(customer);
   const shutoffValves = getShutOffs(customer);
+  const solenoidValves = getSolenoidValves(customer);
   // Start of the display for Customer Screen
   return (
     <View>
@@ -74,6 +76,23 @@ const CustomerScreen = props => {
           })
         }
         title="Shut-Off Valves"
+      />
+      <Button
+        // If the Timer button is pressed, then the user
+        // is redirected to the Timer Info Screen
+        onPress={() =>
+          // Pass navigation and customer as props to the Edit Customer Screen
+          props.navigation.navigate('UtilitySelectionScreen', {
+            customer: customer,
+            utilityType: 'SolenoidValves',
+            utilities: solenoidValves,
+            addUtilityScreen: 'AddSolenoidValves',
+            addUtilityButtonTitle: 'Add Valve',
+            utilityInfoScreenTitle: 'SolenoidValvesInfo',
+            utilityTypeText: 'Solenoid Valves',
+          })
+        }
+        title="Solenoid Valves"
       />
     </View>
   );

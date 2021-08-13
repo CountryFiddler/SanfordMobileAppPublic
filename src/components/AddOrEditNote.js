@@ -323,6 +323,20 @@ const AddOrEditNote = props => {
         noteType: noteType,
       });
     }
+    if (utilityType === 'ShutOffValves') {
+      props.navigation.navigate('ShutOffInfo', {
+        customer: customer,
+        utility: utility,
+        noteType: noteType,
+      });
+    }
+    if (utilityType === 'SolenoidValves') {
+      props.navigation.navigate('SolenoidValvesInfo', {
+        customer: customer,
+        utility: utility,
+        noteType: noteType,
+      });
+    }
   };
 
   function checkNullEntries() {
@@ -351,7 +365,7 @@ const AddOrEditNote = props => {
 
   function checkDuplicateVideoRefs(ref) {
     var contains = false;
-    for (var i = 0; i < numVideos; i++) {
+    for (var i = 0; i < videoRefs.length; i++) {
       if (videoRefs[i].videoRef === ref) {
         contains = true;
         break;
@@ -377,6 +391,7 @@ const AddOrEditNote = props => {
   //const [uploading, setUploading] = useState(false);
   //const [transferred, setTransferred] = useState(0);
   function selectImage() {
+    var areImagesAdded = addedImages;
     ImagePicker.openPicker({
       mediaType: 'photo',
       width: 300,
@@ -407,8 +422,10 @@ const AddOrEditNote = props => {
               images[i].path.substring(images[i].path.lastIndexOf('/') + 1);
           }
           if (!isAddNote) {
-            if (props.note.imageRefs.length > 0 && !addedImages) {
+            if (props.note.imageRefs.length > 0 && !areImagesAdded) {
+              console.log('Brewers Vs Pirates');
               setImageRefs(props.note.imageRefs);
+              areImagesAdded = true;
               setAddedImages(true);
             }
           }
@@ -429,14 +446,15 @@ const AddOrEditNote = props => {
         props.onChange?.(images);
       })
       .catch(error => {
-        console.log(error);
-        if (error.code !== 'E_PICKER_CANCELLED') {
+        console.log(error.code);
+        if (error.code === 'E_NO_IMAGE_DATA_FOUND') {
           Alert.alert('Please Do Not Select Images From Other Apps');
         }
       });
   }
 
   function selectVideo() {
+    var areVideosAdded = addedVideos;
     ImagePicker.openPicker({
       mediaType: 'video',
       width: 300,
@@ -467,15 +485,18 @@ const AddOrEditNote = props => {
               videos[i].path.substring(videos[i].path.lastIndexOf('/') + 1);
           }
           if (!isAddNote) {
-            if (props.note.videoRefs.length > 0 && !addedVideos) {
+            if (props.note.videoRefs.length > 0 && !areVideosAdded) {
+              console.log('Cardinals');
               setVideoRefs(props.note.videoRefs);
+              areVideosAdded = true;
               setAddedVideos(true);
             }
           }
           if (videoRefs.length < 20) {
             console.log(videoRefs.length);
             //checkDuplicateRefs(imageRefs, numImages, imageRef)
-            if (!checkDuplicateImageRefs(videoRef)) {
+            if (!checkDuplicateVideoRefs(videoRef)) {
+              console.log("Brewers");
               setVideosToUpload(prevItems => [...prevItems, videos[i].path]);
               setVideoRefs(prevItems => [...prevItems, {videoRef}]);
               numVideosCounter++;
@@ -489,8 +510,8 @@ const AddOrEditNote = props => {
         props.onChange?.(videos);
       })
       .catch(error => {
-        console.log(error);
-        if (error.code !== 'E_PICKER_CANCELLED') {
+        console.log(error.code);
+        if (error.code === 'E_NO_IMAGE_DATA_FOUND') {
           Alert.alert('Please Do Not Select Images From Other Apps');
         }
       });
