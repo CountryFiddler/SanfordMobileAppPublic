@@ -15,19 +15,16 @@
 // Import Statements
 import React, {useState} from 'react';
 import {Text, StyleSheet, View, Button} from 'react-native';
-import {getTimers} from '../../api/TimerApi';
-import {getShutOffs} from '../../api/ShutOffValveApi';
-import {getSolenoidValves} from '../../api/SolenoidValveApi';
 import { getNotes } from "../../api/UtilityApi";
 
-const CustomerScreen = props => {
+const OtherNotesScreen = props => {
   // Get the customer the user selected from the drop down menu when they
   // searched for a customer
   const customer = props.navigation.getParam('customer');
-  const timers = getTimers(customer);
-  const shutoffValves = getShutOffs(customer);
-  const solenoidValves = getSolenoidValves(customer);
-  const otherNotes = getNotes(customer, '', 'GeneralNotes');
+  const timers = props.navigation.getParam('timers');
+  const shutoffValves = props.navigation.getParam('shutoffValves');
+  const solenoidValves = props.navigation.getParam('solenoidValves');
+  const otherNotes = getNotes(customer, null, 'OtherNotes');
   // Start of the display for Customer Screen
   return (
     <View>
@@ -101,15 +98,17 @@ const CustomerScreen = props => {
         // is redirected to the Timer Info Screen
         onPress={() =>
           // Pass navigation and customer as props to the Edit Customer Screen
-          props.navigation.navigate('UtilityNotesNavigator', {
+          props.navigation.navigate('OtherNotes', {
             customer: customer,
-            utility: '',
-            utilityNotes: otherNotes,
-            noteType: 'GeneralNotes',
-            screenTitle: 'General Notes',
+            utilityType: 'SolenoidValves',
+            utilities: solenoidValves,
+            addUtilityScreen: 'AddSolenoidValves',
+            addUtilityButtonTitle: 'Add Valve',
+            utilityInfoScreenTitle: 'SolenoidValvesInfo',
+            utilityTypeText: 'Solenoid Valves',
           })
         }
-        title="General Notes"
+        title="Notes"
       />
     </View>
   );

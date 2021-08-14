@@ -49,16 +49,20 @@ export function deleteNoteMedia(
       utility: utility,
     });
   }
-  if (utilityType === 'ShutOffValves') {
+  else if (utilityType === 'ShutOffValves') {
     navigation.navigate('ShutOffInfo', {
       customer: customer,
       utility: utility,
     });
   }
-  if (utilityType === 'SolenoidValves') {
+  else if (utilityType === 'SolenoidValves') {
     navigation.navigate('SolenoidValvesInfo', {
       customer: customer,
       utility: utility,
+    });
+  } else {
+    navigation.navigate('Customer', {
+      customer: customer,
     });
   }
 }
@@ -88,15 +92,21 @@ export function deleteContent(
         noteType: utilityNote.noteType,
       });
     }
-    if (utility.utilityType === 'ShutOffValves') {
+    else if (utility.utilityType === 'ShutOffValves') {
       navigation.navigate('ShutOffInfo', {
         customer: customer,
         utility: utility,
         noteType: utilityNote.noteType,
       });
     }
-    if (utility.utilityType === 'SolenoidValves') {
+    else if (utility.utilityType === 'SolenoidValves') {
       navigation.navigate('SolenoidValvesInfo', {
+        customer: customer,
+        utility: utility,
+        noteType: utilityNote.noteType,
+      });
+    } else {
+      navigation.navigate('Customer', {
         customer: customer,
         utility: utility,
         noteType: utilityNote.noteType,
@@ -123,12 +133,11 @@ export function addNote(
     // Is customer.id needed here?
     .doc(customer.id);
   console.log(utilityNote.noteType);
-  if (utilityNote.noteType !== 'OtherNotes') {
+  if (utilityNote.noteType !== 'GeneralNotes') {
     docRef = docRef.collection(utilityType).doc(utility.id);
   }
+  docRef = docRef.collection(utilityNote.noteType).doc();
   docRef
-    .collection(utilityNote.noteType)
-    .doc()
     .set({
       title: utilityNote.title,
       noteText: utilityNote.noteText,
@@ -163,9 +172,10 @@ export function updateNote(
     .collection('Customers')
     // Is customer.id needed here?
     .doc(customer.id);
-  if (utilityNote.noteType !== 'OtherNotes') {
+  if (utilityNote.noteType !== 'GeneralNotes') {
     docRef = docRef.collection(utilityType).doc(utility.id);
   }
+  console.log('Joe' + utilityNote.noteID);
   docRef
     .collection(utilityNote.noteType)
     .doc(utilityNote.noteID)
@@ -207,7 +217,7 @@ export function deleteUtilityNote(customer, utility, utilityNote) {
     .collection('Customers')
     // Is customer.id needed here?
     .doc(customer.id);
-  if (utilityNote.noteType !== 'OtherNotes') {
+  if (utilityNote.noteType !== 'GeneralNotes') {
     docRef = docRef.collection(utility.utilityType).doc(utility.id);
   }
   docRef
@@ -229,7 +239,7 @@ export function getNotes(customer, utility, noteType) {
     .collection('Customers')
     // Is customer.id needed here?
     .doc(customer.id);
-  if (noteType !== 'OtherNotes') {
+  if (noteType !== 'GeneralNotes') {
     docRef = docRef.collection(utility.utilityType).doc(utility.id);
   }
   docRef

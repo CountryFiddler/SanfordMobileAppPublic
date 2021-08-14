@@ -3,6 +3,7 @@ import firebase, {firestore} from 'react-native-firebase';
 import {Alert, Platform} from 'react-native';
 import storage from '@react-native-firebase/storage';
 import {useState} from 'react';
+import {err} from 'react-native-svg/lib/typescript/xml';
 
 export function addCustomer(customer, addComplete) {
   const docRef = firebase
@@ -52,7 +53,8 @@ export async function getCustomers(customersRetrieved) {
             doc.data().address,
         });
       });
-    });
+    })
+    .catch(error => console.log(error));
   customersRetrieved(customers);
 }
 

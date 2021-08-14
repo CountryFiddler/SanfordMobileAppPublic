@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import '@firebase/firestore';
+import 'firebase/auth';
 var firebaseConfig = {
   apiKey: 'AIzaSyARlBxspfdjBzCEno_O35e3KjWW3kt_-pU',
   authDomain: 'sanfordirrigationmobileapp.firebaseapp.com',
@@ -23,5 +24,5 @@ firebase.initializeApp(firebaseConfig);
   });
   //firebaseConfig.useEmulator('localhost', 8080);
 }*/
-
+export const auth = firebase.auth();
 export {firebase};

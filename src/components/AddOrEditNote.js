@@ -137,15 +137,15 @@ const AddOrEditNote = props => {
       //console.log(videoRefs[0].videoRef);
       //console.log(utilityNote.noteID);
       for (var i = 0; i < images.length; i++) {
+        //console.log('Brewers Vs. Cardinals');
         const uri = images[i];
-        // console.log(uri);
         imageRefs[i].imageRef =
           imageRefs[i].imageRef +
           '/' +
           utilityNote.noteID +
           '/' +
           uri.substring(uri.lastIndexOf('/') + 1);
-        //console.log(imageRefs[i].imageRef);
+        console.log(imageRefs[i].imageRef);
       }
       for (var j = 0; j < videos.length; j++) {
         const videoUri = videos[j];
@@ -213,23 +213,40 @@ const AddOrEditNote = props => {
       const filename = uri.substring(uri.lastIndexOf('/') + 1);
       const uploadUri =
         Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
-      const task = storage()
-        .ref(
-          'Customers' +
-            '/' +
-            customer.id +
-            '/' +
-            utility.utilityType +
-            '/' +
-            utility.id +
-            '/' +
-            utilityNote.noteType +
-            '/' +
-            utilityNote.noteID +
-            '/' +
-            filename,
-        )
-        .putFile(uploadUri);
+      var task;
+      if (utilityNote.noteType !== 'GeneralNotes') {
+        task = storage()
+          .ref(
+            'Customers' +
+              '/' +
+              customer.id +
+              '/' +
+              utility.utilityType +
+              '/' +
+              utility.id +
+              '/' +
+              utilityNote.noteType +
+              '/' +
+              utilityNote.noteID +
+              '/' +
+              filename,
+          )
+          .putFile(uploadUri);
+      } else {
+        task = storage()
+          .ref(
+            'Customers' +
+              '/' +
+              customer.id +
+              '/' +
+              utilityNote.noteType +
+              '/' +
+              utilityNote.noteID +
+              '/' +
+              filename,
+          )
+          .putFile(uploadUri);
+      }
       //  console.log(uploadUri);
       // set progress state
       task.on('state_changed', snapshot => {
@@ -322,19 +339,21 @@ const AddOrEditNote = props => {
         utility: utility,
         noteType: noteType,
       });
-    }
-    if (utilityType === 'ShutOffValves') {
+    } else if (utilityType === 'ShutOffValves') {
       props.navigation.navigate('ShutOffInfo', {
         customer: customer,
         utility: utility,
         noteType: noteType,
       });
-    }
-    if (utilityType === 'SolenoidValves') {
+    } else if (utilityType === 'SolenoidValves') {
       props.navigation.navigate('SolenoidValvesInfo', {
         customer: customer,
         utility: utility,
         noteType: noteType,
+      });
+    } else {
+      props.navigation.navigate('Customer', {
+        customer: customer,
       });
     }
   };
@@ -359,6 +378,9 @@ const AddOrEditNote = props => {
         contains = true;
         break;
       }
+    }
+    if (isAddNote) {
+      contains = false;
     }
     return contains;
   }
@@ -402,16 +424,11 @@ const AddOrEditNote = props => {
       .then(images => {
         var numImagesCounter = numImages;
         for (var i = 0; i < images.length; i++) {
-          let imageRef =
-            'Customers' +
-            '/' +
-            customer.id +
-            '/' +
-            utility.utilityType +
-            '/' +
-            utility.id +
-            '/' +
-            noteType; // +
+          let imageRef = 'Customers' + '/' + customer.id + '/';
+          if (noteType !== 'GeneralNotes') {
+            imageRef = imageRef + utility.utilityType + '/' + utility.id + '/';
+          }
+          imageRef = imageRef + noteType; // +
           //'/';
           if (!isAddNote) {
             imageRef =
@@ -423,7 +440,7 @@ const AddOrEditNote = props => {
           }
           if (!isAddNote) {
             if (props.note.imageRefs.length > 0 && !areImagesAdded) {
-              console.log('Brewers Vs Pirates');
+              console.log('Cardinals');
               setImageRefs(props.note.imageRefs);
               areImagesAdded = true;
               setAddedImages(true);
@@ -495,8 +512,8 @@ const AddOrEditNote = props => {
           if (videoRefs.length < 20) {
             console.log(videoRefs.length);
             //checkDuplicateRefs(imageRefs, numImages, imageRef)
-            if (!checkDuplicateVideoRefs(videoRef)) {
-              console.log("Brewers");
+            if (!checkDuplicateVideoRefs(videoRef) && !isAddNote) {
+              console.log('Brewers');
               setVideosToUpload(prevItems => [...prevItems, videos[i].path]);
               setVideoRefs(prevItems => [...prevItems, {videoRef}]);
               numVideosCounter++;
@@ -517,6 +534,7 @@ const AddOrEditNote = props => {
       });
   }
   function selectImageFromCamera() {
+    var areImagesAdded = addedImages;
     ImagePicker.openCamera({
       width: 300,
       height: 400,
@@ -524,16 +542,11 @@ const AddOrEditNote = props => {
       //multiple: true,
     }).then(image => {
       var numImagesCounter = numImages;
-      let imageRef =
-        'Customers' +
-        '/' +
-        customer.id +
-        '/' +
-        utility.utilityType +
-        '/' +
-        utility.id +
-        '/' +
-        noteType; // +
+      let imageRef = 'Customers' + '/' + customer.id + '/';
+      if (noteType !== 'GeneralNotes') {
+        imageRef = imageRef + utility.utilityType + '/' + utility.id + '/';
+      }
+      imageRef = imageRef + noteType; // +
       //'/';
       if (!isAddNote) {
         imageRef =
@@ -544,13 +557,14 @@ const AddOrEditNote = props => {
           image.path.substring(image.path.lastIndexOf('/') + 1);
       }
       if (!isAddNote) {
-        if (props.note.imageRefs.length > 0 && !addedImages) {
+        if (props.note.imageRefs.length > 0 && !areImagesAdded) {
           setImageRefs(props.note.imageRefs);
+          areImagesAdded = true;
           setAddedImages(true);
         }
       }
       if (imageRefs.length < 20) {
-        console.log(imageRefs.length);
+        console.log('BrewCrew');
         if (!checkDuplicateImageRefs(imageRef)) {
           setImagesToUpload(prevItems => [...prevItems, image.path]);
           setImageRefs(prevItems => [...prevItems, {imageRef}]);
@@ -766,6 +780,7 @@ const AddOrEditNote = props => {
                   );
                 })
               : null}*/
+
   return (
     <ScrollView>
       <View>
@@ -807,21 +822,15 @@ const AddOrEditNote = props => {
             ))
           : null}
         <SafeAreaView style={styles.container}>
-          <TouchableOpacity style={styles.selectButton} onPress={selectImage}>
+          <TouchableOpacity
+            style={styles.selectButton}
+            onPress={selectImage}>
             <Text style={styles.buttonText}>Pick an image</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.selectButton} onPress={selectVideo}>
-            <Text style={styles.buttonText}>Pick a Video</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.selectButton}
             onPress={selectImageFromCamera}>
             <Text style={styles.buttonText}>Take a Picture</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.selectButton}
-            onPress={selectVideoFromCamera}>
-            <Text style={styles.buttonText}>Take a Video</Text>
           </TouchableOpacity>
           <View style={styles.imageContainer}>
             {uploading ? (

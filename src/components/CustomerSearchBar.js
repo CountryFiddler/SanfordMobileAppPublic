@@ -54,7 +54,7 @@ class CustomerSearchBar extends Component {
    *
    */
   componentDidMount() {
-    getCustomers(this.customersRetrieved);
+    getCustomers(this.customersRetrieved).catch(error => console.log(error));
     //console.log(this.state.customersList.length);
   }
 
