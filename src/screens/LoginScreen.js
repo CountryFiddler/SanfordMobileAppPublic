@@ -22,7 +22,7 @@ const LoginScreen = props => {
       <View>
         <TextInput
           // Text Input Box for the customer's first name
-          placeholder={'Email'}
+          placeholder={'Email Address'}
           value={email}
           // Displays the value that the user is entering into the text input
           // For example, if the typed 'Bob', then 'Bob' is displayed in the
