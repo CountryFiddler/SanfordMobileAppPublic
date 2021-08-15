@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "32675392484",
+    "project_id": "sanfordirrigationmobileapp",
+    "storage_bucket": "sanfordirrigationmobileapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32675392484:android:2e5b607f0f2a88484bf5f1",
+        "android_client_info": {
+          "package_name": "com.sanfordirrigationmobileapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "32675392484-fuk0d9mr9n57q079cetds0v7hslmfmu2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8tdSYDQAIiNbikCunONgdEm_-2GadiKU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "32675392484-fuk0d9mr9n57q079cetds0v7hslmfmu2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "32675392484-rhho3lt5bvr1hi1i344vjeancpkmocqa.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "SanfordIrrigationiOSApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
