@@ -1,5 +1,6 @@
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
+import LoginScreen from './src/screens/LoginScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import AddCustomerScreen from './src/screens/AddCustomerScreen';
 import EditCustomerScreen from './src/screens/EditCustomerScreen';
@@ -24,6 +25,7 @@ import EditSolenoidValvesInfoScreen from './src/screens/EditSolenoidValvesInfoSc
 
 const navigator = createStackNavigator(
   {
+    Login: LoginScreen,
     Home: HomeScreen,
     AddCustomer: AddCustomerScreen,
     EditCustomer: EditCustomerScreen,
@@ -47,7 +49,7 @@ const navigator = createStackNavigator(
     //AddCustomerComponent: AddCustomer,
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Login',
     defaultNavigationOptions: {
       title: 'Sanford Irrigation',
     },

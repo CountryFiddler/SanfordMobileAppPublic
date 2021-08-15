@@ -24,5 +24,5 @@ firebase.initializeApp(firebaseConfig);
   });
   //firebaseConfig.useEmulator('localhost', 8080);
 }*/
-export const auth = firebase.auth();
+//export const auth = firebase.auth();
 export {firebase};
