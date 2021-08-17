@@ -1,20 +1,27 @@
-import firebase from 'react-native-firebase';
-import React, {useState} from 'react';
+import * as firebase from 'react-native-firebase';
+//import FireAuth from 'react-native-firebase-auth';
+import React, { useEffect, useState } from "react";
 import {Button, SafeAreaView, TextInput, View} from 'react-native';
 
 const LoginScreen = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  function SignIn() {
-    try {
-      firebase.auth().signInWithEmailAndPassword(email, password);
-      firebase.auth().onAuthStateChanged(user => {
-        props.navigation.navigate('Home');
-      });
-    } catch (error) {
-      console.log(error.toString(error));
-    }
-  }
+  const SignIn = () => {
+    console.log(email + ' ' + password);
+    //try {
+    //firebase
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => props.navigation.navigate('Home'))
+      .catch(error => console.log(error));
+    //firebase.auth().onAuthStateChanged(user => {
+    //props.navigation.navigate('Home');
+    //});
+    // } catch (error) {
+    //  console.log(error.toString(error));
+    //}
+  };
 
   return (
     // Start of the display for adding or editing a customer
@@ -32,6 +39,7 @@ const LoginScreen = props => {
         <TextInput
           // Text Input Box for the customer's last name
           placeholder={'Password'}
+          secureTextEntry={true}
           value={password}
           onChangeText={text => setPassword(text)}
         />
@@ -39,12 +47,11 @@ const LoginScreen = props => {
           // Submit button, when clicked submits the info entered by
           // the user to the database
           title="Login"
-          onPress={() => SignIn()}
+          onPress={SignIn}
         />
       </View>
     </SafeAreaView>
   );
   // End of the display for adding or editing a customer
 };
-
 export default LoginScreen;

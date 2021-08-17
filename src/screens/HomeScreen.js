@@ -15,9 +15,21 @@
 import React, {useState} from 'react';
 import {Text, StyleSheet, View, Button} from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
+import * as firebase from 'react-native-firebase';
 
 // Start of Home Screen Display
 const HomeScreen = props => {
+  const SignOut = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(function () {
+        props.navigation.navigate('Login');
+      })
+      .catch(function (error) {
+        // An error happened.
+      });
+  };
   return (
     <View style={styles.homePageContainer}>
       <CustomerSearchBar navigation={props.navigation} />
@@ -26,6 +38,7 @@ const HomeScreen = props => {
         title="Add Customer"
         style={(styles.textStyle, styles.addCustomerButton)}
       />
+      <Button title={'Sign Out'} onPress={SignOut} />
     </View>
   );
 };

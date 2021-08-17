@@ -21,7 +21,18 @@ import EditShutOffValveInfoScreen from './src/screens/EditShutOffValveInfoScreen
 import SolenoidValvesInfoScreen from './src/screens/SolenoidValvesInfoScreen';
 import AddSolenoidValvesScreen from './src/screens/AddSolenoidValvesScreen';
 import EditSolenoidValvesInfoScreen from './src/screens/EditSolenoidValvesInfoScreen';
+import * as firebase from 'react-native-firebase';
+import {useState} from 'react';
 //import AddCustomer from './src/components/AddCustomer';
+let routeName = '';
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    routeName = 'Home';
+  } else {
+    routeName = 'Login';
+  }
+  console.log(routeName);
+});
 
 const navigator = createStackNavigator(
   {
@@ -49,12 +60,13 @@ const navigator = createStackNavigator(
     //AddCustomerComponent: AddCustomer,
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: routeName,
     defaultNavigationOptions: {
       title: 'Sanford Irrigation',
     },
   },
 );
+
 export default createAppContainer(navigator);
 /**
  * Sample React Native App

@@ -12,7 +12,6 @@ target 'SanfordIrrigationMobileApp' do
     :hermes_enabled => false
   )
 
-
   target 'SanfordIrrigationMobileAppTests' do
     inherit! :complete
     # Pods for testing
@@ -28,4 +27,5 @@ target 'SanfordIrrigationMobileApp' do
     react_native_post_install(installer)
   end
   pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
 end

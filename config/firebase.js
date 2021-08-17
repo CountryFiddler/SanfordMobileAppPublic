@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import '@firebase/firestore';
-import 'firebase/auth';
+//import '@firebase/auth';
 var firebaseConfig = {
   apiKey: 'AIzaSyARlBxspfdjBzCEno_O35e3KjWW3kt_-pU',
   authDomain: 'sanfordirrigationmobileapp.firebaseapp.com',
