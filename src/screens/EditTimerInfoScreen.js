@@ -33,9 +33,9 @@ const EditTimerInfoScreen = props => {
   const timer = props.navigation.getParam('timer');
   // Get the navigation prop
   const navigation = props.navigation;
-  const [currentTimerType, setTimerType] = useState('');
-  const [currentNumPrograms, setNumPrograms] = useState('');
-  const [currentNumZones, setNumZones] = useState('');
+  const [currentTimerType, setTimerType] = useState(timer.type);
+  const [currentNumPrograms, setNumPrograms] = useState(timer.numPrograms);
+  const [currentNumZones, setNumZones] = useState(timer.numZones);
   return (
     // Start of the display for adding or editing a customer
     <SafeAreaView>

@@ -5,7 +5,9 @@ import storage from '@react-native-firebase/storage';
 import {useState} from 'react';
 import {err} from 'react-native-svg/lib/typescript/xml';
 
-export function addCustomer(customer, addComplete) {
+export function addCustomer(
+  customer, addComplete
+) {
   const docRef = firebase
     .firestore()
     .collection('Customers')
@@ -17,6 +19,7 @@ export function addCustomer(customer, addComplete) {
       firstName: customer.firstName,
       lastName: customer.lastName,
       address: customer.address,
+      phoneNumber: customer.phoneNumber,
       addressHistory: firebase.firestore.FieldValue.arrayUnion(
         customer.address,
       ),
@@ -44,6 +47,7 @@ export async function getCustomers(customersRetrieved) {
           firstName: doc.data().firstName,
           lastName: doc.data().lastName,
           address: doc.data().address,
+          phoneNumber: doc.data().phoneNumber,
           id: doc.id,
           searchText:
             doc.data().firstName +
@@ -67,6 +71,7 @@ export function updateCustomer(customer) {
       firstName: customer.firstName,
       lastName: customer.lastName,
       address: customer.address,
+      phoneNumber: customer.phoneNumber,
       //searchText: customer.searchText,
       addressHistory: firebase.firestore.FieldValue.arrayUnion(
         customer.address,

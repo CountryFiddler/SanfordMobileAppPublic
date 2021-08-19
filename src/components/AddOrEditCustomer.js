@@ -27,6 +27,9 @@ import {
 } from 'react-native';
 import React, {Component} from 'react';
 import {addCustomer, updateCustomer} from '../../api/FirestoreApi';
+import PhoneInput from 'react-native-phone-number-input';
+import PhoneInputWithCountryDefault from 'react-phone-number-input/modules/PhoneInputWithCountryDefault';
+import PhoneInputWithCountry from 'react-phone-number-input/modules/PhoneInputWithCountry';
 
 class AddOrEditCustomer extends Component {
   /**
@@ -68,6 +71,7 @@ class AddOrEditCustomer extends Component {
         firstName: this.state.currentCustomerFirstName,
         lastName: this.state.currentCustomerLastName,
         address: this.state.currentCustomerAddress,
+        phoneNumber: this.state.currentCustomerPhoneNumber,
       });
       // Go back to the home page after adding the customer to the database
       navigation.navigate('Home');
@@ -80,6 +84,7 @@ class AddOrEditCustomer extends Component {
       customer.firstName = this.state.currentCustomerFirstName;
       customer.lastName = this.state.currentCustomerLastName;
       customer.address = this.state.currentCustomerAddress;
+      customer.phoneNumber = this.state.currentCustomerPhoneNumber;
       customer.searchText =
         this.state.currentCustomerFirstName +
         ' ' +
@@ -147,8 +152,12 @@ class AddOrEditCustomer extends Component {
         this.state.currentCustomerLastName = customer.lastName;
         textError = true;
       }
-      if (this.state.currentCustomerAddress == null && AddScreen) {
+      if (this.state.currentCustomerAddress == null) {
         this.state.currentCustomerAddress = customer.address;
+        textError = true;
+      }
+      if (this.state.currentCustomerPhoneNumber == null) {
+        this.state.currentCustomerPhoneNumber = customer.phoneNumber;
         textError = true;
       }
     }
@@ -236,15 +245,30 @@ class AddOrEditCustomer extends Component {
     }
   }
 
+  findCustomerPhoneNumPlaceholder(AddScreen, EditScreen, customer) {
+    if (AddScreen) {
+      this.state.customerPhoneNumPlaceholder = 'Enter Phone Number';
+    }
+    if (EditScreen) {
+      this.state.customerPhoneNumPlaceholder = customer.phoneNumber;
+    }
+  }
+  parsePhoneNumber(text) {
+    this.setState({
+      currentCustomerPhoneNumber: text.replace(/[^0-9]/g, ''),
+    });
+  }
   // List of current state variables
   state = {
     currentCustomerFirstName: null,
     currentCustomerLastName: null,
     currentCustomerAddress: null,
+    currentCustomerPhoneNumber: null,
     currentCustomerID: null,
     customerFirstNamePlaceholder: '',
     customerLastNamePlaceholder: '',
     customerAddressPlaceholder: '',
+    customerPhoneNumPlaceholder: '',
     userEntryError: false,
   };
 
@@ -274,6 +298,13 @@ class AddOrEditCustomer extends Component {
       this.props.EditScreen,
       customer,
     );
+
+    this.findCustomerPhoneNumPlaceholder(
+      this.props.AddScreen,
+      this.props.EditScreen,
+      customer,
+    );
+    console.log(this.state.currentCustomerPhoneNumber);
     return (
       // Start of the display for adding or editing a customer
       <SafeAreaView>
@@ -285,10 +316,10 @@ class AddOrEditCustomer extends Component {
             // Displays the value that the user is entering into the text input
             // For example, if the typed 'Bob', then 'Bob' is displayed in the
             // Text Input Box
-            onChangeText={text =>
-              this.setState(prevState => ({
-                currentCustomerFirstName: (prevState.currentCustomerFirstName = text),
-              }))
+            onChange={text =>
+              this.setState({
+                currentCustomerFirstName: text,
+              })
             }
           />
           <TextInput
@@ -310,6 +341,13 @@ class AddOrEditCustomer extends Component {
                 currentCustomerAddress: (prevState.currentCustomerAddress = text),
               }))
             }
+          />
+          <PhoneInput
+            defaultCode="US"
+            placeholder={this.state.customerPhoneNumPlaceholder}
+            layout="first"
+            value={this.state.currentCustomerPhoneNumber}
+            onChangeFormattedText={text => this.parsePhoneNumber(text)}
           />
           <Button
             // Submit button, when clicked submits the info entered by

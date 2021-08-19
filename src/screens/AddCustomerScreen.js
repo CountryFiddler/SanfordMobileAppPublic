@@ -25,20 +25,14 @@ import {
 } from 'react-native';
 import React, {Component} from 'react';
 import AddOrEditCustomer from '../components/AddOrEditCustomer';
+import AddCustomer from "../components/AddCustomer";
 
 const AddCustomerScreen = props => {
   // Start of the display for Add Customer Screen
   return (
     <SafeAreaView>
       <View>
-        <AddOrEditCustomer
-          // Pass the customer as a prop as well as navigation
-          customerName={props.name}
-          navigation={props.navigation}
-          /** VERY IMPORTANT!!! Make sure AddScreen is false and EditScreen is true **/
-          AddScreen={true}
-          EditScreen={false}
-        />
+        <AddCustomer navigation={props.navigation} />
       </View>
     </SafeAreaView>
   );

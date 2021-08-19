@@ -26,7 +26,7 @@ export function submitTimerChanges(
   navigation,
 ) {
   if (currentTimerType.length > 0) {
-    timer.timerType = currentTimerType;
+    timer.type = currentTimerType;
   }
   if (currentNumPrograms.length > 0) {
     timer.numPrograms = currentNumPrograms;

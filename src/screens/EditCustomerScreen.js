@@ -17,18 +17,16 @@
 import React, {useState} from 'react';
 import {Text, StyleSheet, View, Button} from 'react-native';
 import AddOrEditCustomer from '../components/AddOrEditCustomer';
+import EditCustomer from "../components/EditCustomer";
 
 const EditCustomerScreen = props => {
   // Start of the display for Edit Customer Screen
   return (
     <View style={styles.homePageContainer}>
-      <AddOrEditCustomer
+      <EditCustomer
         // Pass the customer as a prop as well as navigation
         customer={props.customer}
         navigation={props.navigation}
-        /** VERY IMPORTANT!!! Make sure AddScreen is false and EditScreen is true **/
-        AddScreen={false}
-        EditScreen={true}
       />
     </View>
   );

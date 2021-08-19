@@ -18,7 +18,7 @@ import {Text, StyleSheet, View, Button} from 'react-native';
 import {getTimers} from '../../api/TimerApi';
 import {getShutOffs} from '../../api/ShutOffValveApi';
 import {getSolenoidValves} from '../../api/SolenoidValveApi';
-import { getNotes } from "../../api/UtilityApi";
+import {getNotes} from '../../api/UtilityApi';
 
 const CustomerScreen = props => {
   // Get the customer the user selected from the drop down menu when they
@@ -28,12 +28,30 @@ const CustomerScreen = props => {
   const shutoffValves = getShutOffs(customer);
   const solenoidValves = getSolenoidValves(customer);
   const otherNotes = getNotes(customer, '', 'GeneralNotes');
+  var parsedPhoneNumStr;
+  var parsedPhoneNumInt;
+  parsedPhoneNumStr = '+' + customer.phoneNumber[0] + ' (';
+  for (var i = 1; i < 4; i++) {
+    parsedPhoneNumStr = parsedPhoneNumStr + customer.phoneNumber[i];
+  }
+  parsedPhoneNumStr = parsedPhoneNumStr + ')-';
+  for (var i = 4; i < 7; i++) {
+    parsedPhoneNumStr = parsedPhoneNumStr + customer.phoneNumber[i];
+  }
+  parsedPhoneNumStr = parsedPhoneNumStr + '-';
+  for (var i = 7; i < 11; i++) {
+    parsedPhoneNumStr = parsedPhoneNumStr + customer.phoneNumber[i];
+  }
+  parsedPhoneNumInt = parseInt(customer.phoneNumber);
+  console.log(parsedPhoneNumStr);
+  console.log(parsedPhoneNumInt);
   // Start of the display for Customer Screen
   return (
     <View>
       <Text>{customer.firstName}</Text>
       <Text>{customer.lastName}</Text>
       <Text>{customer.address}</Text>
+      <Text>{parsedPhoneNumStr}</Text>
       <Button
         // If the Edit Customer button is pressed, then the user
         // is redirected to the Edit Customer Screen

@@ -22,7 +22,7 @@ import {
   TextInput,
 } from 'react-native';
 import {submitShutOffChanges} from '../../api/ShutOffValveApi';
-import { submitSolenoidValvesChanges } from "../../api/SolenoidValveApi";
+import {submitSolenoidValvesChanges} from '../../api/SolenoidValveApi';
 
 // Start of Home Screen Display
 const EditSolenoidValvesInfoScreen = props => {
@@ -32,12 +32,20 @@ const EditSolenoidValvesInfoScreen = props => {
   const solenoidValves = props.navigation.getParam('solenoidValves');
   // Get the navigation prop
   const navigation = props.navigation;
-  const [currentLocation, setLocation] = useState('');
-  const [currentSolenoidValvesType, setShutOffType] = useState('');
-  const [currentSolenoidValvesSize, setShutOffSize] = useState('');
-  const [currentNumValves, setNumValves] = useState('');
-  const [currentZoneNumbers, setZoneNumbers] = useState('');
-  const [currentYearInstalled, setYearInstalled] = useState('');
+  const [currentLocation, setLocation] = useState(solenoidValves.location);
+  const [currentSolenoidValvesType, setShutOffType] = useState(
+    solenoidValves.type,
+  );
+  const [currentSolenoidValvesSize, setShutOffSize] = useState(
+    solenoidValves.size,
+  );
+  const [currentNumValves, setNumValves] = useState(solenoidValves.numValves);
+  const [currentZoneNumbers, setZoneNumbers] = useState(
+    solenoidValves.zoneNumbers,
+  );
+  const [currentYearInstalled, setYearInstalled] = useState(
+    solenoidValves.yearInstalled,
+  );
   return (
     // Start of the display for adding or editing a customer
     <SafeAreaView>

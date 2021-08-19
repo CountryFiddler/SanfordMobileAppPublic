@@ -31,8 +31,8 @@ const EditShutOffValveInfoScreen = props => {
   const shutoffValve = props.navigation.getParam('shutoffValve');
   // Get the navigation prop
   const navigation = props.navigation;
-  const [currentShutOffType, setShutOffType] = useState('');
-  const [currentShutOffSize, setShutOffSize] = useState('');
+  const [currentShutOffType, setShutOffType] = useState(shutoffValve.type);
+  const [currentShutOffSize, setShutOffSize] = useState(shutoffValve.size);
   return (
     // Start of the display for adding or editing a customer
     <SafeAreaView>
