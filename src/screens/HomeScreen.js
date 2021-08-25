@@ -52,7 +52,7 @@ class HomeScreen extends Component {
 const styles = StyleSheet.create({
   headerStyle: {
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: 'blue',
   },
   homePageContainer: {
     flex: 1,
