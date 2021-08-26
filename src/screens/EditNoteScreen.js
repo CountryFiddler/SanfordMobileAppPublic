@@ -58,6 +58,8 @@ const EditNoteScreen = props => {
           noteID={note.noteID}
           noteType={note.noteType}
           utilityNotes={utilityNotes}
+          noteTitle={note.title}
+          noteText={note.noteText}
         />
       </View>
     </ScrollView>

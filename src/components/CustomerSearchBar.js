@@ -131,8 +131,9 @@ class CustomerSearchBar extends Component {
 const styles = StyleSheet.create({
   container: {
     // justifyContent: 'center',
-    //alignItems: 'center',
-    marginTop: '20%',
+    //alignItems: 'flex-start',
+    marginTop: '25%',
+    width: '90%',
     flex: 1,
   },
   textInput: {

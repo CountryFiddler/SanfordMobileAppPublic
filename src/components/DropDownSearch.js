@@ -32,7 +32,9 @@ class DropDownSearch extends Component {
       <TouchableOpacity
         onPress={this.props.customerList.onPress}
         style={styles.container}>
-        <View style={styles.subContainer}>
+        <ScrollView
+          style={styles.subContainer}
+          contentContainerStyle={{alignItems: 'flex-start'}}>
           {this.props.customerList.length ? (
             // Map customers into the dropdown search
             // searchText is the text shown for each customer button.
@@ -42,16 +44,15 @@ class DropDownSearch extends Component {
             this.props.customerList.map(customer => {
               return (
                 <View style={styles.itemView} key={customer.id}>
-                  <Button
-                    style={styles.itemText}
-                    title={customer.searchText}
+                  <TouchableOpacity
                     onPress={() =>
                       this.props.navigation.navigate('Customer', {
                         customer: customer,
                         navigation: this.props.navigation,
                       })
-                    }
-                  />
+                    }>
+                    <Text  style={styles.itemText}>{customer.searchText}</Text>
+                  </TouchableOpacity>
                 </View>
               );
             })
@@ -62,7 +63,7 @@ class DropDownSearch extends Component {
               <Text style={styles.itemText}>No Customers Found</Text>
             </View>
           )}
-        </View>
+        </ScrollView>
       </TouchableOpacity>
     );
   }
@@ -78,35 +79,45 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
 
   subContainer: {
     //backgroundColor: '#84DCC6',
+    backgroundColor: 'white',
     paddingTop: 5,
-    marginHorizontal: 30,
-    width: '95%',
+    //borderWidth: 3,
+    //borderColor: 'black',
+    //marginHorizontal: 25,
+    width: '85%',
+    height: '80%',
     //marginVertical: 60,
     borderTopLeftRadius: 4,
     borderTopRightRadius: 4,
+
+    borderBottomLeftRadius: 4,
+    borderBottomRightRadius: 4,
     //flexWrap: 'wrap',
 
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    alignContent: 'center',
+    //justifyContent: 'center',
+    //alignContent: 'center',
   },
   itemView: {
     backgroundColor: 'white',
     height: 70,
     width: '90%',
     //marginBottom: 10,
-    justifyContent: 'center',
+    //justifyContent: 'flex-start',
     borderRadius: 4,
+    alignItems: 'flex-start',
+    marginLeft: '3.5%',
     //flex: 1,
   },
   itemText: {
+    fontSize: 15,
     color: 'black',
-    paddingHorizontal: 10,
+    justifyContent: 'center',
+    //paddingHorizontal: 10,
   },
   noResultView: {
     alignSelf: 'center',

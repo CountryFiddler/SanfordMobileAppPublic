@@ -77,8 +77,8 @@ const AddOrEditNote = props => {
   const [addedImages, setAddedImages] = useState(false);
   const [numImages, setNumImages] = useState(props.numImages);
   const [numVideos, setNumVideos] = useState(props.numVideos);
-  const [noteTitle, setNoteTitle] = useState('');
-  const [noteText, setNoteText] = useState('');
+  const [noteTitle, setNoteTitle] = useState(props.noteTitle);
+  const [noteText, setNoteText] = useState(props.noteText);
   const [imagesToUpload, setImagesToUpload] = useState([]);
   const [imageRefs, setImageRefs] = useState([]);
   const [videosToUpload, setVideosToUpload] = useState([]);

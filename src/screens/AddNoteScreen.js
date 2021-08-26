@@ -56,6 +56,8 @@ const AddNoteScreen = props => {
           noteID={null}
           noteType={noteType}
           utilityNotes={utilityNotes}
+          noteTitle={''}
+          noteText={''}
         />
       </View>
     </ScrollView>

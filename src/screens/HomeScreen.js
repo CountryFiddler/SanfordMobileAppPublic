@@ -13,10 +13,18 @@
  */
 // Import Statements
 import React, {Component, useEffect, useState} from 'react';
-import {Text, StyleSheet, View, Button, BackHandler} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  View,
+  Button,
+  BackHandler,
+  TouchableOpacity,
+} from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import * as firebase from 'react-native-firebase';
-
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faUserPlus, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 // Start of Home Screen Display
 class HomeScreen extends Component {
   SignOut = () => {
@@ -34,14 +42,21 @@ class HomeScreen extends Component {
 
   render() {
     return (
+      //<View>
       <View style={styles.homePageContainer}>
         <CustomerSearchBar navigation={this.props.navigation} />
-        <Button
-          onPress={() => this.props.navigation.navigate('AddCustomer')}
-          title="Add Customer"
-          style={(styles.textStyle, styles.addCustomerButton)}
-        />
-        <Button title={'Sign Out'} onPress={this.SignOut} />
+        <View style={styles.homePageButtonContainer}>
+          <TouchableOpacity
+            style={styles.addCustomerButton}
+            onPress={() => this.props.navigation.navigate('AddCustomer')}>
+            <FontAwesomeIcon icon={faUserPlus} size={33}/>
+            <Text style={styles.textStyle}>Add Customer</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.signOutButton} onPress={this.SignOut}>
+            <FontAwesomeIcon icon={faSignOutAlt} size={33} />
+            <Text style={styles.textStyle}>Sign Out</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -55,16 +70,63 @@ const styles = StyleSheet.create({
     borderColor: 'blue',
   },
   homePageContainer: {
-    flex: 1,
+    borderWidth: 3,
+    borderColor: 'black',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    //flex: 1,
+    // alignItems: 'vertical',
+    // flexDirection: 'row',
+  },
+  homePageButtonContainer: {
+    //marginTop: '5%',
+    marginBottom: '10%',
+    // borderWidth: 3,
+    //borderColor: 'black',
+    //alignItems: 'center',
+    borderTopWidth: 1,
+    borderTopColor: 'black',
+    flexDirection: 'row',
+    width: '100%',
+    //justifyContent: 'center',
+  },
+  testContainer: {
+    //alignItems: 'center',
+    flexDirection: 'row',
+    width: 300,
+    borderWidth: 3,
+    borderColor: 'black',
   },
   textStyle: {
-    fontSize: 30,
+    fontSize: 15,
     textAlign: 'center',
     //alignSelf: 'center',
   },
+  signOutButton: {
+    marginTop: '5%',
+    // borderWidth: 3,
+    //borderColor: 'black',
+    //justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginLeft: '47%',
+  },
   addCustomerButton: {
-    //position: 'absolute',
-    marginTop: 50,
+    // borderWidth: 3,
+    // borderColor: 'black',
+    //justifyContent: 'center',
+    marginTop: '5%',
+    alignItems: 'center',
+    marginLeft: '5%',
+    // width: '50%',
+  },
+  footerStyles: {
+    marginTop: '50%',
+    borderColor: 'black',
+    borderWidth: 3,
+    height: 100,
+    width: '100%',
+    backgroundColor: 'green',
   },
 });
 
