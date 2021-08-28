@@ -14,11 +14,27 @@
  */
 // Import Statements
 import React, {useState} from 'react';
-import {Text, StyleSheet, View, Button} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  View,
+  Button,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import {getTimers} from '../../api/TimerApi';
 import {getShutOffs} from '../../api/ShutOffValveApi';
 import {getSolenoidValves} from '../../api/SolenoidValveApi';
 import {getNotes} from '../../api/UtilityApi';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+  faUser,
+  faAddressBook,
+  faPhone,
+  faPencilAlt,
+  faClock
+} from '@fortawesome/free-solid-svg-icons';
+import {Icon} from 'native-base';
 
 const CustomerScreen = props => {
   // Get the customer the user selected from the drop down menu when they
@@ -48,24 +64,42 @@ const CustomerScreen = props => {
   // Start of the display for Customer Screen
   return (
     <View>
-      <Text>{customer.firstName}</Text>
-      <Text>{customer.lastName}</Text>
-      <Text>{customer.address}</Text>
-      <Text>{parsedPhoneNumStr}</Text>
-      <Button
-        // If the Edit Customer button is pressed, then the user
-        // is redirected to the Edit Customer Screen
-        onPress={() =>
-          // Pass navigation and customer as props to the Edit Customer Screen
-          props.navigation.navigate('EditCustomer', {
-            customer: customer,
-          })
-        }
-        title="Edit Customer"
-      />
-      <Button
-        // If the Timer button is pressed, then the user
-        // is redirected to the Timer Info Screen
+      <View style={styles.customerScreenHeader}>
+        <Text style={styles.customerScreenTitle}>Customer Information</Text>
+        <TouchableOpacity
+          onPress={() =>
+            // Pass navigation and customer as props to the Edit Customer Screen
+            props.navigation.navigate('EditCustomer', {
+              customer: customer,
+            })
+          }>
+          <FontAwesomeIcon icon={faPencilAlt} size={25} />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.customerInfoContainer}>
+        <View style={styles.customerInfoChildContainer}>
+          <FontAwesomeIcon icon={faUser} size={17} />
+          <Text style={styles.labelText}>  Name: </Text>
+          <Text style={styles.customerInfoText}>
+            {customer.firstName} {customer.lastName}
+          </Text>
+        </View>
+        <View style={styles.customerInfoChildContainer}>
+          <FontAwesomeIcon icon={faAddressBook} size={17} />
+          <Text style={styles.labelText}>  Address: </Text>
+          <Text style={styles.customerInfoText}>{customer.address}</Text>
+        </View>
+        <View style={styles.customerInfoChildContainer}>
+          <FontAwesomeIcon
+            icon={faPhone}
+            style={{transform: [{rotateY: '180deg'}]}}
+            size={17}
+          />
+          <Text style={styles.labelText}>  Phone: </Text>
+          <Text style={styles.customerInfoText}>{parsedPhoneNumStr}</Text>
+        </View>
+      </View>
+      <TouchableOpacity
         onPress={() =>
           // Pass navigation and customer as props to the Edit Customer Screen
           props.navigation.navigate('UtilitySelectionScreen', {
@@ -77,12 +111,17 @@ const CustomerScreen = props => {
             utilityInfoScreenTitle: 'TimerInfo',
             utilityTypeText: 'Timers',
           })
-        }
-        title="Timers"
-      />
-      <Button
-        // If the Timer button is pressed, then the user
-        // is redirected to the Timer Info Screen
+        }>
+        <Image
+          style={{width: 100, height: 100}}
+          source={{
+            uri:
+              '/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/iu-1.png',
+          }}
+        />
+        <Text>Timers</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={() =>
           // Pass navigation and customer as props to the Edit Customer Screen
           props.navigation.navigate('UtilitySelectionScreen', {
@@ -94,12 +133,17 @@ const CustomerScreen = props => {
             utilityInfoScreenTitle: 'ShutOffInfo',
             utilityTypeText: 'Shut-Off Valves',
           })
-        }
-        title="Shut-Off Valves"
-      />
-      <Button
-        // If the Timer button is pressed, then the user
-        // is redirected to the Timer Info Screen
+        }>
+        <Image
+          style={{width: 100, height: 100}}
+          source={{
+            uri:
+              '/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/Shut-Off Valve.psd',
+          }}
+        />
+        <Text>Shut-Off Valves</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={() =>
           // Pass navigation and customer as props to the Edit Customer Screen
           props.navigation.navigate('UtilitySelectionScreen', {
@@ -111,9 +155,16 @@ const CustomerScreen = props => {
             utilityInfoScreenTitle: 'SolenoidValvesInfo',
             utilityTypeText: 'Solenoid Valves',
           })
-        }
-        title="Solenoid Valves"
-      />
+        }>
+        <Image
+          style={{width: 70, height: 80}}
+          source={{
+            uri:
+              '/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/SolenoidValve.png',
+          }}
+        />
+        <Text>Solenoid Valves</Text>
+      </TouchableOpacity>
       <Button
         // If the Timer button is pressed, then the user
         // is redirected to the Timer Info Screen
@@ -133,5 +184,114 @@ const CustomerScreen = props => {
   );
   // End of the display for Customer Screen
 };
+const styles = StyleSheet.create({
+  customerScreenHeader: {
+    //marginTop: '5%',
+    //marginBottom: '10%',
+    // borderWidth: 3,
+    //borderColor: 'black',
+    //alignItems: 'center',
+    //borderTopWidth: 3,
+    //borderTopColor: '#26660b',
+    //alignItems: 'center',
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    width: '100%',
+    margin: '5%',
+    //justifyContent: 'center',
+  },
+  customerInfoContainer: {
+    borderBottomWidth: 3,
+    borderBottomColor: '#26660b',
+    borderTopWidth: 3,
+    borderTopColor: '#26660b',
+    height: '40%',
+    // marginTop: '5%',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    marginLeft: '1.5%',
+    marginRight: '1.5%',
+    //justifyContent: 'space-around',
+    //flex: 1,
+    // alignItems: 'vertical',
+    // flexDirection: 'row',
+  },
+  customerScreenTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginLeft: '12%',
+    //marginRight: '12%',
+  },
+  customerInfoChildContainer: {
+    margin: '5%',
+    marginLeft: '1.5%',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    fontSize: 17,
+  },
 
+  customerInfoText: {
+    fontSize: 17,
+    //fontWeight: '500',
+    //fontFamily: 'Iowan Old Style',
+  },
+
+  labelText: {
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+    fontSize: 17,
+  },
+  homePageButtonContainer: {
+    //marginTop: '5%',
+    marginBottom: '10%',
+    // borderWidth: 3,
+    //borderColor: 'black',
+    //alignItems: 'center',
+    borderTopWidth: 3,
+    borderTopColor: '#26660b',
+    flexDirection: 'row',
+    width: '100%',
+    //justifyContent: 'center',
+  },
+  testContainer: {
+    //alignItems: 'center',
+    flexDirection: 'row',
+    width: 300,
+    borderWidth: 3,
+    borderColor: 'black',
+  },
+  textStyle: {
+    fontSize: 15,
+    textAlign: 'center',
+    //alignSelf: 'center',
+  },
+  signOutButton: {
+    marginTop: '5%',
+    // borderWidth: 3,
+    //borderColor: 'black',
+    //justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginLeft: '47%',
+  },
+  addCustomerButton: {
+    // borderWidth: 3,
+    // borderColor: 'black',
+    //justifyContent: 'center',
+    marginTop: '5%',
+    alignItems: 'center',
+    marginLeft: '5%',
+    color: '#26660b',
+    // width: '50%',
+  },
+  footerStyles: {
+    marginTop: '50%',
+    borderColor: 'black',
+    borderWidth: 3,
+    height: 100,
+    width: '100%',
+    backgroundColor: 'green',
+  },
+});
 export default CustomerScreen;

@@ -63,6 +63,16 @@ const navigator = createStackNavigator(
     initialRouteName: routeName,
     defaultNavigationOptions: {
       title: 'Sanford Irrigation',
+      headerStyle: {
+        backgroundColor: '#26660b',
+        borderBottomWidth: 3,
+        borderBottomColor: 'black',
+      },
+      headerTitleStyle: {
+        fontWeight: "bold",
+        color: "#FFF",
+      },
+      headerTintColor: "#FFF",
     },
   },
 );

@@ -109,7 +109,7 @@ const EditCustomer = props => {
   function parsePhoneNumber(text) {
     setCurrentCustomerPhoneNumber(text.replace(/[^0-9]/g, ''));
   }
-  console.log(this.state.currentCustomerPhoneNumber);
+  //console.log(this.state.currentCustomerPhoneNumber);
   return (
     // Start of the display for adding or editing a customer
     <SafeAreaView>
