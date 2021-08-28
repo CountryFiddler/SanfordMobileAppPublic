@@ -20,8 +20,9 @@ import {
   View,
   Button,
   TouchableOpacity,
-  Image,
-} from 'react-native';
+  Image, ScrollView,
+
+} from "react-native";
 import {getTimers} from '../../api/TimerApi';
 import {getShutOffs} from '../../api/ShutOffValveApi';
 import {getSolenoidValves} from '../../api/SolenoidValveApi';
@@ -32,8 +33,12 @@ import {
   faAddressBook,
   faPhone,
   faPencilAlt,
-  faClock
+  faClock,
+  faUserPlus,
+  faSignOutAlt,
+  faHome,
 } from '@fortawesome/free-solid-svg-icons';
+import {faStickyNote, fa} from '@fortawesome/free-regular-svg-icons';
 import {Icon} from 'native-base';
 
 const CustomerScreen = props => {
@@ -63,7 +68,7 @@ const CustomerScreen = props => {
   console.log(parsedPhoneNumInt);
   // Start of the display for Customer Screen
   return (
-    <View>
+    <ScrollView>
       <View style={styles.customerScreenHeader}>
         <Text style={styles.customerScreenTitle}>Customer Information</Text>
         <TouchableOpacity
@@ -79,14 +84,14 @@ const CustomerScreen = props => {
       <View style={styles.customerInfoContainer}>
         <View style={styles.customerInfoChildContainer}>
           <FontAwesomeIcon icon={faUser} size={17} />
-          <Text style={styles.labelText}>  Name: </Text>
+          <Text style={styles.labelText}> Name: </Text>
           <Text style={styles.customerInfoText}>
             {customer.firstName} {customer.lastName}
           </Text>
         </View>
         <View style={styles.customerInfoChildContainer}>
           <FontAwesomeIcon icon={faAddressBook} size={17} />
-          <Text style={styles.labelText}>  Address: </Text>
+          <Text style={styles.labelText}> Address: </Text>
           <Text style={styles.customerInfoText}>{customer.address}</Text>
         </View>
         <View style={styles.customerInfoChildContainer}>
@@ -95,92 +100,110 @@ const CustomerScreen = props => {
             style={{transform: [{rotateY: '180deg'}]}}
             size={17}
           />
-          <Text style={styles.labelText}>  Phone: </Text>
+          <Text style={styles.labelText}> Phone: </Text>
           <Text style={styles.customerInfoText}>{parsedPhoneNumStr}</Text>
         </View>
       </View>
-      <TouchableOpacity
-        onPress={() =>
-          // Pass navigation and customer as props to the Edit Customer Screen
-          props.navigation.navigate('UtilitySelectionScreen', {
-            customer: customer,
-            utilityType: 'Timers',
-            utilities: timers,
-            addUtilityScreen: 'AddTimer',
-            addUtilityButtonTitle: 'Add Timer',
-            utilityInfoScreenTitle: 'TimerInfo',
-            utilityTypeText: 'Timers',
-          })
-        }>
-        <Image
-          style={{width: 100, height: 100}}
-          source={{
-            uri:
-              '/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/iu-1.png',
-          }}
-        />
-        <Text>Timers</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() =>
-          // Pass navigation and customer as props to the Edit Customer Screen
-          props.navigation.navigate('UtilitySelectionScreen', {
-            customer: customer,
-            utilityType: 'ShutOffValves',
-            utilities: shutoffValves,
-            addUtilityScreen: 'AddShutOff',
-            addUtilityButtonTitle: 'Add Shut-Off Valve',
-            utilityInfoScreenTitle: 'ShutOffInfo',
-            utilityTypeText: 'Shut-Off Valves',
-          })
-        }>
-        <Image
-          style={{width: 100, height: 100}}
-          source={{
-            uri:
-              '/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/Shut-Off Valve.psd',
-          }}
-        />
-        <Text>Shut-Off Valves</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() =>
-          // Pass navigation and customer as props to the Edit Customer Screen
-          props.navigation.navigate('UtilitySelectionScreen', {
-            customer: customer,
-            utilityType: 'SolenoidValves',
-            utilities: solenoidValves,
-            addUtilityScreen: 'AddSolenoidValves',
-            addUtilityButtonTitle: 'Add Valve',
-            utilityInfoScreenTitle: 'SolenoidValvesInfo',
-            utilityTypeText: 'Solenoid Valves',
-          })
-        }>
-        <Image
-          style={{width: 70, height: 80}}
-          source={{
-            uri:
-              '/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/SolenoidValve.png',
-          }}
-        />
-        <Text>Solenoid Valves</Text>
-      </TouchableOpacity>
-      <Button
-        // If the Timer button is pressed, then the user
-        // is redirected to the Timer Info Screen
-        onPress={() =>
-          // Pass navigation and customer as props to the Edit Customer Screen
-          props.navigation.navigate('UtilityNotesNavigator', {
-            customer: customer,
-            utility: '',
-            utilityNotes: otherNotes,
-            noteType: 'GeneralNotes',
-            screenTitle: 'General Notes',
-          })
-        }
-        title="General Notes"
-      />
-    </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() =>
+            // Pass navigation and customer as props to the Edit Customer Screen
+            props.navigation.navigate('UtilitySelectionScreen', {
+              customer: customer,
+              utilityType: 'Timers',
+              utilities: timers,
+              addUtilityScreen: 'AddTimer',
+              addUtilityButtonTitle: 'Add Timer',
+              utilityInfoScreenTitle: 'TimerInfo',
+              utilityTypeText: 'Timers',
+            })
+          }
+          style={styles.generalButtonStyle}>
+          <Image
+            style={{width: 50, height: 50}}
+            source={{
+              uri:
+                '/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/iu-1.png',
+            }}
+          />
+          <Text>Timers</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            // Pass navigation and customer as props to the Edit Customer Screen
+            props.navigation.navigate('UtilitySelectionScreen', {
+              customer: customer,
+              utilityType: 'ShutOffValves',
+              utilities: shutoffValves,
+              addUtilityScreen: 'AddShutOff',
+              addUtilityButtonTitle: 'Add Shut-Off Valve',
+              utilityInfoScreenTitle: 'ShutOffInfo',
+              utilityTypeText: 'Shut-Off Valves',
+            })
+          }
+          style={styles.generalButtonStyle}>
+          <Image
+            style={{width: 60, height: 50}}
+            source={{
+              uri:
+                '/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/Shut-Off Valve.psd',
+            }}
+          />
+          <Text>Shut-Off</Text>
+          <Text>Valves</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.divider} />
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() =>
+            // Pass navigation and customer as props to the Edit Customer Screen
+            props.navigation.navigate('UtilitySelectionScreen', {
+              customer: customer,
+              utilityType: 'SolenoidValves',
+              utilities: solenoidValves,
+              addUtilityScreen: 'AddSolenoidValves',
+              addUtilityButtonTitle: 'Add Valve',
+              utilityInfoScreenTitle: 'SolenoidValvesInfo',
+              utilityTypeText: 'Solenoid Valves',
+            })
+          }
+          style={styles.generalButtonStyle}>
+          <Image
+            style={{width: 45, height: 50}}
+            source={{
+              uri:
+                '/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/SolenoidValve.png',
+            }}
+          />
+          <Text>Solenoid</Text>
+          <Text>Valves</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            // Pass navigation and customer as props to the Edit Customer Screen
+            props.navigation.navigate('UtilityNotesNavigator', {
+              customer: customer,
+              utility: '',
+              utilityNotes: otherNotes,
+              noteType: 'GeneralNotes',
+              screenTitle: 'General Notes',
+            })
+          }
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faStickyNote} size={50} />
+          <Text>General</Text>
+          <Text>Notes</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.homePageButtonContainer}>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Home')}
+          style={styles.homeButton}>
+          <FontAwesomeIcon icon={faHome} size={33} />
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
   // End of the display for Customer Screen
 };
@@ -205,7 +228,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#26660b',
     borderTopWidth: 3,
     borderTopColor: '#26660b',
-    height: '40%',
+    height: '35%',
     // marginTop: '5%',
     alignItems: 'flex-start',
     justifyContent: 'center',
@@ -243,9 +266,43 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 17,
   },
+  buttonContainer: {
+    //borderLeftWidth: 3,
+    //borderRightWidth: 3,
+    //borderBottomWidth: 3,
+    //borderWidth: 3,
+    //borderColor: '#26660b',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginTop: '5%',
+    marginBottom: '2%',
+    marginLeft: '5%',
+    marginRight: '5%',
+    width: '90%',
+    height: '17%',
+  },
+  generalButtonStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    //marginRight: '15%',
+  },
+  shutOffButton: {
+    borderWidth: 3,
+    borderColor: 'black',
+    alignItems: 'center',
+    justifyContent: 'center',
+    //marginLeft: '15%',
+  },
+  divider: {
+    borderTopWidth: 3,
+    borderTopColor: '#26660b',
+    marginLeft: '10%',
+    marginRight: '10%',
+  },
   homePageButtonContainer: {
-    //marginTop: '5%',
-    marginBottom: '10%',
+    marginTop: '10%',
+    //marginBottom: '5%',
     // borderWidth: 3,
     //borderColor: 'black',
     //alignItems: 'center',
@@ -253,7 +310,8 @@ const styles = StyleSheet.create({
     borderTopColor: '#26660b',
     flexDirection: 'row',
     width: '100%',
-    //justifyContent: 'center',
+    height: 100,
+    justifyContent: 'center',
   },
   testContainer: {
     //alignItems: 'center',
@@ -284,6 +342,10 @@ const styles = StyleSheet.create({
     marginLeft: '5%',
     color: '#26660b',
     // width: '50%',
+  },
+  homeButton: {
+    //alignItems: 'center',
+    marginTop: '15%',
   },
   footerStyles: {
     marginTop: '50%',
