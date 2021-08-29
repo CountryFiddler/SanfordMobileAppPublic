@@ -13,12 +13,29 @@
  */
 // Import Statements
 import React, {useEffect, useState} from 'react';
-import {Text, StyleSheet, View, Button} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  View,
+  Button,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import BackHandler from 'react-native/Libraries/Utilities/BackHandler';
 import useFocusEffect from '@react-navigation/native';
 import {getTimerNotes} from '../../api/TimerApi';
 import {getNotes} from '../../api/UtilityApi';
+import {styles} from '../../api/stylesApi';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+  faHome,
+  faPencilAlt,
+  faUser,
+  faSearch,
+} from '@fortawesome/free-solid-svg-icons';
+import {faStickyNote} from '@fortawesome/free-regular-svg-icons';
 // Start of Home Screen Display
 const TimerInfoScreen = props => {
   const customer = props.navigation.getParam('customer');
@@ -33,56 +50,102 @@ const TimerInfoScreen = props => {
     timer.numZones = 'No Text Provided';
   }
   return (
-    <View style={styles.homePageContainer}>
-      <Text> {timer.type} </Text>
-      <Text> {timer.numPrograms}</Text>
-      <Text> {timer.numZones}</Text>
-      <Button
-        title={'Edit Timer Info'}
-        onPress={() =>
-          navigation.navigate('EditTimer', {
-            customer: customer,
-            timer: timer,
-            navigation: navigation,
-          })
-        }
-      />
-      <Button
-        title={'Find Timer'}
-        onPress={() =>
-          props.navigation.navigate('UtilityNotesNavigator', {
-            customer: customer,
-            utility: timer,
-            utilityNotes: findTimerNotes,
-            noteType: 'FindTimerNotes',
-            screenTitle: 'Find Timer',
-            //timers: timers,
-          })
-        }
-      />
-      <Button
-        // If the Timer button is pressed, then the user
-        // is redirected to the Timer Info Screen
-        onPress={() =>
-          // Pass navigation and customer as props to the Edit Customer Screen
-          props.navigation.navigate('UtilityNotesNavigator', {
-            customer: customer,
-            utility: timer,
-            utilityNotes: timerNotes,
-            noteType: 'TimerNotes',
-            screenTitle: 'Timer Notes',
-            //timers: timers,
-          })
-        }
-        title="Timer Notes"
-      />
-    </View>
+    <ScrollView>
+      <View style={styles.screenHeader}>
+        <Text style={styles.screenTitle}>Timer Information</Text>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate('EditTimer', {
+              customer: customer,
+              timer: timer,
+              navigation: navigation,
+            })
+          }>
+          <FontAwesomeIcon icon={faPencilAlt} size={25} />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.infoContainer}>
+        <View style={styles.infoChildContainer}>
+          <Image
+            style={{width: 25, height: 25}}
+            source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/iu-1.png')}
+          />
+          <Text style={styles.labelText}> Type: </Text>
+          <Text style={styles.infoText}>{timer.type}</Text>
+        </View>
+        <View style={styles.infoChildContainer}>
+          <Text style={styles.labelText}>#</Text>
+          <Text style={styles.labelText}> Programs: </Text>
+          <Text style={styles.infoText}>{timer.numPrograms}</Text>
+        </View>
+        <View style={styles.infoChildContainer}>
+          <Text style={styles.labelText}>#</Text>
+          <Text style={styles.labelText}> Zones: </Text>
+          <Text style={styles.infoText}>{timer.numZones}</Text>
+        </View>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate('UtilityNotesNavigator', {
+              customer: customer,
+              utility: timer,
+              utilityNotes: findTimerNotes,
+              noteType: 'FindTimerNotes',
+              screenTitle: 'Find Timer',
+              //timers: timers,
+            })
+          }
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faSearch} size={33} />
+          <Text style={styles.buttonText}>Find Timer</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            // Pass navigation and customer as props to the Edit Customer Screen
+            props.navigation.navigate('UtilityNotesNavigator', {
+              customer: customer,
+              utility: timer,
+              utilityNotes: timerNotes,
+              noteType: 'TimerNotes',
+              screenTitle: 'Timer Notes',
+              //timers: timers,
+            })
+          }
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faStickyNote} size={33} />
+          <Text style={styles.buttonText}>Timer Notes</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.divider} />
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Home')}
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faHome} size={33} />
+          <Text style={styles.buttonText}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate('Customer', {
+              customer: customer,
+              navigation: props.navigation,
+            })
+          }
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faUser} size={33} />
+          <Text style={styles.buttonText}>Customer</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.divider} />
+      <View style={timerInfoStyles.spaceHolder} />
+    </ScrollView>
   );
 };
 // End of Home Screen Display
 
 // Start of StylingSheet
-const styles = StyleSheet.create({
+const timerInfoStyles = StyleSheet.create({
   headerStyle: {
     borderWidth: 1,
     borderColor: 'black',
@@ -98,6 +161,9 @@ const styles = StyleSheet.create({
   addCustomerButton: {
     //position: 'absolute',
     marginTop: 50,
+  },
+  spaceHolder: {
+    marginBottom: '80%',
   },
 });
 

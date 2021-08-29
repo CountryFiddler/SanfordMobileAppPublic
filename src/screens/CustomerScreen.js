@@ -20,9 +20,9 @@ import {
   View,
   Button,
   TouchableOpacity,
-  Image, ScrollView,
-
-} from "react-native";
+  Image,
+  ScrollView,
+} from 'react-native';
 import {getTimers} from '../../api/TimerApi';
 import {getShutOffs} from '../../api/ShutOffValveApi';
 import {getSolenoidValves} from '../../api/SolenoidValveApi';
@@ -39,6 +39,7 @@ import {
   faHome,
 } from '@fortawesome/free-solid-svg-icons';
 import {faStickyNote, fa} from '@fortawesome/free-regular-svg-icons';
+import {styles} from '../../api/stylesApi';
 import {Icon} from 'native-base';
 
 const CustomerScreen = props => {
@@ -69,8 +70,10 @@ const CustomerScreen = props => {
   // Start of the display for Customer Screen
   return (
     <ScrollView>
-      <View style={styles.customerScreenHeader}>
-        <Text style={styles.customerScreenTitle}>Customer Information</Text>
+      <View style={styles.screenHeader}>
+        <Text style={styles.screenTitle}>
+          Customer Information
+        </Text>
         <TouchableOpacity
           onPress={() =>
             // Pass navigation and customer as props to the Edit Customer Screen
@@ -81,27 +84,31 @@ const CustomerScreen = props => {
           <FontAwesomeIcon icon={faPencilAlt} size={25} />
         </TouchableOpacity>
       </View>
-      <View style={styles.customerInfoContainer}>
-        <View style={styles.customerInfoChildContainer}>
+      <View style={styles.infoContainer}>
+        <View style={styles.infoChildContainer}>
           <FontAwesomeIcon icon={faUser} size={17} />
           <Text style={styles.labelText}> Name: </Text>
-          <Text style={styles.customerInfoText}>
+          <Text style={styles.infoText}>
             {customer.firstName} {customer.lastName}
           </Text>
         </View>
-        <View style={styles.customerInfoChildContainer}>
+        <View style={styles.infoChildContainer}>
           <FontAwesomeIcon icon={faAddressBook} size={17} />
           <Text style={styles.labelText}> Address: </Text>
-          <Text style={styles.customerInfoText}>{customer.address}</Text>
+          <Text style={styles.infoText}>
+            {customer.address}
+          </Text>
         </View>
-        <View style={styles.customerInfoChildContainer}>
+        <View style={styles.infoChildContainer}>
           <FontAwesomeIcon
             icon={faPhone}
             style={{transform: [{rotateY: '180deg'}]}}
             size={17}
           />
           <Text style={styles.labelText}> Phone: </Text>
-          <Text style={styles.customerInfoText}>{parsedPhoneNumStr}</Text>
+          <Text style={styles.infoText}>
+            {parsedPhoneNumStr}
+          </Text>
         </View>
       </View>
       <View style={styles.buttonContainer}>
@@ -121,12 +128,9 @@ const CustomerScreen = props => {
           style={styles.generalButtonStyle}>
           <Image
             style={{width: 50, height: 50}}
-            source={{
-              uri:
-                '/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/iu-1.png',
-            }}
+            source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/iu-1.png')}
           />
-          <Text>Timers</Text>
+          <Text style={styles.buttonText}>Timers</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
@@ -143,13 +147,10 @@ const CustomerScreen = props => {
           }
           style={styles.generalButtonStyle}>
           <Image
-            style={{width: 60, height: 50}}
-            source={{
-              uri:
-                '/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/Shut-Off Valve.psd',
-            }}
+            style={{width: 70, height: 60}}
+            source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/Shut-OffValve.png')}
           />
-          <Text>Shut-Off</Text>
+          <Text style={styles.buttonText}>Shut-Off</Text>
           <Text>Valves</Text>
         </TouchableOpacity>
       </View>
@@ -171,12 +172,9 @@ const CustomerScreen = props => {
           style={styles.generalButtonStyle}>
           <Image
             style={{width: 45, height: 50}}
-            source={{
-              uri:
-                '/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/SolenoidValve.png',
-            }}
+            source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/SolenoidValve.png')}
           />
-          <Text>Solenoid</Text>
+          <Text style={styles.buttonText}>Solenoid</Text>
           <Text>Valves</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -192,168 +190,30 @@ const CustomerScreen = props => {
           }
           style={styles.generalButtonStyle}>
           <FontAwesomeIcon icon={faStickyNote} size={50} />
-          <Text>General</Text>
+          <Text style={styles.buttonText}>General</Text>
           <Text>Notes</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.homePageButtonContainer}>
+      <View style={styles.divider} />
+      <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={() => props.navigation.navigate('Home')}
-          style={styles.homeButton}>
+          style={styles.generalButtonStyle}>
           <FontAwesomeIcon icon={faHome} size={33} />
+          <Text style={styles.buttonText}>Home</Text>
         </TouchableOpacity>
       </View>
+      <View style={customerScreenStyles.spaceHolder} />
     </ScrollView>
   );
   // End of the display for Customer Screen
 };
-const styles = StyleSheet.create({
-  customerScreenHeader: {
-    //marginTop: '5%',
-    //marginBottom: '10%',
-    // borderWidth: 3,
-    //borderColor: 'black',
-    //alignItems: 'center',
-    //borderTopWidth: 3,
-    //borderTopColor: '#26660b',
-    //alignItems: 'center',
-    justifyContent: 'space-around',
-    flexDirection: 'row',
-    width: '100%',
-    margin: '5%',
-    //justifyContent: 'center',
-  },
-  customerInfoContainer: {
-    borderBottomWidth: 3,
-    borderBottomColor: '#26660b',
-    borderTopWidth: 3,
-    borderTopColor: '#26660b',
-    height: '35%',
-    // marginTop: '5%',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    marginLeft: '1.5%',
-    marginRight: '1.5%',
-    //justifyContent: 'space-around',
-    //flex: 1,
-    // alignItems: 'vertical',
-    // flexDirection: 'row',
-  },
-  customerScreenTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginLeft: '12%',
-    //marginRight: '12%',
-  },
-  customerInfoChildContainer: {
-    margin: '5%',
-    marginLeft: '1.5%',
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    fontSize: 17,
-  },
-
-  customerInfoText: {
-    fontSize: 17,
-    //fontWeight: '500',
-    //fontFamily: 'Iowan Old Style',
-  },
-
-  labelText: {
-    fontStyle: 'italic',
-    fontWeight: 'bold',
-    fontSize: 17,
-  },
-  buttonContainer: {
-    //borderLeftWidth: 3,
-    //borderRightWidth: 3,
-    //borderBottomWidth: 3,
-    //borderWidth: 3,
-    //borderColor: '#26660b',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    flexDirection: 'row',
-    marginTop: '5%',
-    marginBottom: '2%',
-    marginLeft: '5%',
-    marginRight: '5%',
-    width: '90%',
-    height: '17%',
-  },
-  generalButtonStyle: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    //marginRight: '15%',
-  },
-  shutOffButton: {
-    borderWidth: 3,
-    borderColor: 'black',
-    alignItems: 'center',
-    justifyContent: 'center',
-    //marginLeft: '15%',
-  },
-  divider: {
-    borderTopWidth: 3,
-    borderTopColor: '#26660b',
-    marginLeft: '10%',
-    marginRight: '10%',
-  },
-  homePageButtonContainer: {
-    marginTop: '10%',
-    //marginBottom: '5%',
-    // borderWidth: 3,
-    //borderColor: 'black',
-    //alignItems: 'center',
-    borderTopWidth: 3,
-    borderTopColor: '#26660b',
-    flexDirection: 'row',
-    width: '100%',
-    height: 100,
-    justifyContent: 'center',
-  },
-  testContainer: {
-    //alignItems: 'center',
-    flexDirection: 'row',
-    width: 300,
-    borderWidth: 3,
-    borderColor: 'black',
-  },
-  textStyle: {
-    fontSize: 15,
-    textAlign: 'center',
-    //alignSelf: 'center',
-  },
-  signOutButton: {
-    marginTop: '5%',
-    // borderWidth: 3,
-    //borderColor: 'black',
-    //justifyContent: 'flex-end',
-    alignItems: 'center',
-    marginLeft: '47%',
-  },
-  addCustomerButton: {
-    // borderWidth: 3,
-    // borderColor: 'black',
-    //justifyContent: 'center',
-    marginTop: '5%',
-    alignItems: 'center',
-    marginLeft: '5%',
-    color: '#26660b',
-    // width: '50%',
+const customerScreenStyles = StyleSheet.create({
+  spaceHolder: {
+    marginBottom: '30%',
   },
   homeButton: {
-    //alignItems: 'center',
-    marginTop: '15%',
-  },
-  footerStyles: {
-    marginTop: '50%',
-    borderColor: 'black',
-    borderWidth: 3,
-    height: 100,
-    width: '100%',
-    backgroundColor: 'green',
+    marginBottom: '20%',
   },
 });
 export default CustomerScreen;
