@@ -103,6 +103,8 @@ const styles = StyleSheet.create({
     //alignContent: 'center',
   },
   itemView: {
+    borderBottomWidth: 3,
+    borderBottomColor: '#26660b',
     backgroundColor: 'white',
     height: 70,
     width: '90%',
@@ -110,6 +112,7 @@ const styles = StyleSheet.create({
     //justifyContent: 'flex-start',
     borderRadius: 4,
     alignItems: 'flex-start',
+    justifyContent: 'center',
     marginLeft: '3.5%',
     //flex: 1,
   },

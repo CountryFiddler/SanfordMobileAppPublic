@@ -24,6 +24,8 @@ import {
   SafeAreaView,
   TextInput,
   render,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
 import React, {Component, useState} from 'react';
 import {addCustomer, updateCustomer} from '../../api/FirestoreApi';
@@ -31,6 +33,16 @@ import PhoneInput from 'react-native-phone-number-input';
 import PhoneInputWithCountryDefault from 'react-phone-number-input/modules/PhoneInputWithCountryDefault';
 import PhoneInputWithCountry from 'react-phone-number-input/modules/PhoneInputWithCountry';
 import {Alert} from 'react-native';
+import {styles} from '../../api/stylesApi';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+  faAddressBook,
+  faPencilAlt,
+  faPhone,
+  faUser,
+  faCheck,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons';
 
 const AddCustomer = props => {
   // Get the navigation prop
@@ -150,7 +162,8 @@ const AddCustomer = props => {
     console.log(customerPhoneNumber.length);
     if (customerPhoneNumber !== '' && customerPhoneNumber.length !== 11) {
       Alert.alert(
-        "If You Enter a Phone Number, Please Make Sure It's 11 Digits Long. (Ex.  1 (800)-789-9876)",
+        'Invalid Phone Number',
+        'Please make sure it is 11 digits long and includes a leading 1 (Ex. 1-800-333-7777)',
       );
       return false;
     }
@@ -163,28 +176,102 @@ const AddCustomer = props => {
   return (
     // Start of the display for adding or editing a customer
     <SafeAreaView>
-      <View>
-        <TextInput
-          // Text Input Box for the customer's first name
-          placeholder={customerFirstNamePlaceholder}
-          value={customerFirstName}
-          // Displays the value that the user is entering into the text input
-          // For example, if the typed 'Bob', then 'Bob' is displayed in the
-          // Text Input Box
-          onChangeText={text => setCustomerFirstName(text)}
-        />
-        <TextInput
-          // Text Input Box for the customer's last name
-          placeholder={customerLastNamePlaceholder}
-          value={customerLastName}
-          onChangeText={text => setCustomerLastName(text)}
-        />
-        <TextInput
-          // Text Input Box for the customer's address
-          placeholder={customerAddressPlaceholder}
-          value={customerAddress}
-          onChangeText={text => setCustomerAddress(text)}
-        />
+      <View style={addCustomerStyles.addCustomerScreenHeader}>
+        <Text style={addCustomerStyles.addCustomerScreenTitle}>
+          Add Customer
+        </Text>
+      </View>
+      <View style={addCustomerStyles.addCustomerInfoContainer}>
+        <View style={styles.infoChildContainer}>
+          <TextInput
+            style={styles.infoText}
+            // Text Input Box for the customer's first name
+            placeholder={customerFirstNamePlaceholder}
+            value={customerFirstName}
+            // Displays the value that the user is entering into the text input
+            // For example, if the typed 'Bob', then 'Bob' is displayed in the
+            // Text Input Box
+            onChangeText={text => setCustomerFirstName(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <TextInput
+            style={styles.infoText}
+            // Text Input Box for the customer's last name
+            placeholder={customerLastNamePlaceholder}
+            value={customerLastName}
+            onChangeText={text => setCustomerLastName(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <TextInput
+            style={styles.infoText}
+            // Text Input Box for the customer's address
+            placeholder={customerAddressPlaceholder}
+            value={customerAddress}
+            onChangeText={text => setCustomerAddress(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <TextInput
+            style={styles.infoText}
+            placeholder={customerPhoneNumPlaceholder}
+            value={customerPhoneNumber}
+            onChangeText={text => {
+              setCustomerPhoneNumber(text), parsePhoneNumber(text);
+            }}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate('Home')}
+            style={styles.generalButtonStyle}>
+            <FontAwesomeIcon icon={faTimes} size={40} color={'#cc0000'} />
+            <Text style={addCustomerStyles.cancelButtonText}>Cancel</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => submitCustomerInfo()}
+            style={styles.generalButtonStyle}>
+            <FontAwesomeIcon icon={faCheck} size={40} color={'#26660b'} />
+            <Text style={addCustomerStyles.submitButtonText}>Submit</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+  // End of the display for adding or editing a customer
+};
+
+const addCustomerStyles = {
+  addCustomerScreenHeader: {
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    width: '100%',
+    marginTop: '5%',
+  },
+  addCustomerScreenTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  addCustomerInfoContainer: {
+    height: '80%',
+  },
+  cancelButtonText: {
+    color: '#cc0000',
+    fontSize: 20,
+  },
+  submitButtonText: {
+    color: '#26660b',
+    fontSize: 20,
+  },
+};
+export default AddCustomer;
+/* *
         <PhoneInput
           defaultCode={'US'}
           layout={'first'}
@@ -193,16 +280,5 @@ const AddCustomer = props => {
           onChangeFormattedText={text => {
             parsePhoneNumber(text);
           }}
-        />
-        <Button
-          // Submit button, when clicked submits the info entered by
-          // the user to the database
-          title="Submit"
-          onPress={() => submitCustomerInfo()}
-        />
-      </View>
-    </SafeAreaView>
-  );
-  // End of the display for adding or editing a customer
-};
-export default AddCustomer;
+        />/
+*/

@@ -13,13 +13,32 @@
  */
 // Import Statements
 import React, {useEffect, useState} from 'react';
-import {Text, StyleSheet, View, Button} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  View,
+  Button,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+} from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import BackHandler from 'react-native/Libraries/Utilities/BackHandler';
 import useFocusEffect from '@react-navigation/native';
 import {getTimerNotes} from '../../api/TimerApi';
 import {getNotes} from '../../api/UtilityApi';
 import {getSolenoidValvesNotes} from '../../api/SolenoidValveApi';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+  faHome,
+  faPencilAlt,
+  faSearch,
+  faUser,
+  faMapMarkerAlt,
+  faRuler,
+} from '@fortawesome/free-solid-svg-icons';
+import {faStickyNote, faCalendarAlt} from '@fortawesome/free-regular-svg-icons';
+import {styles} from '../../api/stylesApi';
 // Start of Home Screen Display
 const SolenoidValvesInfoScreen = props => {
   const customer = props.navigation.getParam('customer');
@@ -39,72 +58,139 @@ const SolenoidValvesInfoScreen = props => {
   }
   console.log(solenoidValves);
   return (
-    <View style={styles.homePageContainer}>
-      <Text> {solenoidValves.location} </Text>
-      <Text> {solenoidValves.type} </Text>
-      <Text> {solenoidValves.size} </Text>
-      <Text> {solenoidValves.numValves} </Text>
-      <Text> {solenoidValves.zoneNumbers} </Text>
-      <Text> {solenoidValves.yearInstalled} </Text>
-      <Button
-        title={'Edit Valve Info'}
-        onPress={() =>
-          navigation.navigate('EditSolenoidValves', {
-            customer: customer,
-            solenoidValves: solenoidValves,
-            navigation: navigation,
-          })
-        }
-      />
-      <Button
-        title={'Find Valves'}
-        onPress={() =>
-          props.navigation.navigate('UtilityNotesNavigator', {
-            customer: customer,
-            utility: solenoidValves,
-            utilityNotes: findSolenoidValveNotes,
-            noteType: 'FindSolenoidValvesNotes',
-            screenTitle: 'Find Valves',
-          })
-        }
-      />
-      <Button
-        // If the Timer button is pressed, then the user
-        // is redirected to the Timer Info Screen
-        onPress={() =>
-          // Pass navigation and customer as props to the Edit Customer Screen
-          props.navigation.navigate('UtilityNotesNavigator', {
-            customer: customer,
-            utility: solenoidValves,
-            utilityNotes: solenoidValveNotes,
-            noteType: 'SolenoidValveNotes',
-            screenTitle: 'Valve Notes',
-          })
-        }
-        title="Valve Notes"
-      />
-    </View>
+    <ScrollView
+      style={solenoidValveInfoStyles.solenoidValveInfoScrollContainer}>
+      <View style={styles.screenHeader}>
+        <Text style={styles.screenTitle}>Solenoid Valve Info</Text>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate('EditSolenoidValves', {
+              customer: customer,
+              solenoidValves: solenoidValves,
+              navigation: navigation,
+            })
+          }>
+          <FontAwesomeIcon icon={faPencilAlt} size={25} />
+        </TouchableOpacity>
+      </View>
+      <View style={solenoidValveInfoStyles.solenoidValveInfoContainer}>
+        <View style={styles.infoChildContainer}>
+          <FontAwesomeIcon icon={faMapMarkerAlt} size={20} />
+          <Text style={styles.labelText}> Location: </Text>
+          <Text style={styles.infoText}>{solenoidValves.location}</Text>
+        </View>
+        <View style={styles.infoChildContainer}>
+          <Image
+            style={{width: 26, height: 30}}
+            source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/SolenoidValve.png')}
+          />
+          <Text style={styles.labelText}> Type: </Text>
+          <Text style={styles.infoText}>{solenoidValves.type}</Text>
+        </View>
+        <View style={styles.infoChildContainer}>
+          <FontAwesomeIcon icon={faRuler} size={20} />
+          <Text style={styles.labelText}> Size: </Text>
+          <Text style={styles.infoText}>{solenoidValves.size}</Text>
+        </View>
+        <View style={styles.infoChildContainer}>
+          <Text style={styles.labelText}>#</Text>
+          <Text style={styles.labelText}> Valves: </Text>
+          <Text style={styles.infoText}>{solenoidValves.numValves}</Text>
+        </View>
+        <View style={styles.infoChildContainer}>
+          <Text style={styles.labelText}>#</Text>
+          <Text style={styles.labelText}> Zones Controlled: </Text>
+          <Text style={styles.infoText}>{solenoidValves.zoneNumbers}</Text>
+        </View>
+        <View style={styles.infoChildContainer}>
+          <FontAwesomeIcon icon={faCalendarAlt} size={20} />
+          <Text style={styles.labelText}> Year Installed: </Text>
+          <Text style={styles.infoText}>{solenoidValves.yearInstalled}</Text>
+        </View>
+      </View>
+      <View style={solenoidValveInfoStyles.solenoidValveInfoButtonContainer}>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate('UtilityNotesNavigator', {
+              customer: customer,
+              utility: solenoidValves,
+              utilityNotes: findSolenoidValveNotes,
+              noteType: 'FindSolenoidValvesNotes',
+              screenTitle: 'Find Valves',
+            })
+          }
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faSearch} size={33} />
+          <Text style={styles.buttonText}>Find Valves</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            // Pass navigation and customer as props to the Edit Customer Screen
+            props.navigation.navigate('UtilityNotesNavigator', {
+              customer: customer,
+              utility: solenoidValves,
+              utilityNotes: solenoidValveNotes,
+              noteType: 'SolenoidValveNotes',
+              screenTitle: 'Valve Notes',
+            })
+          }
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faStickyNote} size={33} />
+          <Text style={styles.buttonText}>Valve Notes</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.divider} />
+      <View style={solenoidValveInfoStyles.solenoidValveInfoButtonContainer}>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Home')}
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faHome} size={33} />
+          <Text style={styles.buttonText}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate('Customer', {
+              customer: customer,
+              navigation: props.navigation,
+            })
+          }
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faUser} size={33} />
+          <Text style={styles.buttonText}>Customer</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.divider} />
+      <View style={solenoidValveInfoStyles.spaceHolder} />
+    </ScrollView>
   );
 };
 // End of Home Screen Display
 
 // Start of StylingSheet
-const styles = StyleSheet.create({
-  headerStyle: {
-    borderWidth: 1,
-    borderColor: 'black',
+const solenoidValveInfoStyles = StyleSheet.create({
+  solenoidValveInfoContainer: {
+    borderBottomWidth: 3,
+    borderBottomColor: '#26660b',
+    borderTopWidth: 3,
+    borderTopColor: '#26660b',
+    height: '45%',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    marginLeft: '1.5%',
+    marginRight: '1.5%',
   },
-  homePageContainer: {
-    flex: 1,
+  solenoidValveInfoButtonContainer: {
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginLeft: '5%',
+    marginRight: '5%',
+    width: '90%',
+    height: '17%',
   },
-  textStyle: {
-    fontSize: 30,
-    textAlign: 'center',
-    //alignSelf: 'center',
-  },
-  addCustomerButton: {
-    //position: 'absolute',
-    marginTop: 50,
+  spaceHolder: {
+    marginBottom: '70%',
+    //height: 250,
   },
 });
 
