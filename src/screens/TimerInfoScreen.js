@@ -44,10 +44,10 @@ const TimerInfoScreen = props => {
   const timerNotes = getTimerNotes(customer, timer);
   const findTimerNotes = getNotes(customer, timer, 'FindTimerNotes');
   if (timer.numPrograms === '') {
-    timer.numPrograms = 'No Text Provided';
+    timer.numPrograms = 'Not Provided';
   }
   if (timer.numZones === '') {
-    timer.numZones = 'No Text Provided';
+    timer.numZones = 'Not Provided';
   }
   return (
     <View>
@@ -90,7 +90,7 @@ const TimerInfoScreen = props => {
           <Text style={styles.infoText}>{timer.numZones}</Text>
         </View>
       </View>
-      <View style={styles.utilityButtonContainer}>
+      <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={() =>
             props.navigation.navigate('UtilityNotesNavigator', {

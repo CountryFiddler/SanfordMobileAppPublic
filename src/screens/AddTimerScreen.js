@@ -91,7 +91,7 @@ const AddTimerScreen = props => {
           />
         </View>
         <View style={styles.addTextFieldDivider} />
-        <View style={styles.buttonContainer}>
+        <View style={styles.submitDataButtonContainer}>
           <TouchableOpacity
             onPress={() =>
               // Pass navigation and customer as props to the Edit Customer Screen

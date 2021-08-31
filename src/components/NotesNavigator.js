@@ -38,17 +38,19 @@ import {
   MenuTrigger,
 } from 'react-native-popup-menu';
 import EditNotePopup from './EditNotePopup';
+import { styles } from "../../api/stylesApi";
 
 const NotesNavigator = props => {
   // Start of displaying the Drop Down Search
   //console.log(props.timerList.length);
   //console.log(this.state.timerList);
+  var numNotesCounter = 0;
   return (
     <ScrollView>
       <TouchableOpacity
         //onPress={this.props.timerList.onPress}
-        style={styles.container}>
-        <View style={styles.subContainer}>
+        style={styles.navigatorContainer}>
+        <View style={styles.navigatorSubContainer}>
           {props.notes.length ? (
             // Map customers into the dropdown search
             // searchText is the text shown for each customer button.
@@ -56,11 +58,10 @@ const NotesNavigator = props => {
             // If a customer is selected, then the user is directed
             // to the customer page for that customer.
             props.notes.map(note => {
+              numNotesCounter++;
               return (
-                <View style={styles.itemView} key={note.noteID}>
-                  <Button
-                    style={styles.itemText}
-                    title={note.title}
+                <View  key={note.id}>
+                  <TouchableOpacity
                     onPress={() =>
                       props.navigation.navigate('UtilityNote', {
                         customer: props.customer,
@@ -68,7 +69,34 @@ const NotesNavigator = props => {
                         navigation: props.navigation,
                       })
                     }
-                  />
+                    style={styles.navigatorItemView}>
+                    <Text style={styles.navigatorItemText}>
+                      {' #' + numNotesCounter + '. '}
+                    </Text>
+                    <Text style={styles.navigatorItemText}>{note.title}</Text>
+                  </TouchableOpacity>
+                </View>
+              );
+            })
+          ) : (
+            // If there are no matches for customers and what the user entered
+            // then we display the message "No Customers Found"
+            <View style={styles.navigatorItemView}>
+              <Text style={styles.navigatorItemText}>
+                No Notes Found
+              </Text>
+            </View>
+          )}
+        </View>
+      </TouchableOpacity>
+    </ScrollView>
+  );
+  // End of displaying the Drop Down Search
+};
+// End of the stylesheet
+
+export default NotesNavigator;
+/*
                   <Button
                     title={'Edit'}
                     onPress={() =>
@@ -83,96 +111,4 @@ const NotesNavigator = props => {
                       })
                     }
                   />
-                </View>
-              );
-            })
-          ) : (
-            // If there are no matches for customers and what the user entered
-            // then we display the message "No Customers Found"
-            <View style={styles.itemView}>
-              <Text style={styles.itemText}>No Notes Found</Text>
-            </View>
-          )}
-        </View>
-      </TouchableOpacity>
-    </ScrollView>
-  );
-  // End of displaying the Drop Down Search
-};
-
-// Start of the stylesheet
-const styles = StyleSheet.create({
-  container: {
-    //position: 'absolute',
-    //marginTop: '15%',
-    //marginHorizontal: 20,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    alignItems: 'flex-start',
-  },
-
-  editButtonContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  txtSize: {
-    fontSize: 20,
-  },
-  subContainer: {
-    //backgroundColor: '#84DCC6',
-    paddingTop: 5,
-    marginHorizontal: 30,
-    width: '95%',
-    //marginVertical: 60,
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
-    //flexWrap: 'wrap',
-
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    alignContent: 'center',
-  },
-  itemView: {
-    backgroundColor: 'white',
-    height: 70,
-    width: '90%',
-    //marginBottom: 10,
-    justifyContent: 'center',
-    borderRadius: 4,
-    //flex: 1,
-  },
-  itemText: {
-    color: 'black',
-    paddingHorizontal: 10,
-  },
-  noResultView: {
-    alignSelf: 'center',
-    // margin: 20,
-    height: 100,
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignContent: 'center',
-  },
-  noResultText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  headerText: {
-    fontSize: 20,
-    margin: 10,
-    fontWeight: 'bold',
-  },
-  menuContent: {
-    color: '#000',
-    fontWeight: 'bold',
-    padding: 2,
-    fontSize: 20,
-  },
-});
-// End of the stylesheet
-
-export default NotesNavigator;
+ */

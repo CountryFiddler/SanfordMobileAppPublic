@@ -35,7 +35,13 @@ const ShutOffValveInfoScreen = props => {
     shutoffValve.size = 'No Text Provided';
   }
   return (
-    <ScrollView>
+    <View>
+      <View style={styles.iconHeader}>
+        <Image
+          style={{width: 40, height: 35}}
+          source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/Shut-OffValve.png')}
+        />
+      </View>
       <View style={styles.screenHeader}>
         <Text style={styles.screenTitle}>Shut-Off Information </Text>
         <TouchableOpacity
@@ -94,15 +100,6 @@ const ShutOffValveInfoScreen = props => {
           <FontAwesomeIcon icon={faStickyNote} size={33} />
           <Text style={styles.buttonText}>Shut-Off Notes</Text>
         </TouchableOpacity>
-      </View>
-      <View style={styles.divider} />
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={() => props.navigation.navigate('Home')}
-          style={styles.generalButtonStyle}>
-          <FontAwesomeIcon icon={faHome} size={33} />
-          <Text style={styles.buttonText}>Home</Text>
-        </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
             props.navigation.navigate('Customer', {
@@ -114,10 +111,14 @@ const ShutOffValveInfoScreen = props => {
           <FontAwesomeIcon icon={faUser} size={33} />
           <Text style={styles.buttonText}>Customer</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Home')}
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faHome} size={33} />
+          <Text style={styles.buttonText}>Home</Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.divider} />
-      <View style={shutOffValveInfoStyles.spaceHolder} />
-    </ScrollView>
+    </View>
   );
 };
 // End of Home Screen Display

@@ -62,7 +62,7 @@ const SolenoidValvesInfoScreen = props => {
       style={solenoidValveInfoStyles.solenoidValveInfoScrollContainer}>
       <View style={styles.iconHeader}>
         <Image
-          style={{width: 26, height: 30}}
+          style={{width: 36, height: 40}}
           source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/SolenoidValve.png')}
         />
       </View>
@@ -114,7 +114,7 @@ const SolenoidValvesInfoScreen = props => {
           <Text style={styles.infoText}>{solenoidValves.yearInstalled}</Text>
         </View>
       </View>
-      <View style={solenoidValveInfoStyles.solenoidValveInfoButtonContainer}>
+      <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={() =>
             props.navigation.navigate('UtilityNotesNavigator', {
@@ -144,15 +144,7 @@ const SolenoidValvesInfoScreen = props => {
           <FontAwesomeIcon icon={faStickyNote} size={33} />
           <Text style={styles.buttonText}>Valve Notes</Text>
         </TouchableOpacity>
-      </View>
-      <View style={styles.divider} />
-      <View style={solenoidValveInfoStyles.solenoidValveInfoButtonContainer}>
-        <TouchableOpacity
-          onPress={() => props.navigation.navigate('Home')}
-          style={styles.generalButtonStyle}>
-          <FontAwesomeIcon icon={faHome} size={33} />
-          <Text style={styles.buttonText}>Home</Text>
-        </TouchableOpacity>
+
         <TouchableOpacity
           onPress={() =>
             props.navigation.navigate('Customer', {
@@ -164,9 +156,13 @@ const SolenoidValvesInfoScreen = props => {
           <FontAwesomeIcon icon={faUser} size={33} />
           <Text style={styles.buttonText}>Customer</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Home')}
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faHome} size={33} />
+          <Text style={styles.buttonText}>Home</Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.divider} />
-      <View style={solenoidValveInfoStyles.spaceHolder} />
     </ScrollView>
   );
 };
@@ -175,6 +171,8 @@ const SolenoidValvesInfoScreen = props => {
 // Start of StylingSheet
 const solenoidValveInfoStyles = StyleSheet.create({
   solenoidValveInfoContainer: {
+    paddingTop: 120,
+    paddingBottom: 120,
     borderBottomWidth: 3,
     borderBottomColor: '#26660b',
     borderTopWidth: 3,
@@ -191,7 +189,7 @@ const solenoidValveInfoStyles = StyleSheet.create({
     flexDirection: 'row',
     marginLeft: '5%',
     marginRight: '5%',
-    width: '90%',
+    //width: '90%',
     height: '17%',
   },
   spaceHolder: {

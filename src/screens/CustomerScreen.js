@@ -117,12 +117,15 @@ const CustomerScreen = props => {
             // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('UtilitySelectionScreen', {
               customer: customer,
+              headerIcon:
+                'timer',
               utilityType: 'Timers',
               utilities: timers,
               addUtilityScreen: 'AddTimer',
               addUtilityButtonTitle: 'Add Timer',
               utilityInfoScreenTitle: 'TimerInfo',
               utilityTypeText: 'Timers',
+              addUtilityText: 'Add Timer',
             })
           }
           style={styles.generalButtonStyle}>
@@ -137,12 +140,15 @@ const CustomerScreen = props => {
             // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('UtilitySelectionScreen', {
               customer: customer,
+              headerIcon:
+                'shutOff',
               utilityType: 'ShutOffValves',
               utilities: shutoffValves,
               addUtilityScreen: 'AddShutOff',
               addUtilityButtonTitle: 'Add Shut-Off Valve',
               utilityInfoScreenTitle: 'ShutOffInfo',
               utilityTypeText: 'Shut-Off Valves',
+              addUtilityText: 'Add Valve',
             })
           }
           style={styles.generalButtonStyle}>
@@ -159,12 +165,15 @@ const CustomerScreen = props => {
             // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('UtilitySelectionScreen', {
               customer: customer,
+              headerIcon:
+                'solenoidValve',
               utilityType: 'SolenoidValves',
               utilities: solenoidValves,
               addUtilityScreen: 'AddSolenoidValves',
               addUtilityButtonTitle: 'Add Valve',
               utilityInfoScreenTitle: 'SolenoidValvesInfo',
               utilityTypeText: 'Solenoid Valves',
+              addUtilityText: 'Add Valves',
             })
           }
           style={styles.generalButtonStyle}>

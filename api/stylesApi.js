@@ -11,6 +11,12 @@ export const styles = StyleSheet.create({
     marginRight: '5%',
     marginBottom: '5%',
   },
+  navigatorScreenHeader: {
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    width: '100%',
+    marginTop: '5%',
+  },
   customerInfoContainer: {
     borderBottomWidth: 3,
     borderBottomColor: '#26660b',
@@ -48,6 +54,12 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     marginLeft: '12%',
   },
+  navigatorScreenTitle: {
+    marginTop: '2%',
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
   infoText: {
     fontSize: 17,
   },
@@ -76,6 +88,17 @@ export const styles = StyleSheet.create({
     marginRight: '1.5%',
   },
 
+  submitDataButtonContainer: {
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingTop: 25,
+    marginBottom: '7%',
+    paddingBottom: 10,
+    marginLeft: '1.5%',
+    marginRight: '1.5%',
+  },
+
   utilityButtonContainer: {
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -84,9 +107,6 @@ export const styles = StyleSheet.create({
     marginBottom: '5%',
     height: '17%',
 
-    // marginLeft: '3%',
-    //marginRight: '5%',
-    //width: '90%',
     borderBottomWidth: 3,
     borderBottomColor: '#26660b',
     marginLeft: '1.5%',
@@ -124,6 +144,13 @@ export const styles = StyleSheet.create({
     width: '100%',
     marginTop: '5%',
   },
+  addSolenoidValveDataScreenHeader: {
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    //flexDirection: 'row',
+    width: '100%',
+    //marginTop: '5%',
+  },
   iconHeader: {
     marginTop: '5%',
     alignItems: 'center',
@@ -153,9 +180,6 @@ export const styles = StyleSheet.create({
 
     marginBottom: '5%',
 
-
-
-    //height: 15,
   },
   utilityFooter: {
     justifyContent: 'space-around',
@@ -165,5 +189,56 @@ export const styles = StyleSheet.create({
     marginBottom: '2%',
     marginLeft: '3%',
     width: '90%',
+  },
+
+  utilityNavigatorContainer: {
+    height: '65%',
+    //justifyContent: 'space-around',
+    marginTop: '5%',
+    marginLeft: '5%',
+    marginRight: '5%',
+    borderTopWidth: 3,
+    borderTopColor: '#26660b',
+    borderBottomWidth: 3,
+    borderBottomColor: '#26660b',
+    borderRadius: 7,
+  },
+
+
+
+  navigatorItemView: {
+    //backgroundColor: '#26660b',
+    backgroundColor: 'white',
+    borderBottomWidth: 3,
+    borderBottomColor: '#26660b',
+    height: 70,
+    //width: '90%',
+    flexDirection: 'row',
+    //marginBottom: 10,
+    //justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    //marginLeft: '2%',
+    //flex: 1,
+  },
+  navigatorItemText: {
+    color: 'black',
+    fontSize: 17,
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+
+  },
+  navigatorNoResultView: {
+    alignSelf: 'center',
+    height: 100,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
+  },
+  navigatorNoResultText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });

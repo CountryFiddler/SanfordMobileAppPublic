@@ -13,9 +13,15 @@
  */
 // Import Statements
 import React, {useState} from 'react';
-import {Text, StyleSheet, View, Button} from 'react-native';
+import {Text, StyleSheet, View, Button, TouchableOpacity} from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import NotesNavigator from '../components/NotesNavigator';
+import Icons from '../components/Icons';
+import UtilitySelection from '../components/UtilitySelection';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faHome, faPlus, faUser} from '@fortawesome/free-solid-svg-icons';
+import {styles} from '../../api/stylesApi';
+import {faStickyNote} from '@fortawesome/free-regular-svg-icons';
 
 // Start of Home Screen Display
 const UtilityNotesNavigatorScreen = props => {
@@ -26,54 +32,57 @@ const UtilityNotesNavigatorScreen = props => {
   const screenTitle = props.navigation.getParam('screenTitle');
   console.log(utilityNotes);
   return (
-    <View style={styles.homePageContainer}>
-      <Text>{screenTitle}</Text>
-      <NotesNavigator
-        notes={utilityNotes}
-        customer={customer}
-        navigation={props.navigation}
-        utilityType={utility.utilityType}
-        utility={utility}
-      />
-      <Button
-        // If the Timer button is pressed, then the user
-        // is redirected to the Timer Info Screen
-        onPress={() =>
-          // Pass navigation and customer as props to the Edit Customer Screen
-          props.navigation.navigate('AddNote', {
-            customer: customer,
-            utilityType: utility.utilityType,
-            utility: utility,
-            noteType: noteType,
-            utilityNotes: utilityNotes,
-            //timers: timers,
-          })
-        }
-        title="Add New Note"
-      />
+    <View>
+      <View style={styles.navigatorScreenHeader}>
+        <FontAwesomeIcon icon={faStickyNote} size={33} />
+        <Text style={styles.navigatorScreenTitle}>{screenTitle}</Text>
+      </View>
+      <View style={styles.utilityNavigatorContainer}>
+        <NotesNavigator
+          notes={utilityNotes}
+          customer={customer}
+          navigation={props.navigation}
+          utilityType={utility.utilityType}
+          utility={utility}
+        />
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate('Customer', {
+              customer: customer,
+              navigation: props.navigation,
+            })
+          }
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faUser} size={33} />
+          <Text style={styles.buttonText}>Customer</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Home')}
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faHome} size={33} />
+          <Text style={styles.buttonText}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            // Pass navigation and customer as props to the Edit Customer Screen
+            props.navigation.navigate('AddNote', {
+              customer: customer,
+              utilityType: utility.utilityType,
+              utility: utility,
+              noteType: noteType,
+              utilityNotes: utilityNotes,
+              //timers: timers,
+            })
+          }
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faPlus} size={33} />
+          <Text>Add Note</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 // End of Home Screen Display
-
-// Start of StylingSheet
-const styles = StyleSheet.create({
-  headerStyle: {
-    borderWidth: 1,
-    borderColor: 'black',
-  },
-  homePageContainer: {
-    flex: 1,
-  },
-  textStyle: {
-    fontSize: 30,
-    textAlign: 'center',
-    //alignSelf: 'center',
-  },
-  addCustomerButton: {
-    //position: 'absolute',
-    marginTop: 50,
-  },
-});
-
 export default UtilityNotesNavigatorScreen;

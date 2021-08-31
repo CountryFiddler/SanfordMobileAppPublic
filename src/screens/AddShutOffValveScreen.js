@@ -20,12 +20,20 @@ import {
   TextInput,
   SafeAreaView,
   Alert,
+  Image,
+  Text,
+  TouchableOpacity,
 } from 'react-native';
 import {submitShutOffInfo} from '../../api/ShutOffValveApi';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {submitTimerInfo} from '../../api/TimerApi';
+import { styles } from "../../api/stylesApi";
 
 // Start of Add Timer Screen Display
 const AddShutOffValveScreen = props => {
   const customer = props.navigation.getParam('customer');
+  const shutOffs = props.navigation.getParam('utilities');
   const [shutoffType, setShutOffType] = useState('');
   const [size, setSize] = useState('');
   function checkEmptySubmissions() {
@@ -40,32 +48,68 @@ const AddShutOffValveScreen = props => {
   }
   return (
     <SafeAreaView>
-      <View>
-        <TextInput
-          // Text Input Box for the customer's first name
-          placeholder={'Shut-Off Type'}
-          value={shutoffType}
-          // Displays the value that the user is entering into the text input
-          // For example, if the typed 'Bob', then 'Bob' is displayed in the
-          // Text Input Box
-          onChangeText={text => setShutOffType(text)}
+      <View style={styles.addInfoScreenHeader}>
+        <Image
+          style={{width: 40, height: 35}}
+          source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/Shut-OffValve.png')}
         />
-        <TextInput
-          // Text Input Box for the customer's last name
-          placeholder={'Shut-Off Valve Size'}
-          value={size}
-          onChangeText={text => setSize(text)}
-        />
-        <Button
-          // Submit button, when clicked submits the info entered by
-          // the user to the database
-          title="Submit"
-          onPress={() => {
-            if (checkEmptySubmissions()) {
-              submitShutOffInfo(customer, shutoffType, size, props.navigation);
+        <Text style={styles.addInfoScreenTitle}>Add Shut-Off</Text>
+      </View>
+      <View style={styles.addInfoContainer}>
+        <View style={styles.infoChildContainer}>
+          <Text style={styles.labelText}> Type: </Text>
+          <TextInput
+            style={styles.infoText}
+            placeholder={'Shut-Off Type'}
+            value={shutoffType}
+            onChangeText={text => setShutOffType(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <Text style={styles.labelText}> Size: </Text>
+          <TextInput
+            style={styles.infoText}
+            placeholder={'Shut-Off Valve Size'}
+            value={size}
+            onChangeText={text => setSize(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.submitDataButtonContainer}>
+          <TouchableOpacity
+            onPress={() =>
+              // Pass navigation and customer as props to the Edit Customer Screen
+              props.navigation.navigate('UtilitySelectionScreen', {
+                customer: customer,
+                utilityType: 'Timers',
+                utilities: shutOffs,
+                addUtilityScreen: 'AddTimer',
+                addUtilityButtonTitle: 'Add Timer',
+                utilityInfoScreenTitle: 'TimerInfo',
+                utilityTypeText: 'Timers',
+              })
             }
-          }}
-        />
+            style={styles.generalButtonStyle}>
+            <FontAwesomeIcon icon={faTimes} size={40} color={'#cc0000'} />
+            <Text style={styles.cancelButtonText}>Cancel</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              if (checkEmptySubmissions()) {
+                submitShutOffInfo(
+                  customer,
+                  shutoffType,
+                  size,
+                  props.navigation,
+                );
+              }
+            }}
+            style={styles.generalButtonStyle}>
+            <FontAwesomeIcon icon={faCheck} size={40} color={'#26660b'} />
+            <Text style={styles.submitButtonText}>Submit</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -73,23 +117,5 @@ const AddShutOffValveScreen = props => {
 // End of Home Screen Display
 
 // Start of StylingSheet
-const styles = StyleSheet.create({
-  headerStyle: {
-    borderWidth: 1,
-    borderColor: 'black',
-  },
-  homePageContainer: {
-    flex: 1,
-  },
-  textStyle: {
-    fontSize: 30,
-    textAlign: 'center',
-    //alignSelf: 'center',
-  },
-  addCustomerButton: {
-    //position: 'absolute',
-    marginTop: 50,
-  },
-});
 
 export default AddShutOffValveScreen;

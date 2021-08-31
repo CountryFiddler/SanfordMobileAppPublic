@@ -152,8 +152,6 @@ export function getSolenoidValvesNotes(customer, solenoidValves) {
           noteID: doc.id,
           numImages: doc.data().numImages,
           imageRefs: doc.data().imageRefs,
-          //numVideos: doc.data().numVideos,
-          //videoRefs: doc.data().videoRefs,
           noteType: 'SolenoidValveNotes',
         });
       });

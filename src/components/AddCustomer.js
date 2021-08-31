@@ -229,7 +229,7 @@ const AddCustomer = props => {
           />
         </View>
         <View style={styles.addTextFieldDivider} />
-        <View style={styles.buttonContainer}>
+        <View style={styles.submitDataButtonContainer}>
           <TouchableOpacity
             onPress={() => props.navigation.navigate('Home')}
             style={styles.generalButtonStyle}>

@@ -37,9 +37,10 @@ import {
   faCheck,
   faIdBadge,
   faPhoneAlt,
-  faTimes, faUser,
-} from "@fortawesome/free-solid-svg-icons";
-import { checkValidPhoneNumber } from "../../api/CustomerApi";
+  faTimes,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
+import {checkValidPhoneNumber} from '../../api/CustomerApi';
 
 const EditCustomer = props => {
   const customer = props.navigation.getParam('customer');
@@ -129,7 +130,12 @@ const EditCustomer = props => {
       customer.address = currentCustomerAddress;
       customer.phoneNumber = currentCustomerPhoneNumber;
       customer.id = customer.id;
-      customer.searchText = currentCustomerFirstName + ' ' + currentCustomerLastName + '\n' + currentCustomerAddress;
+      customer.searchText =
+        currentCustomerFirstName +
+        ' ' +
+        currentCustomerLastName +
+        '\n' +
+        currentCustomerAddress;
       props.navigation.navigate('Customer', {
         customer: customer,
         navigation: props.navigation,
@@ -144,7 +150,7 @@ const EditCustomer = props => {
   return (
     <SafeAreaView>
       <View style={styles.addInfoScreenHeader}>
-        <FontAwesomeIcon icon={faUser} size={33}/>
+        <FontAwesomeIcon icon={faUser} size={33} />
         <Text style={styles.addInfoScreenTitle}>Edit Customer</Text>
       </View>
       <View style={styles.addInfoContainer}>
@@ -200,9 +206,14 @@ const EditCustomer = props => {
           />
         </View>
         <View style={styles.addTextFieldDivider} />
-        <View style={styles.buttonContainer}>
+        <View style={styles.submitDataButtonContainer}>
           <TouchableOpacity
-            onPress={() => props.navigation.navigate('Home')}
+            onPress={() =>
+              props.navigation.navigate('Customer', {
+                customer: customer,
+                navigation: props.navigation,
+              })
+            }
             style={styles.generalButtonStyle}>
             <FontAwesomeIcon icon={faTimes} size={40} color={'#cc0000'} />
             <Text style={styles.cancelButtonText}>Cancel</Text>

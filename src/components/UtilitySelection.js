@@ -26,8 +26,11 @@ import {
   Alert,
 } from 'react-native';
 import {getCustomers, getTimers} from '../../api/FirestoreApi';
+import {styles} from '../../api/stylesApi';
+import {counter} from '@fortawesome/fontawesome-svg-core';
 
 const UtilitySelection = props => {
+  var numUtilitiesCounter = 0;
   // Start of displaying the Drop Down Search
   //console.log(props.timerList.length);
   //console.log(this.state.timerList);
@@ -35,8 +38,8 @@ const UtilitySelection = props => {
     <ScrollView>
       <TouchableOpacity
         //onPress={this.props.timerList.onPress}
-        style={styles.container}>
-        <View style={styles.subContainer}>
+        style={styles.navigatorContainer}>
+        <View style={styles.navigatorSubContainer}>
           {props.utilityList.length ? (
             // Map customers into the dropdown search
             // searchText is the text shown for each customer button.
@@ -44,17 +47,16 @@ const UtilitySelection = props => {
             // If a customer is selected, then the user is directed
             // to the customer page for that customer.
             props.utilityList.map(utility => {
-              var utilityTitle
+              numUtilitiesCounter++;
+              var utilityTitle;
               if (props.utilityType === 'SolenoidValves') {
                 utilityTitle = utility.location;
               } else {
                 utilityTitle = utility.type;
               }
               return (
-                <View style={styles.itemView} key={utility.id}>
-                  <Button
-                    style={styles.itemText}
-                    title={utilityTitle}
+                <View  key={utility.id}>
+                  <TouchableOpacity
                     onPress={() =>
                       props.navigation.navigate(props.utilityInfoScreen, {
                         customer: props.customer,
@@ -62,15 +64,20 @@ const UtilitySelection = props => {
                         navigation: props.navigation,
                       })
                     }
-                  />
+                    style={styles.navigatorItemView}>
+                    <Text style={styles.navigatorItemText}>
+                      {' #' + numUtilitiesCounter + '. '}
+                    </Text>
+                    <Text style={styles.navigatorItemText}>{utilityTitle}</Text>
+                  </TouchableOpacity>
                 </View>
               );
             })
           ) : (
             // If there are no matches for customers and what the user entered
             // then we display the message "No Customers Found"
-            <View style={styles.itemView}>
-              <Text style={styles.itemText}>
+            <View style={styles.navigatorItemView}>
+              <Text style={styles.navigatorItemText}>
                 No {props.utilityTypeText} Found
               </Text>
             </View>
@@ -81,61 +88,6 @@ const UtilitySelection = props => {
   );
   // End of displaying the Drop Down Search
 };
-
-// Start of the stylesheet
-const styles = StyleSheet.create({
-  container: {
-    //position: 'absolute',
-    //marginTop: '15%',
-    //marginHorizontal: 20,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    alignItems: 'flex-start',
-  },
-
-  subContainer: {
-    //backgroundColor: '#84DCC6',
-    paddingTop: 5,
-    marginHorizontal: 30,
-    width: '95%',
-    //marginVertical: 60,
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
-    //flexWrap: 'wrap',
-
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    alignContent: 'center',
-  },
-  itemView: {
-    backgroundColor: 'white',
-    height: 70,
-    width: '90%',
-    //marginBottom: 10,
-    justifyContent: 'center',
-    borderRadius: 4,
-    //flex: 1,
-  },
-  itemText: {
-    color: 'black',
-    paddingHorizontal: 10,
-  },
-  noResultView: {
-    alignSelf: 'center',
-    // margin: 20,
-    height: 100,
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignContent: 'center',
-  },
-  noResultText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-});
 // End of the stylesheet
 
 export default UtilitySelection;
