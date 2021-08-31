@@ -31,7 +31,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
   faUser,
   faAddressBook,
-  faPhone,
+  faPhoneAlt,
   faPencilAlt,
   faClock,
   faUserPlus,
@@ -65,15 +65,19 @@ const CustomerScreen = props => {
     parsedPhoneNumStr = parsedPhoneNumStr + customer.phoneNumber[i];
   }
   parsedPhoneNumInt = parseInt(customer.phoneNumber);
+  if (customer.phoneNumber === '') {
+    parsedPhoneNumStr = 'No Phone Number Provided';
+  }
   console.log(parsedPhoneNumStr);
   console.log(parsedPhoneNumInt);
   // Start of the display for Customer Screen
   return (
-    <ScrollView>
+    <ScrollView style={{paddingBottom: 100}} persistentScrollbar={false}>
+      <View style={styles.iconHeader}>
+        <FontAwesomeIcon icon={faUser} size={25} />
+      </View>
       <View style={styles.screenHeader}>
-        <Text style={styles.screenTitle}>
-          Customer Information
-        </Text>
+        <Text style={styles.screenTitle}>Customer Information</Text>
         <TouchableOpacity
           onPress={() =>
             // Pass navigation and customer as props to the Edit Customer Screen
@@ -84,31 +88,27 @@ const CustomerScreen = props => {
           <FontAwesomeIcon icon={faPencilAlt} size={25} />
         </TouchableOpacity>
       </View>
-      <View style={styles.infoContainer}>
+      <View style={styles.customerInfoContainer}>
         <View style={styles.infoChildContainer}>
-          <FontAwesomeIcon icon={faUser} size={17} />
+          <FontAwesomeIcon icon={faUser} size={17} style={styles.icons} />
           <Text style={styles.labelText}> Name: </Text>
           <Text style={styles.infoText}>
             {customer.firstName} {customer.lastName}
           </Text>
         </View>
         <View style={styles.infoChildContainer}>
-          <FontAwesomeIcon icon={faAddressBook} size={17} />
+          <FontAwesomeIcon
+            icon={faAddressBook}
+            size={17}
+            style={styles.icons}
+          />
           <Text style={styles.labelText}> Address: </Text>
-          <Text style={styles.infoText}>
-            {customer.address}
-          </Text>
+          <Text style={styles.infoText}>{customer.address}</Text>
         </View>
         <View style={styles.infoChildContainer}>
-          <FontAwesomeIcon
-            icon={faPhone}
-            style={{transform: [{rotateY: '180deg'}]}}
-            size={17}
-          />
+          <FontAwesomeIcon icon={faPhoneAlt} style={styles.icons} size={17} />
           <Text style={styles.labelText}> Phone: </Text>
-          <Text style={styles.infoText}>
-            {parsedPhoneNumStr}
-          </Text>
+          <Text style={styles.infoText}>{parsedPhoneNumStr}</Text>
         </View>
       </View>
       <View style={styles.buttonContainer}>
@@ -127,8 +127,8 @@ const CustomerScreen = props => {
           }
           style={styles.generalButtonStyle}>
           <Image
-            style={{width: 50, height: 50}}
-            source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/iu-1.png')}
+            style={{width: 30, height: 30}}
+            source={require('../icons/iu-1.png')}
           />
           <Text style={styles.buttonText}>Timers</Text>
         </TouchableOpacity>
@@ -147,15 +147,13 @@ const CustomerScreen = props => {
           }
           style={styles.generalButtonStyle}>
           <Image
-            style={{width: 70, height: 60}}
-            source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/Shut-OffValve.png')}
+            style={{width: 50, height: 42}}
+            source={require('../icons/Shut-OffValve.png')}
+            //source={{uri: '/icons/Shut-OffValve.png'}}
           />
           <Text style={styles.buttonText}>Shut-Off</Text>
           <Text>Valves</Text>
         </TouchableOpacity>
-      </View>
-      <View style={styles.divider} />
-      <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={() =>
             // Pass navigation and customer as props to the Edit Customer Screen
@@ -171,8 +169,8 @@ const CustomerScreen = props => {
           }
           style={styles.generalButtonStyle}>
           <Image
-            style={{width: 45, height: 50}}
-            source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/SolenoidValve.png')}
+            style={{width: 27, height: 31}}
+            source={require('../icons/SolenoidValve.png')}
           />
           <Text style={styles.buttonText}>Solenoid</Text>
           <Text>Valves</Text>
@@ -189,31 +187,34 @@ const CustomerScreen = props => {
             })
           }
           style={styles.generalButtonStyle}>
-          <FontAwesomeIcon icon={faStickyNote} size={50} />
+          <FontAwesomeIcon icon={faStickyNote} size={30} />
           <Text style={styles.buttonText}>General</Text>
           <Text>Notes</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.divider} />
-      <View style={styles.buttonContainer}>
+
+      <View style={styles.customerFooter}>
         <TouchableOpacity
           onPress={() => props.navigation.navigate('Home')}
           style={styles.generalButtonStyle}>
-          <FontAwesomeIcon icon={faHome} size={33} />
-          <Text style={styles.buttonText}>Home</Text>
+          <FontAwesomeIcon icon={faHome} size={30} />
+          <Text>Home</Text>
         </TouchableOpacity>
       </View>
-      <View style={customerScreenStyles.spaceHolder} />
     </ScrollView>
   );
   // End of the display for Customer Screen
 };
 const customerScreenStyles = StyleSheet.create({
   spaceHolder: {
-    marginBottom: '30%',
+    //height: 500,
+    height: 70,
   },
   homeButton: {
     marginBottom: '20%',
+  },
+  footer: {
+    //height: 25,
   },
 });
 export default CustomerScreen;

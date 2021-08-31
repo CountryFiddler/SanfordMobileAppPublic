@@ -63,6 +63,7 @@ export async function getCustomers(customersRetrieved) {
 }
 
 export function updateCustomer(customer) {
+  console.log(customer.id);
   firebase
     .firestore()
     .collection('Customers')

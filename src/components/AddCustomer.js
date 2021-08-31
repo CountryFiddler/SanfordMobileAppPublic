@@ -38,11 +38,13 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
   faAddressBook,
   faPencilAlt,
-  faPhone,
+  faPhoneAlt,
   faUser,
   faCheck,
   faTimes,
-} from '@fortawesome/free-solid-svg-icons';
+  faIdBadge, faUserPlus,
+} from "@fortawesome/free-solid-svg-icons";
+import {checkValidPhoneNumber} from '../../api/CustomerApi';
 
 const AddCustomer = props => {
   // Get the navigation prop
@@ -95,7 +97,10 @@ const AddCustomer = props => {
     //checkValidPhoneNumber();
     console.log(customerPhoneNumber);
     //parsePhoneNumber();
-    if (!checkForNullTextEntries() && checkValidPhoneNumber()) {
+    if (
+      !checkForNullTextEntries() &&
+      checkValidPhoneNumber(customerPhoneNumber)
+    ) {
       // Call addCustomer and set the data fields of firstName, lastName,
       // and address.
       console.log(customerFirstName);
@@ -158,17 +163,6 @@ const AddCustomer = props => {
     return textError;
   }
 
-  function checkValidPhoneNumber() {
-    console.log(customerPhoneNumber.length);
-    if (customerPhoneNumber !== '' && customerPhoneNumber.length !== 11) {
-      Alert.alert(
-        'Invalid Phone Number',
-        'Please make sure it is 11 digits long and includes a leading 1 (Ex. 1-800-333-7777)',
-      );
-      return false;
-    }
-    return true;
-  }
   function parsePhoneNumber(text) {
     setCustomerPhoneNumber(text.replace(/[^0-9]/g, ''));
   }
@@ -176,13 +170,15 @@ const AddCustomer = props => {
   return (
     // Start of the display for adding or editing a customer
     <SafeAreaView>
-      <View style={addCustomerStyles.addCustomerScreenHeader}>
-        <Text style={addCustomerStyles.addCustomerScreenTitle}>
+      <View style={styles.addInfoScreenHeader}>
+        <FontAwesomeIcon icon={faUserPlus} size={33}/>
+        <Text style={styles.addInfoScreenTitle}>
           Add Customer
         </Text>
       </View>
-      <View style={addCustomerStyles.addCustomerInfoContainer}>
+      <View style={styles.addInfoContainer}>
         <View style={styles.infoChildContainer}>
+          <FontAwesomeIcon icon={faIdBadge} size={17} style={styles.icons} />
           <TextInput
             style={styles.infoText}
             // Text Input Box for the customer's first name
@@ -196,6 +192,7 @@ const AddCustomer = props => {
         </View>
         <View style={styles.addTextFieldDivider} />
         <View style={styles.infoChildContainer}>
+          <FontAwesomeIcon icon={faIdBadge} size={17} style={styles.icons} />
           <TextInput
             style={styles.infoText}
             // Text Input Box for the customer's last name
@@ -206,6 +203,11 @@ const AddCustomer = props => {
         </View>
         <View style={styles.addTextFieldDivider} />
         <View style={styles.infoChildContainer}>
+          <FontAwesomeIcon
+            icon={faAddressBook}
+            size={17}
+            style={styles.icons}
+          />
           <TextInput
             style={styles.infoText}
             // Text Input Box for the customer's address
@@ -216,6 +218,7 @@ const AddCustomer = props => {
         </View>
         <View style={styles.addTextFieldDivider} />
         <View style={styles.infoChildContainer}>
+          <FontAwesomeIcon icon={faPhoneAlt} size={17} style={styles.icons} />
           <TextInput
             style={styles.infoText}
             placeholder={customerPhoneNumPlaceholder}
@@ -231,13 +234,13 @@ const AddCustomer = props => {
             onPress={() => props.navigation.navigate('Home')}
             style={styles.generalButtonStyle}>
             <FontAwesomeIcon icon={faTimes} size={40} color={'#cc0000'} />
-            <Text style={addCustomerStyles.cancelButtonText}>Cancel</Text>
+            <Text style={styles.cancelButtonText}>Cancel</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => submitCustomerInfo()}
             style={styles.generalButtonStyle}>
             <FontAwesomeIcon icon={faCheck} size={40} color={'#26660b'} />
-            <Text style={addCustomerStyles.submitButtonText}>Submit</Text>
+            <Text style={styles.submitButtonText}>Submit</Text>
           </TouchableOpacity>
         </View>
       </View>

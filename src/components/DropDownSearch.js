@@ -51,7 +51,13 @@ class DropDownSearch extends Component {
                         navigation: this.props.navigation,
                       })
                     }>
-                    <Text  style={styles.itemText}>{customer.searchText}</Text>
+                    {customer.firstName !== '' ? (
+                      <Text style={styles.itemText}>{customer.firstName + ' ' + customer.lastName + '\n' + customer.address}</Text>
+                    ) : (
+                      <Text style={styles.itemText}>
+                        {customer.lastName + '\n' + customer.address}
+                      </Text>
+                    )}
                   </TouchableOpacity>
                 </View>
               );
@@ -105,10 +111,14 @@ const styles = StyleSheet.create({
   itemView: {
     borderBottomWidth: 3,
     borderBottomColor: '#26660b',
+    //borderTopWidth: 3,
+    //borderTopColor: '#26660b',
+    //borderWidth: 3,
+    //borderColor: '#26660b',
     backgroundColor: 'white',
     height: 70,
     width: '90%',
-    //marginBottom: 10,
+    marginTop: '3%',
     //justifyContent: 'flex-start',
     borderRadius: 4,
     alignItems: 'flex-start',

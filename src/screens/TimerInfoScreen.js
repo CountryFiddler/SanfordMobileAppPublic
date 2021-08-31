@@ -50,7 +50,13 @@ const TimerInfoScreen = props => {
     timer.numZones = 'No Text Provided';
   }
   return (
-    <ScrollView>
+    <View>
+      <View style={styles.iconHeader}>
+        <Image
+          style={{width: 30, height: 30}}
+          source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/iu-1.png')}
+        />
+      </View>
       <View style={styles.screenHeader}>
         <Text style={styles.screenTitle}>Timer Information</Text>
         <TouchableOpacity
@@ -64,7 +70,7 @@ const TimerInfoScreen = props => {
           <FontAwesomeIcon icon={faPencilAlt} size={25} />
         </TouchableOpacity>
       </View>
-      <View style={styles.infoContainer}>
+      <View style={styles.utilityInfoContainer}>
         <View style={styles.infoChildContainer}>
           <Image
             style={{width: 25, height: 25}}
@@ -84,7 +90,7 @@ const TimerInfoScreen = props => {
           <Text style={styles.infoText}>{timer.numZones}</Text>
         </View>
       </View>
-      <View style={styles.buttonContainer}>
+      <View style={styles.utilityButtonContainer}>
         <TouchableOpacity
           onPress={() =>
             props.navigation.navigate('UtilityNotesNavigator', {
@@ -93,11 +99,10 @@ const TimerInfoScreen = props => {
               utilityNotes: findTimerNotes,
               noteType: 'FindTimerNotes',
               screenTitle: 'Find Timer',
-              //timers: timers,
             })
           }
           style={styles.generalButtonStyle}>
-          <FontAwesomeIcon icon={faSearch} size={33} />
+          <FontAwesomeIcon icon={faSearch} size={30} />
           <Text style={styles.buttonText}>Find Timer</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -109,21 +114,11 @@ const TimerInfoScreen = props => {
               utilityNotes: timerNotes,
               noteType: 'TimerNotes',
               screenTitle: 'Timer Notes',
-              //timers: timers,
             })
           }
           style={styles.generalButtonStyle}>
-          <FontAwesomeIcon icon={faStickyNote} size={33} />
+          <FontAwesomeIcon icon={faStickyNote} size={30} />
           <Text style={styles.buttonText}>Timer Notes</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.divider} />
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={() => props.navigation.navigate('Home')}
-          style={styles.generalButtonStyle}>
-          <FontAwesomeIcon icon={faHome} size={33} />
-          <Text style={styles.buttonText}>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
@@ -133,13 +128,17 @@ const TimerInfoScreen = props => {
             })
           }
           style={styles.generalButtonStyle}>
-          <FontAwesomeIcon icon={faUser} size={33} />
+          <FontAwesomeIcon icon={faUser} size={30} />
           <Text style={styles.buttonText}>Customer</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Home')}
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faHome} size={30} />
+          <Text style={styles.buttonText}>Home</Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.divider} />
-      <View style={timerInfoStyles.spaceHolder} />
-    </ScrollView>
+    </View>
   );
 };
 // End of Home Screen Display
@@ -163,7 +162,7 @@ const timerInfoStyles = StyleSheet.create({
     marginTop: 50,
   },
   spaceHolder: {
-    marginBottom: '80%',
+    // marginBottom: '20%',
   },
 });
 

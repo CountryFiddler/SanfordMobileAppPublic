@@ -60,6 +60,12 @@ const SolenoidValvesInfoScreen = props => {
   return (
     <ScrollView
       style={solenoidValveInfoStyles.solenoidValveInfoScrollContainer}>
+      <View style={styles.iconHeader}>
+        <Image
+          style={{width: 26, height: 30}}
+          source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/SolenoidValve.png')}
+        />
+      </View>
       <View style={styles.screenHeader}>
         <Text style={styles.screenTitle}>Solenoid Valve Info</Text>
         <TouchableOpacity

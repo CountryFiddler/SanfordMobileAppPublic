@@ -49,17 +49,17 @@ const ShutOffValveInfoScreen = props => {
           <FontAwesomeIcon icon={faPencilAlt} size={25} />
         </TouchableOpacity>
       </View>
-      <View style={styles.infoContainer}>
+      <View style={styles.utilityInfoContainer}>
         <View style={styles.infoChildContainer}>
           <Image
-            style={{width: 30, height: 25}}
+            style={{width: 30, height: 25, marginRight: '2%'}}
             source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/Shut-OffValve.png')}
           />
           <Text style={styles.labelText}> Type: </Text>
           <Text style={styles.infoText}>{shutoffValve.type}</Text>
         </View>
         <View style={styles.infoChildContainer}>
-          <FontAwesomeIcon icon={faRuler} size={33}/>
+          <FontAwesomeIcon icon={faRuler} size={33} style={styles.icons}/>
           <Text style={styles.labelText}> Size: </Text>
           <Text style={styles.infoText}>{shutoffValve.size}</Text>
         </View>

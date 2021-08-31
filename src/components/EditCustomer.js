@@ -23,16 +23,27 @@ import {
   Text,
   SafeAreaView,
   TextInput,
-  render,
+  TouchableOpacity,
 } from 'react-native';
 import React, {Component, useState} from 'react';
 import {addCustomer, updateCustomer} from '../../api/FirestoreApi';
 import PhoneInput from 'react-native-phone-number-input';
 import PhoneInputWithCountryDefault from 'react-phone-number-input/modules/PhoneInputWithCountryDefault';
 import PhoneInputWithCountry from 'react-phone-number-input/modules/PhoneInputWithCountry';
+import {styles} from '../../api/stylesApi';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+  faAddressBook,
+  faCheck,
+  faIdBadge,
+  faPhoneAlt,
+  faTimes, faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import { checkValidPhoneNumber } from "../../api/CustomerApi";
 
 const EditCustomer = props => {
   const customer = props.navigation.getParam('customer');
+  console.log(customer.id);
   // Get the navigation prop
   const {navigation} = props;
 
@@ -46,25 +57,24 @@ const EditCustomer = props => {
     customer.address,
   );
   const [currentCustomerPhoneNumber, setCurrentCustomerPhoneNumber] = useState(
-    customer.phone,
+    customer.phoneNumber,
   );
   const [currentCustomerID, setCurrentCustomerID] = useState(customer.id);
   const [
     customerFirstNamePlaceholder,
     setCustomerFirstNamePlaceholder,
-  ] = customer.firstName;
+  ] = useState('First Name');
   const [
     customerLastNamePlaceholder,
     setCustomerLastNamePlaceholder,
-  ] = customer.lastName;
-  const [
-    customerAddressPlaceholder,
-    setCustomerAddressPlaceholder,
-  ] = customer.address;
+  ] = useState('Last Name');
+  const [customerAddressPlaceholder, setCustomerAddressPlaceholder] = useState(
+    'Address',
+  );
   const [
     customerPhoneNumPlaceholder,
     setCustomerPhoneNumPlaceholder,
-  ] = customer.phoneNumber;
+  ] = useState('Phone Number');
 
   /**
    * Description: When the user clicks the submit button, this function is
@@ -96,14 +106,35 @@ const EditCustomer = props => {
     // customer to the database
     // Call addCustomer and set the data fields of firstName, lastName,
     // and address.
-    updateCustomer({
-      firstName: currentCustomerFirstName,
-      lastName: currentCustomerLastName,
-      address: currentCustomerAddress,
-      phoneNumber: currentCustomerPhoneNumber,
-    });
-    // Go back to the home page after adding the customer to the database
-    navigation.navigate('Home');
+    if (checkValidPhoneNumber(currentCustomerPhoneNumber)) {
+      updateCustomer({
+        firstName: currentCustomerFirstName,
+        lastName: currentCustomerLastName,
+        address: currentCustomerAddress,
+        phoneNumber: currentCustomerPhoneNumber,
+        id: customer.id,
+      });
+      // Go back to the home page after adding the customer to the database
+      /*props.navigation.navigate('Customer', {
+        customer: {
+          firstName: currentCustomerFirstName,
+          lastName: currentCustomerLastName,
+          address: currentCustomerAddress,
+          phoneNumber: currentCustomerPhoneNumber,
+        },
+        navigation: props.navigation,
+      });*/
+      customer.firstName = currentCustomerFirstName;
+      customer.lastName = currentCustomerLastName;
+      customer.address = currentCustomerAddress;
+      customer.phoneNumber = currentCustomerPhoneNumber;
+      customer.id = customer.id;
+      customer.searchText = currentCustomerFirstName + ' ' + currentCustomerLastName + '\n' + currentCustomerAddress;
+      props.navigation.navigate('Customer', {
+        customer: customer,
+        navigation: props.navigation,
+      });
+    }
   }
 
   function parsePhoneNumber(text) {
@@ -111,45 +142,81 @@ const EditCustomer = props => {
   }
   //console.log(this.state.currentCustomerPhoneNumber);
   return (
-    // Start of the display for adding or editing a customer
     <SafeAreaView>
-      <View>
-        <TextInput
-          // Text Input Box for the customer's first name
-          placeholder={customerFirstNamePlaceholder}
-          value={currentCustomerFirstName}
-          // Displays the value that the user is entering into the text input
-          // For example, if the typed 'Bob', then 'Bob' is displayed in the
-          // Text Input Box
-          onChange={text => setCurrentCustomerFirstName(text)}
-        />
-        <TextInput
-          // Text Input Box for the customer's last name
-          placeholder={customerLastNamePlaceholder}
-          value={currentCustomerLastName}
-          onChangeText={text => setCurrentCustomerLastName(text)}
-        />
-        <TextInput
-          // Text Input Box for the customer's address
-          placeholder={customerAddressPlaceholder}
-          value={currentCustomerAddress}
-          onChangeText={text => setCurrentCustomerAddress(text)}
-        />
-        <PhoneInput
-          defaultCode="US"
-          placeholder={customerPhoneNumPlaceholder}
-          layout="first"
-          value={currentCustomerPhoneNumber}
-          onChangeFormattedText={text => parsePhoneNumber(text)}
-        />
-        <Button
-          // Submit button, when clicked submits the info entered by
-          // the user to the database
-          title="Submit"
-          onPress={() => submitCustomerInfo()}
-        />
+      <View style={styles.addInfoScreenHeader}>
+        <FontAwesomeIcon icon={faUser} size={33}/>
+        <Text style={styles.addInfoScreenTitle}>Edit Customer</Text>
+      </View>
+      <View style={styles.addInfoContainer}>
+        <View style={styles.infoChildContainer}>
+          <FontAwesomeIcon icon={faIdBadge} size={17} style={styles.icons} />
+          <TextInput
+            style={styles.infoText}
+            // Text Input Box for the customer's first name
+            placeholder={customerFirstNamePlaceholder}
+            value={currentCustomerFirstName}
+            // Displays the value that the user is entering into the text input
+            // For example, if the typed 'Bob', then 'Bob' is displayed in the
+            // Text Input Box
+            onChange={text => setCurrentCustomerFirstName(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <FontAwesomeIcon icon={faIdBadge} size={17} style={styles.icons} />
+          <TextInput
+            style={styles.infoText}
+            // Text Input Box for the customer's last name
+            placeholder={customerLastNamePlaceholder}
+            value={currentCustomerLastName}
+            onChangeText={text => setCurrentCustomerLastName(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <FontAwesomeIcon
+            icon={faAddressBook}
+            size={17}
+            style={styles.icons}
+          />
+          <TextInput
+            style={styles.infoText}
+            // Text Input Box for the customer's address
+            placeholder={customerAddressPlaceholder}
+            value={currentCustomerAddress}
+            onChangeText={text => setCurrentCustomerAddress(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <FontAwesomeIcon icon={faPhoneAlt} size={17} style={styles.icons} />
+          <TextInput
+            style={styles.infoText}
+            placeholder={customerPhoneNumPlaceholder}
+            value={currentCustomerPhoneNumber}
+            onChangeText={text => {
+              setCurrentCustomerPhoneNumber(text), parsePhoneNumber(text);
+            }}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate('Home')}
+            style={styles.generalButtonStyle}>
+            <FontAwesomeIcon icon={faTimes} size={40} color={'#cc0000'} />
+            <Text style={styles.cancelButtonText}>Cancel</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => submitCustomerInfo()}
+            style={styles.generalButtonStyle}>
+            <FontAwesomeIcon icon={faCheck} size={40} color={'#26660b'} />
+            <Text style={styles.submitButtonText}>Submit</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
+    // Start of the display for adding or editing a customer
   );
   // End of the display for adding or editing a customer
 };

@@ -40,6 +40,7 @@ const UtilitySelectionScreen = props => {
         onPress={() =>
           props.navigation.navigate(addUtility, {
             customer: customer,
+            utilities: utilities,
             navigation: props.navigation,
           })
         }
