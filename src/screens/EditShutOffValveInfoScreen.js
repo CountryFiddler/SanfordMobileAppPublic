@@ -44,7 +44,7 @@ const EditShutOffValveInfoScreen = props => {
           style={{width: 40, height: 35}}
           source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/Shut-OffValve.png')}
         />
-        <Text style={styles.addInfoScreenTitle}>Add Shut-Off</Text>
+        <Text style={styles.addInfoScreenTitle}>Edit Shut-Off</Text>
       </View>
       <View style={styles.addInfoContainer}>
         <View style={styles.infoChildContainer}>

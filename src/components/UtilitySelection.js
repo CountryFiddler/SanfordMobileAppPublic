@@ -61,6 +61,7 @@ const UtilitySelection = props => {
                       props.navigation.navigate(props.utilityInfoScreen, {
                         customer: props.customer,
                         utility: utility,
+                        utilities: props.utilityList,
                         navigation: props.navigation,
                       })
                     }

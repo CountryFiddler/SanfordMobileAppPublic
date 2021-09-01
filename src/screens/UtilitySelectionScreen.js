@@ -100,9 +100,10 @@ const UtilitySelectionScreen = props => {
           title={addUtilityButtonTitle}
           style={styles.generalButtonStyle}>
           <FontAwesomeIcon icon={faPlus} size={33} />
-          <Text>{addUtilityText}</Text>
+          <Text style={styles.buttonText}>{addUtilityText}</Text>
         </TouchableOpacity>
       </View>
+      <View style={styles.longDivider}/>
     </View>
   );
 };

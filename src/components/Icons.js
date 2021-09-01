@@ -44,8 +44,10 @@ import {
   faTimes,
   faIdBadge,
   faUserPlus,
+  faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 import {checkValidPhoneNumber} from '../../api/CustomerApi';
+import {faStickyNote} from '@fortawesome/free-regular-svg-icons';
 
 const Icons = props => {
   // Get the navigation prop
@@ -55,7 +57,9 @@ const Icons = props => {
   var timer = false;
   var shutOff = false;
   var solenoidValve = false;
-  const size = props.size;
+  var search = false;
+  var stickyNote = false;
+  var size = props.size;
 
   if (props.icon === 'timer') {
     timer = true;
@@ -78,6 +82,18 @@ const Icons = props => {
       height = 40;
     }
   }
+  if (props.icon === 'search') {
+    search = true;
+    if (size === 'medium') {
+      size = 33;
+    }
+  }
+  if (props.icon === 'stickyNote') {
+    stickyNote = true;
+    if (size === 'medium') {
+      size = 33;
+    }
+  }
 
   return (
     <SafeAreaView>
@@ -96,6 +112,10 @@ const Icons = props => {
           style={{width: width, height: height}}
           source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/SolenoidValve.png')}
         />
+      ) : search ? (
+        <FontAwesomeIcon icon={faSearch} size={size} />
+      ) : stickyNote ? (
+        <FontAwesomeIcon icon={faStickyNote} size={size} />
       ) : null}
     </SafeAreaView>
   );

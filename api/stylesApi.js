@@ -38,6 +38,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: '1.5%',
     marginRight: '1.5%',
+    borderRadius: 20,
   },
 
   infoChildContainer: {
@@ -69,7 +70,7 @@ export const styles = StyleSheet.create({
     fontSize: 17,
   },
   buttonText: {
-    marginTop: '15%',
+    paddingTop: 5,
     textAlign: 'center',
   },
   buttonContainer: {
@@ -77,13 +78,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     paddingTop: 10,
-    marginBottom: '7%',
+    //marginBottom: '7%',
     paddingBottom: 10,
    // marginLeft: '3%',
     //marginRight: '5%',
     //width: '90%',
-    borderBottomWidth: 3,
-    borderBottomColor: '#26660b',
+    //borderBottomWidth: 3,
+    //borderBottomColor: '#26660b',
     marginLeft: '1.5%',
     marginRight: '1.5%',
   },
@@ -122,6 +123,15 @@ export const styles = StyleSheet.create({
     borderTopColor: '#26660b',
     marginLeft: '10%',
     marginRight: '10%',
+    borderRadius: 20,
+  },
+
+  longDivider: {
+    borderTopWidth: 3,
+    borderTopColor: '#26660b',
+    marginLeft: '1.5%',
+    marginRight: '1.5%',
+    borderRadius: 20,
   },
   addTextFieldDivider: {
     borderTopWidth: 3,
@@ -177,9 +187,9 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-
-    marginBottom: '5%',
-
+    paddingTop: 10,
+    paddingBottom: 10,
+    //marginBottom: '5%',
   },
   utilityFooter: {
     justifyContent: 'space-around',

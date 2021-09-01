@@ -20,10 +20,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faHome, faPencilAlt, faSearch, faUser, faRuler } from "@fortawesome/free-solid-svg-icons";
 import { faStickyNote } from "@fortawesome/free-regular-svg-icons";
 import { styles } from "../../api/stylesApi";
+import Icons from "../components/Icons";
 // Start of Home Screen Display
 const ShutOffValveInfoScreen = props => {
   const customer = props.navigation.getParam('customer');
   const shutoffValve = props.navigation.getParam('utility');
+  const shutOffValveList = props.navigation.getParam('utilities');
   const navigation = props.navigation;
   const shutoffValveNotes = getShutOffValveNotes(customer, shutoffValve);
   const findShutOffValveNotes = getNotes(
@@ -74,6 +76,7 @@ const ShutOffValveInfoScreen = props => {
         <TouchableOpacity
           onPress={() =>
             props.navigation.navigate('UtilityNotesNavigator', {
+              headerIcon: 'search',
               customer: customer,
               utility: shutoffValve,
               utilityNotes: findShutOffValveNotes,
@@ -83,12 +86,13 @@ const ShutOffValveInfoScreen = props => {
           }
           style={styles.generalButtonStyle}>
           <FontAwesomeIcon icon={faSearch} size={33} />
-          <Text style={styles.buttonText}>Find Shut-Off</Text>
+          <Text style={styles.buttonText}>Find Valve</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
             // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('UtilityNotesNavigator', {
+              headerIcon: 'stickyNote',
               customer: customer,
               utility: shutoffValve,
               utilityNotes: shutoffValveNotes,
@@ -98,7 +102,36 @@ const ShutOffValveInfoScreen = props => {
           }
           style={styles.generalButtonStyle}>
           <FontAwesomeIcon icon={faStickyNote} size={33} />
-          <Text style={styles.buttonText}>Shut-Off Notes</Text>
+          <Text style={styles.buttonText}>Valve Notes</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.divider} />
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() =>
+            // Pass navigation and customer as props to the Edit Customer Screen
+            props.navigation.navigate('UtilitySelectionScreen', {
+              customer: customer,
+              headerIcon:
+                'shutOff',
+              utilityType: 'ShutOffValves',
+              utilities: shutOffValveList,
+              addUtilityScreen: 'AddShutOff',
+              addUtilityButtonTitle: 'Add Shut-Off Valve',
+              utilityInfoScreenTitle: 'ShutOffInfo',
+              utilityTypeText: 'Shut-Off Valves',
+              addUtilityText: 'Add Valve',
+            })
+          }
+          style={styles.generalButtonStyle}>
+          <Icons icon={'shutOff'} size={'medium'} />
+          <Text style={styles.buttonText}>Valve List</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Home')}
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faHome} size={30} />
+          <Text style={styles.buttonText}>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
@@ -108,16 +141,11 @@ const ShutOffValveInfoScreen = props => {
             })
           }
           style={styles.generalButtonStyle}>
-          <FontAwesomeIcon icon={faUser} size={33} />
+          <FontAwesomeIcon icon={faUser} size={30} />
           <Text style={styles.buttonText}>Customer</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => props.navigation.navigate('Home')}
-          style={styles.generalButtonStyle}>
-          <FontAwesomeIcon icon={faHome} size={33} />
-          <Text style={styles.buttonText}>Home</Text>
-        </TouchableOpacity>
       </View>
+      <View style={styles.longDivider} />
     </View>
   );
 };

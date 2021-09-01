@@ -25,6 +25,7 @@ import {faStickyNote} from '@fortawesome/free-regular-svg-icons';
 
 // Start of Home Screen Display
 const UtilityNotesNavigatorScreen = props => {
+  const headerIcon = props.navigation.getParam('headerIcon');
   const utilityNotes = props.navigation.getParam('utilityNotes');
   const utility = props.navigation.getParam('utility');
   const customer = props.navigation.getParam('customer');
@@ -34,7 +35,7 @@ const UtilityNotesNavigatorScreen = props => {
   return (
     <View>
       <View style={styles.navigatorScreenHeader}>
-        <FontAwesomeIcon icon={faStickyNote} size={33} />
+        <Icons icon={headerIcon} size={'medium'} />
         <Text style={styles.navigatorScreenTitle}>{screenTitle}</Text>
       </View>
       <View style={styles.utilityNavigatorContainer}>
@@ -81,6 +82,7 @@ const UtilityNotesNavigatorScreen = props => {
           <Text>Add Note</Text>
         </TouchableOpacity>
       </View>
+      <View style={styles.longDivider}/>
     </View>
   );
 };

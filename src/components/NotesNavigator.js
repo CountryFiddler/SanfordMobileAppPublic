@@ -38,9 +38,10 @@ import {
   MenuTrigger,
 } from 'react-native-popup-menu';
 import EditNotePopup from './EditNotePopup';
-import { styles } from "../../api/stylesApi";
+import {styles} from '../../api/stylesApi';
 
 const NotesNavigator = props => {
+  console.log('Brewers ' + props.customer.id);
   // Start of displaying the Drop Down Search
   //console.log(props.timerList.length);
   //console.log(this.state.timerList);
@@ -60,13 +61,15 @@ const NotesNavigator = props => {
             props.notes.map(note => {
               numNotesCounter++;
               return (
-                <View  key={note.id}>
+                <View key={note.noteID}>
                   <TouchableOpacity
                     onPress={() =>
                       props.navigation.navigate('UtilityNote', {
                         customer: props.customer,
                         note: note,
+                        notesList: props.notes,
                         navigation: props.navigation,
+                        utility: props.utility,
                       })
                     }
                     style={styles.navigatorItemView}>
@@ -82,9 +85,7 @@ const NotesNavigator = props => {
             // If there are no matches for customers and what the user entered
             // then we display the message "No Customers Found"
             <View style={styles.navigatorItemView}>
-              <Text style={styles.navigatorItemText}>
-                No Notes Found
-              </Text>
+              <Text style={styles.navigatorItemText}>No Notes Found</Text>
             </View>
           )}
         </View>

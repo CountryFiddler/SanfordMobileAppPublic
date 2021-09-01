@@ -42,7 +42,6 @@ const EditNoteScreen = props => {
   const utilityType = props.navigation.getParam('utilityType');
   const utility = props.navigation.getParam('utility');
   const utilityNotes = props.navigation.getParam('utilityNotes');
-  console.log(note);
   return (
     <ScrollView>
       <View>

@@ -201,7 +201,7 @@ const CustomerScreen = props => {
           <Text>Notes</Text>
         </TouchableOpacity>
       </View>
-
+      <View style={styles.divider}/>
       <View style={styles.customerFooter}>
         <TouchableOpacity
           onPress={() => props.navigation.navigate('Home')}
@@ -210,6 +210,7 @@ const CustomerScreen = props => {
           <Text>Home</Text>
         </TouchableOpacity>
       </View>
+      <View style={styles.longDivider}/>
     </ScrollView>
   );
   // End of the display for Customer Screen

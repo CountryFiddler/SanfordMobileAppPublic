@@ -37,7 +37,11 @@ import NoteMedia from '../components/NoteMedia';
 
 // Start of Home Screen Display
 const UtilityNoteScreen = props => {
+  const customer = props.navigation.getParam('customer');
   const note = props.navigation.getParam('note');
+  const noteList = props.navigation.getParam('noteList');
+  const utility = props.navigation.getParam('utility');
+  //const utilityType = props.navigation.getParam('utilityType');
   //console.log(testImage);
   //imageURL = getImageURL(note.images[0].imageRef);
   // console.log(note.images[0].imageRef);
@@ -46,6 +50,20 @@ const UtilityNoteScreen = props => {
     <ScrollView style={styles.homePageContainer}>
       <Text>{note.title} </Text>
       <Text>{note.noteText}</Text>
+      <Button
+        title={'Edit'}
+        onPress={() =>
+          props.navigation.navigate('EditNote', {
+            customer: customer,
+            note: note,
+            noteType: note.noteType,
+            navigation: props.navigation,
+            utilityType: utility.utilityType,
+            utility: utility,
+            utilityNotes: noteList,
+          })
+        }
+      />
       <NoteMedia note={note} isDeleteMedia={false} />
     </ScrollView>
   );

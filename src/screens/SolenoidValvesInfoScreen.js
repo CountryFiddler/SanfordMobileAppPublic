@@ -39,10 +39,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {faStickyNote, faCalendarAlt} from '@fortawesome/free-regular-svg-icons';
 import {styles} from '../../api/stylesApi';
+import Icons from "../components/Icons";
 // Start of Home Screen Display
 const SolenoidValvesInfoScreen = props => {
   const customer = props.navigation.getParam('customer');
   const solenoidValves = props.navigation.getParam('utility');
+  const solenoidValvesList = props.navigation.getParam('utilities');
   const navigation = props.navigation;
   const solenoidValveNotes = getSolenoidValvesNotes(customer, solenoidValves);
   const findSolenoidValveNotes = getNotes(
@@ -118,6 +120,7 @@ const SolenoidValvesInfoScreen = props => {
         <TouchableOpacity
           onPress={() =>
             props.navigation.navigate('UtilityNotesNavigator', {
+              headerIcon: 'search',
               customer: customer,
               utility: solenoidValves,
               utilityNotes: findSolenoidValveNotes,
@@ -133,6 +136,7 @@ const SolenoidValvesInfoScreen = props => {
           onPress={() =>
             // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('UtilityNotesNavigator', {
+              headerIcon: 'stickyNote',
               customer: customer,
               utility: solenoidValves,
               utilityNotes: solenoidValveNotes,
@@ -144,7 +148,35 @@ const SolenoidValvesInfoScreen = props => {
           <FontAwesomeIcon icon={faStickyNote} size={33} />
           <Text style={styles.buttonText}>Valve Notes</Text>
         </TouchableOpacity>
-
+      </View>
+      <View style={styles.divider} />
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() =>
+            // Pass navigation and customer as props to the Edit Customer Screen
+            props.navigation.navigate('UtilitySelectionScreen', {
+              customer: customer,
+              headerIcon:
+                'solenoidValve',
+              utilityType: 'SolenoidValves',
+              utilities: solenoidValvesList,
+              addUtilityScreen: 'AddSolenoidValves',
+              addUtilityButtonTitle: 'Add Valve',
+              utilityInfoScreenTitle: 'SolenoidValvesInfo',
+              utilityTypeText: 'Solenoid Valves',
+              addUtilityText: 'Add Valves',
+            })
+          }
+          style={styles.generalButtonStyle}>
+          <Icons icon={'solenoidValve'} width={27} height={30} />
+          <Text style={styles.buttonText}>Valve List</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Home')}
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faHome} size={30} />
+          <Text style={styles.buttonText}>Home</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
             props.navigation.navigate('Customer', {
@@ -153,16 +185,11 @@ const SolenoidValvesInfoScreen = props => {
             })
           }
           style={styles.generalButtonStyle}>
-          <FontAwesomeIcon icon={faUser} size={33} />
+          <FontAwesomeIcon icon={faUser} size={30} />
           <Text style={styles.buttonText}>Customer</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => props.navigation.navigate('Home')}
-          style={styles.generalButtonStyle}>
-          <FontAwesomeIcon icon={faHome} size={33} />
-          <Text style={styles.buttonText}>Home</Text>
-        </TouchableOpacity>
       </View>
+      <View style={styles.longDivider} />
     </ScrollView>
   );
 };
