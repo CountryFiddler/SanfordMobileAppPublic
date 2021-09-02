@@ -24,6 +24,8 @@ import {
   StatusBar,
   SafeAreaView,
   TouchableWithoutFeedback,
+  Modal,
+  TouchableOpacity,
 } from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import {firestore, storage} from 'react-native-firebase';
@@ -32,6 +34,9 @@ import EditNotePopup from '../components/EditNotePopup';
 import {deleteNoteMedia} from '../../api/UtilityApi';
 import Video from 'react-native-video';
 import CheckBox from 'react-native-checkbox';
+import {ReactNativeZoomableView} from '@dudigital/react-native-zoomable-view';
+import {styles} from '../../api/stylesApi';
+import Icons from './Icons';
 
 // Start of Home Screen Display
 const NoteMedia = props => {
@@ -76,6 +81,8 @@ const NoteMedia = props => {
   const [video19, setVideo19] = useState(null);
   const [video20, setVideo20] = useState(null);
   const [agree, setAgree] = useState(false);
+  const [zoomIn1, setZoomIn1] = useState(false);
+  const [zoomIn2, setZoomIn2] = useState(false);
   const [imagesToDelete, setImagesToDelete] = useState([]);
   const customer = props.customer;
   const utilityType = props.utilityType;
@@ -84,7 +91,7 @@ const NoteMedia = props => {
   const isDeleteMedia = props.isDeleteMedia;
   const navigation = props.navigation;
   // toString might be just it
-  if (note.imageRefs.length > 0) {
+  /*if (note.imageRefs.length > 0) {
     console.log('adljkdsafjkldfsjkldfs');
     var imageRef1 = storage()
       .ref('/' + note.imageRefs[0].imageRef)
@@ -116,7 +123,7 @@ const NoteMedia = props => {
       .then(url => {
         setImage4(url);
       });
-  }
+  }*/
   if (note.imageRefs.length > 4) {
     var imageRef = storage()
       .ref('/' + note.imageRefs[4].imageRef)
@@ -246,7 +253,7 @@ const NoteMedia = props => {
       });
   }
 
- /* if (note.videoRefs.length > 0) {
+  /* if (note.videoRefs.length > 0) {
     var videoRef1 = storage()
       .ref('/' + note.videoRefs[0].videoRef)
       .getDownloadURL()
@@ -428,61 +435,169 @@ const NoteMedia = props => {
     .ref('/' + note.images[0].imageRef)
     .getDownloadURL();*/
   function displayImage1() {
-    if (note.imageRefs.length > 0) {
-      return (
-        <View>
-          <Image source={{uri: image1}} style={{width: 200, height: 300}} />
-          {isDeleteMedia ? (
-            <CheckBox
-              boxType={'square'}
-              label=""
-              value={agree}
-              onChange={() => (
-                selectImageToDelete(note.imageRefs[0].imageRef), setAgree(true)
-              )}
-            />
-          ) : null}
-        </View>
-      );
-    }
+    //<Image source={{uri: image1}} style={{width: 200, height: 300}} />
+    // if (note.imageRefs.length > 0) {
+    return (
+      <View>
+        <TouchableOpacity onPress={() => setZoomIn1(true)}>
+          <Image
+            source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/4194331C-1822-468E-975A-EF236711870A_1_105_c.jpeg')}
+            style={styles.noteImage}
+          />
+        </TouchableOpacity>
+        {isDeleteMedia ? (
+          <CheckBox
+            boxType={'square'}
+            label=""
+            value={agree}
+            onChange={() => (
+              selectImageToDelete(note.imageRefs[1].imageRef), setAgree(true)
+            )}
+          />
+        ) : null}
+        <Modal visible={zoomIn1 === true} animated>
+          <View style={styles.noteImageModalContainer}>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setZoomIn1(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.modalImageContainer}>
+              <ReactNativeZoomableView
+                maxZoom={10}
+                minZoom={0.5}
+                zoomStep={0.5}
+                initialZoom={1}
+                doubleTapDelay={1}
+                bindToBorders={true}
+                captureEvent={true}>
+                <Image
+                  source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/4194331C-1822-468E-975A-EF236711870A_1_105_c.jpeg')}
+                  style={styles.modalImage}
+                />
+              </ReactNativeZoomableView>
+            </View>
+          </View>
+        </Modal>
+      </View>
+    );
+    // }
   }
   function displayImage2() {
-    if (note.imageRefs.length > 1) {
-      return (
-        <View>
-          <Image source={{uri: image2}} style={{width: 200, height: 300}} />
-          {isDeleteMedia ? (
-            <CheckBox
-              boxType={'square'}
-              label=""
-              value={agree}
-              onChange={() => (
-                selectImageToDelete(note.imageRefs[1].imageRef), setAgree(true)
-              )}
-            />
-          ) : null}
-        </View>
-      );
-    }
+    //<Image source={{uri: image2}} style={{width: 200, height: 300}} />
+    //   if (note.imageRefs.length > 1) {
+    return (
+      <View>
+        <TouchableOpacity onPress={() => setZoomIn2(true)}>
+          <Image
+            source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/933845EB-50DC-4C71-B619-8AAE39168A86_1_105_c.jpeg')}
+            style={styles.noteImage}
+          />
+        </TouchableOpacity>
+        {isDeleteMedia ? (
+          <CheckBox
+            boxType={'square'}
+            label=""
+            value={agree}
+            onChange={() => (
+              selectImageToDelete(note.imageRefs[1].imageRef), setAgree(true)
+            )}
+          />
+        ) : null}
+        <Modal visible={zoomIn2 === true} animated>
+          <View style={styles.noteImageModalContainer}>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setZoomIn2(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.modalImageContainer}>
+              <ReactNativeZoomableView
+                maxZoom={10}
+                minZoom={0.5}
+                zoomStep={0.5}
+                initialZoom={1}
+                doubleTapDelay={1}
+                bindToBorders={true}
+                captureEvent={true}>
+                <Image
+                  source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/933845EB-50DC-4C71-B619-8AAE39168A86_1_105_c.jpeg')}
+                  style={styles.modalImage}
+                />
+              </ReactNativeZoomableView>
+            </View>
+          </View>
+        </Modal>
+      </View>
+    );
+    // }
+    /*
+              <Modal visible={zoomIn === true} animated>
+            <View>
+              <ReactNativeZoomableView
+                maxZoom={1.5}
+                minZoom={1}
+                zoomStep={0.5}
+                initialZoom={1}
+                bindToBorders={true}
+                captureEvent={true}>
+                <Image
+                  source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/933845EB-50DC-4C71-B619-8AAE39168A86_1_105_c.jpeg')}
+                  style={{width: 200, height: 200}}
+                />
+              </ReactNativeZoomableView>
+            </View>
+          </Modal>
+     */
   }
   function displayImage3() {
-    if (note.imageRefs.length > 2) {
-      return (
-        <View>
-          <Image source={{uri: image3}} style={{width: 200, height: 300}} />
-          {isDeleteMedia ? (
-            <CheckBox
-              boxType={'square'}
-              label=""
-              value={agree}
-              onChange={() => (
-                selectImageToDelete(note.imageRefs[2].imageRef), setAgree(true)
-              )}
-            />
-          ) : null}
-        </View>
-      );
-    }
+    // if (note.imageRefs.length > 2) {
+    //<Image source={{uri: image3}} style={{width: 200, height: 300}} />
+    return (
+      <View>
+        <TouchableOpacity onPress={() => setZoomIn1(true)}>
+          <Image
+            source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+            style={styles.noteImage}
+          />
+        </TouchableOpacity>
+        {isDeleteMedia ? (
+          <CheckBox
+            boxType={'square'}
+            label=""
+            value={agree}
+            onChange={() => (
+              selectImageToDelete(note.imageRefs[1].imageRef), setAgree(true)
+            )}
+          />
+        ) : null}
+        <Modal visible={zoomIn1 === true} animated>
+          <View style={styles.noteImageModalContainer}>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setZoomIn1(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.modalImageContainer}>
+              <ReactNativeZoomableView
+                maxZoom={10}
+                minZoom={0.5}
+                zoomStep={0.5}
+                initialZoom={1}
+                doubleTapDelay={1}
+                bindToBorders={true}
+                captureEvent={true}>
+                <Image
+                  source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                  style={styles.modalImage}
+                />
+              </ReactNativeZoomableView>
+            </View>
+          </View>
+        </Modal>
+      </View>
+    );
+    //}
   }
   function displayImage4() {
     if (note.imageRefs.length > 3) {
@@ -1379,28 +1494,51 @@ const NoteMedia = props => {
   //imageURL = getImageURL(note.images[0].imageRef);
   // console.log(note.images[0].imageRef);
   // getURLS();
+  console.log('Num Image Refs: ' + note.imageRefs.length);
   return (
-    <ScrollView style={styles.homePageContainer}>
-      <View>{displayImage1()}</View>
-      <View>{displayImage2()}</View>
-      <View>{displayImage3()}</View>
-      <View>{displayImage4()}</View>
-      <View>{displayImage5()}</View>
-      <View>{displayImage6()}</View>
-      <View>{displayImage7()}</View>
-      <View>{displayImage8()}</View>
-      <View>{displayImage9()}</View>
-      <View>{displayImage10()}</View>
-      <View>{displayImage11()}</View>
-      <View>{displayImage12()}</View>
-      <View>{displayImage13()}</View>
-      <View>{displayImage14()}</View>
-      <View>{displayImage15()}</View>
-      <View>{displayImage16()}</View>
-      <View>{displayImage17()}</View>
-      <View>{displayImage18()}</View>
-      <View>{displayImage19()}</View>
-      <View>{displayImage20()}</View>
+    <ScrollView style={styles.noteImageContainer}>
+      <View style={styles.noteImageSubContainer}>
+        <View>{displayImage1()}</View>
+        <View>{displayImage2()}</View>
+      </View>
+      <View style={styles.noteImageSubContainer}>
+        <View>{displayImage3()}</View>
+        {note.imageRefs.length > 3 ? (
+        <View>{displayImage4()}</View>
+        ) : null}
+      </View>
+      <View style={styles.noteImageSubContainer}>
+        <View>{displayImage5()}</View>
+        <View>{displayImage6()}</View>
+      </View>
+      <View style={styles.noteImageSubContainer}>
+        <View>{displayImage7()}</View>
+        <View>{displayImage8()}</View>
+      </View>
+      <View style={styles.noteImageSubContainer}>
+        <View>{displayImage9()}</View>
+        <View>{displayImage10()}</View>
+      </View>
+      <View style={styles.noteImageSubContainer}>
+        <View>{displayImage11()}</View>
+        <View>{displayImage12()}</View>
+      </View>
+      <View style={styles.noteImageSubContainer}>
+        <View>{displayImage13()}</View>
+        <View>{displayImage14()}</View>
+      </View>
+      <View style={styles.noteImageSubContainer}>
+        <View>{displayImage15()}</View>
+        <View>{displayImage16()}</View>
+      </View>
+      <View style={styles.noteImageSubContainer}>
+        <View>{displayImage17()}</View>
+        <View>{displayImage18()}</View>
+      </View>
+      <View style={styles.noteImageSubContainer}>
+        <View>{displayImage19()}</View>
+        <View>{displayImage20()}</View>
+      </View>
       <View>
         {isDeleteMedia ? (
           <Button
@@ -1422,34 +1560,5 @@ const NoteMedia = props => {
   );
 };
 // End of Home Screen Display
-
-// Start of StylingSheet
-const styles = StyleSheet.create({
-  headerStyle: {
-    borderWidth: 1,
-    borderColor: 'black',
-  },
-  homePageContainer: {
-    //flex: 1,
-  },
-  textStyle: {
-    fontSize: 30,
-    textAlign: 'center',
-    //alignSelf: 'center',
-  },
-  addCustomerButton: {
-    //position: 'absolute',
-    marginTop: 50,
-  },
-  mediaPlayer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    backgroundColor: 'black',
-    justifyContent: 'center',
-  },
-});
 
 export default NoteMedia;

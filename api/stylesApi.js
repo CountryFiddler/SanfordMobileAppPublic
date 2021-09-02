@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   screenHeader: {
@@ -80,7 +80,7 @@ export const styles = StyleSheet.create({
     paddingTop: 10,
     //marginBottom: '7%',
     paddingBottom: 10,
-   // marginLeft: '3%',
+    // marginLeft: '3%',
     //marginRight: '5%',
     //width: '90%',
     //borderBottomWidth: 3,
@@ -189,7 +189,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 10,
     paddingBottom: 10,
-    //marginBottom: '5%',
   },
   utilityFooter: {
     justifyContent: 'space-around',
@@ -214,8 +213,6 @@ export const styles = StyleSheet.create({
     borderRadius: 7,
   },
 
-
-
   navigatorItemView: {
     //backgroundColor: '#26660b',
     backgroundColor: 'white',
@@ -236,7 +233,6 @@ export const styles = StyleSheet.create({
     fontSize: 17,
     fontStyle: 'italic',
     fontWeight: 'bold',
-
   },
   navigatorNoResultView: {
     alignSelf: 'center',
@@ -250,5 +246,106 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: 'white',
+  },
+  noteHeaderBar: {
+    flexDirection: 'row',
+    marginTop: '2%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginLeft: '5%',
+    marginRight: '5%',
+  },
+  noteTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginLeft: '5%',
+    marginRight: '5%',
+  },
+  noteTitleText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  noteTextContainer: {
+    height: '10%',
+    marginTop: '5%',
+    paddingLeft: 20,
+    paddingRight: 20,
+    borderTopWidth: 3,
+    borderTopColor: '#26660b',
+    borderBottomWidth: 3,
+    borderBottomColor: '#26660b',
+    borderRadius: 20,
+  },
+  noteText: {
+    marginTop: '2%',
+    marginBottom: '2%',
+    fontSize: 16,
+    textAlign: 'left',
+  },
+  imageDisplayContainer: {
+    height: '55%',
+  },
+  editIcon: {
+    //alignItems: 'flex-end',
+    //resizeMode: 'contain',
+  },
+  noteImageContainer: {
+    //marginTop: '2%',
+
+  },
+  noteImageSubContainer: {
+    marginTop: '5%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  noteImage: {
+    width: 175,
+    height: 175,
+    borderRadius: 10,
+  },
+  noteImageModalContainer: {
+    flex: 1,
+    backgroundColor: 'black',
+    marginTop: '10%',
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalImageContainer: {
+    height: '80%',
+    marginBottom: '30%',
+  },
+  modalImage: {
+    width: 275,
+    height: 275,
+    borderRadius: 10,
+  },
+  modalExitButton: {
+    marginTop: '20%',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    width: '90%',
+    height: '10%',
+  },
+  mediaPlayer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    backgroundColor: 'black',
+    justifyContent: 'center',
   },
 });

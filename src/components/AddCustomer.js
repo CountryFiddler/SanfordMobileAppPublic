@@ -116,7 +116,7 @@ const AddCustomer = props => {
   }
 
   /**
-   * //TODO Fix this function so that if displays the proper placholders and finish commenting
+   *
    * Description: This function is used to see if the data fields are null
    * when the customer submits information to create a new customer or update
    * an existing customer in the database. This funciton is called in

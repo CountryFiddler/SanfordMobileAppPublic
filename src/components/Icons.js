@@ -47,7 +47,7 @@ import {
   faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 import {checkValidPhoneNumber} from '../../api/CustomerApi';
-import {faStickyNote} from '@fortawesome/free-regular-svg-icons';
+import {faStickyNote, faTimesCircle} from '@fortawesome/free-regular-svg-icons';
 
 const Icons = props => {
   // Get the navigation prop
@@ -59,6 +59,8 @@ const Icons = props => {
   var solenoidValve = false;
   var search = false;
   var stickyNote = false;
+  var edit = false;
+  var exit = false;
   var size = props.size;
 
   if (props.icon === 'timer') {
@@ -94,6 +96,18 @@ const Icons = props => {
       size = 33;
     }
   }
+  if (props.icon === 'edit') {
+    edit = true;
+    if (size === 'medium') {
+      size = 25;
+    }
+  }
+  if (props.icon === 'exit') {
+    exit = true;
+    if (size === 'medium') {
+      size = 33;
+    }
+  }
 
   return (
     <SafeAreaView>
@@ -116,6 +130,14 @@ const Icons = props => {
         <FontAwesomeIcon icon={faSearch} size={size} />
       ) : stickyNote ? (
         <FontAwesomeIcon icon={faStickyNote} size={size} />
+      ) : edit ? (
+        <FontAwesomeIcon icon={faPencilAlt} size={size} />
+      ) : exit ? (
+        <FontAwesomeIcon
+          icon={faTimesCircle}
+          size={size}
+          style={{color: 'white'}}
+        />
       ) : null}
     </SafeAreaView>
   );

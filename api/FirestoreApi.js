@@ -1,4 +1,4 @@
-//TODO Add comments to FirestoreApi
+
 import firebase, {firestore} from 'react-native-firebase';
 import {Alert, Platform} from 'react-native';
 import storage from '@react-native-firebase/storage';

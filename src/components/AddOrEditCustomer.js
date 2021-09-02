@@ -57,7 +57,6 @@ class AddOrEditCustomer extends Component {
       then we do not add the customer to the database (or if we are editing
       we just dont update the data fields when the user clicks submit)*/
     this.checkForNullTextEntries(customer, AddScreen, EditScreen);
-    //TODO Display a message to the user if there is a null field
 
     // If AddScreen and checkForNullTextEntries is false, then we add a
     // customer to the database
@@ -78,7 +77,6 @@ class AddOrEditCustomer extends Component {
     }
     // Do the following if EditScreen is true
     if (EditScreen) {
-      //TODO Figure out if we need to keep this line
       this.state.currentCustomerID = customer.id;
       // Update the customer data fields
       customer.firstName = this.state.currentCustomerFirstName;
@@ -100,7 +98,7 @@ class AddOrEditCustomer extends Component {
   }
 
   /**
-   * //TODO Fix this function so that if displays the proper placholders and finish commenting
+   *
    * Description: This function is used to see if the data fields are null
    * when the customer submits information to create a new customer or update
    * an existing customer in the database. This funciton is called in

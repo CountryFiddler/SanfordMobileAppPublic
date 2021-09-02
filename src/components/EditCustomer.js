@@ -101,7 +101,6 @@ const EditCustomer = props => {
     /* Check for null entries. If adding a customer and the entries are null
       then we do not add the customer to the database (or if we are editing
       we just dont update the data fields when the user clicks submit)*/
-    //TODO Display a message to the user if there is a null field
 
     // If AddScreen and checkForNullTextEntries is false, then we add a
     // customer to the database
