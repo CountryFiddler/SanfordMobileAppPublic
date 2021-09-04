@@ -123,8 +123,6 @@ export function addNote(
   utilityNote,
   imageRefs,
   numImages,
-  videoRefs,
-  numVideos,
   addComplete,
 ) {
   var docRef = firebase
@@ -143,8 +141,6 @@ export function addNote(
       noteText: utilityNote.noteText,
       numImages: numImages,
       imageRefs: imageRefs,
-      numVideos: numVideos,
-      videoRefs: videoRefs,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     })
     .then(snapshot => snapshot.get())
@@ -162,8 +158,6 @@ export function updateNote(
   utilityNote,
   imageRefs,
   numImages,
-  videoRefs,
-  numVideos,
   addComplete,
 ) {
   console.log(imageRefs);
@@ -184,8 +178,6 @@ export function updateNote(
       noteText: utilityNote.noteText,
       numImages: numImages,
       imageRefs: imageRefs,
-      numVideos: numVideos,
-      videoRefs: videoRefs,
     })
     .then(snapshot => snapshot.get())
     .then(customerData => addComplete(customerData.data()))

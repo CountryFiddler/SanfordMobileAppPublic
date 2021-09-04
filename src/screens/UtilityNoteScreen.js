@@ -35,6 +35,8 @@ import Video from 'react-native-video';
 import NoteMedia from '../components/NoteMedia';
 import {styles} from '../../api/stylesApi';
 import Icons from '../components/Icons';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faHome, faPlus, faUser} from '@fortawesome/free-solid-svg-icons';
 //Media Controls to control Play/Pause/Seek and full screen
 //import MediaControls, {PLAYER_STATES} from 'react-native-media-controls';
 
@@ -44,6 +46,15 @@ const UtilityNoteScreen = props => {
   const note = props.navigation.getParam('note');
   const noteList = props.navigation.getParam('noteList');
   const utility = props.navigation.getParam('utility');
+  const utilityList = props.navigation.getParam('utilityList');
+  const utilityInfoScreen = props.navigation.getParam('utilityInfoScreen');
+  const utilityIcon = props.navigation.getParam('utilityIcon');
+  const utilityTitle = props.navigation.getParam('utilityTitle');
+  const headerIcon = props.navigation.getParam('headerIcon');
+  const noteType = props.navigation.getParam('noteType');
+  const screenTitle = props.navigation.getParam('screenTitle');
+  const noteIcon = props.navigation.getParam('noteIcon');
+  const noteIconTitle = props.navigation.getParam('noteIconTitle');
   //const utilityType = props.navigation.getParam('utilityType');
   //console.log(testImage);
   //imageURL = getImageURL(note.images[0].imageRef);
@@ -81,6 +92,64 @@ const UtilityNoteScreen = props => {
       <View style={styles.imageDisplayContainer}>
         <NoteMedia note={note} isDeleteMedia={false} />
       </View>
+      <View style={styles.longDivider} />
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() =>
+            // Pass navigation and customer as props to the Edit Customer Screen
+            props.navigation.navigate('UtilityNotesNavigator', {
+              customer: customer,
+              utilityNotes: noteList,
+              utility: utility,
+              utilityList: utilityList,
+              utilityInfoScreen: utilityInfoScreen,
+              utilityIcon: utilityIcon,
+              utilityTitle: utilityTitle,
+              headerIcon: headerIcon,
+              noteType: noteType,
+              screenTitle: screenTitle,
+              noteIcon: noteIcon,
+              noteIconTitle: noteIconTitle,
+            })
+          }
+          style={styles.generalButtonStyle}>
+          <Icons icon={noteIcon} size={'medium'}/>
+          <Text style={styles.buttonText}>{noteIconTitle}</Text>
+        </TouchableOpacity>
+        {utilityTitle !== null ? (
+          <TouchableOpacity
+            style={styles.generalButtonStyle}
+            onPress={() =>
+              props.navigation.navigate(utilityInfoScreen, {
+                customer: customer,
+                utility: utility,
+                utilities: utilityList,
+                navigation: props.navigation,
+              })
+            }>
+            <Icons icon={utilityIcon} size={'medium'} />
+            <Text style={styles.buttonText}>{utilityTitle}</Text>
+          </TouchableOpacity>
+        ) : null}
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Home')}
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faHome} size={33} />
+          <Text style={styles.buttonText}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate('Customer', {
+              customer: customer,
+              navigation: props.navigation,
+            })
+          }
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faUser} size={33} />
+          <Text style={styles.buttonText}>Customer</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.longDivider} />
     </View>
   );
 };

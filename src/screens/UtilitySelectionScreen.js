@@ -74,23 +74,6 @@ const UtilitySelectionScreen = props => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={() =>
-            props.navigation.navigate('Customer', {
-              customer: customer,
-              navigation: props.navigation,
-            })
-          }
-          style={styles.generalButtonStyle}>
-          <FontAwesomeIcon icon={faUser} size={33} />
-          <Text style={styles.buttonText}>Customer</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => props.navigation.navigate('Home')}
-          style={styles.generalButtonStyle}>
-          <FontAwesomeIcon icon={faHome} size={33} />
-          <Text style={styles.buttonText}>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() =>
             props.navigation.navigate(addUtility, {
               customer: customer,
               utilities: utilities,
@@ -101,6 +84,23 @@ const UtilitySelectionScreen = props => {
           style={styles.generalButtonStyle}>
           <FontAwesomeIcon icon={faPlus} size={33} />
           <Text style={styles.buttonText}>{addUtilityText}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Home')}
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faHome} size={33} />
+          <Text style={styles.buttonText}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate('Customer', {
+              customer: customer,
+              navigation: props.navigation,
+            })
+          }
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faUser} size={33} />
+          <Text style={styles.buttonText}>Customer</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.longDivider}/>

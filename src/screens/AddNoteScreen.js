@@ -31,6 +31,7 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import {UploadMedia} from '../../api/FirestoreApi';
 import {storage} from 'react-native-firebase';
 import AddOrEditNote from '../components/AddOrEditNote';
+import AddNote from '../components/AddNote';
 // Start of Home Screen Display
 
 const AddNoteScreen = props => {
@@ -43,24 +44,19 @@ const AddNoteScreen = props => {
   // Start of Add Timer Screen Display
   //const [numZones, setNumZones] = useState(null);
   return (
-    <ScrollView>
-      <View>
-        <AddOrEditNote
-          customer={customer}
-          utilityType={utilityType}
-          utility={utility}
-          isAddNote={true}
-          numImages={0}
-          numVideos={0}
-          navigation={props.navigation}
-          noteID={null}
-          noteType={noteType}
-          utilityNotes={utilityNotes}
-          noteTitle={''}
-          noteText={''}
-        />
-      </View>
-    </ScrollView>
+    <View>
+      <AddNote
+        customer={customer}
+        utilityType={utilityType}
+        utility={utility}
+        numImages={0}
+        navigation={props.navigation}
+        noteID={null}
+        noteType={noteType}
+        noteTitle={''}
+        noteText={''}
+      />
+    </View>
   );
 };
 // End of Home Screen Display

@@ -102,6 +102,12 @@ const TimerInfoScreen = props => {
               utilityNotes: findTimerNotes,
               noteType: 'FindTimerNotes',
               screenTitle: 'Find Timer',
+              utilityIcon: 'timer',
+              utilityList: timerList,
+              utilityTitle: 'Timer',
+              utilityInfoScreen: 'TimerInfo',
+              noteIcon: 'search',
+              noteIconTitle: 'Find' + '\n' +'Timer',
             })
           }
           style={styles.generalButtonStyle}>
@@ -113,11 +119,17 @@ const TimerInfoScreen = props => {
             // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('UtilityNotesNavigator', {
               headerIcon: 'stickyNote',
+              utilityIcon: 'timer',
               customer: customer,
               utility: timer,
+              utilityList: timerList,
               utilityNotes: timerNotes,
               noteType: 'TimerNotes',
               screenTitle: 'Timer Notes',
+              utilityTitle: 'Timer',
+              utilityInfoScreen: 'TimerInfo',
+              noteIcon: 'stickyNote',
+              noteIconTitle: 'Timer' + '\n' +'Notes',
             })
           }
           style={styles.generalButtonStyle}>

@@ -48,6 +48,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {checkValidPhoneNumber} from '../../api/CustomerApi';
 import {faStickyNote, faTimesCircle} from '@fortawesome/free-regular-svg-icons';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Icons = props => {
   // Get the navigation prop
@@ -108,7 +109,6 @@ const Icons = props => {
       size = 33;
     }
   }
-
   return (
     <SafeAreaView>
       {timer ? (

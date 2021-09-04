@@ -82,6 +82,12 @@ const ShutOffValveInfoScreen = props => {
               utilityNotes: findShutOffValveNotes,
               noteType: 'FindShutOffValveNotes',
               screenTitle: 'Find Shut-Off Valve',
+              utilityIcon: 'shutOff',
+              utilityList: shutOffValveList,
+              utilityTitle: 'Shut-Off',
+              utilityInfoScreen: 'ShutOffInfo',
+              noteIcon: 'search',
+              noteIconTitle: 'Find' + '\n' +'Valve',
             })
           }
           style={styles.generalButtonStyle}>
@@ -98,6 +104,12 @@ const ShutOffValveInfoScreen = props => {
               utilityNotes: shutoffValveNotes,
               noteType: 'ShutOffValveNotes',
               screenTitle: 'Shut-Off Valve Notes',
+              utilityIcon: 'shutOff',
+              utilityList: shutOffValveList,
+              utilityTitle: 'Shut-Off',
+              utilityInfoScreen: 'ShutOffInfo',
+              noteIcon: 'stickyNote',
+              noteIconTitle: 'Valve' + '\n' +'Notes',
             })
           }
           style={styles.generalButtonStyle}>

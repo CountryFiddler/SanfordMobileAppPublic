@@ -41,7 +41,7 @@ import EditNotePopup from './EditNotePopup';
 import {styles} from '../../api/stylesApi';
 
 const NotesNavigator = props => {
-  console.log('Brewers ' + props.customer.id);
+
   // Start of displaying the Drop Down Search
   //console.log(props.timerList.length);
   //console.log(this.state.timerList);
@@ -67,9 +67,19 @@ const NotesNavigator = props => {
                       props.navigation.navigate('UtilityNote', {
                         customer: props.customer,
                         note: note,
-                        notesList: props.notes,
+                        noteList: props.notes,
                         navigation: props.navigation,
                         utility: props.utility,
+                        utilityList: props.utilityList,
+                        utilityInfoScreen: props.utilityInfoScreen,
+                        utilityIcon: props.utilityIcon,
+                        utilityTitle: props.utilityTitle,
+                        headerIcon: props.headerIcon,
+                        noteType: note.noteType,
+                        screenTitle: props.screenTitle,
+                        noteIcon: props.noteIcon,
+                        noteIconTitle: props.noteIconTitle,
+
                       })
                     }
                     style={styles.navigatorItemView}>

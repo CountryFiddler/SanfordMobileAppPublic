@@ -22,10 +22,6 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import CustomerSearchBar from '../components/CustomerSearchBar';
-import BackHandler from 'react-native/Libraries/Utilities/BackHandler';
-import useFocusEffect from '@react-navigation/native';
-import {getTimerNotes} from '../../api/TimerApi';
 import {getNotes} from '../../api/UtilityApi';
 import {getSolenoidValvesNotes} from '../../api/SolenoidValveApi';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -126,6 +122,12 @@ const SolenoidValvesInfoScreen = props => {
               utilityNotes: findSolenoidValveNotes,
               noteType: 'FindSolenoidValvesNotes',
               screenTitle: 'Find Valves',
+              utilityIcon: 'solenoidValve',
+              utilityList: solenoidValvesList,
+              utilityTitle: 'Valves',
+              utilityInfoScreen: 'SolenoidValvesInfo',
+              noteIcon: 'search',
+              noteIconTitle: 'Find' + '\n' +'Valve',
             })
           }
           style={styles.generalButtonStyle}>
@@ -142,6 +144,12 @@ const SolenoidValvesInfoScreen = props => {
               utilityNotes: solenoidValveNotes,
               noteType: 'SolenoidValveNotes',
               screenTitle: 'Valve Notes',
+              utilityIcon: 'solenoidValve',
+              utilityList: solenoidValvesList,
+              utilityTitle: 'Valves',
+              utilityInfoScreen: 'SolenoidValvesInfo',
+              noteIcon: 'stickyNote',
+              noteIconTitle: 'Valve' + '\n' +'Notes',
             })
           }
           style={styles.generalButtonStyle}>

@@ -193,6 +193,9 @@ const CustomerScreen = props => {
               utilityNotes: otherNotes,
               noteType: 'GeneralNotes',
               screenTitle: 'General Notes',
+              utilityTitle: null,
+              noteIcon: 'stickyNote',
+              noteIconTitle: 'General' + '\n' +'Notes',
             })
           }
           style={styles.generalButtonStyle}>

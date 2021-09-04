@@ -106,7 +106,10 @@ const EditCustomer = props => {
     // customer to the database
     // Call addCustomer and set the data fields of firstName, lastName,
     // and address.
-    if (checkValidPhoneNumber(currentCustomerPhoneNumber)) {
+    if (
+      !checkForNullTextEntries() &&
+      checkValidPhoneNumber(currentCustomerPhoneNumber)
+    ) {
       updateCustomer({
         firstName: currentCustomerFirstName,
         lastName: currentCustomerLastName,
@@ -141,7 +144,26 @@ const EditCustomer = props => {
       });
     }
   }
+  function checkForNullTextEntries() {
+    // Becomes true if a data field is null.
+    var textError = false;
 
+    if (currentCustomerFirstName === '') {
+      setCurrentCustomerFirstName('');
+    }
+    if (currentCustomerLastName === '') {
+      setCustomerLastNamePlaceholder('Please Enter a Valid Customer Last Name');
+      textError = true;
+    }
+    if (currentCustomerAddress === '') {
+      setCustomerAddressPlaceholder('Please Enter a Valid Customer Address');
+      textError = true;
+    }
+    if (currentCustomerPhoneNumber === '') {
+      setCurrentCustomerPhoneNumber('');
+    }
+    return textError;
+  }
   function parsePhoneNumber(text) {
     setCurrentCustomerPhoneNumber(text.replace(/[^0-9]/g, ''));
   }
@@ -163,7 +185,7 @@ const EditCustomer = props => {
             // Displays the value that the user is entering into the text input
             // For example, if the typed 'Bob', then 'Bob' is displayed in the
             // Text Input Box
-            onChange={text => setCurrentCustomerFirstName(text)}
+            onChangeText={text => setCurrentCustomerFirstName(text)}
           />
         </View>
         <View style={styles.addTextFieldDivider} />

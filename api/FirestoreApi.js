@@ -64,6 +64,10 @@ export async function getCustomers(customersRetrieved) {
 
 export function updateCustomer(customer) {
   console.log(customer.id);
+  console.log(customer.firstName);
+  console.log(customer.lastName);
+  console.log(customer.address);
+  console.log(customer.phoneNumber);
   firebase
     .firestore()
     .collection('Customers')
