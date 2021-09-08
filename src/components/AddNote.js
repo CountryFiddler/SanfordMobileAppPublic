@@ -43,9 +43,16 @@ import {storage} from 'react-native-firebase';
 import EditNotePopup from '../components/EditNotePopup';
 import * as Progress from 'react-native-progress';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faIdBadge, faPencilAlt} from '@fortawesome/free-solid-svg-icons';
+import {
+  faCheck,
+  faIdBadge,
+  faPencilAlt,
+  faTimes,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
 import {styles} from '../../api/stylesApi';
 import Icons from './Icons';
+import {faImage, faCamera} from '@fortawesome/free-solid-svg-icons';
 import NativeIcons from './NativeIcons';
 // Start of Home Screen Display
 const AddNote = props => {
@@ -185,10 +192,10 @@ const AddNote = props => {
       }
 
       counter++;
-      Alert.alert(
+      /*Alert.alert(
         'Photo uploaded!',
         'Your photo has been uploaded to Firebase Cloud Storage!',
-      );
+      );*/
       setUploading(false);
       setMediaUploadCounter(counter + 1);
     }
@@ -322,75 +329,90 @@ const AddNote = props => {
       <View style={styles.iconHeader}>
         <Icons icon={'stickyNote'} size={'medium'} />
       </View>
-      <View style={styles.addInfoScreenHeader}>
+      <View>
         <Text style={styles.addInfoScreenTitle}>Add Note</Text>
       </View>
-      <ScrollView style={{height: '70%'}}>
+      <View style={{height: '100%'}}>
         <View>
-          <View>
-            <Text style={styles.noteTitleLabel}> Title: </Text>
-            <View style={styles.textInputContainer}>
-              <TextInput
-                textAlignVertical={'top'}
-                multiline={true}
-                style={styles.textInput}
-                // Text Input Box for the customer's first name
-                // Text Input Box for the customer's first name
-                placeholder={'Title'}
-                value={noteTitle}
-                // Displays the value that the user is entering into the text input
-                // For example, if the typed 'Bob', then 'Bob' is displayed in the
-                // Text Input Box
-                onChangeText={text => setNoteTitle(text)}
-              />
-            </View>
-            <View style={styles.addTextFieldDivider} />
-            <Text style={styles.noteMessageLabel}> Message: </Text>
-            <View style={styles.noteMessageInputContainer}>
-              <TextInput
-                style={styles.textInput}
-                textAlignVertical={'top'}
-                multiline={true}
-                // Text Input Box for the customer's first name
-                // Text Input Box for the customer's first name
-                // Text Input Box for the customer's last name
-                placeholder={'Message'}
-                value={noteText}
-                onChangeText={text => setNoteText(text)}
-              />
-            </View>
-            <View style={styles.addTextFieldDivider} />
+          <Text style={styles.noteTitleLabel}> Title: </Text>
+          <View style={styles.textInputContainer}>
+            <TextInput
+              textAlignVertical={'top'}
+              multiline={true}
+              style={styles.textInput}
+              // Text Input Box for the customer's first name
+              // Text Input Box for the customer's first name
+              placeholder={'Title'}
+              value={noteTitle}
+              // Displays the value that the user is entering into the text input
+              // For example, if the typed 'Bob', then 'Bob' is displayed in the
+              // Text Input Box
+              onChangeText={text => setNoteTitle(text)}
+            />
           </View>
-          <StatusBar barStyle={'dark-content'} />
-          <View style={styles.container}>
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                style={styles.selectButton}
-                onPress={selectImage}>
-
-                <Text style={styles.buttonText}>Pick an image</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.selectButton}
-                onPress={selectImageFromCamera}>
-                <Text style={styles.buttonText}>Take a Picture</Text>
-              </TouchableOpacity>
+          <View style={styles.addTextFieldDivider} />
+          <Text style={styles.noteMessageLabel}> Message: </Text>
+          <View style={styles.noteMessageInputContainer}>
+            <TextInput
+              style={styles.textInput}
+              textAlignVertical={'top'}
+              multiline={true}
+              // Text Input Box for the customer's first name
+              // Text Input Box for the customer's first name
+              // Text Input Box for the customer's last name
+              placeholder={'Message'}
+              value={noteText}
+              onChangeText={text => setNoteText(text)}
+            />
+          </View>
+          <View style={styles.addTextFieldDivider} />
+          <View style={styles.infoChildContainer}>
+            <FontAwesomeIcon icon={faImage} size={17} style={styles.icons} />
+            <Text style={styles.labelText}># Images Selected: </Text>
+            <Text style={styles.infoText}>{numImages}</Text>
+          </View>
+        </View>
+        <StatusBar barStyle={'dark-content'} />
+        <View>
+          {uploading ? (
+            <View style={styles.addNoteProgressBarContainer}>
+              <Progress.Bar
+                progress={transferred}
+                width={300}
+                color={'#26660b'}
+              />
+              <Text style={styles.labelText}>
+                {' '}
+                {mediaType} {mediaUploadCounter} out of {numMediaToUpload} is
+                being uploaded...
+              </Text>
             </View>
-            <View style={styles.imageContainer}>
-              {uploading ? (
-                <View style={styles.progressBarContainer}>
-                  <Progress.Bar progress={transferred} width={300} />
-                  <Text>
-                    {' '}
-                    {mediaType} {mediaUploadCounter} out of {numMediaToUpload}{' '}
-                    is being uploaded...
-                  </Text>
-                </View>
-              ) : (
+          ) : (
+            <View>
+              <View style={styles.addPhotoButtonContainer}>
                 <TouchableOpacity
-                  style={styles.uploadButton}
+                  style={styles.generalButtonStyle}
+                  onPress={selectImage}>
+                  <FontAwesomeIcon icon={faImage} size={33} />
+                  <Text style={styles.buttonText}>Pick an image</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.generalButtonStyle}
+                  onPress={selectImageFromCamera}>
+                  <FontAwesomeIcon icon={faCamera} size={33} />
+                  <Text style={styles.buttonText}>Take a Picture</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.submitDataButtonContainer}>
+                <TouchableOpacity
+                  onPress={() => props.navigation.goBack()}
+                  style={styles.generalButtonStyle}>
+                  <FontAwesomeIcon icon={faTimes} size={40} color={'#cc0000'} />
+                  <Text style={styles.cancelButtonText}>Cancel</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.generalButtonStyle}
                   onPress={() => {
-                    //console.log(noteTitle);
                     {
                       noteTitle !== ''
                         ? submitNote(
@@ -412,13 +434,14 @@ const AddNote = props => {
                           );
                     }
                   }}>
-                  <Text style={styles.buttonText}>Submit Info</Text>
+                  <FontAwesomeIcon icon={faCheck} size={40} color={'#26660b'} />
+                  <Text style={styles.submitButtonText}>Submit</Text>
                 </TouchableOpacity>
-              )}
+              </View>
             </View>
-          </View>
+          )}
         </View>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };

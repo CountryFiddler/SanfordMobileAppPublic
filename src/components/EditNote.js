@@ -42,6 +42,16 @@ import {
 import {storage} from 'react-native-firebase';
 import EditNotePopup from '../components/EditNotePopup';
 import * as Progress from 'react-native-progress';
+import Icons from './Icons';
+import {styles} from '../../api/stylesApi';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+  faImage,
+  faBars,
+  faCamera,
+  faTimes,
+  faCheck,
+} from '@fortawesome/free-solid-svg-icons';
 // Start of Home Screen Display
 const EditNote = props => {
   const currNote = {
@@ -75,7 +85,7 @@ const EditNote = props => {
   const [noteTitle, setNoteTitle] = useState(props.noteTitle);
   const [noteText, setNoteText] = useState(props.noteText);
   const [imagesToUpload, setImagesToUpload] = useState([]);
-  const [imageRefs, setImageRefs] = useState(props.imageRefs);
+  const [imageRefs, setImageRefs] = useState(props.note.imageRefs);
   const [noteTitlePlaceholder, setNoteTitlePlaceholder] = useState('Title');
   const [noteTextPlaceholder, setNoteTextPlaceholder] = useState('Message');
   //setOldNote(props.note);
@@ -111,13 +121,7 @@ const EditNote = props => {
     //mediaUploadCounter = 0
   };
 
-  const UploadMedia = async (
-    images,
-    videos,
-    customer,
-    utility,
-    utilityNote,
-  ) => {
+  const UploadMedia = async (images, customer, utility, utilityNote) => {
     console.log(uploading);
     //console.log(media[counter].source);
     var counter = 0;
@@ -187,10 +191,10 @@ const EditNote = props => {
       }
 
       counter++;
-      Alert.alert(
+     /* Alert.alert(
         'Photo uploaded!',
         'Your photo has been uploaded to Firebase Cloud Storage!',
-      );
+      );*/
       setUploading(false);
       setMediaUploadCounter(counter + 1);
     }
@@ -262,12 +266,6 @@ const EditNote = props => {
             noteID +
             '/' +
             images[i].path.substring(images[i].path.lastIndexOf('/') + 1);
-          if (props.note.imageRefs.length > 0 && !areImagesAdded) {
-            console.log('Cardinals');
-            setImageRefs(props.note.imageRefs);
-            areImagesAdded = true;
-            setAddedImages(true);
-          }
           if (imageRefs.length < 20) {
             console.log(imageRefs.length);
             //checkDuplicateRefs(imageRefs, numImages, imageRef)
@@ -314,12 +312,6 @@ const EditNote = props => {
         noteID +
         '/' +
         image.path.substring(image.path.lastIndexOf('/') + 1);
-
-      if (props.note.imageRefs.length > 0 && !areImagesAdded) {
-        setImageRefs(props.note.imageRefs);
-        areImagesAdded = true;
-        setAddedImages(true);
-      }
 
       if (imageRefs.length < 20) {
         console.log('BrewCrew');
@@ -371,30 +363,21 @@ const EditNote = props => {
                   );
                 })
               : null}*/
+  console.log(customer.id);
 
   return (
     <ScrollView>
-      <View>
-        <TextInput
-          // Text Input Box for the customer's first name
-          placeholder={noteTitlePlaceholder}
-          value={noteTitle}
-          // Displays the value that the user is entering into the text input
-          // For example, if the typed 'Bob', then 'Bob' is displayed in the
-          // Text Input Box
-          onChangeText={text => setNoteTitle(text)}
-        />
-        <TextInput
-          // Text Input Box for the customer's last name
-          placeholder={noteTextPlaceholder}
-          value={noteText}
-          onChangeText={text => setNoteText(text)}
-        />
-        <StatusBar barStyle={'dark-content'} />
-        <SafeAreaView style={styles.editButtonContainer}>
-          <TouchableWithoutFeedback onPress={onShowPopup}>
-            <Text style={styles.txtSize}>Options</Text>
-          </TouchableWithoutFeedback>
+      <View style={styles.iconHeader}>
+        <Icons icon={'stickyNote'} size={'medium'} />
+      </View>
+      <View style={styles.noteHeaderBar}>
+        <View style={styles.noteTitle}>
+          <Text style={styles.noteTitleText}>Edit Note</Text>
+        </View>
+        <View style={styles.editIcon}>
+          <TouchableOpacity onPress={onShowPopup}>
+            <FontAwesomeIcon icon={faBars} size={23} />
+          </TouchableOpacity>
           <EditNotePopup
             title={'Options'}
             ref={target => (popupRef = target)}
@@ -406,30 +389,81 @@ const EditNote = props => {
             utilityType={utilityType}
             utility={utility}
           />
-        </SafeAreaView>
+        </View>
+      </View>
 
-        <SafeAreaView style={styles.container}>
-          <TouchableOpacity style={styles.selectButton} onPress={selectImage}>
-            <Text style={styles.buttonText}>Pick an image</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.selectButton}
-            onPress={selectImageFromCamera}>
-            <Text style={styles.buttonText}>Take a Picture</Text>
-          </TouchableOpacity>
-          <View style={styles.imageContainer}>
-            {uploading ? (
-              <View style={styles.progressBarContainer}>
-                <Progress.Bar progress={transferred} width={300} />
-                <Text>
-                  {' '}
-                  {mediaType} {mediaUploadCounter} out of {numMediaToUpload} is
-                  being uploaded...
-                </Text>
-              </View>
-            ) : (
+      <View style={{height: '40%'}}>
+        <Text style={styles.noteTitleLabel}> Title: </Text>
+        <View style={styles.textInputContainer}>
+          <TextInput
+            textAlignVertical={'top'}
+            multiline={true}
+            style={styles.textInput}
+            // Text Input Box for the customer's first name
+            // Text Input Box for the customer's first name
+            placeholder={noteTitlePlaceholder}
+            value={noteTitle}
+            onChangeText={text => setNoteTitle(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <Text style={styles.noteMessageLabel}> Message: </Text>
+        <View style={styles.noteMessageInputContainer}>
+          <TextInput
+            style={styles.textInput}
+            textAlignVertical={'top'}
+            multiline={true}
+            // Text Input Box for the customer's first name
+            // Text Input Box for the customer's first name
+            // Text Input Box for the customer's last name
+            placeholder={noteTextPlaceholder}
+            value={noteText}
+            onChangeText={text => setNoteText(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <FontAwesomeIcon icon={faImage} size={17} style={styles.icons} />
+          <Text style={styles.labelText}># Images Selected: </Text>
+          <Text style={styles.infoText}>{imagesToUpload.length}</Text>
+        </View>
+      </View>
+      <StatusBar barStyle={'dark-content'} />
+      <View >
+        {uploading ? (
+          <View style={styles.editNoteProgressBarContainer}>
+            <Progress.Bar progress={transferred} width={300} color={'#26660b'}/>
+            <Text style={styles.labelText}>
+              {' '}
+              {mediaType} {mediaUploadCounter} out of {numMediaToUpload} is
+              being uploaded...
+            </Text>
+          </View>
+        ) : (
+          <ScrollView>
+            <View style={styles.editPhotoButtonContainer}>
               <TouchableOpacity
-                style={styles.uploadButton}
+                style={styles.generalButtonStyle}
+                onPress={selectImage}>
+                <FontAwesomeIcon icon={faImage} size={33} />
+                <Text style={styles.buttonText}>Pick an image</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.generalButtonStyle}
+                onPress={selectImageFromCamera}>
+                <FontAwesomeIcon icon={faCamera} size={33} />
+                <Text style={styles.buttonText}>Take a Picture</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.submitDataButtonContainer}>
+              <TouchableOpacity
+                onPress={() => props.navigation.goBack()}
+                style={styles.generalButtonStyle}>
+                <FontAwesomeIcon icon={faTimes} size={40} color={'#cc0000'} />
+                <Text style={styles.cancelButtonText}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.generalButtonStyle}
                 onPress={() => {
                   //console.log(noteTitle);
                   {
@@ -455,59 +489,19 @@ const EditNote = props => {
                         );
                   }
                 }}>
-                <Text style={styles.buttonText}>Submit Info</Text>
+                <FontAwesomeIcon icon={faCheck} size={40} color={'#26660b'} />
+                <Text style={styles.submitButtonText}>Submit</Text>
               </TouchableOpacity>
-            )}
-          </View>
-        </SafeAreaView>
+            </View>
+            <View style={styles.spaceHolder}></View>
+          </ScrollView>
+        )}
       </View>
     </ScrollView>
   );
 };
 // End of Home Screen Display
 
-const styles = StyleSheet.create({
-  container: {
-    // Dont have flex 1, this messes up Android
-    //flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#bbded6',
-  },
-  selectButton: {
-    borderRadius: 5,
-    width: 150,
-    height: 50,
-    backgroundColor: '#8ac6d1',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  uploadButton: {
-    borderRadius: 5,
-    width: 150,
-    height: 50,
-    backgroundColor: '#ffb6b9',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  imageContainer: {
-    marginTop: 30,
-    marginBottom: 50,
-    alignItems: 'center',
-  },
-  progressBarContainer: {
-    marginTop: 200,
-  },
-  imageBox: {
-    width: 300,
-    height: 300,
-  },
-});
 // End of Home Screen Display
 
 export default EditNote;

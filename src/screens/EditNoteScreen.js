@@ -35,6 +35,7 @@ import {UploadMedia} from '../../api/FirestoreApi';
 import {storage} from 'react-native-firebase';
 import EditNotePopup from '../components/EditNotePopup';
 import AddOrEditNote from '../components/AddOrEditNote';
+import EditNote from "../components/EditNote";
 // Start of Home Screen Display
 const EditNoteScreen = props => {
   const note = props.navigation.getParam('note');
@@ -44,8 +45,7 @@ const EditNoteScreen = props => {
   const utilityNotes = props.navigation.getParam('utilityNotes');
   return (
     <ScrollView>
-      <View>
-        <AddOrEditNote
+        <EditNote
           customer={customer}
           note={note}
           utilityType={utilityType}
@@ -60,7 +60,6 @@ const EditNoteScreen = props => {
           noteTitle={note.title}
           noteText={note.noteText}
         />
-      </View>
     </ScrollView>
   );
 };

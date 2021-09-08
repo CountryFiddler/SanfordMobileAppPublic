@@ -75,7 +75,7 @@ export const styles = StyleSheet.create({
     fontSize: 17,
     alignItems: 'flex-start',
 
-    height: '5%',
+    height: '10%',
   },
   noteMessageInputContainer: {
     marginTop: '5%',
@@ -118,14 +118,34 @@ export const styles = StyleSheet.create({
     marginLeft: '1.5%',
     marginRight: '1.5%',
   },
-
+  addPhotoButtonContainer: {
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginTop: '-13%',
+    paddingBottom: 10,
+    marginLeft: '1.5%',
+    marginRight: '1.5%',
+  },
+  editPhotoButtonContainer: {
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingBottom: 10,
+    //marginTop: '5%',
+    marginLeft: '1.5%',
+    marginRight: '1.5%',
+  },
+  addNoteInfoButtonContainer: {
+    height: '75%',
+  },
   submitDataButtonContainer: {
     justifyContent: 'space-around',
     alignItems: 'center',
     flexDirection: 'row',
     paddingTop: 25,
     marginBottom: '7%',
-    paddingBottom: 10,
+    paddingBottom: 50,
     marginLeft: '1.5%',
     marginRight: '1.5%',
   },
@@ -388,8 +408,6 @@ export const styles = StyleSheet.create({
     fontSize: 17,
   },
   noteTitleLabel: {
-    //marginTop: '10%',
-    //marginBottom: '10%',
     marginTop: '2%',
     marginLeft: '2%',
     fontStyle: 'italic',
@@ -435,11 +453,24 @@ export const styles = StyleSheet.create({
     marginBottom: 50,
     alignItems: 'center',
   },
-  progressBarContainer: {
-    marginTop: 200,
+  editNoteProgressBarContainer: {
+    marginTop: '20%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  addNoteProgressBarContainer: {
+    //marginTop: '20%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  progressBar: {
+    color: '#26660b',
   },
   imageBox: {
     width: 300,
     height: 300,
+  },
+  spaceHolder: {
+    marginBottom: '20%',
   },
 });

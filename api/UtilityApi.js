@@ -160,7 +160,8 @@ export function updateNote(
   numImages,
   addComplete,
 ) {
-  console.log(imageRefs);
+  console.log(customer.id);
+  //console.log(imageRefs);
   var docRef = firebase
     .firestore()
     .collection('Customers')
@@ -169,7 +170,7 @@ export function updateNote(
   if (utilityNote.noteType !== 'GeneralNotes') {
     docRef = docRef.collection(utilityType).doc(utility.id);
   }
-  console.log('Joe' + utilityNote.noteID);
+  console.log('Joe' + utilityNote.noteType);
   docRef
     .collection(utilityNote.noteType)
     .doc(utilityNote.noteID)
