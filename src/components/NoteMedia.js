@@ -1575,6 +1575,7 @@ const NoteMedia = props => {
               <View>{displayImage20()}</View>
             </View>
           </ScrollView>
+          <View style={styles.editNoteDivider}/>
           <View>
             {isDeleteMedia ? (
               <View style={styles.submitDataButtonContainer}>

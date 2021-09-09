@@ -442,6 +442,7 @@ const EditNote = props => {
                 <Text style={styles.buttonText}>Take a Picture</Text>
               </TouchableOpacity>
             </View>
+            <View style={styles.editNoteDivider}/>
             <View style={styles.submitDataButtonContainer}>
               <TouchableOpacity
                 onPress={() => props.navigation.goBack()}

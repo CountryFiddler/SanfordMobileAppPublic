@@ -48,14 +48,12 @@ export function deleteNoteMedia(
       customer: customer,
       utility: utility,
     });
-  }
-  else if (utilityType === 'ShutOffValves') {
+  } else if (utilityType === 'ShutOffValves') {
     navigation.navigate('ShutOffInfo', {
       customer: customer,
       utility: utility,
     });
-  }
-  else if (utilityType === 'SolenoidValves') {
+  } else if (utilityType === 'SolenoidValves') {
     navigation.navigate('SolenoidValvesInfo', {
       customer: customer,
       utility: utility,
@@ -65,6 +63,72 @@ export function deleteNoteMedia(
       customer: customer,
     });
   }
+}
+
+export function deleteCustomer(
+  customer,
+  timers,
+  shutOffValves,
+  solenoidValves,
+  generalNotes,
+  navigation,
+) {
+  for (var i = 0, i < timers.length; i++) {
+
+  }
+  for (var i = 0; i < utilityNotes.length; i++) {
+    deleteUtilityNote(customer, utility, utilityNotes[i]);
+  }
+  for (var j = 0; j < findUtilityNotes.length; j++) {
+    deleteUtilityNote(customer, utility, findUtilityNotes[j]);
+  }
+  navigation.navigate('Customer', {
+    customer: customer,
+    navigation: navigation,
+  });
+}
+
+export function deleteUtilites(
+  customer,
+  utilities,
+  navigation,
+  noteTypes
+) {
+  for (var i = 0; i < noteTypes.length; i++){
+    for (var j = 0; j < utilities.length; j++) {
+      getNotes(customer, utilities[i], noteTypes[j]);
+      deleteUtility(customer, utilities[i],)
+    }
+  }
+  for (var i = 0; i < utilityNotes.length; i++) {
+    deleteUtilityNote(customer, utility, utilityNotes[i]);
+  }
+  for (var j = 0; j < findUtilityNotes.length; j++) {
+    deleteUtilityNote(customer, utility, findUtilityNotes[j]);
+  }
+  navigation.navigate('Customer', {
+    customer: customer,
+    navigation: navigation,
+  });
+}
+
+export function deleteUtility(
+  customer,
+  utility,
+  utilityNotes,
+  findUtilityNotes,
+  navigation,
+) {
+  for (var i = 0; i < utilityNotes.length; i++) {
+    deleteUtilityNote(customer, utility, utilityNotes[i]);
+  }
+  for (var j = 0; j < findUtilityNotes.length; j++) {
+    deleteUtilityNote(customer, utility, findUtilityNotes[j]);
+  }
+  navigation.navigate('Customer', {
+    customer: customer,
+    navigation: navigation,
+  });
 }
 
 export function deleteContent(
@@ -91,15 +155,13 @@ export function deleteContent(
         utility: utility,
         noteType: utilityNote.noteType,
       });
-    }
-    else if (utility.utilityType === 'ShutOffValves') {
+    } else if (utility.utilityType === 'ShutOffValves') {
       navigation.navigate('ShutOffInfo', {
         customer: customer,
         utility: utility,
         noteType: utilityNote.noteType,
       });
-    }
-    else if (utility.utilityType === 'SolenoidValves') {
+    } else if (utility.utilityType === 'SolenoidValves') {
       navigation.navigate('SolenoidValvesInfo', {
         customer: customer,
         utility: utility,

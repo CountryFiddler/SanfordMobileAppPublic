@@ -13,11 +13,14 @@
  */
 // Import Statements
 import React, {useState} from 'react';
-import {Text, StyleSheet, View, Button} from 'react-native';
+import { Text, StyleSheet, View, Button, TouchableOpacity } from "react-native";
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import {deleteContent} from '../../api/UtilityApi';
 import { styles } from "../../api/stylesApi";
 import Icons from "../components/Icons";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 
 // Start of Home Screen Display
 const DeleteContentScreen = props => {
@@ -38,10 +41,47 @@ const DeleteContentScreen = props => {
       <View style={styles.deleteContentScreenTitle}>
       <Text style={styles.noteTitleText}>Are You Sure Want to Delete {contentToDelete}?</Text>
       </View>
-      <Text>
-        Once Deleted, All Content Associated with {contentToDelete} Will Be
-        Erased
-      </Text>
+      <View style={styles.deleteContentScreenTextContainer}>
+
+        <Text style={styles.deleteContentScreenText}>
+          Once Deleted, All Content Associated with {contentToDelete} Will Be
+          Erased
+        </Text>
+      </View>
+      <View style={styles.editNoteDivider}/>
+      <View style={styles.submitDataButtonContainer}>
+        <TouchableOpacity
+          onPress={() => props.navigation.goBack()}
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faTimes} size={40} color={'#26660b'} />
+          <Text style={styles.submitButtonText}>Cancel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            deleteContent(
+              deleteCustomer,
+              deleteUtility,
+              deleteUtilityNote,
+              customer,
+              utility,
+              utilityNote,
+              props.navigation,
+            )
+          }
+          style={styles.generalButtonStyle}>
+          <FontAwesomeIcon icon={faTrashAlt} size={40} color={'#cc0000'} />
+          <Text style={styles.cancelButtonText}>Delete</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
+// End of Home Screen Display
+
+
+export default DeleteContentScreen;
+
+/*
       <Button
         onPress={() =>
           deleteContent(
@@ -62,10 +102,4 @@ const DeleteContentScreen = props => {
         title="Cancel"
         style={(styles.textStyle, styles.addCustomerButton)}
       />
-    </View>
-  );
-};
-// End of Home Screen Display
-
-
-export default DeleteContentScreen;
+ */

@@ -434,7 +434,7 @@ export const styles = StyleSheet.create({
     //flex: 1,
     alignItems: 'center',
     backgroundColor: '#bbded6',
-   // height: '50%',
+    // height: '50%',
     //marginTop: '2%',
   },
   selectButton: {
@@ -488,7 +488,6 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
   },
   checkBoxContainer: {
-
     alignItems: 'flex-end',
     width: 195,
   },
@@ -508,8 +507,6 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   deleteContentScreenTitle: {
-
-
     justifyContent: 'center',
     alignItems: 'center',
     //width: '80%',
@@ -524,6 +521,49 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     //justifyContent: 'flex-end',
     alignItems: 'center',
+  },
+  editNoteDivider: {
+    borderTopWidth: 3,
+    borderTopColor: '#26660b',
+    marginTop: '5%',
+    marginLeft: '10%',
+    marginRight: '10%',
+    borderRadius: 20,
+  },
 
+  deleteContentScreenTextContainer: {
+    borderTopColor: '#26660b',
+    borderTopWidth: 3,
+    paddingTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    //width: '80%',
+    paddingLeft: 20,
+    paddingRight: 20,
+    marginTop: '5%',
+    marginRight: '5%',
+    marginLeft: '5%',
+  },
+
+  deleteContentScreenText: {
+    fontSize: 18,
+    textAlign: 'center',
+    //flex: 1,
+    flexDirection: 'row',
+    //justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  loginButtonContainer: {
+    borderRadius: 10,
+    width: 175,
+    height: 50,
+    backgroundColor: '#26660b',
+    justifyContent: 'center',
+  },
+  loginButtonText: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });

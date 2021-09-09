@@ -44,10 +44,17 @@ import {
   faTimes,
   faIdBadge,
   faUserPlus,
-  faSearch, faTrashAlt,
+  faSearch,
+  faTrashAlt,
+  faKey, faSignInAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import {checkValidPhoneNumber} from '../../api/CustomerApi';
-import { faImage, faStickyNote, faTimesCircle } from "@fortawesome/free-regular-svg-icons";
+import {
+  faEnvelope,
+  faImage,
+  faStickyNote,
+  faTimesCircle,
+} from '@fortawesome/free-regular-svg-icons';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const Icons = props => {
@@ -64,6 +71,9 @@ const Icons = props => {
   var exit = false;
   var image = false;
   var trash = false;
+  var email = false;
+  var password = false;
+  var signIn = false;
   var size = props.size;
 
   if (props.icon === 'timer') {
@@ -123,6 +133,33 @@ const Icons = props => {
       size = 33;
     }
   }
+  if (props.icon === 'email') {
+    email = true;
+    if (size === 'medium') {
+      size = 33;
+    }
+    if (size === 'small') {
+      size = 17;
+    }
+  }
+  if (props.icon === 'password') {
+    password = true;
+    if (size === 'medium') {
+      size = 33;
+    }
+    if (size === 'small') {
+      size = 17;
+    }
+  }
+  if (props.icon === 'signIn') {
+    signIn = true;
+    if (size === 'medium') {
+      size = 33;
+    }
+    if (size === 'small') {
+      size = 17;
+    }
+  }
   return (
     <SafeAreaView>
       {timer ? (
@@ -153,16 +190,16 @@ const Icons = props => {
           style={{color: 'white'}}
         />
       ) : image ? (
-        <FontAwesomeIcon
-          icon={faImage}
-          size={size}
-        />
+        <FontAwesomeIcon icon={faImage} size={size} />
       ) : trash ? (
-        <FontAwesomeIcon
-          icon={faTrashAlt}
-          size={size}
-        />
-      ) :null}
+        <FontAwesomeIcon icon={faTrashAlt} size={size} />
+      ) : email ? (
+        <FontAwesomeIcon icon={faEnvelope} size={size} style={props.style}/>
+      ) : password ? (
+        <FontAwesomeIcon icon={faKey} size={size} style={props.style}/>
+      ) : signIn ? (
+        <FontAwesomeIcon icon={faSignInAlt} size={size} />
+      ) : null}
     </SafeAreaView>
   );
 };
