@@ -9,8 +9,13 @@ import {
   TouchableWithoutFeedback,
   Dimensions,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
+import {styles} from '../../api/stylesApi';
+import {faTimes} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faImage, faStickyNote} from '@fortawesome/free-regular-svg-icons';
 
 // Start of Home Screen Display
 const deviceHeight = Dimensions.get('window').height;
@@ -45,7 +50,7 @@ class EditNotePopup extends Component {
   renderTitle = () => {
     const {title} = this.props;
     return (
-      <View style={{alignItems: 'center'}}>
+      <View style={{alignItems: 'center', fontWeight: 'bold'}}>
         <Text
           style={{
             color: '#182E44',
@@ -86,24 +91,26 @@ class EditNotePopup extends Component {
         <View
           style={{
             height: 50,
-            flex: 1,
+            //flex: 1,
             alignItems: 'flex-start',
-            justifyContent: 'center',
-            marginLeft: 50,
+            //justifyContent: 'center',
+            marginLeft: 10,
           }}>
-          <Button
-            style={{fontSize: 18, fontWeight: 'normal', color: '#182E44'}}
-            title={item.name}
-            onPress={() =>
-              this.props.navigation.navigate('DeleteNoteMedia', {
-                customer: this.props.customer,
-                note: this.props.note,
-                navigation: this.props.navigation,
-                utilityType: this.props.utilityType,
-                utility: this.props.utility,
-              })
-            }
-          />
+          <TouchableOpacity
+            onPress={() => (
+              this.setState({show: false}),
+                this.props.navigation.navigate('DeleteNoteMedia', {
+                  customer: this.props.customer,
+                  note: this.props.note,
+                  navigation: this.props.navigation,
+                  utilityType: this.props.utilityType,
+                  utility: this.props.utility,
+                })
+            )}
+            style={styles.editNotePopUpButtonContainer}>
+            <FontAwesomeIcon icon={faImage} size={30} color={'#26660b'} />
+            <Text style={styles.editNotePopUpButton}>{item.name}</Text>
+          </TouchableOpacity>
         </View>
       );
     } else {
@@ -113,13 +120,13 @@ class EditNotePopup extends Component {
             height: 50,
             flex: 1,
             alignItems: 'flex-start',
-            justifyContent: 'center',
-            marginLeft: 50,
+            //justifyContent: 'center',
+            flexDirection: 'row',
+            marginLeft: 10,
           }}>
-          <Button
-            style={{fontSize: 18, fontWeight: 'normal', color: '#182E44'}}
-            title={item.name}
-            onPress={() =>
+          <TouchableOpacity
+            onPress={() => (
+              this.setState({show: false}),
               this.props.navigation.navigate('DeleteContent', {
                 deleteCustomer: false,
                 deleteUtility: false,
@@ -130,8 +137,11 @@ class EditNotePopup extends Component {
                 contentToDelete: this.props.note.title,
                 prevScreen: 'EditNote',
               })
-            }
-          />
+            )}
+            style={styles.editNotePopUpButtonContainer}>
+            <FontAwesomeIcon icon={faStickyNote} size={30} color={'#26660b'} />
+            <Text style={styles.editNotePopUpButton}>{item.name}</Text>
+          </TouchableOpacity>
         </View>
       );
     }
@@ -160,7 +170,7 @@ class EditNotePopup extends Component {
           style={{
             flex: 1,
             backgroundColor: '#000000AA',
-            justifyContent: 'flex-end',
+            //justifyContent: 'flex-end',
           }}>
           {this.renderOutsideTouchable(onTouchOutside)}
           <View
@@ -182,25 +192,5 @@ class EditNotePopup extends Component {
 }
 
 // End of Home Screen Display
-
-// Start of StylingSheet
-const styles = StyleSheet.create({
-  headerStyle: {
-    borderWidth: 1,
-    borderColor: 'black',
-  },
-  homePageContainer: {
-    flex: 1,
-  },
-  textStyle: {
-    fontSize: 30,
-    textAlign: 'center',
-    //alignSelf: 'center',
-  },
-  addCustomerButton: {
-    //position: 'absolute',
-    marginTop: 50,
-  },
-});
 
 export default EditNotePopup;

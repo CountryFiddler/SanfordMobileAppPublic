@@ -16,6 +16,8 @@ import React, {useState} from 'react';
 import {Text, StyleSheet, View, Button} from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import {deleteContent} from '../../api/UtilityApi';
+import { styles } from "../../api/stylesApi";
+import Icons from "../components/Icons";
 
 // Start of Home Screen Display
 const DeleteContentScreen = props => {
@@ -29,8 +31,13 @@ const DeleteContentScreen = props => {
   const contentToDelete = props.navigation.getParam('contentToDelete');
   console.log(prevScreen);
   return (
-    <View style={styles.homePageContainer}>
-      <Text>Are You Sure Want to Delete {contentToDelete}?</Text>
+    <View >
+      <View style={styles.iconHeader}>
+        <Icons icon={'trash'} size={'medium'} />
+      </View>
+      <View style={styles.deleteContentScreenTitle}>
+      <Text style={styles.noteTitleText}>Are You Sure Want to Delete {contentToDelete}?</Text>
+      </View>
       <Text>
         Once Deleted, All Content Associated with {contentToDelete} Will Be
         Erased
@@ -60,24 +67,5 @@ const DeleteContentScreen = props => {
 };
 // End of Home Screen Display
 
-// Start of StylingSheet
-const styles = StyleSheet.create({
-  headerStyle: {
-    borderWidth: 1,
-    borderColor: 'black',
-  },
-  homePageContainer: {
-    flex: 1,
-  },
-  textStyle: {
-    fontSize: 30,
-    textAlign: 'center',
-    //alignSelf: 'center',
-  },
-  addCustomerButton: {
-    //position: 'absolute',
-    marginTop: 50,
-  },
-});
 
 export default DeleteContentScreen;

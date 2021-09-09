@@ -31,6 +31,8 @@ import {getImageURL, updateNote} from '../../api/FirestoreApi';
 import EditNotePopup from '../components/EditNotePopup';
 import {deleteNoteMedia} from '../../api/TimerApi';
 import NoteMedia from '../components/NoteMedia';
+import Icons from '../components/Icons';
+import {styles} from '../../api/stylesApi';
 
 // Start of Home Screen Display
 const DeleteNoteMediaScreen = props => {
@@ -45,38 +47,27 @@ const DeleteNoteMediaScreen = props => {
   // console.log(note.images[0].imageRef);
   // getURLS();
   return (
-    <ScrollView style={styles.homePageContainer}>
-      <NoteMedia
-        customer={customer}
-        utilityType={utilityType}
-        utility={utility}
-        note={note}
-        isDeleteMedia={true}
-        navigation={props.navigation}
-      />
-    </ScrollView>
+    <SafeAreaView>
+      <View style={styles.iconHeader}>
+        <Icons icon={'stickyNote'} size={'medium'} />
+      </View>
+      <View>
+        <Text style={styles.addInfoScreenTitle}>Delete Photos</Text>
+      </View>
+      <View style={styles.dividerWithSpacing} />
+      <View>
+        <NoteMedia
+          customer={customer}
+          utilityType={utilityType}
+          utility={utility}
+          note={note}
+          isDeleteMedia={true}
+          navigation={props.navigation}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 // End of Home Screen Display
-
-// Start of StylingSheet
-const styles = StyleSheet.create({
-  headerStyle: {
-    borderWidth: 1,
-    borderColor: 'black',
-  },
-  homePageContainer: {
-    flex: 1,
-  },
-  textStyle: {
-    fontSize: 30,
-    textAlign: 'center',
-    //alignSelf: 'center',
-  },
-  addCustomerButton: {
-    //position: 'absolute',
-    marginTop: 50,
-  },
-});
 
 export default DeleteNoteMediaScreen;

@@ -722,3 +722,25 @@ console.log(counter);*/
       <View>{displayVideo18()}</View>
       <View>{displayVideo19()}</View>
       <View>{displayVideo20()}</View>*/
+/*
+
+const [video1, setVideo1] = useState(null);
+const [video2, setVideo2] = useState(null);
+const [video3, setVideo3] = useState(null);
+const [video4, setVideo4] = useState(null);
+const [video5, setVideo5] = useState(null);
+const [video6, setVideo6] = useState(null);
+const [video7, setVideo7] = useState(null);
+const [video8, setVideo8] = useState(null);
+const [video9, setVideo9] = useState(null);
+const [video10, setVideo10] = useState(null);
+const [video11, setVideo11] = useState(null);
+const [video12, setVideo12] = useState(null);
+const [video13, setVideo13] = useState(null);
+const [video14, setVideo14] = useState(null);
+const [video15, setVideo15] = useState(null);
+const [video16, setVideo16] = useState(null);
+const [video17, setVideo17] = useState(null);
+const [video18, setVideo18] = useState(null);
+const [video19, setVideo19] = useState(null);
+const [video20, setVideo20] = useState(null);*/

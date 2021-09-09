@@ -47,26 +47,13 @@ import {styles} from '../../api/stylesApi';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
   faImage,
-  faBars,
+  faEllipsisV,
   faCamera,
   faTimes,
   faCheck,
 } from '@fortawesome/free-solid-svg-icons';
 // Start of Home Screen Display
 const EditNote = props => {
-  const currNote = {
-    numImages: 0,
-    numVideos: 0,
-    title: '',
-    titlePlaceholder: 'Title',
-    noteText: '',
-    noteTextPlaceholder: 'Text',
-    images: [],
-    imageRefs: [],
-    videos: [],
-    videoRefs: [],
-    noteID: '',
-  };
   const customer = props.customer;
   const utilityType = props.utilityType;
   const utility = props.utility;
@@ -376,7 +363,7 @@ const EditNote = props => {
         </View>
         <View style={styles.editIcon}>
           <TouchableOpacity onPress={onShowPopup}>
-            <FontAwesomeIcon icon={faBars} size={23} />
+            <FontAwesomeIcon icon={faEllipsisV} size={23} />
           </TouchableOpacity>
           <EditNotePopup
             title={'Options'}
@@ -384,7 +371,7 @@ const EditNote = props => {
             onTouchOutside={onClosePopup}
             data={popupList}
             customer={customer}
-            note={currNote}
+            note={note}
             navigation={props.navigation}
             utilityType={utilityType}
             utility={utility}

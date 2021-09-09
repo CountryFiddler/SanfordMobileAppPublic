@@ -44,10 +44,10 @@ import {
   faTimes,
   faIdBadge,
   faUserPlus,
-  faSearch,
-} from '@fortawesome/free-solid-svg-icons';
+  faSearch, faTrashAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import {checkValidPhoneNumber} from '../../api/CustomerApi';
-import {faStickyNote, faTimesCircle} from '@fortawesome/free-regular-svg-icons';
+import { faImage, faStickyNote, faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const Icons = props => {
@@ -62,6 +62,8 @@ const Icons = props => {
   var stickyNote = false;
   var edit = false;
   var exit = false;
+  var image = false;
+  var trash = false;
   var size = props.size;
 
   if (props.icon === 'timer') {
@@ -109,6 +111,18 @@ const Icons = props => {
       size = 33;
     }
   }
+  if (props.icon === 'image') {
+    image = true;
+    if (size === 'medium') {
+      size = 33;
+    }
+  }
+  if (props.icon === 'trash') {
+    trash = true;
+    if (size === 'medium') {
+      size = 33;
+    }
+  }
   return (
     <SafeAreaView>
       {timer ? (
@@ -138,7 +152,17 @@ const Icons = props => {
           size={size}
           style={{color: 'white'}}
         />
-      ) : null}
+      ) : image ? (
+        <FontAwesomeIcon
+          icon={faImage}
+          size={size}
+        />
+      ) : trash ? (
+        <FontAwesomeIcon
+          icon={faTrashAlt}
+          size={size}
+        />
+      ) :null}
     </SafeAreaView>
   );
 };

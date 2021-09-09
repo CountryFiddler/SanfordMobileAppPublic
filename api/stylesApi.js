@@ -361,6 +361,12 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
   },
+  deleteNoteImageSubContainer: {
+    marginTop: '5%',
+    flexDirection: 'row',
+    paddingLeft: 12,
+    alignItems: 'center',
+  },
   noteImage: {
     width: 175,
     height: 175,
@@ -472,5 +478,52 @@ export const styles = StyleSheet.create({
   },
   spaceHolder: {
     marginBottom: '20%',
+  },
+  dividerWithSpacing: {
+    borderTopWidth: 3,
+    borderTopColor: '#26660b',
+    marginLeft: '10%',
+    marginRight: '10%',
+    marginTop: '2%',
+    borderRadius: 20,
+  },
+  checkBoxContainer: {
+
+    alignItems: 'flex-end',
+    width: 195,
+  },
+  checkBox: {
+    alignItems: 'flex-end',
+    width: 190,
+  },
+  deleteImageDisplay: {
+    width: 100,
+  },
+  editNotePopUpButtonContainer: {
+    flexDirection: 'row',
+  },
+  editNotePopUpButton: {
+    marginLeft: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  deleteContentScreenTitle: {
+
+
+    justifyContent: 'center',
+    alignItems: 'center',
+    //width: '80%',
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  deleteContentScreenTitleText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    //flex: 1,
+    flexDirection: 'row',
+    //justifyContent: 'flex-end',
+    alignItems: 'center',
+
   },
 });
