@@ -566,4 +566,8 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
+  deleteContentScreenCancelButton: {
+    color: 'black',
+    fontSize: 20,
+  },
 });

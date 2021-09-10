@@ -19,14 +19,21 @@ import {
   View,
   Button,
   SafeAreaView,
-  TextInput, Image, TouchableOpacity,
-} from "react-native";
+  TextInput,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
-import { addCustomer, getTimerNotes, updateCustomer } from "../../api/FirestoreApi";
-import { submitTimerChanges, submitTimerInfo } from "../../api/TimerApi";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { styles } from "../../api/stylesApi";
+import {
+  addCustomer,
+  getTimerNotes,
+  updateCustomer,
+} from '../../api/FirestoreApi';
+import {submitTimerChanges, submitTimerInfo} from '../../api/TimerApi';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {styles} from '../../api/stylesApi';
+import Icons from '../components/Icons';
 
 // Start of Home Screen Display
 const EditTimerInfoScreen = props => {
@@ -47,9 +54,7 @@ const EditTimerInfoScreen = props => {
           style={{width: 30, height: 30}}
           source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/iu-1.png')}
         />
-        <Text style={styles.addInfoScreenTitle}>
-          Edit Timer
-        </Text>
+        <Text style={styles.addInfoScreenTitle}>Edit Timer</Text>
       </View>
       <View style={styles.addInfoContainer}>
         <View style={styles.infoChildContainer}>
@@ -89,6 +94,21 @@ const EditTimerInfoScreen = props => {
         </View>
         <View style={styles.addTextFieldDivider} />
         <View style={styles.submitDataButtonContainer}>
+          <TouchableOpacity
+            onPress={() =>
+              props.navigation.navigate('DeleteContent', {
+                deleteUtility: true,
+                customer: customer,
+                utility: timer,
+                noteSections: ['FindTimerNotes, TimerNotes'],
+                contentToDelete: 'This Timer',
+                navigation: props.navigation,
+              })
+            }
+            style={styles.generalButtonStyle}>
+            <Icons icon={'trash'} size={40} />
+            <Text style={styles.cancelButtonText}>Delete</Text>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={() =>
               props.navigation.navigate('TimerInfo', {

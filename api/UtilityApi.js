@@ -68,67 +68,116 @@ export function deleteNoteMedia(
 export function deleteCustomer(
   customer,
   timers,
-  shutOffValves,
+  shutOffs,
   solenoidValves,
   generalNotes,
   navigation,
 ) {
-  for (var i = 0, i < timers.length; i++) {
-
-  }
-  for (var i = 0; i < utilityNotes.length; i++) {
-    deleteUtilityNote(customer, utility, utilityNotes[i]);
-  }
-  for (var j = 0; j < findUtilityNotes.length; j++) {
-    deleteUtilityNote(customer, utility, findUtilityNotes[j]);
-  }
-  navigation.navigate('Customer', {
-    customer: customer,
-    navigation: navigation,
-  });
+  var timerNoteTypes = ['FindTimerNotes', 'TimerNotes'];
+  var shutOffNoteTypes = ['FindShutOffValveNotes', 'ShutOffValveNotes'];
+  var solenoidValveNoteTypes = ['FindSolenoidValveNotes', 'SolenoidValveNotes'];
+  deleteUtilities(customer, timers, timerNoteTypes);
+  deleteUtilities(customer, shutOffs, shutOffNoteTypes);
+  deleteUtilities(customer, solenoidValves, solenoidValveNoteTypes);
+  deleteGeneralNotes(customer, generalNotes);
+  var docRef = firestore()
+    .collection('Customers')
+    // Is customer.id needed here?
+    .doc(customer.id)
+    .delete()
+    .then(() => {
+      console.log('Document successfully deleted!');
+    })
+    .catch(error => {
+      console.error('Error removing document: ', error);
+    });
+  navigation.navigate('Home');
 }
 
-export function deleteUtilites(
-  customer,
-  utilities,
-  navigation,
-  noteTypes
-) {
-  for (var i = 0; i < noteTypes.length; i++){
-    for (var j = 0; j < utilities.length; j++) {
-      getNotes(customer, utilities[i], noteTypes[j]);
-      deleteUtility(customer, utilities[i],)
+export function deleteUtilities(customer, utilities, noteTypes, navigation) {
+  for (var i = 0; i < utilities.length; i++) {
+    for (var j = 0; j < noteTypes.length; j++) {
+      var notes = getNotes(customer, utilities[i], noteTypes[j]);
+      deleteUtility(customer, utilities[i], notes);
     }
   }
-  for (var i = 0; i < utilityNotes.length; i++) {
-    deleteUtilityNote(customer, utility, utilityNotes[i]);
+}
+
+export function deleteUtility(customer, utility, noteSections, navigation) {
+  for (var i = 0; i < noteSections.length; i++) {
+    deleteUtilityNotes(customer, utility, noteSections[i]);
   }
-  for (var j = 0; j < findUtilityNotes.length; j++) {
-    deleteUtilityNote(customer, utility, findUtilityNotes[j]);
-  }
+  var docRef = firestore()
+    .collection('Customers')
+    // Is customer.id needed here?
+    .doc(customer.id)
+    .collection(utility.utilityType)
+    .doc(utility.id)
+    .delete()
+    .then(() => {
+      console.log('Document successfully deleted!');
+    })
+    .catch(error => {
+      console.error('Error removing document: ', error);
+    });
   navigation.navigate('Customer', {
     customer: customer,
     navigation: navigation,
   });
 }
 
-export function deleteUtility(
-  customer,
-  utility,
-  utilityNotes,
-  findUtilityNotes,
-  navigation,
-) {
-  for (var i = 0; i < utilityNotes.length; i++) {
-    deleteUtilityNote(customer, utility, utilityNotes[i]);
+export function deleteUtilityNotes(customer, utility, notes) {
+  for (var i = 0; i < notes.length; i++) {
+    deleteUtilityNote(customer, utility, notes[i]);
   }
-  for (var j = 0; j < findUtilityNotes.length; j++) {
-    deleteUtilityNote(customer, utility, findUtilityNotes[j]);
+}
+
+export function deleteGeneralNotes(customer, notes) {
+  for (var i = 0; i < notes.length; i++) {
+    deleteGeneralNote(customer, notes[i]);
   }
-  navigation.navigate('Customer', {
-    customer: customer,
-    navigation: navigation,
-  });
+}
+
+export function deleteGeneralNote(customer, note) {
+  for (var i = 0; i < note.images.length; i++) {
+    deleteImage(note.images[i].imageRef);
+  }
+  var docRef = firestore()
+    .collection('Customers')
+    // Is customer.id needed here?
+    .doc(customer.id)
+    .collection(note.noteType)
+    .doc(note.noteID)
+    .delete()
+    .then(() => {
+      console.log('Document successfully deleted!');
+    })
+    .catch(error => {
+      console.error('Error removing document: ', error);
+    });
+}
+
+export function deleteUtilityNote(customer, utility, utilityNote) {
+  for (var i = 0; i < utilityNote.images.length; i++) {
+    deleteImage(utilityNote.images[i].imageRef);
+  }
+  var docRef = firestore()
+    .collection('Customers')
+    // Is customer.id needed here?
+    .doc(customer.id);
+  if (utilityNote.noteType !== 'GeneralNotes') {
+    docRef = docRef.collection(utility.utilityType).doc(utility.id);
+  }
+  docRef
+    .collection(utilityNote.noteType)
+    .doc(utilityNote.noteID)
+    .delete()
+    .then(() => {
+      console.log('Document successfully deleted!');
+    })
+    .catch(error => {
+      console.error('Error removing document: ', error);
+    });
 }
 
 export function deleteContent(
@@ -262,29 +311,6 @@ export function deleteImage(imageName) {
       console.log(`${imageName}has been deleted successfully.`);
     })
     .catch(e => console.log('error on image deletion => ', e));
-}
-
-export function deleteUtilityNote(customer, utility, utilityNote) {
-  for (var i = 0; i < utilityNote.images.length; i++) {
-    deleteImage(utilityNote.images[i].imageRef);
-  }
-  var docRef = firestore()
-    .collection('Customers')
-    // Is customer.id needed here?
-    .doc(customer.id);
-  if (utilityNote.noteType !== 'GeneralNotes') {
-    docRef = docRef.collection(utility.utilityType).doc(utility.id);
-  }
-  docRef
-    .collection(utilityNote.noteType)
-    .doc(utilityNote.noteID)
-    .delete()
-    .then(() => {
-      console.log('Document successfully deleted!');
-    })
-    .catch(error => {
-      console.error('Error removing document: ', error);
-    });
 }
 
 export function getNotes(customer, utility, noteType) {
