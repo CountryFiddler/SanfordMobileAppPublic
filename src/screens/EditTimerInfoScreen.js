@@ -39,8 +39,10 @@ import Icons from '../components/Icons';
 const EditTimerInfoScreen = props => {
   // Get the customer from props (this is only if the user is coming
   // from the Customer Screen)
+  const noteSections = ['FindTimerNotes', 'TimerNotes'];
   const customer = props.navigation.getParam('customer');
   const timer = props.navigation.getParam('timer');
+  const noteCollection = props.navigation.getParam('noteCollection');
   // Get the navigation prop
   const navigation = props.navigation;
   const [currentTimerType, setTimerType] = useState(timer.type);
@@ -100,14 +102,14 @@ const EditTimerInfoScreen = props => {
                 deleteUtility: true,
                 customer: customer,
                 utility: timer,
-                noteSections: ['FindTimerNotes, TimerNotes'],
+                noteCollection: noteCollection,
                 contentToDelete: 'This Timer',
                 navigation: props.navigation,
               })
             }
             style={styles.generalButtonStyle}>
-            <Icons icon={'trash'} size={40} />
-            <Text style={styles.cancelButtonText}>Delete</Text>
+            <Icons icon={'trash'} size={40} color={'#cc0000'}/>
+            <Text style={styles.deleteButtonText}>Delete</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() =>
@@ -118,8 +120,8 @@ const EditTimerInfoScreen = props => {
               })
             }
             style={styles.generalButtonStyle}>
-            <FontAwesomeIcon icon={faTimes} size={40} color={'#cc0000'} />
-            <Text style={styles.cancelButtonText}>Cancel</Text>
+            <FontAwesomeIcon icon={faTimes} size={40} color={'black'} />
+            <Text style={styles.blackCancelButtonText}>Cancel</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() =>

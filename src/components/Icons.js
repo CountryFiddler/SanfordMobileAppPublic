@@ -45,14 +45,15 @@ import {
   faIdBadge,
   faUserPlus,
   faSearch,
-  faTrashAlt,
-  faKey, faSignInAlt,
-} from "@fortawesome/free-solid-svg-icons";
+  faKey,
+  faSignInAlt,
+} from '@fortawesome/free-solid-svg-icons';
 import {checkValidPhoneNumber} from '../../api/CustomerApi';
 import {
   faEnvelope,
   faImage,
   faStickyNote,
+  faTrashAlt,
   faTimesCircle,
 } from '@fortawesome/free-regular-svg-icons';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -74,8 +75,12 @@ const Icons = props => {
   var email = false;
   var password = false;
   var signIn = false;
+  var color = props.color;
   var size = props.size;
 
+  if (color === null) {
+    color = 'black';
+  }
   if (props.icon === 'timer') {
     timer = true;
     if (size === 'medium') {
@@ -192,11 +197,11 @@ const Icons = props => {
       ) : image ? (
         <FontAwesomeIcon icon={faImage} size={size} />
       ) : trash ? (
-        <FontAwesomeIcon icon={faTrashAlt} size={size} />
+        <FontAwesomeIcon icon={faTrashAlt} size={size} color={color}/>
       ) : email ? (
-        <FontAwesomeIcon icon={faEnvelope} size={size} style={props.style}/>
+        <FontAwesomeIcon icon={faEnvelope} size={size} style={props.style} />
       ) : password ? (
-        <FontAwesomeIcon icon={faKey} size={size} style={props.style}/>
+        <FontAwesomeIcon icon={faKey} size={size} style={props.style} />
       ) : signIn ? (
         <FontAwesomeIcon icon={faSignInAlt} size={size} />
       ) : null}

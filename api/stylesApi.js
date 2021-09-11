@@ -229,6 +229,10 @@ export const styles = StyleSheet.create({
     color: '#cc0000',
     fontSize: 20,
   },
+  blackCancelButtonText: {
+    color: 'black',
+    fontSize: 20,
+  },
   submitButtonText: {
     color: '#26660b',
     fontSize: 20,
@@ -568,6 +572,10 @@ export const styles = StyleSheet.create({
   },
   deleteContentScreenCancelButton: {
     color: 'black',
+    fontSize: 20,
+  },
+  deleteButtonText: {
+    color: '#cc0000',
     fontSize: 20,
   },
 });

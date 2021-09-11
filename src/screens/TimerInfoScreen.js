@@ -45,6 +45,7 @@ const TimerInfoScreen = props => {
   const navigation = props.navigation;
   const timerNotes = getTimerNotes(customer, timer);
   const findTimerNotes = getNotes(customer, timer, 'FindTimerNotes');
+  const noteCollection = [timerNotes, findTimerNotes];
   if (timer.numPrograms === '') {
     timer.numPrograms = 'Not Provided';
   }
@@ -66,6 +67,7 @@ const TimerInfoScreen = props => {
             navigation.navigate('EditTimer', {
               customer: customer,
               timer: timer,
+              noteCollection: noteCollection,
               navigation: navigation,
             })
           }>

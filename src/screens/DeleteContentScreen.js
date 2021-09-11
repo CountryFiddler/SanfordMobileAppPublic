@@ -15,7 +15,7 @@
 import React, {useState} from 'react';
 import {Text, StyleSheet, View, Button, TouchableOpacity} from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
-import {deleteContent} from '../../api/UtilityApi';
+import { deleteContent, deleteCustomer, deleteUtility, deleteUtilityNote } from "../../api/UtilityApi";
 import {styles} from '../../api/stylesApi';
 import Icons from '../components/Icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -24,15 +24,17 @@ import {faTrashAlt} from '@fortawesome/free-regular-svg-icons';
 
 // Start of Home Screen Display
 const DeleteContentScreen = props => {
-  const deleteCustomer = props.navigation.getParam('deleteCustomer');
-  const deleteUtility = props.navigation.getParam('deleteUtility');
-  const deleteUtilityNote = props.navigation.getParam('deleteUtilityNote');
-  //const customer = props.navigation.getParam('customer');
-  //const utility = props.navigation.getParam('utility');
-  //const utilityNote = props.navigation.getParam('utilityNote');
+  const isDeleteCustomer = props.navigation.getParam('deleteCustomer');
+  const isDeleteUtility = props.navigation.getParam('deleteUtility');
+  const isDeleteUtilityNote = props.navigation.getParam('deleteUtilityNote');
+  const customer = props.navigation.getParam('customer');
+  const utility = props.navigation.getParam('utility');
+  const utilityNote = props.navigation.getParam('utilityNote');
+  const noteCollection = props.navigation.getParam('noteCollection');
   //const prevScreen = props.navigation.getParam('prevScreen');
   const contentToDelete = props.navigation.getParam('contentToDelete');
   //console.log(prevScreen);
+  //console.log(noteSections[1]);
   return (
     <View>
       <View style={styles.iconHeader}>
@@ -57,7 +59,7 @@ const DeleteContentScreen = props => {
           <FontAwesomeIcon icon={faTimes} size={40} color={'black'} />
           <Text style={styles.deleteContentScreenCancelButton}>Cancel</Text>
         </TouchableOpacity>
-        {deleteCustomer ? (
+        {isDeleteCustomer ? (
           <TouchableOpacity
             onPress={() =>
               deleteCustomer(
@@ -73,13 +75,13 @@ const DeleteContentScreen = props => {
             <FontAwesomeIcon icon={faTrashAlt} size={40} color={'#cc0000'} />
             <Text style={styles.cancelButtonText}>Delete</Text>
           </TouchableOpacity>
-        ) : deleteUtility ? (
+        ) : isDeleteUtility ? (
           <TouchableOpacity
             onPress={() =>
-              deleteCustomer(
-                props.customer,
-                props.utility,
-                props.noteSections,
+              deleteUtility(
+                customer,
+                utility,
+                noteCollection,
                 props.navigation,
               )
             }
@@ -87,10 +89,15 @@ const DeleteContentScreen = props => {
             <FontAwesomeIcon icon={faTrashAlt} size={40} color={'#cc0000'} />
             <Text style={styles.cancelButtonText}>Delete</Text>
           </TouchableOpacity>
-        ) : deleteUtilityNote ? (
+        ) : isDeleteUtilityNote ? (
           <TouchableOpacity
             onPress={() =>
-              deleteCustomer(props.customer, props.utility, props.utilityNote)
+              deleteUtilityNote(
+                customer,
+                utility,
+                utilityNote,
+                props.navigation,
+              )
             }
             style={styles.generalButtonStyle}>
             <FontAwesomeIcon icon={faTrashAlt} size={40} color={'#cc0000'} />

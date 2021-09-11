@@ -1991,3 +1991,1384 @@ function displayImage20() {
     </ScrollView>
   );
 }*/
+
+/*
+USE THIS WHEN TESTING THE STYLING OF NOTE MEDIA!!!
+  function displayImage1() {
+    //<Image source={{uri: image1}} style={{width: 20, height: 300}} />
+    //if (note.imageRefs.length > 0) {
+    return (
+      <View>
+        {isDeleteMedia ? (
+          <View>
+            <View style={styles.checkBox}>
+              <BouncyCheckbox
+                fillColor={'#26660b'}
+                label=""
+                value={agree}
+                ref={(ref: any) => (bouncyCheckboxRef1 = ref)}
+                onPress={() => (
+                  selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+                )}
+              />
+            </View>
+            <TouchableOpacity
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef1?.onPress()
+              )}>
+              <Image
+                source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                style={styles.noteImage}
+              />
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View>
+            <Modal visible={image1ZoomIn === true} animated>
+              <View style={styles.modalExitButton}>
+                <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <Icons icon={'exit'} size={33} />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.noteImageModalContainer}>
+                <View style={styles.modalImageContainer}>
+                  <ReactNativeZoomableView
+                    maxZoom={10}
+                    minZoom={0.5}
+                    zoomStep={0.5}
+                    initialZoom={1}
+                    doubleTapDelay={1}
+                    bindToBorders={true}
+                    captureEvent={true}>
+                    <Image
+                      source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                      style={styles.modalImage}
+                    />
+                  </ReactNativeZoomableView>
+                </View>
+              </View>
+            </Modal>
+            <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <Image
+                source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                style={styles.noteImage}
+              />
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
+    );
+    //}
+  }
+  function displayImage2() {
+    //<Image source={{uri: image2}} style={{width: 200, height: 300}} />
+    //if (note.imageRefs.length > 1) {
+    return (
+      <View>
+        {isDeleteMedia ? (
+          <View>
+            <View style={styles.checkBox}>
+              <BouncyCheckbox
+                fillColor={'#26660b'}
+                label=""
+                value={agree}
+                ref={(ref: any) => (bouncyCheckboxRef2 = ref)}
+                onPress={() => (
+                  selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+                )}
+              />
+            </View>
+            <TouchableOpacity
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef2?.onPress()
+              )}>
+              <Image
+                source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                style={styles.noteImage}
+              />
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View>
+            <Modal visible={image1ZoomIn === true} animated>
+              <View style={styles.modalExitButton}>
+                <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <Icons icon={'exit'} size={33} />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.noteImageModalContainer}>
+                <View style={styles.modalImageContainer}>
+                  <ReactNativeZoomableView
+                    maxZoom={10}
+                    minZoom={0.5}
+                    zoomStep={0.5}
+                    initialZoom={1}
+                    doubleTapDelay={1}
+                    bindToBorders={true}
+                    captureEvent={true}>
+                    <Image
+                      source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                      style={styles.modalImage}
+                    />
+                  </ReactNativeZoomableView>
+                </View>
+              </View>
+            </Modal>
+            <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <Image
+                source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                style={styles.noteImage}
+              />
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
+    );
+    //}
+    /*
+              <Modal visible={zoomIn === true} animated>
+            <View>
+              <ReactNativeZoomableView
+                maxZoom={1.5}
+                minZoom={1}
+                zoomStep={0.5}
+                initialZoom={1}
+                bindToBorders={true}
+                captureEvent={true}>
+                <Image
+                  source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/933845EB-50DC-4C71-B619-8AAE39168A86_1_105_c.jpeg')}
+                  style={{width: 200, height: 200}}
+                />
+              </ReactNativeZoomableView>
+            </View>
+          </Modal>
+}
+function displayImage3() {
+  //if (note.imageRefs.length > 2) {
+  //<Image source={{uri: image3}} style={{width: 200, height: 300}} />
+  return (
+    <View>
+      {isDeleteMedia ? (
+        <View>
+          <View style={styles.checkBox}>
+            <BouncyCheckbox
+              fillColor={'#26660b'}
+              label=""
+              value={agree}
+              ref={(ref: any) => (bouncyCheckboxRef3 = ref)}
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => (
+              selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef3?.onPress()
+            )}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <Modal visible={image1ZoomIn === true} animated>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.noteImageModalContainer}>
+              <View style={styles.modalImageContainer}>
+                <ReactNativeZoomableView
+                  maxZoom={10}
+                  minZoom={0.5}
+                  zoomStep={0.5}
+                  initialZoom={1}
+                  doubleTapDelay={1}
+                  bindToBorders={true}
+                  captureEvent={true}>
+                  <Image
+                    source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                    style={styles.modalImage}
+                  />
+                </ReactNativeZoomableView>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  );
+  //}
+}
+function displayImage4() {
+  //<Image source={{uri: image4}} style={{width: 200, height: 300}} />;
+  //if (note.imageRefs.length > 3) {
+  return (
+    <View>
+      {isDeleteMedia ? (
+        <View>
+          <View style={styles.checkBox}>
+            <BouncyCheckbox
+              fillColor={'#26660b'}
+              label=""
+              value={agree}
+              ref={(ref: any) => (bouncyCheckboxRef4 = ref)}
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => (
+              selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef4?.onPress()
+            )}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <Modal visible={image1ZoomIn === true} animated>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.noteImageModalContainer}>
+              <View style={styles.modalImageContainer}>
+                <ReactNativeZoomableView
+                  maxZoom={10}
+                  minZoom={0.5}
+                  zoomStep={0.5}
+                  initialZoom={1}
+                  doubleTapDelay={1}
+                  bindToBorders={true}
+                  captureEvent={true}>
+                  <Image
+                    source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                    style={styles.modalImage}
+                  />
+                </ReactNativeZoomableView>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  );
+  //}
+}
+function displayImage5() {
+  //<Image source={{uri: image5}} style={{width: 200, height: 300}} />
+  //if (note.imageRefs.length > 4) {
+  return (
+    <View>
+      {isDeleteMedia ? (
+        <View>
+          <View style={styles.checkBox}>
+            <BouncyCheckbox
+              fillColor={'#26660b'}
+              label=""
+              value={agree}
+              ref={(ref: any) => (bouncyCheckboxRef5 = ref)}
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => (
+              selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef5?.onPress()
+            )}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <Modal visible={image1ZoomIn === true} animated>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.noteImageModalContainer}>
+              <View style={styles.modalImageContainer}>
+                <ReactNativeZoomableView
+                  maxZoom={10}
+                  minZoom={0.5}
+                  zoomStep={0.5}
+                  initialZoom={1}
+                  doubleTapDelay={1}
+                  bindToBorders={true}
+                  captureEvent={true}>
+                  <Image
+                    source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                    style={styles.modalImage}
+                  />
+                </ReactNativeZoomableView>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  );
+  //}
+}
+function displayImage6() {
+  //<Image source={{uri: image6}} style={{width: 200, height: 300}} />
+  //if (note.imageRefs.length > 5) {
+  return (
+    <View>
+      {isDeleteMedia ? (
+        <View>
+          <View style={styles.checkBox}>
+            <BouncyCheckbox
+              fillColor={'#26660b'}
+              label=""
+              value={agree}
+              ref={(ref: any) => (bouncyCheckboxRef6 = ref)}
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => (
+              selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef6?.onPress()
+            )}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <Modal visible={image1ZoomIn === true} animated>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.noteImageModalContainer}>
+              <View style={styles.modalImageContainer}>
+                <ReactNativeZoomableView
+                  maxZoom={10}
+                  minZoom={0.5}
+                  zoomStep={0.5}
+                  initialZoom={1}
+                  doubleTapDelay={1}
+                  bindToBorders={true}
+                  captureEvent={true}>
+                  <Image
+                    source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                    style={styles.modalImage}
+                  />
+                </ReactNativeZoomableView>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  );
+  //}
+}
+function displayImage7() {
+  //<Image source={{uri: image7}} style={{width: 200, height: 300}} />
+  //if (note.imageRefs.length > 6) {
+  return (
+    <View>
+      {isDeleteMedia ? (
+        <View>
+          <View style={styles.checkBox}>
+            <BouncyCheckbox
+              fillColor={'#26660b'}
+              label=""
+              value={agree}
+              ref={(ref: any) => (bouncyCheckboxRef7 = ref)}
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => (
+              selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef7?.onPress()
+            )}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <Modal visible={image1ZoomIn === true} animated>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.noteImageModalContainer}>
+              <View style={styles.modalImageContainer}>
+                <ReactNativeZoomableView
+                  maxZoom={10}
+                  minZoom={0.5}
+                  zoomStep={0.5}
+                  initialZoom={1}
+                  doubleTapDelay={1}
+                  bindToBorders={true}
+                  captureEvent={true}>
+                  <Image
+                    source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                    style={styles.modalImage}
+                  />
+                </ReactNativeZoomableView>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  );
+  //}
+}
+function displayImage8() {
+  //<Image source={{uri: image8}} style={{width: 200, height: 300}} />
+  //if (note.imageRefs.length > 7) {
+  return (
+    <View>
+      {isDeleteMedia ? (
+        <View>
+          <View style={styles.checkBox}>
+            <BouncyCheckbox
+              fillColor={'#26660b'}
+              label=""
+              value={agree}
+              ref={(ref: any) => (bouncyCheckboxRef8 = ref)}
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => (
+              selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef8?.onPress()
+            )}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <Modal visible={image1ZoomIn === true} animated>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.noteImageModalContainer}>
+              <View style={styles.modalImageContainer}>
+                <ReactNativeZoomableView
+                  maxZoom={10}
+                  minZoom={0.5}
+                  zoomStep={0.5}
+                  initialZoom={1}
+                  doubleTapDelay={1}
+                  bindToBorders={true}
+                  captureEvent={true}>
+                  <Image
+                    source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                    style={styles.modalImage}
+                  />
+                </ReactNativeZoomableView>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  );
+  //}
+}
+function displayImage9() {
+  //<Image source={{uri: image9}} style={{width: 200, height: 300}} />
+  //if (note.imageRefs.length > 8) {
+  return (
+    <View>
+      {isDeleteMedia ? (
+        <View>
+          <View style={styles.checkBox}>
+            <BouncyCheckbox
+              fillColor={'#26660b'}
+              label=""
+              value={agree}
+              ref={(ref: any) => (bouncyCheckboxRef9 = ref)}
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => (
+              selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef9?.onPress()
+            )}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <Modal visible={image1ZoomIn === true} animated>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.noteImageModalContainer}>
+              <View style={styles.modalImageContainer}>
+                <ReactNativeZoomableView
+                  maxZoom={10}
+                  minZoom={0.5}
+                  zoomStep={0.5}
+                  initialZoom={1}
+                  doubleTapDelay={1}
+                  bindToBorders={true}
+                  captureEvent={true}>
+                  <Image
+                    source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                    style={styles.modalImage}
+                  />
+                </ReactNativeZoomableView>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  );
+  //}
+}
+function displayImage10() {
+  //<Image source={{uri: image10}} style={{width: 200, height: 300}} />
+  //if (note.imageRefs.length > 9) {
+  return (
+    <View>
+      {isDeleteMedia ? (
+        <View>
+          <View style={styles.checkBox}>
+            <BouncyCheckbox
+              fillColor={'#26660b'}
+              label=""
+              value={agree}
+              ref={(ref: any) => (bouncyCheckboxRef10 = ref)}
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => (
+              selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef10?.onPress()
+            )}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <Modal visible={image1ZoomIn === true} animated>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.noteImageModalContainer}>
+              <View style={styles.modalImageContainer}>
+                <ReactNativeZoomableView
+                  maxZoom={10}
+                  minZoom={0.5}
+                  zoomStep={0.5}
+                  initialZoom={1}
+                  doubleTapDelay={1}
+                  bindToBorders={true}
+                  captureEvent={true}>
+                  <Image
+                    source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                    style={styles.modalImage}
+                  />
+                </ReactNativeZoomableView>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  );
+  //}
+}
+function displayImage11() {
+  // <Image source={{uri: image11}} style={{width: 200, height: 300}} />
+  //if (note.imageRefs.length > 10) {
+  return (
+    <View>
+      {isDeleteMedia ? (
+        <View>
+          <View style={styles.checkBox}>
+            <BouncyCheckbox
+              fillColor={'#26660b'}
+              label=""
+              value={agree}
+              ref={(ref: any) => (bouncyCheckboxRef11 = ref)}
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => (
+              selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef11?.onPress()
+            )}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <Modal visible={image1ZoomIn === true} animated>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.noteImageModalContainer}>
+              <View style={styles.modalImageContainer}>
+                <ReactNativeZoomableView
+                  maxZoom={10}
+                  minZoom={0.5}
+                  zoomStep={0.5}
+                  initialZoom={1}
+                  doubleTapDelay={1}
+                  bindToBorders={true}
+                  captureEvent={true}>
+                  <Image
+                    source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                    style={styles.modalImage}
+                  />
+                </ReactNativeZoomableView>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  );
+  //}
+}
+function displayImage12() {
+  //<Image source={{uri: image12}} style={{width: 200, height: 300}} />
+  //if (note.imageRefs.length > 11) {
+  return (
+    <View>
+      {isDeleteMedia ? (
+        <View>
+          <View style={styles.checkBox}>
+            <BouncyCheckbox
+              fillColor={'#26660b'}
+              label=""
+              value={agree}
+              ref={(ref: any) => (bouncyCheckboxRef12 = ref)}
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => (
+              selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef12?.onPress()
+            )}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <Modal visible={image1ZoomIn === true} animated>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.noteImageModalContainer}>
+              <View style={styles.modalImageContainer}>
+                <ReactNativeZoomableView
+                  maxZoom={10}
+                  minZoom={0.5}
+                  zoomStep={0.5}
+                  initialZoom={1}
+                  doubleTapDelay={1}
+                  bindToBorders={true}
+                  captureEvent={true}>
+                  <Image
+                    source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                    style={styles.modalImage}
+                  />
+                </ReactNativeZoomableView>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  );
+  //}
+}
+function displayImage13() {
+  //<Image source={{uri: image13}} style={{width: 200, height: 300}} />
+  //if (note.imageRefs.length > 12) {
+  return (
+    <View>
+      {isDeleteMedia ? (
+        <View>
+          <View style={styles.checkBox}>
+            <BouncyCheckbox
+              fillColor={'#26660b'}
+              label=""
+              value={agree}
+              ref={(ref: any) => (bouncyCheckboxRef13 = ref)}
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => (
+              selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef13?.onPress()
+            )}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <Modal visible={image1ZoomIn === true} animated>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.noteImageModalContainer}>
+              <View style={styles.modalImageContainer}>
+                <ReactNativeZoomableView
+                  maxZoom={10}
+                  minZoom={0.5}
+                  zoomStep={0.5}
+                  initialZoom={1}
+                  doubleTapDelay={1}
+                  bindToBorders={true}
+                  captureEvent={true}>
+                  <Image
+                    source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                    style={styles.modalImage}
+                  />
+                </ReactNativeZoomableView>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  );
+  //}
+}
+function displayImage14() {
+  //<Image source={{uri: image14}} style={{width: 200, height: 300}} />
+  //if (note.imageRefs.length > 13) {
+  return (
+    <View>
+      {isDeleteMedia ? (
+        <View>
+          <View style={styles.checkBox}>
+            <BouncyCheckbox
+              fillColor={'#26660b'}
+              label=""
+              value={agree}
+              ref={(ref: any) => (bouncyCheckboxRef14 = ref)}
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => (
+              selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef14?.onPress()
+            )}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <Modal visible={image1ZoomIn === true} animated>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.noteImageModalContainer}>
+              <View style={styles.modalImageContainer}>
+                <ReactNativeZoomableView
+                  maxZoom={10}
+                  minZoom={0.5}
+                  zoomStep={0.5}
+                  initialZoom={1}
+                  doubleTapDelay={1}
+                  bindToBorders={true}
+                  captureEvent={true}>
+                  <Image
+                    source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                    style={styles.modalImage}
+                  />
+                </ReactNativeZoomableView>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  );
+  //}
+}
+function displayImage15() {
+  //<Image source={{uri: image15}} style={{width: 200, height: 300}} />
+  //if (note.imageRefs.length > 14) {
+  return (
+    <View>
+      {isDeleteMedia ? (
+        <View>
+          <View style={styles.checkBox}>
+            <BouncyCheckbox
+              fillColor={'#26660b'}
+              label=""
+              value={agree}
+              ref={(ref: any) => (bouncyCheckboxRef15 = ref)}
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => (
+              selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef15?.onPress()
+            )}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <Modal visible={image1ZoomIn === true} animated>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.noteImageModalContainer}>
+              <View style={styles.modalImageContainer}>
+                <ReactNativeZoomableView
+                  maxZoom={10}
+                  minZoom={0.5}
+                  zoomStep={0.5}
+                  initialZoom={1}
+                  doubleTapDelay={1}
+                  bindToBorders={true}
+                  captureEvent={true}>
+                  <Image
+                    source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                    style={styles.modalImage}
+                  />
+                </ReactNativeZoomableView>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  );
+  //}
+}
+function displayImage16() {
+  //<Image source={{uri: image16}} style={{width: 200, height: 300}} />
+  //if (note.imageRefs.length > 15) {
+  return (
+    <View>
+      {isDeleteMedia ? (
+        <View>
+          <View style={styles.checkBox}>
+            <BouncyCheckbox
+              fillColor={'#26660b'}
+              label=""
+              value={agree}
+              ref={(ref: any) => (bouncyCheckboxRef16 = ref)}
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => (
+              selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef16?.onPress()
+            )}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <Modal visible={image1ZoomIn === true} animated>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.noteImageModalContainer}>
+              <View style={styles.modalImageContainer}>
+                <ReactNativeZoomableView
+                  maxZoom={10}
+                  minZoom={0.5}
+                  zoomStep={0.5}
+                  initialZoom={1}
+                  doubleTapDelay={1}
+                  bindToBorders={true}
+                  captureEvent={true}>
+                  <Image
+                    source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                    style={styles.modalImage}
+                  />
+                </ReactNativeZoomableView>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  );
+  //}
+}
+function displayImage17() {
+  //<Image source={{uri: image17}} style={{width: 200, height: 300}} />
+  //if (note.imageRefs.length > 16) {
+  return (
+    <View>
+      {isDeleteMedia ? (
+        <View>
+          <View style={styles.checkBox}>
+            <BouncyCheckbox
+              fillColor={'#26660b'}
+              label=""
+              value={agree}
+              ref={(ref: any) => (bouncyCheckboxRef17 = ref)}
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => (
+              selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef17?.onPress()
+            )}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <Modal visible={image1ZoomIn === true} animated>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.noteImageModalContainer}>
+              <View style={styles.modalImageContainer}>
+                <ReactNativeZoomableView
+                  maxZoom={10}
+                  minZoom={0.5}
+                  zoomStep={0.5}
+                  initialZoom={1}
+                  doubleTapDelay={1}
+                  bindToBorders={true}
+                  captureEvent={true}>
+                  <Image
+                    source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                    style={styles.modalImage}
+                  />
+                </ReactNativeZoomableView>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  );
+  //}
+}
+function displayImage18() {
+  //<Image source={{uri: image18}} style={{width: 200, height: 300}} />
+  //if (note.imageRefs.length > 17) {
+  return (
+    <View>
+      {isDeleteMedia ? (
+        <View>
+          <View style={styles.checkBox}>
+            <BouncyCheckbox
+              fillColor={'#26660b'}
+              label=""
+              value={agree}
+              ref={(ref: any) => (bouncyCheckboxRef18 = ref)}
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => (
+              selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef18?.onPress()
+            )}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <Modal visible={image1ZoomIn === true} animated>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.noteImageModalContainer}>
+              <View style={styles.modalImageContainer}>
+                <ReactNativeZoomableView
+                  maxZoom={10}
+                  minZoom={0.5}
+                  zoomStep={0.5}
+                  initialZoom={1}
+                  doubleTapDelay={1}
+                  bindToBorders={true}
+                  captureEvent={true}>
+                  <Image
+                    source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                    style={styles.modalImage}
+                  />
+                </ReactNativeZoomableView>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  );
+  //}
+}
+function displayImage19() {
+  //<Image source={{uri: image19}} style={{width: 200, height: 300}} />
+  // if (note.imageRefs.length > 18) {
+  return (
+    <View>
+      {isDeleteMedia ? (
+        <View>
+          <View style={styles.checkBox}>
+            <BouncyCheckbox
+              fillColor={'#26660b'}
+              label=""
+              value={agree}
+              ref={(ref: any) => (bouncyCheckboxRef19 = ref)}
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => (
+              selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef19?.onPress()
+            )}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <Modal visible={image1ZoomIn === true} animated>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.noteImageModalContainer}>
+              <View style={styles.modalImageContainer}>
+                <ReactNativeZoomableView
+                  maxZoom={10}
+                  minZoom={0.5}
+                  zoomStep={0.5}
+                  initialZoom={1}
+                  doubleTapDelay={1}
+                  bindToBorders={true}
+                  captureEvent={true}>
+                  <Image
+                    source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                    style={styles.modalImage}
+                  />
+                </ReactNativeZoomableView>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  );
+  // }
+}
+function displayImage20() {
+  //<Image source={{uri: image20}} style={{width: 200, height: 300}} />
+  //if (note.imageRefs.length > 19) {
+  return (
+    <View>
+      {isDeleteMedia ? (
+        <View>
+          <View style={styles.checkBox}>
+            <BouncyCheckbox
+              fillColor={'#26660b'}
+              label=""
+              value={agree}
+              ref={(ref: any) => (bouncyCheckboxRef20 = ref)}
+              onPress={() => (
+                selectImageToDelete(note.imageRefs[0].imageRef),
+                  setAgree(true)
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => (
+              selectImageToDelete(note.imageRefs[0].imageRef),
+                bouncyCheckboxRef20?.onPress()
+            )}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <Modal visible={image1ZoomIn === true} animated>
+            <View style={styles.modalExitButton}>
+              <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                <Icons icon={'exit'} size={33} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.noteImageModalContainer}>
+              <View style={styles.modalImageContainer}>
+                <ReactNativeZoomableView
+                  maxZoom={10}
+                  minZoom={0.5}
+                  zoomStep={0.5}
+                  initialZoom={1}
+                  doubleTapDelay={1}
+                  bindToBorders={true}
+                  captureEvent={true}>
+                  <Image
+                    source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+                    style={styles.modalImage}
+                  />
+                </ReactNativeZoomableView>
+              </View>
+            </View>
+          </Modal>
+          <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+            <Image
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/8C1C0D3D-7D32-4004-A8D5-36CE18C747E0_1_105_c.jpeg')}
+              style={styles.noteImage}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  );
+  //}
+}
+ */

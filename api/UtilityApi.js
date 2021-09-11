@@ -103,9 +103,9 @@ export function deleteUtilities(customer, utilities, noteTypes, navigation) {
   }
 }
 
-export function deleteUtility(customer, utility, noteSections, navigation) {
-  for (var i = 0; i < noteSections.length; i++) {
-    deleteUtilityNotes(customer, utility, noteSections[i]);
+export function deleteUtility(customer, utility, noteCollection, navigation) {
+  for (var i = 0; i < noteCollection.length; i++) {
+    deleteUtilityNotes(customer, utility, noteCollection[i]);
   }
   var docRef = firestore()
     .collection('Customers')
@@ -115,7 +115,7 @@ export function deleteUtility(customer, utility, noteSections, navigation) {
     .doc(utility.id)
     .delete()
     .then(() => {
-      console.log('Document successfully deleted!');
+      console.log('DocumentB successfully deleted!');
     })
     .catch(error => {
       console.error('Error removing document: ', error);
@@ -127,8 +127,12 @@ export function deleteUtility(customer, utility, noteSections, navigation) {
 }
 
 export function deleteUtilityNotes(customer, utility, notes) {
+  console.log(customer);
+  console.log(utility);
+  console.log(notes);
   for (var i = 0; i < notes.length; i++) {
-    deleteUtilityNote(customer, utility, notes[i]);
+    console.log('Deleting Notes');
+    deleteUtilityNote(customer, utility, notes[i], null);
   }
 }
 
@@ -157,9 +161,9 @@ export function deleteGeneralNote(customer, note) {
     });
 }
 
-export function deleteUtilityNote(customer, utility, utilityNote) {
-  for (var i = 0; i < utilityNote.images.length; i++) {
-    deleteImage(utilityNote.images[i].imageRef);
+export function deleteUtilityNote(customer, utility, utilityNote, navigation) {
+  for (var i = 0; i < utilityNote.imageRefs.length; i++) {
+    deleteImage(utilityNote.imageRefs[i].imageRef);
   }
   var docRef = firestore()
     .collection('Customers')
@@ -178,6 +182,33 @@ export function deleteUtilityNote(customer, utility, utilityNote) {
     .catch(error => {
       console.error('Error removing document: ', error);
     });
+  if (navigation !== null) {
+    if (utility.utilityType === 'Timers') {
+      navigation.navigate('TimerInfo', {
+        customer: customer,
+        utility: utility,
+        noteType: utilityNote.noteType,
+      });
+    } else if (utility.utilityType === 'ShutOffValves') {
+      navigation.navigate('ShutOffInfo', {
+        customer: customer,
+        utility: utility,
+        noteType: utilityNote.noteType,
+      });
+    } else if (utility.utilityType === 'SolenoidValves') {
+      navigation.navigate('SolenoidValvesInfo', {
+        customer: customer,
+        utility: utility,
+        noteType: utilityNote.noteType,
+      });
+    } else {
+      navigation.navigate('Customer', {
+        customer: customer,
+        utility: utility,
+        noteType: utilityNote.noteType,
+      });
+    }
+  }
 }
 
 export function deleteContent(
