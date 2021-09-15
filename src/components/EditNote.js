@@ -301,7 +301,6 @@ const EditNote = props => {
         image.path.substring(image.path.lastIndexOf('/') + 1);
 
       if (imageRefs.length < 20) {
-        console.log('BrewCrew');
         if (!checkDuplicateImageRefs(imageRef)) {
           setImagesToUpload(prevItems => [...prevItems, image.path]);
           setImageRefs(prevItems => [...prevItems, {imageRef}]);

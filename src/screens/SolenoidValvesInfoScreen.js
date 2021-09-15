@@ -48,6 +48,7 @@ const SolenoidValvesInfoScreen = props => {
     solenoidValves,
     'FindSolenoidValvesNotes',
   );
+  const noteCollection = [solenoidValveNotes, findSolenoidValveNotes];
   if (solenoidValves.numValves === '') {
     solenoidValves.numValves = 'No Text Provided';
   }
@@ -71,6 +72,8 @@ const SolenoidValvesInfoScreen = props => {
             navigation.navigate('EditSolenoidValves', {
               customer: customer,
               solenoidValves: solenoidValves,
+              solenoidValvesList: solenoidValvesList,
+              noteCollection: noteCollection,
               navigation: navigation,
             })
           }>

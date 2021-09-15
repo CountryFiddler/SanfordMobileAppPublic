@@ -33,8 +33,10 @@ const DeleteContentScreen = props => {
   const noteCollection = props.navigation.getParam('noteCollection');
   //const prevScreen = props.navigation.getParam('prevScreen');
   const contentToDelete = props.navigation.getParam('contentToDelete');
-  //console.log(prevScreen);
-  //console.log(noteSections[1]);
+  const timers = props.navigation.getParam('timers');
+  const shutOffs = props.navigation.getParam('shutOffs');
+  const solenoidValves = props.navigation.getParam('solenoidValves');
+
   return (
     <View>
       <View style={styles.iconHeader}>
@@ -63,10 +65,10 @@ const DeleteContentScreen = props => {
           <TouchableOpacity
             onPress={() =>
               deleteCustomer(
-                props.customer,
-                props.timers,
-                props.shutOffs,
-                props.solenoidValves,
+                customer,
+                timers,
+                shutOffs,
+                solenoidValves,
                 props.generalNotes,
                 props.navigation,
               )

@@ -49,7 +49,7 @@ const CustomerScreen = props => {
   const timers = getTimers(customer);
   const shutoffValves = getShutOffs(customer);
   const solenoidValves = getSolenoidValves(customer);
-  const otherNotes = getNotes(customer, '', 'GeneralNotes');
+  const generalNotes = getNotes(customer, '', 'GeneralNotes');
   var parsedPhoneNumStr;
   var parsedPhoneNumInt;
   parsedPhoneNumStr = '+' + customer.phoneNumber[0] + ' (';
@@ -83,6 +83,9 @@ const CustomerScreen = props => {
             // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('EditCustomer', {
               customer: customer,
+              shutoffValves: shutoffValves,
+              solenoidValves: solenoidValves,
+              generalNotes: generalNotes,
             })
           }>
           <FontAwesomeIcon icon={faPencilAlt} size={25} />
@@ -190,7 +193,7 @@ const CustomerScreen = props => {
             props.navigation.navigate('UtilityNotesNavigator', {
               customer: customer,
               utility: '',
-              utilityNotes: otherNotes,
+              utilityNotes: generalNotes,
               noteType: 'GeneralNotes',
               screenTitle: 'General Notes',
               utilityTitle: null,

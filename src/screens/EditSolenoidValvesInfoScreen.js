@@ -27,6 +27,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCheck, faMapMarkerAlt, faRuler, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarAlt } from "@fortawesome/free-regular-svg-icons";
 import { styles } from "../../api/stylesApi";
+import Icons from "../components/Icons";
 
 // Start of Home Screen Display
 const EditSolenoidValvesInfoScreen = props => {
@@ -34,6 +35,8 @@ const EditSolenoidValvesInfoScreen = props => {
   // from the Customer Screen)
   const customer = props.navigation.getParam('customer');
   const solenoidValves = props.navigation.getParam('solenoidValves');
+  const noteCollection = props.navigation.getParam('noteCollection');
+  const solenoidValvesList = props.navigation.getParam('solenoidValvesList');
   // Get the navigation prop
   const navigation = props.navigation;
   const [currentLocation, setLocation] = useState(solenoidValves.location);
@@ -148,11 +151,26 @@ const EditSolenoidValvesInfoScreen = props => {
         <View style={styles.submitDataButtonContainer}>
           <TouchableOpacity
             onPress={() =>
+              props.navigation.navigate('DeleteContent', {
+                deleteUtility: true,
+                customer: customer,
+                utility: solenoidValves,
+                noteCollection: noteCollection,
+                contentToDelete: 'This Valve(s)',
+                navigation: props.navigation,
+              })
+            }
+            style={styles.generalButtonStyle}>
+            <Icons icon={'trash'} size={40} color={'#cc0000'}/>
+            <Text style={styles.deleteButtonText}>Delete</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
               // Pass navigation and customer as props to the Edit Customer Screen
               props.navigation.navigate('UtilitySelectionScreen', {
                 customer: customer,
                 utilityType: 'SolenoidValves',
-                utilities: solenoidValves,
+                utilities: solenoidValvesList,
                 addUtilityScreen: 'AddSolenoidValves',
                 addUtilityButtonTitle: 'Add Valve',
                 utilityInfoScreenTitle: 'SolenoidValvesInfo',
@@ -160,8 +178,8 @@ const EditSolenoidValvesInfoScreen = props => {
               })
             }
             style={styles.generalButtonStyle}>
-            <FontAwesomeIcon icon={faTimes} size={40} color={'#cc0000'} />
-            <Text style={styles.cancelButtonText}>Cancel</Text>
+            <FontAwesomeIcon icon={faTimes} size={40} color={'black'} />
+            <Text style={styles.blackCancelButtonText}>Cancel</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() =>

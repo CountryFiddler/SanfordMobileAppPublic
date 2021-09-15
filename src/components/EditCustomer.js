@@ -41,9 +41,46 @@ import {
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import {checkValidPhoneNumber} from '../../api/CustomerApi';
+import Icons from './Icons';
+import {getSolenoidValvesNotes} from '../../api/SolenoidValveApi';
+import {getNotes} from '../../api/UtilityApi';
 
 const EditCustomer = props => {
   const customer = props.navigation.getParam('customer');
+  const timers = props.navigation.getParam('timers');
+  const shutOffs = props.navigation.getParam('shutOffs');
+  const solenoidValvesList = props.navigation.getParam('solenoidValves');
+  const [noteCollection, setNoteCollection] = useState([]);
+  for (var i = 0; i < timers.length; i++) {
+    var timerNotes = getNotes(customer, timers[i], 'TimerNotes');
+    var findTimerNotes = getNotes(customer, timers[i], 'FindTimerNotes');
+    setNoteCollection(noteCollection.concat(timerNotes));
+    setNoteCollection(noteCollection.concat(findTimerNotes));
+  }
+  for (var j = 0; i < shutOffs.length; j++) {
+    var shutOffNotes = getNotes(customer, shutOffs[j], 'ShutOffValveNotes');
+    var findShutOffNotes = getNotes(
+      customer,
+      shutOffs[j],
+      'FindShutOffValveNotes',
+    );
+    setNoteCollection(noteCollection.concat(shutOffNotes));
+    setNoteCollection(noteCollection.concat(findShutOffNotes));
+  }
+  for (var k = 0; i < solenoidValvesList.length; k++) {
+    var solenoidValveNotes = getNotes(
+      customer,
+      solenoidValvesList[k],
+      'SolenoidValveNotes',
+    );
+    var findSolenoidValveNotes = getNotes(
+      customer,
+      solenoidValvesList[k],
+      'FindSolenoidValveNotes',
+    );
+    setNoteCollection(noteCollection.concat(solenoidValveNotes));
+    setNoteCollection(noteCollection.concat(findSolenoidValveNotes));
+  }
   console.log(customer.id);
   // Get the navigation prop
   const {navigation} = props;
@@ -228,6 +265,21 @@ const EditCustomer = props => {
         </View>
         <View style={styles.addTextFieldDivider} />
         <View style={styles.submitDataButtonContainer}>
+          <TouchableOpacity
+            onPress={() =>
+              props.navigation.navigate('DeleteContent', {
+                deleteUtility: true,
+                customer: customer,
+                utility: '',
+                noteCollection: noteCollection,
+                contentToDelete: customer.firstName + ' ' + customer.lastName,
+                navigation: props.navigation,
+              })
+            }
+            style={styles.generalButtonStyle}>
+            <Icons icon={'trash'} size={40} color={'#cc0000'} />
+            <Text style={styles.deleteButtonText}>Delete</Text>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={() =>
               props.navigation.navigate('Customer', {

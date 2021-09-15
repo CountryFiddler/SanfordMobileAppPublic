@@ -19,12 +19,18 @@ import {
   View,
   Button,
   SafeAreaView,
-  TextInput, Image, TouchableOpacity,
-} from "react-native";
-import { submitShutOffChanges, submitShutOffInfo } from "../../api/ShutOffValveApi";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { styles } from "../../api/stylesApi";
+  TextInput,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
+import {
+  submitShutOffChanges,
+  submitShutOffInfo,
+} from '../../api/ShutOffValveApi';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {styles} from '../../api/stylesApi';
+import Icons from '../components/Icons';
 
 // Start of Home Screen Display
 const EditShutOffValveInfoScreen = props => {
@@ -33,6 +39,7 @@ const EditShutOffValveInfoScreen = props => {
   const customer = props.navigation.getParam('customer');
   const shutOffs = props.navigation.getParam('utilities');
   const shutoffValve = props.navigation.getParam('shutoffValve');
+  const noteCollection = props.navigation.getParam('noteCollection');
   // Get the navigation prop
   const navigation = props.navigation;
   const [currentShutOffType, setShutOffType] = useState(shutoffValve.type);
@@ -70,15 +77,32 @@ const EditShutOffValveInfoScreen = props => {
         <View style={styles.submitDataButtonContainer}>
           <TouchableOpacity
             onPress={() =>
+              props.navigation.navigate('DeleteContent', {
+                deleteUtility: true,
+                customer: customer,
+                utility: shutoffValve,
+                noteCollection: noteCollection,
+                contentToDelete: 'This Shut-Off',
+                navigation: props.navigation,
+              })
+            }
+            style={styles.generalButtonStyle}>
+            <Icons icon={'trash'} size={40} color={'#cc0000'} />
+            <Text style={styles.deleteButtonText}>Delete</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
               // Pass navigation and customer as props to the Edit Customer Screen
               props.navigation.navigate('UtilitySelectionScreen', {
                 customer: customer,
-                utilityType: 'Timers',
+                headerIcon: 'shutOff',
+                utilityType: 'ShutOffValves',
                 utilities: shutOffs,
-                addUtilityScreen: 'AddTimer',
-                addUtilityButtonTitle: 'Add Timer',
-                utilityInfoScreenTitle: 'TimerInfo',
-                utilityTypeText: 'Timers',
+                addUtilityScreen: 'AddShutOff',
+                addUtilityButtonTitle: 'Add Shut-Off Valve',
+                utilityInfoScreenTitle: 'ShutOffInfo',
+                utilityTypeText: 'Shut-Off Valves',
+                addUtilityText: 'Add Valve',
               })
             }
             style={styles.generalButtonStyle}>
@@ -106,6 +130,5 @@ const EditShutOffValveInfoScreen = props => {
   // End of the display for adding or editing a customer
 };
 // End of Home Screen Display
-
 
 export default EditShutOffValveInfoScreen;

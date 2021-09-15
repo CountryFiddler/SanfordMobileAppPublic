@@ -33,6 +33,7 @@ const ShutOffValveInfoScreen = props => {
     shutoffValve,
     'FindShutOffValveNotes',
   );
+  const noteCollection = [shutoffValveNotes, findShutOffValveNotes];
   if (shutoffValve.size === '') {
     shutoffValve.size = 'No Text Provided';
   }
@@ -51,6 +52,8 @@ const ShutOffValveInfoScreen = props => {
             navigation.navigate('EditShutOff', {
               customer: customer,
               shutoffValve: shutoffValve,
+              utilities: shutOffValveList,
+              noteCollection: noteCollection,
               navigation: navigation,
             })
           }>
