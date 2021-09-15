@@ -50,24 +50,44 @@ const EditCustomer = props => {
   const timers = props.navigation.getParam('timers');
   const shutOffs = props.navigation.getParam('shutOffs');
   const solenoidValvesList = props.navigation.getParam('solenoidValves');
-  const [noteCollection, setNoteCollection] = useState([]);
+  const generalNotes = props.navigation.getParam('generalNotes');
+  console.log(generalNotes);
+  //const [timerCollection, setTimerCollection] = useState([]);
+  //const [shutOffCollection, setShutOffCollection] = useState([]);
+  //const [solenoidValveCollection, setSolenoidValveCollection] = useState([]);
+  //const [generalNoteCollection, setGeneralNoteCollection] = useState([]);
+  var timerCollection = [];
+  var shutOffCollection = [];
+  var solenoidValveCollection = [];
+  var generalNoteCollection = [];
+  //console.log(timerCollection.length);
+  console.log(shutOffs.length);
+  console.log(solenoidValvesList.length);
   for (var i = 0; i < timers.length; i++) {
     var timerNotes = getNotes(customer, timers[i], 'TimerNotes');
     var findTimerNotes = getNotes(customer, timers[i], 'FindTimerNotes');
-    setNoteCollection(noteCollection.concat(timerNotes));
-    setNoteCollection(noteCollection.concat(findTimerNotes));
+    //setTimerCollection(
+    timerCollection.push({
+      utility: timers[i],
+      noteCollection: [timerNotes, findTimerNotes],
+    });
+    // );
   }
-  for (var j = 0; i < shutOffs.length; j++) {
+  for (var j = 0; j < shutOffs.length; j++) {
     var shutOffNotes = getNotes(customer, shutOffs[j], 'ShutOffValveNotes');
     var findShutOffNotes = getNotes(
       customer,
       shutOffs[j],
       'FindShutOffValveNotes',
     );
-    setNoteCollection(noteCollection.concat(shutOffNotes));
-    setNoteCollection(noteCollection.concat(findShutOffNotes));
+    //setShutOffCollection(
+    shutOffCollection.push({
+      utility: shutOffs[j],
+      noteCollection: [shutOffNotes, findShutOffNotes],
+    });
+    // );
   }
-  for (var k = 0; i < solenoidValvesList.length; k++) {
+  for (var k = 0; k < solenoidValvesList.length; k++) {
     var solenoidValveNotes = getNotes(
       customer,
       solenoidValvesList[k],
@@ -76,10 +96,14 @@ const EditCustomer = props => {
     var findSolenoidValveNotes = getNotes(
       customer,
       solenoidValvesList[k],
-      'FindSolenoidValveNotes',
+      'FindSolenoidValvesNotes',
     );
-    setNoteCollection(noteCollection.concat(solenoidValveNotes));
-    setNoteCollection(noteCollection.concat(findSolenoidValveNotes));
+    //setSolenoidValveCollection(
+    solenoidValveCollection.push({
+      utility: solenoidValvesList[k],
+      noteCollection: [solenoidValveNotes, findSolenoidValveNotes],
+    });
+    //);
   }
   console.log(customer.id);
   // Get the navigation prop
@@ -268,10 +292,13 @@ const EditCustomer = props => {
           <TouchableOpacity
             onPress={() =>
               props.navigation.navigate('DeleteContent', {
-                deleteUtility: true,
+                deleteCustomer: true,
                 customer: customer,
                 utility: '',
-                noteCollection: noteCollection,
+                timerCollection: timerCollection,
+                shutOffCollection: shutOffCollection,
+                solenoidValveCollection: solenoidValveCollection,
+                generalNotes: generalNotes,
                 contentToDelete: customer.firstName + ' ' + customer.lastName,
                 navigation: props.navigation,
               })

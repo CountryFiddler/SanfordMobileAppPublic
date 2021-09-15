@@ -67,18 +67,19 @@ export function deleteNoteMedia(
 
 export function deleteCustomer(
   customer,
-  timers,
-  shutOffs,
-  solenoidValves,
+  timerCollection,
+  shutOffCollection,
+  solenoidValveCollection,
   generalNotes,
   navigation,
 ) {
-  var timerNoteTypes = ['FindTimerNotes', 'TimerNotes'];
-  var shutOffNoteTypes = ['FindShutOffValveNotes', 'ShutOffValveNotes'];
-  var solenoidValveNoteTypes = ['FindSolenoidValveNotes', 'SolenoidValveNotes'];
-  deleteUtilities(customer, timers, timerNoteTypes);
-  deleteUtilities(customer, shutOffs, shutOffNoteTypes);
-  deleteUtilities(customer, solenoidValves, solenoidValveNoteTypes);
+  //console.log('Deleting Timers');
+  deleteUtilities(customer, timerCollection);
+  //console.log('Deleting ShutOffs');
+  deleteUtilities(customer, shutOffCollection);
+  //console.log('Deleting SolenoidValves');
+  deleteUtilities(customer, solenoidValveCollection);
+  //console.log('Deleting General Notes');
   deleteGeneralNotes(customer, generalNotes);
   var docRef = firestore()
     .collection('Customers')
@@ -94,16 +95,22 @@ export function deleteCustomer(
   navigation.navigate('Home');
 }
 
-export function deleteUtilities(customer, utilities, noteTypes, navigation) {
-  for (var i = 0; i < utilities.length; i++) {
-    for (var j = 0; j < noteTypes.length; j++) {
-      var notes = getNotes(customer, utilities[i], noteTypes[j]);
-      deleteUtility(customer, utilities[i], notes);
-    }
+export function deleteUtilities(customer, utilityCollection) {
+  console.log('Deleting Utilities');
+   // console.log('Delete Utilities: ' + utilityCollection[0].noteCollection.length);
+  for (var i = 0; i < utilityCollection.length; i++) {
+    //console.log(utilityCollection[i].noteCollection.length);
+    deleteUtility(
+      customer,
+      utilityCollection[i].utility,
+      utilityCollection[i].noteCollection,
+      null,
+    );
   }
 }
 
 export function deleteUtility(customer, utility, noteCollection, navigation) {
+  console.log(noteCollection[0]);
   for (var i = 0; i < noteCollection.length; i++) {
     deleteUtilityNotes(customer, utility, noteCollection[i]);
   }
@@ -120,16 +127,15 @@ export function deleteUtility(customer, utility, noteCollection, navigation) {
     .catch(error => {
       console.error('Error removing document: ', error);
     });
-  navigation.navigate('Customer', {
-    customer: customer,
-    navigation: navigation,
-  });
+  if (navigation !== null) {
+    navigation.navigate('Customer', {
+      customer: customer,
+      navigation: navigation,
+    });
+  }
 }
 
 export function deleteUtilityNotes(customer, utility, notes) {
-  console.log(customer);
-  console.log(utility);
-  console.log(notes);
   for (var i = 0; i < notes.length; i++) {
     console.log('Deleting Notes');
     deleteUtilityNote(customer, utility, notes[i], null);
@@ -138,13 +144,13 @@ export function deleteUtilityNotes(customer, utility, notes) {
 
 export function deleteGeneralNotes(customer, notes) {
   for (var i = 0; i < notes.length; i++) {
-    deleteGeneralNote(customer, notes[i]);
+    deleteGeneralNote(customer, notes[i], null);
   }
 }
 
-export function deleteGeneralNote(customer, note) {
-  for (var i = 0; i < note.images.length; i++) {
-    deleteImage(note.images[i].imageRef);
+export function deleteGeneralNote(customer, note, navigation) {
+  for (var i = 0; i < note.imageRefs.length; i++) {
+    deleteImage(note.imageRefs[i].imageRef);
   }
   var docRef = firestore()
     .collection('Customers')
@@ -159,6 +165,12 @@ export function deleteGeneralNote(customer, note) {
     .catch(error => {
       console.error('Error removing document: ', error);
     });
+  if (navigation !== null) {
+    navigation.navigate('Customer', {
+      customer: customer,
+      navigation: navigation,
+    });
+  }
 }
 
 export function deleteUtilityNote(customer, utility, utilityNote, navigation) {

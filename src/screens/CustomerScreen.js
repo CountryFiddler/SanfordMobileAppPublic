@@ -83,7 +83,8 @@ const CustomerScreen = props => {
             // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('EditCustomer', {
               customer: customer,
-              shutoffValves: shutoffValves,
+              timers: timers,
+              shutOffs: shutoffValves,
               solenoidValves: solenoidValves,
               generalNotes: generalNotes,
             })

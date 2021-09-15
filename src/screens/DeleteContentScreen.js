@@ -15,7 +15,12 @@
 import React, {useState} from 'react';
 import {Text, StyleSheet, View, Button, TouchableOpacity} from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
-import { deleteContent, deleteCustomer, deleteUtility, deleteUtilityNote } from "../../api/UtilityApi";
+import {
+  deleteContent,
+  deleteCustomer,
+  deleteUtility,
+  deleteUtilityNote,
+} from '../../api/UtilityApi';
 import {styles} from '../../api/stylesApi';
 import Icons from '../components/Icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -31,12 +36,20 @@ const DeleteContentScreen = props => {
   const utility = props.navigation.getParam('utility');
   const utilityNote = props.navigation.getParam('utilityNote');
   const noteCollection = props.navigation.getParam('noteCollection');
+  const timerCollection = props.navigation.getParam('timerCollection');
+  const shutOffCollection = props.navigation.getParam('shutOffCollection');
+  const solenoidValveCollection = props.navigation.getParam(
+    'solenoidValveCollection',
+  );
+  const generalNotes = props.navigation.getParam('generalNotes');
   //const prevScreen = props.navigation.getParam('prevScreen');
   const contentToDelete = props.navigation.getParam('contentToDelete');
   const timers = props.navigation.getParam('timers');
   const shutOffs = props.navigation.getParam('shutOffs');
   const solenoidValves = props.navigation.getParam('solenoidValves');
-
+  console.log(timerCollection.length);
+  console.log(shutOffCollection.length);
+  console.log(solenoidValveCollection.length);
   return (
     <View>
       <View style={styles.iconHeader}>
@@ -66,10 +79,10 @@ const DeleteContentScreen = props => {
             onPress={() =>
               deleteCustomer(
                 customer,
-                timers,
-                shutOffs,
-                solenoidValves,
-                props.generalNotes,
+                timerCollection,
+                shutOffCollection,
+                solenoidValveCollection,
+                generalNotes,
                 props.navigation,
               )
             }
@@ -80,12 +93,7 @@ const DeleteContentScreen = props => {
         ) : isDeleteUtility ? (
           <TouchableOpacity
             onPress={() =>
-              deleteUtility(
-                customer,
-                utility,
-                noteCollection,
-                props.navigation,
-              )
+              deleteUtility(customer, utility, noteCollection, props.navigation)
             }
             style={styles.generalButtonStyle}>
             <FontAwesomeIcon icon={faTrashAlt} size={40} color={'#cc0000'} />

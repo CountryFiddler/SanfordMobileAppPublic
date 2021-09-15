@@ -17,7 +17,7 @@
 import React, {useState} from 'react';
 import {Text, StyleSheet, View, Button} from 'react-native';
 import AddOrEditCustomer from '../components/AddOrEditCustomer';
-import EditCustomer from "../components/EditCustomer";
+import EditCustomer from '../components/EditCustomer';
 
 const EditCustomerScreen = props => {
   // Start of the display for Edit Customer Screen
@@ -26,6 +26,10 @@ const EditCustomerScreen = props => {
       <EditCustomer
         // Pass the customer as a prop as well as navigation
         customer={props.customer}
+        timers={props.timers}
+        shutOffs={props.shutOffs}
+        solenoidValvesList={props.solenoidValves}
+        generalNotes={props.generalNotes}
         navigation={props.navigation}
       />
     </View>
