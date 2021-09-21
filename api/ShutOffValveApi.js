@@ -1,10 +1,20 @@
 import firebase, {firestore} from 'react-native-firebase';
 
-export function submitShutOffInfo(customer, shutoffType, size, navigation) {
-  console.log(shutoffType);
+export function submitShutOffInfo(
+  customer,
+  shutoffType,
+  size,
+  location,
+  backFlow,
+  yearInstalled,
+  navigation,
+) {
   addShutOff(customer, {
     type: shutoffType,
     size: size,
+    location: location,
+    backFlow: backFlow,
+    yearInstalled: yearInstalled,
   });
   navigation.navigate('Customer', {
     customer: customer,
@@ -16,6 +26,9 @@ export function submitShutOffChanges(
   shutoff,
   currentShutOffType,
   currentSize,
+  currentLocation,
+  currentBackFlow,
+  currentYearInstalled,
   navigation,
 ) {
   if (currentShutOffType.length > 0) {
@@ -23,6 +36,15 @@ export function submitShutOffChanges(
   }
   if (currentSize.length > 0) {
     shutoff.size = currentSize;
+  }
+  if (currentLocation.length > 0) {
+    shutoff.location = currentLocation;
+  }
+  if (currentBackFlow.length > 0) {
+    shutoff.backFlow = currentBackFlow;
+  }
+  if (currentYearInstalled > 0) {
+    shutoff.yearInstalled = currentYearInstalled;
   }
   updateShutOffs(customer, shutoff);
   navigation.navigate('ShutOffInfo', {
@@ -42,6 +64,9 @@ export function addShutOff(customer, shutoff, addComplete) {
     .set({
       type: shutoff.type,
       size: shutoff.size,
+      location: shutoff.location,
+      backFlow: shutoff.backFlow,
+      yearInstalled: shutoff.yearInstalled,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     })
     .then(snapshot => snapshot.get())
@@ -59,6 +84,9 @@ export function updateShutOffs(customer, shutoff) {
     .update({
       type: shutoff.type,
       size: shutoff.size,
+      location: shutoff.location,
+      backFlow: shutoff.backFlow,
+      yearInstalled: shutoff.yearInstalled,
     })
     // I think this updates the database quicker???
     .then(snapshot => snapshot.get())
@@ -77,6 +105,9 @@ export function getShutOffs(customer) {
         shutOffValvesList.push({
           type: doc.data().type,
           size: doc.data().size,
+          location: doc.data().location,
+          backFlow: doc.data().backFlow,
+          yearInstalled: doc.data().yearInstalled,
           id: doc.id,
           customerID: customer.id,
           utilityType: 'ShutOffValves',

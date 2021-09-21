@@ -97,7 +97,7 @@ export function deleteCustomer(
 
 export function deleteUtilities(customer, utilityCollection) {
   console.log('Deleting Utilities');
-   // console.log('Delete Utilities: ' + utilityCollection[0].noteCollection.length);
+  // console.log('Delete Utilities: ' + utilityCollection[0].noteCollection.length);
   for (var i = 0; i < utilityCollection.length; i++) {
     //console.log(utilityCollection[i].noteCollection.length);
     deleteUtility(
@@ -279,6 +279,9 @@ export function addNote(
   numImages,
   addComplete,
 ) {
+  var today = new Date(),
+    date =
+      today.getMonth() + 1 + '-' + today.getDate() + '-' + today.getFullYear();
   var docRef = firebase
     .firestore()
     .collection('Customers')
@@ -315,7 +318,17 @@ export function updateNote(
   addComplete,
 ) {
   console.log(customer.id);
+  var meridiam;
+  var today = new Date(),
+    date =
+      today.getMonth() + 1 + '-' + today.getDate() + '-' + today.getFullYear();
+
   //console.log(imageRefs);
+  if (today.getHours() > 12) {
+    meridiam = 'pm';
+  } else {
+    meridiam = 'am';
+  }
   var docRef = firebase
     .firestore()
     .collection('Customers')
@@ -333,6 +346,19 @@ export function updateNote(
       noteText: utilityNote.noteText,
       numImages: numImages,
       imageRefs: imageRefs,
+      dateHistory: firebase.firestore.FieldValue.arrayUnion({
+        month: today.getMonth() + 1,
+        day: today.getDate(),
+        year: today.getFullYear(),
+        time:
+          (today.getHours() % 12) + ':' + today.getMinutes() + ' ' + meridiam,
+        timeWithSeconds:
+          today.getHours() +
+          ':' +
+          today.getMinutes() +
+          ':' +
+          today.getSeconds(),
+      }),
     })
     .then(snapshot => snapshot.get())
     .then(customerData => addComplete(customerData.data()))
@@ -380,9 +406,8 @@ export function getNotes(customer, utility, noteType) {
           noteID: doc.id,
           numImages: doc.data().numImages,
           imageRefs: doc.data().imageRefs,
-          numVideos: doc.data().numVideos,
-          videoRefs: doc.data().videoRefs,
           noteType: noteType,
+          createdAt: doc.data().createdAt,
         });
       });
     });

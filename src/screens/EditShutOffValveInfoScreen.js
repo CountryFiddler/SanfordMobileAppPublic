@@ -44,6 +44,11 @@ const EditShutOffValveInfoScreen = props => {
   const navigation = props.navigation;
   const [currentShutOffType, setShutOffType] = useState(shutoffValve.type);
   const [currentShutOffSize, setShutOffSize] = useState(shutoffValve.size);
+  const [currentLocation, setCurrentLocation] = useState(shutoffValve.location);
+  const [currentBackFlow, setCurrentBackFlow] = useState(shutoffValve.backFlow);
+  const [currentYearInstalled, setCurrentYearInstalled] = useState(
+    shutoffValve.yearInstalled,
+  );
   return (
     <SafeAreaView>
       <View style={styles.addInfoScreenHeader}>
@@ -71,6 +76,51 @@ const EditShutOffValveInfoScreen = props => {
             placeholder={shutoffValve.size}
             value={currentShutOffSize}
             onChangeText={text => setShutOffSize(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <Icons icon={'location'} size={20} />
+          <Text style={styles.labelText}> Location: </Text>
+          <TextInput
+            style={styles.infoText}
+            // Text Input Box for the customer's first name
+            placeholder={'Location'}
+            value={currentLocation}
+            // Displays the value that the user is entering into the text input
+            // For example, if the typed 'Bob', then 'Bob' is displayed in the
+            // Text Input Box
+            onChangeText={text => setCurrentLocation(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <Icons icon={'backFlow'} size={20}/>
+          <Text style={styles.labelText}>  Backflow: </Text>
+          <TextInput
+            style={styles.infoText}
+            // Text Input Box for the customer's first name
+            placeholder={'Yes/No'}
+            value={currentBackFlow}
+            // Displays the value that the user is entering into the text input
+            // For example, if the typed 'Bob', then 'Bob' is displayed in the
+            // Text Input Box
+            onChangeText={text => setCurrentBackFlow(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <Icons icon={'calendar'} size={20} />
+          <Text style={styles.labelText}> Year Installed: </Text>
+          <TextInput
+            style={styles.infoText}
+            // Text Input Box for the customer's first name
+            placeholder={'Year Installed'}
+            value={currentYearInstalled}
+            // Displays the value that the user is entering into the text input
+            // For example, if the typed 'Bob', then 'Bob' is displayed in the
+            // Text Input Box
+            onChangeText={text => setCurrentYearInstalled(text)}
           />
         </View>
         <View style={styles.addTextFieldDivider} />
@@ -106,8 +156,8 @@ const EditShutOffValveInfoScreen = props => {
               })
             }
             style={styles.generalButtonStyle}>
-            <FontAwesomeIcon icon={faTimes} size={40} color={'#cc0000'} />
-            <Text style={styles.cancelButtonText}>Cancel</Text>
+            <FontAwesomeIcon icon={faTimes} size={40} color={'black'} />
+            <Text style={styles.blackCancelButtonText}>Cancel</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() =>
@@ -116,6 +166,9 @@ const EditShutOffValveInfoScreen = props => {
                 shutoffValve,
                 currentShutOffType,
                 currentShutOffSize,
+                currentLocation,
+                currentBackFlow,
+                currentYearInstalled,
                 navigation,
               )
             }

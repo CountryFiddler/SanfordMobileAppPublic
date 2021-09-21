@@ -27,12 +27,16 @@ import {submitTimerInfo} from '../../api/TimerApi';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faAddressBook, faCheck, faIdBadge, faPhoneAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { styles } from "../../api/stylesApi";
+import Icons from "../components/Icons";
 
 // Start of Add Timer Screen Display
 const AddTimerScreen = props => {
   const customer = props.navigation.getParam('customer');
   const timers = props.navigation.getParam('utilities');
   const [timerType, setTimerType] = useState('');
+  const [location, setLocation] = useState('');
+  const [insideOutside, setInsideOutside] = useState('');
+  const [yearInstalled, setYearInstalled] = useState('');
   const [numPrograms, setNumPrograms] = useState('');
   const [numZones, setNumZones] = useState('');
   function checkEmptySubmissions() {
@@ -56,6 +60,7 @@ const AddTimerScreen = props => {
       </View>
       <View style={styles.addInfoContainer}>
         <View style={styles.infoChildContainer}>
+          <Icons icon={'timer'} width={25} height={25}/>
           <Text style={styles.labelText}> Type: </Text>
           <TextInput
             style={styles.infoText}
@@ -66,6 +71,36 @@ const AddTimerScreen = props => {
             // For example, if the typed 'Bob', then 'Bob' is displayed in the
             // Text Input Box
             onChangeText={text => setTimerType(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <Icons icon={'location'} size={20}/>
+          <Text style={styles.labelText}> Location: </Text>
+          <TextInput
+            style={styles.infoText}
+            // Text Input Box for the customer's first name
+            placeholder={'Location'}
+            value={location}
+            // Displays the value that the user is entering into the text input
+            // For example, if the typed 'Bob', then 'Bob' is displayed in the
+            // Text Input Box
+            onChangeText={text => setLocation(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <Icons icon={'insideOutside'} size={20}/>
+          <Text style={styles.labelText}> Inside/Outside: </Text>
+          <TextInput
+            style={styles.infoText}
+            // Text Input Box for the customer's first name
+            placeholder={'Inside/Outside'}
+            value={insideOutside}
+            // Displays the value that the user is entering into the text input
+            // For example, if the typed 'Bob', then 'Bob' is displayed in the
+            // Text Input Box
+            onChangeText={text => setInsideOutside(text)}
           />
         </View>
         <View style={styles.addTextFieldDivider} />
@@ -88,6 +123,21 @@ const AddTimerScreen = props => {
             placeholder={'Number of Zones'}
             value={numZones}
             onChangeText={text => setNumZones(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <Icons icon={'calendar'} size={20}/>
+          <Text style={styles.labelText}> Year Installed: </Text>
+          <TextInput
+            style={styles.infoText}
+            // Text Input Box for the customer's first name
+            placeholder={'Year Installed'}
+            value={yearInstalled}
+            // Displays the value that the user is entering into the text input
+            // For example, if the typed 'Bob', then 'Bob' is displayed in the
+            // Text Input Box
+            onChangeText={text => setYearInstalled(text)}
           />
         </View>
         <View style={styles.addTextFieldDivider} />
@@ -115,6 +165,9 @@ const AddTimerScreen = props => {
                 submitTimerInfo(
                   customer,
                   timerType,
+                  location,
+                  insideOutside,
+                  yearInstalled,
                   numPrograms,
                   numZones,
                   props.navigation,

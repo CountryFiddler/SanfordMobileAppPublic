@@ -3,12 +3,18 @@ import firebase, {firestore} from 'react-native-firebase';
 export function submitTimerInfo(
   customer,
   timerType,
+  location,
+  insideOutside,
+  yearInstalled,
   numPrograms,
   numZones,
   navigation,
 ) {
   addTimer(customer, {
     type: timerType,
+    location: location,
+    insideOutside: insideOutside,
+    yearInstalled: yearInstalled,
     numPrograms: numPrograms,
     numZones: numZones,
   });
@@ -21,6 +27,9 @@ export function submitTimerChanges(
   customer,
   timer,
   currentTimerType,
+  currentLocation,
+  currentInsideOutside,
+  currentYearInstalled,
   currentNumPrograms,
   currentNumZones,
   navigation,
@@ -28,11 +37,20 @@ export function submitTimerChanges(
   if (currentTimerType.length > 0) {
     timer.type = currentTimerType;
   }
+  if (currentLocation.length > 0) {
+    timer.location = currentLocation;
+  }
+  if (currentInsideOutside.length > 0) {
+    timer.insideOutside = currentInsideOutside;
+  }
   if (currentNumPrograms.length > 0) {
     timer.numPrograms = currentNumPrograms;
   }
   if (currentNumZones.length > 0) {
     timer.numZones = currentNumZones;
+  }
+  if (currentYearInstalled.length > 0) {
+    timer.yearInstalled = currentYearInstalled;
   }
   updateTimers(customer, timer);
   navigation.navigate('TimerInfo', {
@@ -55,8 +73,11 @@ export function addTimer(customer, timer, addComplete) {
     .set({
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       type: timer.type,
+      location: timer.location,
+      insideOutside: timer.insideOutside,
       numPrograms: timer.numPrograms,
       numZones: timer.numZones,
+      yearInstalled: timer.yearInstalled,
     })
     .then(snapshot => snapshot.get())
     .then(customerData => addComplete(customerData.data()))
@@ -73,7 +94,10 @@ export function updateTimers(customer, timer) {
     .update({
       type: timer.type,
       numPrograms: timer.numPrograms,
+      location: timer.location,
+      insideOutside: timer.insideOutside,
       numZones: timer.numZones,
+      yearInstalled: timer.yearInstalled,
     })
     // I think this updates the database quicker???
     .then(snapshot => snapshot.get())
@@ -93,8 +117,11 @@ export function getTimers(customer) {
       snapshot.forEach(doc => {
         timersList.push({
           type: doc.data().type,
+          location: doc.data().location,
+          insideOutside: doc.data().insideOutside,
           numPrograms: doc.data().numPrograms,
           numZones: doc.data().numZones,
+          yearInstalled: doc.data().yearInstalled,
           id: doc.id,
           customerID: customer.id,
           utilityType: 'Timers',

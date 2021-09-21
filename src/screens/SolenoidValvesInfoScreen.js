@@ -35,7 +35,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {faStickyNote, faCalendarAlt} from '@fortawesome/free-regular-svg-icons';
 import {styles} from '../../api/stylesApi';
-import Icons from "../components/Icons";
+import Icons from '../components/Icons';
 // Start of Home Screen Display
 const SolenoidValvesInfoScreen = props => {
   const customer = props.navigation.getParam('customer');
@@ -57,7 +57,7 @@ const SolenoidValvesInfoScreen = props => {
   }
   console.log(solenoidValves);
   return (
-    <ScrollView
+    <View
       style={solenoidValveInfoStyles.solenoidValveInfoScrollContainer}>
       <View style={styles.iconHeader}>
         <Image
@@ -80,9 +80,9 @@ const SolenoidValvesInfoScreen = props => {
           <FontAwesomeIcon icon={faPencilAlt} size={25} />
         </TouchableOpacity>
       </View>
-      <View style={solenoidValveInfoStyles.solenoidValveInfoContainer}>
+      <ScrollView style={solenoidValveInfoStyles.solenoidValveInfoContainer}>
         <View style={styles.infoChildContainer}>
-          <FontAwesomeIcon icon={faMapMarkerAlt} size={20} />
+          <Icons icon={'location'} size={20} />
           <Text style={styles.labelText}> Location: </Text>
           <Text style={styles.infoText}>{solenoidValves.location}</Text>
         </View>
@@ -110,11 +110,11 @@ const SolenoidValvesInfoScreen = props => {
           <Text style={styles.infoText}>{solenoidValves.zoneNumbers}</Text>
         </View>
         <View style={styles.infoChildContainer}>
-          <FontAwesomeIcon icon={faCalendarAlt} size={20} />
+          <Icons icon={'calendar'} size={20}/>
           <Text style={styles.labelText}> Year Installed: </Text>
           <Text style={styles.infoText}>{solenoidValves.yearInstalled}</Text>
         </View>
-      </View>
+      </ScrollView>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={() =>
@@ -130,7 +130,7 @@ const SolenoidValvesInfoScreen = props => {
               utilityTitle: 'Valves',
               utilityInfoScreen: 'SolenoidValvesInfo',
               noteIcon: 'search',
-              noteIconTitle: 'Find' + '\n' +'Valve',
+              noteIconTitle: 'Find' + '\n' + 'Valve',
             })
           }
           style={styles.generalButtonStyle}>
@@ -152,7 +152,7 @@ const SolenoidValvesInfoScreen = props => {
               utilityTitle: 'Valves',
               utilityInfoScreen: 'SolenoidValvesInfo',
               noteIcon: 'stickyNote',
-              noteIconTitle: 'Valve' + '\n' +'Notes',
+              noteIconTitle: 'Valve' + '\n' + 'Notes',
             })
           }
           style={styles.generalButtonStyle}>
@@ -167,8 +167,7 @@ const SolenoidValvesInfoScreen = props => {
             // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('UtilitySelectionScreen', {
               customer: customer,
-              headerIcon:
-                'solenoidValve',
+              headerIcon: 'solenoidValve',
               utilityType: 'SolenoidValves',
               utilities: solenoidValvesList,
               addUtilityScreen: 'AddSolenoidValves',
@@ -201,7 +200,7 @@ const SolenoidValvesInfoScreen = props => {
         </TouchableOpacity>
       </View>
       <View style={styles.longDivider} />
-    </ScrollView>
+    </View>
   );
 };
 // End of Home Screen Display
@@ -209,15 +208,14 @@ const SolenoidValvesInfoScreen = props => {
 // Start of StylingSheet
 const solenoidValveInfoStyles = StyleSheet.create({
   solenoidValveInfoContainer: {
-    paddingTop: 120,
-    paddingBottom: 120,
+//    paddingTop: 120,
+    //paddingBottom: 120,
     borderBottomWidth: 3,
     borderBottomColor: '#26660b',
     borderTopWidth: 3,
     borderTopColor: '#26660b',
-    height: '45%',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
+    //height: '45%',
+
     marginLeft: '1.5%',
     marginRight: '1.5%',
   },

@@ -47,7 +47,9 @@ import {
   faSearch,
   faKey,
   faSignInAlt,
-} from '@fortawesome/free-solid-svg-icons';
+  faMapMarkerAlt,
+  faDoorOpen, faRuler, faBackward,
+} from "@fortawesome/free-solid-svg-icons";
 import {checkValidPhoneNumber} from '../../api/CustomerApi';
 import {
   faEnvelope,
@@ -55,6 +57,7 @@ import {
   faStickyNote,
   faTrashAlt,
   faTimesCircle,
+  faCalendarAlt,
 } from '@fortawesome/free-regular-svg-icons';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -75,6 +78,11 @@ const Icons = props => {
   var email = false;
   var password = false;
   var signIn = false;
+  var location = false;
+  var insideOutside = false;
+  var calendar = false;
+  var utilitySize = false;
+  var backFlow = false;
   var color = props.color;
   var size = props.size;
 
@@ -165,6 +173,46 @@ const Icons = props => {
       size = 17;
     }
   }
+  if (props.icon === 'location') {
+    location = true;
+    if (size === 'medium') {
+      size = 33;
+    } else if (size === 'small') {
+      size = 17;
+    }
+  }
+  if (props.icon === 'insideOutside') {
+    insideOutside = true;
+    if (size === 'medium') {
+      size = 33;
+    } else if (size === 'small') {
+      size = 17;
+    }
+  }
+  if (props.icon === 'calendar') {
+    calendar = true;
+    if (size === 'medium') {
+      size = 33;
+    } else if (size === 'small') {
+      size = 17;
+    }
+  }
+  if (props.icon === 'utilitySize') {
+    utilitySize = true;
+    if (size === 'medium') {
+      size = 33;
+    } else if (size === 'small') {
+      size = 17;
+    }
+  }
+  if (props.icon === 'backFlow') {
+    backFlow = true;
+    if (size === 'medium') {
+      size = 33;
+    } else if (size === 'small') {
+      size = 17;
+    }
+  }
   return (
     <SafeAreaView>
       {timer ? (
@@ -197,13 +245,23 @@ const Icons = props => {
       ) : image ? (
         <FontAwesomeIcon icon={faImage} size={size} />
       ) : trash ? (
-        <FontAwesomeIcon icon={faTrashAlt} size={size} color={color}/>
+        <FontAwesomeIcon icon={faTrashAlt} size={size} color={color} />
       ) : email ? (
         <FontAwesomeIcon icon={faEnvelope} size={size} style={props.style} />
       ) : password ? (
         <FontAwesomeIcon icon={faKey} size={size} style={props.style} />
       ) : signIn ? (
         <FontAwesomeIcon icon={faSignInAlt} size={size} />
+      ) : location ? (
+        <FontAwesomeIcon icon={faMapMarkerAlt} size={size} />
+      ) : insideOutside ? (
+        <FontAwesomeIcon icon={faDoorOpen} size={size} />
+      ) : calendar ? (
+        <FontAwesomeIcon icon={faCalendarAlt} size={size} />
+      ) : utilitySize ? (
+        <FontAwesomeIcon icon={faRuler} size={size} />
+      ) : backFlow ? (
+        <FontAwesomeIcon icon={faBackward} size={size} />
       ) : null}
     </SafeAreaView>
   );

@@ -47,9 +47,7 @@ const DeleteContentScreen = props => {
   const timers = props.navigation.getParam('timers');
   const shutOffs = props.navigation.getParam('shutOffs');
   const solenoidValves = props.navigation.getParam('solenoidValves');
-  console.log(timerCollection.length);
-  console.log(shutOffCollection.length);
-  console.log(solenoidValveCollection.length);
+
   return (
     <View>
       <View style={styles.iconHeader}>

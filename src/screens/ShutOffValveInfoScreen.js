@@ -35,7 +35,16 @@ const ShutOffValveInfoScreen = props => {
   );
   const noteCollection = [shutoffValveNotes, findShutOffValveNotes];
   if (shutoffValve.size === '') {
-    shutoffValve.size = 'No Text Provided';
+    shutoffValve.size = 'Not Provided';
+  }
+  if (shutoffValve.location === '') {
+    shutoffValve.location = 'Not Provided';
+  }
+  if (shutoffValve.backFlow === '') {
+    shutoffValve.backFlow = 'Not Provided';
+  }
+  if (shutoffValve.yearInstalled === '') {
+    shutoffValve.yearInstalled = 'Not Provided';
   }
   return (
     <View>
@@ -60,7 +69,7 @@ const ShutOffValveInfoScreen = props => {
           <FontAwesomeIcon icon={faPencilAlt} size={25} />
         </TouchableOpacity>
       </View>
-      <View style={styles.utilityInfoContainer}>
+      <ScrollView style={styles.utilityInfoContainer}>
         <View style={styles.infoChildContainer}>
           <Image
             style={{width: 30, height: 25, marginRight: '2%'}}
@@ -70,11 +79,26 @@ const ShutOffValveInfoScreen = props => {
           <Text style={styles.infoText}>{shutoffValve.type}</Text>
         </View>
         <View style={styles.infoChildContainer}>
-          <FontAwesomeIcon icon={faRuler} size={33} style={styles.icons}/>
-          <Text style={styles.labelText}> Size: </Text>
+          <Icons icon={'utilitySize'} size={'medium'}/>
+          <Text style={styles.labelText}>  Size: </Text>
           <Text style={styles.infoText}>{shutoffValve.size}</Text>
         </View>
-      </View>
+        <View style={styles.infoChildContainer}>
+          <Icons icon={'location'} size={20}/>
+          <Text style={styles.labelText}> Location: </Text>
+          <Text style={styles.infoText}>{shutoffValve.location}</Text>
+        </View>
+        <View style={styles.infoChildContainer}>
+          <Icons icon={'backFlow'} size={20}/>
+          <Text style={styles.labelText}>  Backflow: </Text>
+          <Text style={styles.infoText}>{shutoffValve.backFlow}</Text>
+        </View>
+        <View style={styles.infoChildContainer}>
+          <Icons icon={'calendar'} size={20}/>
+          <Text style={styles.labelText}> Year Installed: </Text>
+          <Text style={styles.infoText}>{shutoffValve.yearInstalled}</Text>
+        </View>
+      </ScrollView>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={() =>

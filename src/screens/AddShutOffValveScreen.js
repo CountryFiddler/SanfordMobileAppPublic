@@ -29,6 +29,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {submitTimerInfo} from '../../api/TimerApi';
 import { styles } from "../../api/stylesApi";
+import Icons from "../components/Icons";
 
 // Start of Add Timer Screen Display
 const AddShutOffValveScreen = props => {
@@ -36,6 +37,9 @@ const AddShutOffValveScreen = props => {
   const shutOffs = props.navigation.getParam('utilities');
   const [shutoffType, setShutOffType] = useState('');
   const [size, setSize] = useState('');
+  const [location, setLocation] = useState('');
+  const [backFlow, setBackFlow] = useState('');
+  const [yearInstalled, setYearInstalled] = useState('');
   function checkEmptySubmissions() {
     if (shutoffType === '') {
       Alert.alert(
@@ -76,6 +80,51 @@ const AddShutOffValveScreen = props => {
           />
         </View>
         <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <Icons icon={'location'} size={20}/>
+          <Text style={styles.labelText}> Location: </Text>
+          <TextInput
+            style={styles.infoText}
+            // Text Input Box for the customer's first name
+            placeholder={'Location'}
+            value={location}
+            // Displays the value that the user is entering into the text input
+            // For example, if the typed 'Bob', then 'Bob' is displayed in the
+            // Text Input Box
+            onChangeText={text => setLocation(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <Icons icon={'backFlow'} size={20}/>
+          <Text style={styles.labelText}> Backflow: </Text>
+          <TextInput
+            style={styles.infoText}
+            // Text Input Box for the customer's first name
+            placeholder={'Yes/No'}
+            value={backFlow}
+            // Displays the value that the user is entering into the text input
+            // For example, if the typed 'Bob', then 'Bob' is displayed in the
+            // Text Input Box
+            onChangeText={text => setBackFlow(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <Icons icon={'calendar'} size={20}/>
+          <Text style={styles.labelText}> Year Installed: </Text>
+          <TextInput
+            style={styles.infoText}
+            // Text Input Box for the customer's first name
+            placeholder={'Year Installed'}
+            value={yearInstalled}
+            // Displays the value that the user is entering into the text input
+            // For example, if the typed 'Bob', then 'Bob' is displayed in the
+            // Text Input Box
+            onChangeText={text => setYearInstalled(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
         <View style={styles.submitDataButtonContainer}>
           <TouchableOpacity
             onPress={() =>
@@ -101,6 +150,9 @@ const AddShutOffValveScreen = props => {
                   customer,
                   shutoffType,
                   size,
+                  location,
+                  backFlow,
+                  yearInstalled,
                   props.navigation,
                 );
               }

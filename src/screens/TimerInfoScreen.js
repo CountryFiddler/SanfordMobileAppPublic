@@ -43,7 +43,7 @@ const TimerInfoScreen = props => {
   const timer = props.navigation.getParam('utility');
   const timerList = props.navigation.getParam('utilities');
   const navigation = props.navigation;
-  const timerNotes = getTimerNotes(customer, timer);
+  const timerNotes = getNotes(customer, timer, 'TimerNotes');
   const findTimerNotes = getNotes(customer, timer, 'FindTimerNotes');
   const noteCollection = [timerNotes, findTimerNotes];
   if (timer.numPrograms === '') {
@@ -51,6 +51,12 @@ const TimerInfoScreen = props => {
   }
   if (timer.numZones === '') {
     timer.numZones = 'Not Provided';
+  }
+  if (timer.location === '') {
+    timer.location = 'Not Provided';
+  }
+  if (timer.insideOutside === '') {
+    timer.insideOutside = 'Not Provided';
   }
   return (
     <View>
@@ -74,14 +80,21 @@ const TimerInfoScreen = props => {
           <FontAwesomeIcon icon={faPencilAlt} size={25} />
         </TouchableOpacity>
       </View>
-      <View style={styles.utilityInfoContainer}>
+      <ScrollView style={styles.utilityInfoContainer}>
         <View style={styles.infoChildContainer}>
-          <Image
-            style={{width: 25, height: 25}}
-            source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/iu-1.png')}
-          />
+          <Icons icon={'timer'} width={25} height={25}/>
           <Text style={styles.labelText}> Type: </Text>
           <Text style={styles.infoText}>{timer.type}</Text>
+        </View>
+        <View style={styles.infoChildContainer}>
+          <Icons icon={'location'} size={20}/>
+          <Text style={styles.labelText}> Location: </Text>
+          <Text style={styles.infoText}>{timer.location}</Text>
+        </View>
+        <View style={styles.infoChildContainer}>
+          <Icons icon={'insideOutside'} size={20}/>
+          <Text style={styles.labelText}> Inside/Outside: </Text>
+          <Text style={styles.infoText}>{timer.insideOutside}</Text>
         </View>
         <View style={styles.infoChildContainer}>
           <Text style={styles.labelText}>#</Text>
@@ -93,7 +106,12 @@ const TimerInfoScreen = props => {
           <Text style={styles.labelText}> Zones: </Text>
           <Text style={styles.infoText}>{timer.numZones}</Text>
         </View>
-      </View>
+        <View style={styles.infoChildContainer}>
+          <Icons icon={'calendar'} size={20}/>
+          <Text style={styles.labelText}> Year Installed: </Text>
+          <Text style={styles.infoText}>{timer.yearInstalled}</Text>
+        </View>
+      </ScrollView>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={() =>

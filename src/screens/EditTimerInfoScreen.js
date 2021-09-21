@@ -46,6 +46,13 @@ const EditTimerInfoScreen = props => {
   // Get the navigation prop
   const navigation = props.navigation;
   const [currentTimerType, setTimerType] = useState(timer.type);
+  const [currentLocation, setCurrentLocation] = useState(timer.location);
+  const [currentInsideOutside, setCurrentInsideOutside] = useState(
+    timer.insideOutside,
+  );
+  const [currentYearInstalled, setCurrentYearInstalled] = useState(
+    timer.yearInstalled,
+  );
   const [currentNumPrograms, setNumPrograms] = useState(timer.numPrograms);
   const [currentNumZones, setNumZones] = useState(timer.numZones);
   return (
@@ -60,6 +67,7 @@ const EditTimerInfoScreen = props => {
       </View>
       <View style={styles.addInfoContainer}>
         <View style={styles.infoChildContainer}>
+          <Icons icon={'timer'} width={25} height={25} />
           <Text style={styles.labelText}> Type: </Text>
           <TextInput
             style={styles.infoText}
@@ -70,6 +78,36 @@ const EditTimerInfoScreen = props => {
             // For example, if the typed 'Bob', then 'Bob' is displayed in the
             // Text Input Box
             onChangeText={text => setTimerType(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <Icons icon={'location'} size={20} />
+          <Text style={styles.labelText}> Location: </Text>
+          <TextInput
+            style={styles.infoText}
+            // Text Input Box for the customer's first name
+            placeholder={'Location'}
+            value={currentLocation}
+            // Displays the value that the user is entering into the text input
+            // For example, if the typed 'Bob', then 'Bob' is displayed in the
+            // Text Input Box
+            onChangeText={text => setCurrentLocation(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <Icons icon={'insideOutside'} size={20} />
+          <Text style={styles.labelText}> Inside/Outside: </Text>
+          <TextInput
+            style={styles.infoText}
+            // Text Input Box for the customer's first name
+            placeholder={'Inside/Outside'}
+            value={currentInsideOutside}
+            // Displays the value that the user is entering into the text input
+            // For example, if the typed 'Bob', then 'Bob' is displayed in the
+            // Text Input Box
+            onChangeText={text => setCurrentInsideOutside(text)}
           />
         </View>
         <View style={styles.addTextFieldDivider} />
@@ -95,6 +133,21 @@ const EditTimerInfoScreen = props => {
           />
         </View>
         <View style={styles.addTextFieldDivider} />
+        <View style={styles.infoChildContainer}>
+          <Icons icon={'calendar'} size={20} />
+          <Text style={styles.labelText}> Year Installed: </Text>
+          <TextInput
+            style={styles.infoText}
+            // Text Input Box for the customer's first name
+            placeholder={'Year Installed'}
+            value={currentYearInstalled}
+            // Displays the value that the user is entering into the text input
+            // For example, if the typed 'Bob', then 'Bob' is displayed in the
+            // Text Input Box
+            onChangeText={text => setCurrentYearInstalled(text)}
+          />
+        </View>
+        <View style={styles.addTextFieldDivider} />
         <View style={styles.submitDataButtonContainer}>
           <TouchableOpacity
             onPress={() =>
@@ -108,7 +161,7 @@ const EditTimerInfoScreen = props => {
               })
             }
             style={styles.generalButtonStyle}>
-            <Icons icon={'trash'} size={40} color={'#cc0000'}/>
+            <Icons icon={'trash'} size={40} color={'#cc0000'} />
             <Text style={styles.deleteButtonText}>Delete</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -129,6 +182,8 @@ const EditTimerInfoScreen = props => {
                 customer,
                 timer,
                 currentTimerType,
+                currentLocation,
+                currentInsideOutside,
                 currentNumPrograms,
                 currentNumZones,
                 navigation,
