@@ -42,7 +42,11 @@ const SolenoidValvesInfoScreen = props => {
   const solenoidValves = props.navigation.getParam('utility');
   const solenoidValvesList = props.navigation.getParam('utilities');
   const navigation = props.navigation;
-  const solenoidValveNotes = getSolenoidValvesNotes(customer, solenoidValves);
+  const solenoidValveNotes = getNotes(
+    customer,
+    solenoidValves,
+    'SolenoidValvesNotes',
+  );
   const findSolenoidValveNotes = getNotes(
     customer,
     solenoidValves,
@@ -57,8 +61,7 @@ const SolenoidValvesInfoScreen = props => {
   }
   console.log(solenoidValves);
   return (
-    <View
-      style={solenoidValveInfoStyles.solenoidValveInfoScrollContainer}>
+    <View style={solenoidValveInfoStyles.solenoidValveInfoScrollContainer}>
       <View style={styles.iconHeader}>
         <Image
           style={{width: 36, height: 40}}
@@ -110,7 +113,7 @@ const SolenoidValvesInfoScreen = props => {
           <Text style={styles.infoText}>{solenoidValves.zoneNumbers}</Text>
         </View>
         <View style={styles.infoChildContainer}>
-          <Icons icon={'calendar'} size={20}/>
+          <Icons icon={'calendar'} size={20} />
           <Text style={styles.labelText}> Year Installed: </Text>
           <Text style={styles.infoText}>{solenoidValves.yearInstalled}</Text>
         </View>
@@ -208,7 +211,7 @@ const SolenoidValvesInfoScreen = props => {
 // Start of StylingSheet
 const solenoidValveInfoStyles = StyleSheet.create({
   solenoidValveInfoContainer: {
-//    paddingTop: 120,
+    //    paddingTop: 120,
     //paddingBottom: 120,
     borderBottomWidth: 3,
     borderBottomColor: '#26660b',

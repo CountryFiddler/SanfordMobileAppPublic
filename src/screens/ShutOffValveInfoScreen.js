@@ -13,21 +13,39 @@
  */
 // Import Statements
 import React, {useEffect, useState} from 'react';
-import { Text, StyleSheet, View, Button, TouchableOpacity, Image, ScrollView } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  View,
+  Button,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+} from 'react-native';
 import {getNotes} from '../../api/UtilityApi';
 import {getShutOffValveNotes} from '../../api/ShutOffValveApi';
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faHome, faPencilAlt, faSearch, faUser, faRuler } from "@fortawesome/free-solid-svg-icons";
-import { faStickyNote } from "@fortawesome/free-regular-svg-icons";
-import { styles } from "../../api/stylesApi";
-import Icons from "../components/Icons";
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+  faHome,
+  faPencilAlt,
+  faSearch,
+  faUser,
+  faRuler,
+} from '@fortawesome/free-solid-svg-icons';
+import {faStickyNote} from '@fortawesome/free-regular-svg-icons';
+import {styles} from '../../api/stylesApi';
+import Icons from '../components/Icons';
 // Start of Home Screen Display
 const ShutOffValveInfoScreen = props => {
   const customer = props.navigation.getParam('customer');
   const shutoffValve = props.navigation.getParam('utility');
   const shutOffValveList = props.navigation.getParam('utilities');
   const navigation = props.navigation;
-  const shutoffValveNotes = getShutOffValveNotes(customer, shutoffValve);
+  const shutoffValveNotes = getNotes(
+    customer,
+    shutoffValve,
+    'ShutOffValveNotes',
+  );
   const findShutOffValveNotes = getNotes(
     customer,
     shutoffValve,
@@ -79,22 +97,22 @@ const ShutOffValveInfoScreen = props => {
           <Text style={styles.infoText}>{shutoffValve.type}</Text>
         </View>
         <View style={styles.infoChildContainer}>
-          <Icons icon={'utilitySize'} size={'medium'}/>
-          <Text style={styles.labelText}>  Size: </Text>
+          <Icons icon={'utilitySize'} size={'medium'} />
+          <Text style={styles.labelText}> Size: </Text>
           <Text style={styles.infoText}>{shutoffValve.size}</Text>
         </View>
         <View style={styles.infoChildContainer}>
-          <Icons icon={'location'} size={20}/>
+          <Icons icon={'location'} size={20} />
           <Text style={styles.labelText}> Location: </Text>
           <Text style={styles.infoText}>{shutoffValve.location}</Text>
         </View>
         <View style={styles.infoChildContainer}>
-          <Icons icon={'backFlow'} size={20}/>
-          <Text style={styles.labelText}>  Backflow: </Text>
+          <Icons icon={'backFlow'} size={20} />
+          <Text style={styles.labelText}> Backflow: </Text>
           <Text style={styles.infoText}>{shutoffValve.backFlow}</Text>
         </View>
         <View style={styles.infoChildContainer}>
-          <Icons icon={'calendar'} size={20}/>
+          <Icons icon={'calendar'} size={20} />
           <Text style={styles.labelText}> Year Installed: </Text>
           <Text style={styles.infoText}>{shutoffValve.yearInstalled}</Text>
         </View>
@@ -114,7 +132,7 @@ const ShutOffValveInfoScreen = props => {
               utilityTitle: 'Shut-Off',
               utilityInfoScreen: 'ShutOffInfo',
               noteIcon: 'search',
-              noteIconTitle: 'Find' + '\n' +'Valve',
+              noteIconTitle: 'Find' + '\n' + 'Valve',
             })
           }
           style={styles.generalButtonStyle}>
@@ -136,7 +154,7 @@ const ShutOffValveInfoScreen = props => {
               utilityTitle: 'Shut-Off',
               utilityInfoScreen: 'ShutOffInfo',
               noteIcon: 'stickyNote',
-              noteIconTitle: 'Valve' + '\n' +'Notes',
+              noteIconTitle: 'Valve' + '\n' + 'Notes',
             })
           }
           style={styles.generalButtonStyle}>
@@ -151,8 +169,7 @@ const ShutOffValveInfoScreen = props => {
             // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('UtilitySelectionScreen', {
               customer: customer,
-              headerIcon:
-                'shutOff',
+              headerIcon: 'shutOff',
               utilityType: 'ShutOffValves',
               utilities: shutOffValveList,
               addUtilityScreen: 'AddShutOff',

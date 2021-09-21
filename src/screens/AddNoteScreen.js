@@ -44,7 +44,7 @@ const AddNoteScreen = props => {
   // Start of Add Timer Screen Display
   //const [numZones, setNumZones] = useState(null);
   return (
-    <ScrollView style={{height: '100%'}}>
+    <View >
       <AddNote
         customer={customer}
         utilityType={utilityType}
@@ -56,7 +56,7 @@ const AddNoteScreen = props => {
         noteTitle={''}
         noteText={''}
       />
-    </ScrollView>
+    </View>
   );
 };
 // End of Home Screen Display

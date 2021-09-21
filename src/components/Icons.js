@@ -48,7 +48,7 @@ import {
   faKey,
   faSignInAlt,
   faMapMarkerAlt,
-  faDoorOpen, faRuler, faBackward,
+  faDoorOpen, faRuler, faBackward, faHistory,
 } from "@fortawesome/free-solid-svg-icons";
 import {checkValidPhoneNumber} from '../../api/CustomerApi';
 import {
@@ -83,6 +83,7 @@ const Icons = props => {
   var calendar = false;
   var utilitySize = false;
   var backFlow = false;
+  var history = false;
   var color = props.color;
   var size = props.size;
 
@@ -213,6 +214,14 @@ const Icons = props => {
       size = 17;
     }
   }
+  if (props.icon === 'history') {
+    history = true;
+    if (size === 'medium') {
+      size = 33;
+    } else if (size === 'small') {
+      size = 17;
+    }
+  }
   return (
     <SafeAreaView>
       {timer ? (
@@ -262,6 +271,8 @@ const Icons = props => {
         <FontAwesomeIcon icon={faRuler} size={size} />
       ) : backFlow ? (
         <FontAwesomeIcon icon={faBackward} size={size} />
+      ) : history ? (
+        <FontAwesomeIcon icon={faHistory} size={size} />
       ) : null}
     </SafeAreaView>
   );

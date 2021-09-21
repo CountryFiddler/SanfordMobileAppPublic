@@ -25,6 +25,7 @@ import {
   SafeAreaView,
   TouchableWithoutFeedback,
   TouchableOpacity,
+  Modal,
 } from 'react-native';
 
 import CustomerSearchBar from '../components/CustomerSearchBar';
@@ -55,6 +56,7 @@ const UtilityNoteScreen = props => {
   const screenTitle = props.navigation.getParam('screenTitle');
   const noteIcon = props.navigation.getParam('noteIcon');
   const noteIconTitle = props.navigation.getParam('noteIconTitle');
+  const [showNoteHistory, setShowNoteHistory] = useState(false);
   //const utilityType = props.navigation.getParam('utilityType');
   //console.log(testImage);
   //imageURL = getImageURL(note.images[0].imageRef);
@@ -66,6 +68,11 @@ const UtilityNoteScreen = props => {
         <Icons icon={'stickyNote'} size={'medium'} />
       </View>
       <View style={styles.noteHeaderBar}>
+        <View>
+          <TouchableOpacity onPress={() => setShowNoteHistory(true)}>
+            <Icons icon={'history'} size={'small'} />
+          </TouchableOpacity>
+        </View>
         <View style={styles.noteTitle}>
           <Text style={styles.noteTitleText}>{note.title} </Text>
         </View>
@@ -113,7 +120,7 @@ const UtilityNoteScreen = props => {
             })
           }
           style={styles.generalButtonStyle}>
-          <Icons icon={noteIcon} size={'medium'}/>
+          <Icons icon={noteIcon} size={'medium'} />
           <Text style={styles.buttonText}>{noteIconTitle}</Text>
         </TouchableOpacity>
         {utilityTitle !== null ? (
@@ -150,6 +157,37 @@ const UtilityNoteScreen = props => {
         </TouchableOpacity>
       </View>
       <View style={styles.longDivider} />
+      <View>
+        <Modal
+          visible={showNoteHistory === true}
+          animated
+          style={{height: 150, backgroundColor: 'red'}}>
+          <View style={styles.modalExitButton}>
+            <TouchableOpacity onPress={() => setShowNoteHistory(false)}>
+              <Icons icon={'exit'} size={33} />
+            </TouchableOpacity>
+          </View>
+          {note.employeeNameAndTimeHistory.length
+            ? note.employeeNameAndTimeHistory.map(history => {
+                return (
+                  <View key={history.timeWithSeconds}>
+                    <Text>Name: {history.employeeName}</Text>
+                    <Text>
+                      Date:{' '}
+                      {history.month +
+                        '-' +
+                        history.day +
+                        '-' +
+                        history.year +
+                        ' ' +
+                        history.time}
+                    </Text>
+                  </View>
+                );
+              })
+            : null}
+        </Modal>
+      </View>
     </View>
   );
 };

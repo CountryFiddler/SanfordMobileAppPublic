@@ -62,6 +62,7 @@ const AddNote = props => {
   const noteType = props.noteType;
   const [noteID, setNoteID] = useState(0);
   const note = props.note;
+  const [employeeName, setEmployeeName] = useState('');
   const [uploading, setUploading] = useState(false);
   const [transferred, setTransferred] = useState(0);
   const [mediaType, setMediaType] = useState('');
@@ -85,13 +86,15 @@ const AddNote = props => {
     noteText,
     noteID,
     noteType,
+    employeeName,
     navigation,
   ) => {
-    var utilityNote = {noteTitle, noteText, noteID, noteType};
+    var utilityNote = {noteTitle, noteText, noteID, noteType, employeeName};
     utilityNote.title = noteTitle;
     utilityNote.noteText = noteText;
     utilityNote.noteID = noteID;
     utilityNote.noteType = noteType;
+    utilityNote.employeeName = employeeName
     //console.log(videos[0]);
     utilityNote.noteID = addNote(
       customer,
@@ -100,6 +103,7 @@ const AddNote = props => {
       utilityNote,
       imageRefs,
       numImages,
+      employeeName
     );
     //console.log(videoRefs[0].videoRef);
     //console.log(utilityNote.noteID);
@@ -121,6 +125,7 @@ const AddNote = props => {
       utilityNote,
       imageRefs,
       numImages,
+      employeeName,
     );
     // Get Single Note
     // Set The Remaining ImageRefs and VideoRefs
@@ -332,115 +337,132 @@ const AddNote = props => {
       <View>
         <Text style={styles.addInfoScreenTitle}>Add Note</Text>
       </View>
-      <View style={{height: '100%'}}>
-        <View>
-          <Text style={styles.noteTitleLabel}> Title: </Text>
-          <View style={styles.textInputContainer}>
-            <TextInput
-              textAlignVertical={'top'}
-              multiline={true}
-              style={styles.textInput}
-              // Text Input Box for the customer's first name
-              // Text Input Box for the customer's first name
-              placeholder={'Title'}
-              value={noteTitle}
-              // Displays the value that the user is entering into the text input
-              // For example, if the typed 'Bob', then 'Bob' is displayed in the
-              // Text Input Box
-              onChangeText={text => setNoteTitle(text)}
-            />
-          </View>
-          <View style={styles.addTextFieldDivider} />
-          <Text style={styles.noteMessageLabel}> Message: </Text>
-          <View style={styles.noteMessageInputContainer}>
-            <TextInput
-              style={styles.textInput}
-              textAlignVertical={'top'}
-              multiline={true}
-              // Text Input Box for the customer's first name
-              // Text Input Box for the customer's first name
-              // Text Input Box for the customer's last name
-              placeholder={'Message'}
-              value={noteText}
-              onChangeText={text => setNoteText(text)}
-            />
-          </View>
-          <View style={styles.addTextFieldDivider} />
-          <View style={styles.infoChildContainer}>
-            <FontAwesomeIcon icon={faImage} size={17} style={styles.icons} />
-            <Text style={styles.labelText}># Images Selected: </Text>
-            <Text style={styles.infoText}>{numImages}</Text>
-          </View>
+      <ScrollView style={{height: '35%'}}>
+        <Text style={styles.noteTitleLabel}> Name: </Text>
+        <View style={styles.textInputContainer}>
+          <TextInput
+            textAlignVertical={'top'}
+            multiline={true}
+            style={styles.textInput}
+            // Text Input Box for the customer's first name
+            // Text Input Box for the customer's first name
+            placeholder={'Name'}
+            value={employeeName}
+            // Displays the value that the user is entering into the text input
+            // For example, if the typed 'Bob', then 'Bob' is displayed in the
+            // Text Input Box
+            onChangeText={text => setEmployeeName(text)}
+          />
         </View>
-        <StatusBar barStyle={'dark-content'} />
-        <View>
-          {uploading ? (
-            <View style={styles.addNoteProgressBarContainer}>
-              <Progress.Bar
-                progress={transferred}
-                width={300}
-                color={'#26660b'}
-              />
-              <Text style={styles.labelText}>
-                {' '}
-                {mediaType} {mediaUploadCounter} out of {numMediaToUpload} is
-                being uploaded...
-              </Text>
-            </View>
-          ) : (
-            <View>
-              <View style={styles.addPhotoButtonContainer}>
-                <TouchableOpacity
-                  style={styles.generalButtonStyle}
-                  onPress={selectImage}>
-                  <FontAwesomeIcon icon={faImage} size={33} />
-                  <Text style={styles.buttonText}>Pick an image</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.generalButtonStyle}
-                  onPress={selectImageFromCamera}>
-                  <FontAwesomeIcon icon={faCamera} size={33} />
-                  <Text style={styles.buttonText}>Take a Picture</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.submitDataButtonContainer}>
-                <TouchableOpacity
-                  onPress={() => props.navigation.goBack()}
-                  style={styles.generalButtonStyle}>
-                  <FontAwesomeIcon icon={faTimes} size={40} color={'#cc0000'} />
-                  <Text style={styles.cancelButtonText}>Cancel</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.generalButtonStyle}
-                  onPress={() => {
-                    {
-                      noteTitle !== ''
-                        ? submitNote(
-                            customer,
-                            numImages,
-                            imagesToUpload,
-                            imageRefs,
-                            utilityType,
-                            utility,
-                            noteTitle,
-                            noteText,
-                            noteID,
-                            noteType,
-                            props.navigation,
-                          )
-                        : Alert.alert(
-                            'Please Enter A Note Title',
-                            'All notes must have a title',
-                          );
-                    }
-                  }}>
-                  <FontAwesomeIcon icon={faCheck} size={40} color={'#26660b'} />
-                  <Text style={styles.submitButtonText}>Submit</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          )}
+        <View style={styles.addTextFieldDivider} />
+        <Text style={styles.noteTitleLabel}> Title: </Text>
+        <View style={styles.textInputContainer}>
+          <TextInput
+            textAlignVertical={'top'}
+            multiline={true}
+            style={styles.textInput}
+            // Text Input Box for the customer's first name
+            // Text Input Box for the customer's first name
+            placeholder={'Note Title'}
+            value={noteTitle}
+            // Displays the value that the user is entering into the text input
+            // For example, if the typed 'Bob', then 'Bob' is displayed in the
+            // Text Input Box
+            onChangeText={text => setNoteTitle(text)}
+          />
         </View>
+        <View style={styles.addTextFieldDivider} />
+        <Text style={styles.noteMessageLabel}> Message: </Text>
+        <View style={styles.noteMessageInputContainer}>
+          <TextInput
+            style={styles.textInput}
+            textAlignVertical={'top'}
+            multiline={true}
+            // Text Input Box for the customer's first name
+            // Text Input Box for the customer's first name
+            // Text Input Box for the customer's last name
+            placeholder={'Message'}
+            value={noteText}
+            onChangeText={text => setNoteText(text)}
+          />
+        </View>
+      </ScrollView>
+      <View style={styles.addTextFieldDivider} />
+      <View style={styles.infoChildContainer}>
+        <FontAwesomeIcon icon={faImage} size={17} style={styles.icons} />
+        <Text style={styles.labelText}># Images Selected: </Text>
+        <Text style={styles.infoText}>{numImages}</Text>
+      </View>
+      <StatusBar barStyle={'dark-content'} />
+      <View style={{paddingTop: 50}}>
+        {uploading ? (
+          <View style={styles.addNoteProgressBarContainer}>
+            <Progress.Bar
+              progress={transferred}
+              width={300}
+              color={'#26660b'}
+            />
+            <Text style={styles.labelText}>
+              {' '}
+              {mediaType} {mediaUploadCounter} out of {numMediaToUpload} is
+              being uploaded...
+            </Text>
+          </View>
+        ) : (
+          <View>
+            <View style={styles.addPhotoButtonContainer}>
+              <TouchableOpacity
+                style={styles.generalButtonStyle}
+                onPress={selectImage}>
+                <FontAwesomeIcon icon={faImage} size={33} />
+                <Text style={styles.buttonText}>Pick an image</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.generalButtonStyle}
+                onPress={selectImageFromCamera}>
+                <FontAwesomeIcon icon={faCamera} size={33} />
+                <Text style={styles.buttonText}>Take a Picture</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.longDivider}/>
+            <View style={styles.submitDataButtonContainer}>
+              <TouchableOpacity
+                onPress={() => props.navigation.goBack()}
+                style={styles.generalButtonStyle}>
+                <FontAwesomeIcon icon={faTimes} size={40} color={'#cc0000'} />
+                <Text style={styles.cancelButtonText}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.generalButtonStyle}
+                onPress={() => {
+                  {
+                    (noteTitle !== '' && employeeName !== '')
+                      ? submitNote(
+                          customer,
+                          numImages,
+                          imagesToUpload,
+                          imageRefs,
+                          utilityType,
+                          utility,
+                          noteTitle,
+                          noteText,
+                          noteID,
+                          noteType,
+                          employeeName,
+                          props.navigation,
+                        )
+                      : Alert.alert(
+                          'Please Enter a Name and a Title',
+                          'All notes must have a name and title',
+                        );
+                  }
+                }}>
+                <FontAwesomeIcon icon={faCheck} size={40} color={'#26660b'} />
+                <Text style={styles.submitButtonText}>Submit</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
       </View>
     </SafeAreaView>
   );

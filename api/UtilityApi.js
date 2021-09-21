@@ -277,6 +277,7 @@ export function addNote(
   utilityNote,
   imageRefs,
   numImages,
+  employeeName,
   addComplete,
 ) {
   var today = new Date(),
@@ -315,19 +316,27 @@ export function updateNote(
   utilityNote,
   imageRefs,
   numImages,
+  employeeName,
   addComplete,
 ) {
   console.log(customer.id);
   var meridiam;
+  var currentHour;
   var today = new Date(),
     date =
       today.getMonth() + 1 + '-' + today.getDate() + '-' + today.getFullYear();
 
   //console.log(imageRefs);
-  if (today.getHours() > 12) {
+  if (today.getHours() >= 12) {
     meridiam = 'pm';
+    if (today.getHours() === 12) {
+      currentHour = (today.getHours());
+    } else {
+      currentHour = (today.getHours() % 12);
+    }
   } else {
     meridiam = 'am';
+    currentHour = today.getHours();
   }
   var docRef = firebase
     .firestore()
@@ -351,7 +360,24 @@ export function updateNote(
         day: today.getDate(),
         year: today.getFullYear(),
         time:
-          (today.getHours() % 12) + ':' + today.getMinutes() + ' ' + meridiam,
+          currentHour + ':' + today.getMinutes() + ' ' + meridiam,
+        timeWithSeconds:
+          today.getHours() +
+          ':' +
+          today.getMinutes() +
+          ':' +
+          today.getSeconds(),
+      }),
+      nameHistory: firebase.firestore.FieldValue.arrayUnion({
+        employeeName: employeeName,
+      }),
+      employeeNameAndTimeHistory: firebase.firestore.FieldValue.arrayUnion({
+        employeeName: employeeName,
+        month: today.getMonth() + 1,
+        day: today.getDate(),
+        year: today.getFullYear(),
+        time:
+          currentHour + ':' + today.getMinutes() + ' ' + meridiam,
         timeWithSeconds:
           today.getHours() +
           ':' +
@@ -407,6 +433,7 @@ export function getNotes(customer, utility, noteType) {
           numImages: doc.data().numImages,
           imageRefs: doc.data().imageRefs,
           noteType: noteType,
+          employeeNameAndTimeHistory: doc.data().employeeNameAndTimeHistory,
           createdAt: doc.data().createdAt,
         });
       });

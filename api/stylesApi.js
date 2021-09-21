@@ -75,7 +75,7 @@ export const styles = StyleSheet.create({
     fontSize: 17,
     alignItems: 'flex-start',
 
-    height: '10%',
+    height: '8%',
   },
   noteMessageInputContainer: {
     marginTop: '5%',

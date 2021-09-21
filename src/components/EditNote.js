@@ -62,6 +62,7 @@ const EditNote = props => {
   const note = props.note;
   //const utilityNotes = props.utilityNotes;
   const utilityNotes = props.utilityNotes;
+  const [employeeName, setEmployeeName] = useState('');
   const [uploading, setUploading] = useState(false);
   const [transferred, setTransferred] = useState(0);
   const [mediaType, setMediaType] = useState('');
@@ -379,6 +380,22 @@ const EditNote = props => {
       </View>
 
       <View style={{height: '40%'}}>
+        <Text style={styles.noteTitleLabel}> Name: </Text>
+        <View style={styles.textInputContainer}>
+          <TextInput
+            textAlignVertical={'top'}
+            multiline={true}
+            style={styles.textInput}
+            // Text Input Box for the customer's first name
+            // Text Input Box for the customer's first name
+            placeholder={'Name'}
+            value={employeeName}
+            // Displays the value that the user is entering into the text input
+            // For example, if the typed 'Bob', then 'Bob' is displayed in the
+            // Text Input Box
+            onChangeText={text => setEmployeeName(text)}
+          />
+        </View>
         <Text style={styles.noteTitleLabel}> Title: </Text>
         <View style={styles.textInputContainer}>
           <TextInput
@@ -454,7 +471,7 @@ const EditNote = props => {
                 onPress={() => {
                   //console.log(noteTitle);
                   {
-                    noteTitle !== ''
+                    (noteTitle !== '' && employeeName !== '')
                       ? //console.log(noteTitle),
                         //  console.log(currNote.videoRefs[0].videoRef),
                         submitNote(
@@ -468,12 +485,13 @@ const EditNote = props => {
                           noteText,
                           noteID,
                           noteType,
+                          employeeName,
                           props.navigation,
                         )
                       : Alert.alert(
-                          'Please Enter A Note Title',
-                          'All notes must have a title',
-                        );
+                      'Please Enter a Name and a Title',
+                      'All notes must have a name and title',
+                      );
                   }
                 }}>
                 <FontAwesomeIcon icon={faCheck} size={40} color={'#26660b'} />
