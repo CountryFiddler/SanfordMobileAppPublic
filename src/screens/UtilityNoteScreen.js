@@ -167,6 +167,7 @@ const UtilityNoteScreen = props => {
               <Icons icon={'exit'} size={33} />
             </TouchableOpacity>
           </View>
+          <ScrollView>
           {note.employeeNameAndTimeHistory.length
             ? note.employeeNameAndTimeHistory.map(history => {
                 return (
@@ -186,6 +187,7 @@ const UtilityNoteScreen = props => {
                 );
               })
             : null}
+          </ScrollView>
         </Modal>
       </View>
     </View>
