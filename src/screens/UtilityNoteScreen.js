@@ -26,6 +26,7 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
   Modal,
+  Dimensions,
 } from 'react-native';
 
 import CustomerSearchBar from '../components/CustomerSearchBar';
@@ -68,9 +69,9 @@ const UtilityNoteScreen = props => {
         <Icons icon={'stickyNote'} size={'medium'} />
       </View>
       <View style={styles.noteHeaderBar}>
-        <View>
+        <View style={styles.noteHistoryIcon}>
           <TouchableOpacity onPress={() => setShowNoteHistory(true)}>
-            <Icons icon={'history'} size={'small'} />
+            <Icons icon={'history'} size={'25'} />
           </TouchableOpacity>
         </View>
         <View style={styles.noteTitle}>
@@ -157,39 +158,63 @@ const UtilityNoteScreen = props => {
         </TouchableOpacity>
       </View>
       <View style={styles.longDivider} />
-      <View>
-        <Modal
-          visible={showNoteHistory === true}
-          animated
-          style={{height: 150, backgroundColor: 'red'}}>
-          <View style={styles.modalExitButton}>
-            <TouchableOpacity onPress={() => setShowNoteHistory(false)}>
-              <Icons icon={'exit'} size={33} />
-            </TouchableOpacity>
+
+      <Modal
+        visible={showNoteHistory === true}
+        animationType={'fade'}
+        transparent={true}
+        style={{color: 'red'}}>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: '#000000AA',
+          }}>
+          <View style={styles.noteHistoryContainer}>
+            <View style={styles.historyModalExitButton}>
+              <TouchableOpacity onPress={() => setShowNoteHistory(false)}>
+                <Icons icon={'exit'} size={33} color={'white'} />
+              </TouchableOpacity>
+            </View>
+            <ScrollView
+              style={{
+                height: 400,
+                backgroundColor: '#FFFFFF',
+                borderRadius: 15,
+              }}>
+              <Text style={styles.noteHistoryTitleLabel}>Note History</Text>
+              {note.employeeNameAndTimeHistory.length
+                ? note.employeeNameAndTimeHistory.map(history => {
+                    return (
+                      <View>
+                        <View
+                          key={history.timeWithSeconds}
+                          style={{marginTop: '5%', marginLeft: '2%'}}>
+                          <View style={styles.noteHistoryInfoContainer}>
+                            <Text style={styles.noteHistoryLabel}>Employee: </Text>
+                            <Text>{history.employeeName}</Text>
+                          </View>
+                          <View style={styles.noteHistoryInfoContainer}>
+                            <Text style={styles.noteHistoryLabel}>Date: </Text>
+                            <Text>
+                            {history.month +
+                              '-' +
+                              history.day +
+                              '-' +
+                              history.year +
+                              ' ' +
+                              history.time}
+                          </Text>
+                          </View>
+                        </View>
+                        <View style={styles.longDivider} />
+                      </View>
+                    );
+                  })
+                : null}
+            </ScrollView>
           </View>
-          <ScrollView>
-          {note.employeeNameAndTimeHistory.length
-            ? note.employeeNameAndTimeHistory.map(history => {
-                return (
-                  <View key={history.timeWithSeconds}>
-                    <Text>Name: {history.employeeName}</Text>
-                    <Text>
-                      Date:{' '}
-                      {history.month +
-                        '-' +
-                        history.day +
-                        '-' +
-                        history.year +
-                        ' ' +
-                        history.time}
-                    </Text>
-                  </View>
-                );
-              })
-            : null}
-          </ScrollView>
-        </Modal>
-      </View>
+        </View>
+      </Modal>
     </View>
   );
 };

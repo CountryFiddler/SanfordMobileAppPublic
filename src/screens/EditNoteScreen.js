@@ -44,7 +44,7 @@ const EditNoteScreen = props => {
   const utility = props.navigation.getParam('utility');
   const utilityNotes = props.navigation.getParam('utilityNotes');
   return (
-    <ScrollView>
+    <View>
         <EditNote
           customer={customer}
           note={note}
@@ -60,7 +60,7 @@ const EditNoteScreen = props => {
           noteTitle={note.title}
           noteText={note.noteText}
         />
-    </ScrollView>
+    </View>
   );
 };
 // End of Home Screen Display

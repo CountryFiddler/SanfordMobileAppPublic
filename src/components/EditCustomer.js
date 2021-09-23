@@ -315,8 +315,8 @@ const EditCustomer = props => {
               })
             }
             style={styles.generalButtonStyle}>
-            <FontAwesomeIcon icon={faTimes} size={40} color={'#cc0000'} />
-            <Text style={styles.cancelButtonText}>Cancel</Text>
+            <FontAwesomeIcon icon={faTimes} size={40} color={'black'} />
+            <Text style={styles.blackCancelButtonText}>Cancel</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => submitCustomerInfo()}

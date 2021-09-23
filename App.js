@@ -23,7 +23,10 @@ import AddSolenoidValvesScreen from './src/screens/AddSolenoidValvesScreen';
 import EditSolenoidValvesInfoScreen from './src/screens/EditSolenoidValvesInfoScreen';
 import * as firebase from 'react-native-firebase';
 import {useState} from 'react';
+import { Dimensions, Image } from "react-native";
+import React from 'react';
 //import AddCustomer from './src/components/AddCustomer';
+const deviceHeight = Dimensions.get('window').height;
 let routeName = '';
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
@@ -62,17 +65,25 @@ const navigator = createStackNavigator(
   {
     initialRouteName: routeName,
     defaultNavigationOptions: {
-      title: 'Sanford Irrigation',
+      headerTitle: (
+        <Image
+          style={{height: 100, width: 100}}
+          source={require('./src/icons/SanfordLogo.png')}
+        />
+      ),
+      headerTitleAlign: 'center',
+      headerBackTitle: 'Back',
       headerStyle: {
         backgroundColor: '#26660b',
         borderBottomWidth: 3,
         borderBottomColor: 'black',
+        height: deviceHeight/8,
       },
       headerTitleStyle: {
-        fontWeight: "bold",
-        color: "#FFF",
+        fontWeight: 'bold',
+        color: '#FFF',
       },
-      headerTintColor: "#FFF",
+      headerTintColor: '#FFF',
     },
   },
 );

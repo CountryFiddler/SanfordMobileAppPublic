@@ -69,7 +69,7 @@ const EditNote = props => {
   const [numMediaToUpload, setNumMediaToUpload] = useState(0);
   const [mediaUploadCounter, setMediaUploadCounter] = useState(0);
   const [addedImages, setAddedImages] = useState(false);
-  const [numImages, setNumImages] = useState(props.numImages);
+  const [numImages, setNumImages] = useState(0);
   const [noteTitle, setNoteTitle] = useState(props.noteTitle);
   const [noteText, setNoteText] = useState(props.noteText);
   const [imagesToUpload, setImagesToUpload] = useState([]);
@@ -353,7 +353,7 @@ const EditNote = props => {
   console.log(customer.id);
 
   return (
-    <ScrollView>
+    <View>
       <View style={styles.iconHeader}>
         <Icons icon={'stickyNote'} size={'medium'} />
       </View>
@@ -379,7 +379,7 @@ const EditNote = props => {
         </View>
       </View>
 
-      <View style={{height: '40%'}}>
+      <ScrollView style={{height: '35%'}}>
         <Text style={styles.noteTitleLabel}> Name: </Text>
         <View style={styles.textInputContainer}>
           <TextInput
@@ -396,6 +396,7 @@ const EditNote = props => {
             onChangeText={text => setEmployeeName(text)}
           />
         </View>
+        <View style={styles.addTextFieldDivider} />
         <Text style={styles.noteTitleLabel}> Title: </Text>
         <View style={styles.textInputContainer}>
           <TextInput
@@ -424,12 +425,12 @@ const EditNote = props => {
             onChangeText={text => setNoteText(text)}
           />
         </View>
-        <View style={styles.addTextFieldDivider} />
-        <View style={styles.infoChildContainer}>
-          <FontAwesomeIcon icon={faImage} size={17} style={styles.icons} />
-          <Text style={styles.labelText}># Images Selected: </Text>
-          <Text style={styles.infoText}>{imagesToUpload.length}</Text>
-        </View>
+      </ScrollView>
+      <View style={styles.addTextFieldDivider} />
+      <View style={styles.infoChildContainer}>
+        <FontAwesomeIcon icon={faImage} size={17} style={styles.icons} />
+        <Text style={styles.labelText}># Images Selected: </Text>
+        <Text style={styles.infoText}>{numImages}</Text>
       </View>
       <StatusBar barStyle={'dark-content'} />
       <View >
@@ -458,7 +459,7 @@ const EditNote = props => {
                 <Text style={styles.buttonText}>Take a Picture</Text>
               </TouchableOpacity>
             </View>
-            <View style={styles.editNoteDivider}/>
+            <View style={styles.longDivider}/>
             <View style={styles.submitDataButtonContainer}>
               <TouchableOpacity
                 onPress={() => props.navigation.goBack()}
@@ -498,11 +499,11 @@ const EditNote = props => {
                 <Text style={styles.submitButtonText}>Submit</Text>
               </TouchableOpacity>
             </View>
-            <View style={styles.spaceHolder}></View>
+
           </ScrollView>
         )}
       </View>
-    </ScrollView>
+    </View>
   );
 };
 // End of Home Screen Display

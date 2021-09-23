@@ -433,7 +433,7 @@ export function getNotes(customer, utility, noteType) {
           numImages: doc.data().numImages,
           imageRefs: doc.data().imageRefs,
           noteType: noteType,
-          employeeNameAndTimeHistory: doc.data().employeeNameAndTimeHistory,
+          employeeNameAndTimeHistory: doc.data().employeeNameAndTimeHistory.reverse(),
           createdAt: doc.data().createdAt,
         });
       });

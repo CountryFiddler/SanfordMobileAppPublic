@@ -1,5 +1,6 @@
-import {StyleSheet} from 'react-native';
-
+import {Dimensions, StyleSheet} from 'react-native';
+const deviceHeight = Dimensions.get('window').height;
+const deviceWidth = Dimensions.get('window').width;
 export const styles = StyleSheet.create({
   screenHeader: {
     alignItems: 'center',
@@ -356,6 +357,10 @@ export const styles = StyleSheet.create({
     //alignItems: 'flex-end',
     //resizeMode: 'contain',
   },
+  noteHistoryIcon: {
+    resizeMode: 'contain',
+    marginLeft: '4%',
+  },
   noteImageContainer: {
     //marginTop: '2%',
   },
@@ -407,6 +412,33 @@ export const styles = StyleSheet.create({
     // paddingBottom: 100,
     //width: '90%',
     //height: 100,
+  },
+  historyModalExitButton: {
+    backgroundColor: 'transparent',
+    alignItems: 'flex-end',
+  },
+  noteHistoryContainer: {
+    width: deviceWidth * 0.8,
+    maxHeight: deviceHeight * 0.8,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop: deviceHeight / 4,
+  },
+  noteHistoryLabel: {
+    fontWeight: 'bold',
+  },
+  noteHistoryInfoContainer: {
+    flexDirection: 'row',
+    marginBottom: '1%',
+  },
+  noteHistoryTitleLabel: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: '2%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   noteMessageLabel: {
     //marginTop: '10%',

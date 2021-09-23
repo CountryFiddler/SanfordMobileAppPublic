@@ -88,7 +88,7 @@ const Icons = props => {
   var size = props.size;
 
   if (color === null) {
-    color = 'black';
+    color = 'white';
   }
   if (props.icon === 'timer') {
     timer = true;
@@ -249,7 +249,7 @@ const Icons = props => {
         <FontAwesomeIcon
           icon={faTimesCircle}
           size={size}
-          style={{color: 'white'}}
+          style={{color: color}}
         />
       ) : image ? (
         <FontAwesomeIcon icon={faImage} size={size} />
