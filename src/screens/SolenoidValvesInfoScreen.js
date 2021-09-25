@@ -217,7 +217,7 @@ const solenoidValveInfoStyles = StyleSheet.create({
     borderBottomColor: '#26660b',
     borderTopWidth: 3,
     borderTopColor: '#26660b',
-    //height: '45%',
+    height: '50%',
 
     marginLeft: '1.5%',
     marginRight: '1.5%',

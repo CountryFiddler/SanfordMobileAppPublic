@@ -21,8 +21,8 @@ import {
   SafeAreaView,
   TextInput,
   Image,
-  TouchableOpacity,
-} from 'react-native';
+  TouchableOpacity, ScrollView,
+} from "react-native";
 import {
   submitShutOffChanges,
   submitShutOffInfo,
@@ -58,7 +58,9 @@ const EditShutOffValveInfoScreen = props => {
         />
         <Text style={styles.addInfoScreenTitle}>Edit Shut-Off</Text>
       </View>
-      <View style={styles.addInfoContainer}>
+      <View >
+        <View style={styles.longDividerWithSpacing} />
+        <ScrollView style={{height: '48%'}}>
         <View style={styles.infoChildContainer}>
           <Text style={styles.labelText}> Type: </Text>
           <TextInput
@@ -123,7 +125,8 @@ const EditShutOffValveInfoScreen = props => {
             onChangeText={text => setCurrentYearInstalled(text)}
           />
         </View>
-        <View style={styles.addTextFieldDivider} />
+        </ScrollView>
+        <View style={styles.longDividerWithSpacing} />
         <View style={styles.submitDataButtonContainer}>
           <TouchableOpacity
             onPress={() =>
@@ -143,17 +146,7 @@ const EditShutOffValveInfoScreen = props => {
           <TouchableOpacity
             onPress={() =>
               // Pass navigation and customer as props to the Edit Customer Screen
-              props.navigation.navigate('UtilitySelectionScreen', {
-                customer: customer,
-                headerIcon: 'shutOff',
-                utilityType: 'ShutOffValves',
-                utilities: shutOffs,
-                addUtilityScreen: 'AddShutOff',
-                addUtilityButtonTitle: 'Add Shut-Off Valve',
-                utilityInfoScreenTitle: 'ShutOffInfo',
-                utilityTypeText: 'Shut-Off Valves',
-                addUtilityText: 'Add Valve',
-              })
+              props.navigation.goBack()
             }
             style={styles.generalButtonStyle}>
             <FontAwesomeIcon icon={faTimes} size={40} color={'black'} />

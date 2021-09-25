@@ -19,7 +19,7 @@ import {
   View,
   Button,
   SafeAreaView,
-  TextInput, Image, TouchableOpacity,
+  TextInput, Image, TouchableOpacity, ScrollView,
 } from "react-native";
 import {submitShutOffChanges} from '../../api/ShutOffValveApi';
 import { submitSolenoidValvesChanges, submitSolenoidValvesInfo } from "../../api/SolenoidValveApi";
@@ -67,6 +67,8 @@ const EditSolenoidValvesInfoScreen = props => {
         </Text>
       </View>
       <View style={styles.addInfoContainer}>
+        <View style={styles.longDividerWithSpacing} />
+        <ScrollView style={{height: '50%'}}>
         <View style={styles.infoChildContainer}>
           <FontAwesomeIcon icon={faMapMarkerAlt} size={20} />
           <Text style={styles.labelText}> Location: </Text>
@@ -147,7 +149,8 @@ const EditSolenoidValvesInfoScreen = props => {
             onChangeText={text => setYearInstalled(text)}
           />
         </View>
-        <View style={styles.addTextFieldDivider} />
+        </ScrollView>
+        <View style={styles.longDividerWithSpacing} />
         <View style={styles.submitDataButtonContainer}>
           <TouchableOpacity
             onPress={() =>
@@ -167,15 +170,7 @@ const EditSolenoidValvesInfoScreen = props => {
           <TouchableOpacity
             onPress={() =>
               // Pass navigation and customer as props to the Edit Customer Screen
-              props.navigation.navigate('UtilitySelectionScreen', {
-                customer: customer,
-                utilityType: 'SolenoidValves',
-                utilities: solenoidValvesList,
-                addUtilityScreen: 'AddSolenoidValves',
-                addUtilityButtonTitle: 'Add Valve',
-                utilityInfoScreenTitle: 'SolenoidValvesInfo',
-                utilityTypeText: 'Solenoid Valves',
-              })
+              props.navigation.goBack()
             }
             style={styles.generalButtonStyle}>
             <FontAwesomeIcon icon={faTimes} size={40} color={'black'} />

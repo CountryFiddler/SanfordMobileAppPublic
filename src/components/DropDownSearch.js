@@ -32,7 +32,7 @@ class DropDownSearch extends Component {
       <TouchableOpacity
         onPress={this.props.customerList.onPress}
         style={styles.container}>
-        <ScrollView
+        <View
           style={styles.subContainer}
           contentContainerStyle={{alignItems: 'flex-start'}}>
           {this.props.customerList.length ? (
@@ -69,7 +69,7 @@ class DropDownSearch extends Component {
               <Text style={styles.itemText}>No Customers Found</Text>
             </View>
           )}
-        </ScrollView>
+        </View>
       </TouchableOpacity>
     );
   }
@@ -90,13 +90,13 @@ const styles = StyleSheet.create({
 
   subContainer: {
     //backgroundColor: '#84DCC6',
-    backgroundColor: 'white',
+    //backgroundColor: 'white',
     paddingTop: 5,
     //borderWidth: 3,
     //borderColor: 'black',
     //marginHorizontal: 25,
     width: '85%',
-    height: '80%',
+    ///height: '70%',
     //marginVertical: 60,
     borderTopLeftRadius: 4,
     borderTopRightRadius: 4,
@@ -109,27 +109,29 @@ const styles = StyleSheet.create({
     //alignContent: 'center',
   },
   itemView: {
-    borderBottomWidth: 3,
-    borderBottomColor: '#26660b',
+    //borderBottomWidth: 3,
+    borderLeftWidth: 3,
+    borderColor: '#26660b',
     //borderTopWidth: 3,
     //borderTopColor: '#26660b',
     //borderWidth: 3,
     //borderColor: '#26660b',
-    backgroundColor: 'white',
+    backgroundColor: '#f2f3f4',
     height: 70,
-    width: '90%',
+    width: '100%',
     marginTop: '3%',
     //justifyContent: 'flex-start',
     borderRadius: 4,
     alignItems: 'flex-start',
     justifyContent: 'center',
-    marginLeft: '3.5%',
+    //marginLeft: '3.5%',
     //flex: 1,
   },
   itemText: {
     fontSize: 15,
     color: 'black',
     justifyContent: 'center',
+    marginLeft: '2%',
     //paddingHorizontal: 10,
   },
   noResultView: {

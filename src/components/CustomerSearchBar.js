@@ -15,7 +15,7 @@
  * database.
  */
 import React, {Component} from 'react';
-import {StyleSheet, View, TextInput} from 'react-native';
+import {StyleSheet, View, TextInput, ScrollView} from 'react-native';
 import {getCustomers} from '../../api/FirestoreApi';
 import DropDownSearch from './DropDownSearch';
 
@@ -115,11 +115,13 @@ class CustomerSearchBar extends Component {
           }}
         />
         {this.state.searching && (
-          <DropDownSearch
-            // This the drop down search that appears as a user is searching
-            customerList={this.state.filteredCustomers}
-            navigation={this.props.navigation}
-          />
+          <ScrollView>
+            <DropDownSearch
+              // This the drop down search that appears as a user is searching
+              customerList={this.state.filteredCustomers}
+              navigation={this.props.navigation}
+            />
+          </ScrollView>
         )}
       </View>
     );

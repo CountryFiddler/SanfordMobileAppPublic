@@ -366,9 +366,9 @@ const NoteMedia = props => {
             </View>
           ) : (
             <View>
-              <Modal visible={image1ZoomIn === true} animated>
+              <Modal visible={image2ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
-                  <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <TouchableOpacity onPress={() => setImage2ZoomIn(false)}>
                     <Icons icon={'exit'} size={33} color={'white'}/>
                   </TouchableOpacity>
                 </View>
@@ -387,7 +387,7 @@ const NoteMedia = props => {
                   </View>
                 </View>
               </Modal>
-              <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <TouchableOpacity onPress={() => setImage2ZoomIn(true)}>
                 <Image source={{uri: image2}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -442,9 +442,9 @@ const NoteMedia = props => {
             </View>
           ) : (
             <View>
-              <Modal visible={image1ZoomIn === true} animated>
+              <Modal visible={image3ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
-                  <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <TouchableOpacity onPress={() => setImage3ZoomIn(false)}>
                     <Icons icon={'exit'} size={33} color={'white'}/>
                   </TouchableOpacity>
                 </View>
@@ -463,7 +463,7 @@ const NoteMedia = props => {
                   </View>
                 </View>
               </Modal>
-              <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <TouchableOpacity onPress={() => setImage3ZoomIn(true)}>
                 <Image source={{uri: image3}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -500,9 +500,9 @@ const NoteMedia = props => {
             </View>
           ) : (
             <View>
-              <Modal visible={image1ZoomIn === true} animated>
+              <Modal visible={image4ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
-                  <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <TouchableOpacity onPress={() => setImage4ZoomIn(false)}>
                     <Icons icon={'exit'} size={33} color={'white'}/>
                   </TouchableOpacity>
                 </View>
@@ -521,7 +521,7 @@ const NoteMedia = props => {
                   </View>
                 </View>
               </Modal>
-              <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <TouchableOpacity onPress={() => setImage4ZoomIn(true)}>
                 <Image source={{uri: image4}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -558,9 +558,9 @@ const NoteMedia = props => {
             </View>
           ) : (
             <View>
-              <Modal visible={image1ZoomIn === true} animated>
+              <Modal visible={image5ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
-                  <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <TouchableOpacity onPress={() => setImage5ZoomIn(false)}>
                     <Icons icon={'exit'} size={33} color={'white'}/>
                   </TouchableOpacity>
                 </View>
@@ -579,7 +579,7 @@ const NoteMedia = props => {
                   </View>
                 </View>
               </Modal>
-              <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <TouchableOpacity onPress={() => setImage5ZoomIn(true)}>
                 <Image source={{uri: image5}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -616,9 +616,9 @@ const NoteMedia = props => {
             </View>
           ) : (
             <View>
-              <Modal visible={image1ZoomIn === true} animated>
+              <Modal visible={image6ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
-                  <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <TouchableOpacity onPress={() => setImage6ZoomIn(false)}>
                     <Icons icon={'exit'} size={33} color={'white'}/>
                   </TouchableOpacity>
                 </View>
@@ -637,7 +637,7 @@ const NoteMedia = props => {
                   </View>
                 </View>
               </Modal>
-              <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <TouchableOpacity onPress={() => setImage6ZoomIn(true)}>
                 <Image source={{uri: image6}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -674,9 +674,9 @@ const NoteMedia = props => {
             </View>
           ) : (
             <View>
-              <Modal visible={image1ZoomIn === true} animated>
+              <Modal visible={image7ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
-                  <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <TouchableOpacity onPress={() => setImage7ZoomIn(false)}>
                     <Icons icon={'exit'} size={33} color={'white'}/>
                   </TouchableOpacity>
                 </View>
@@ -695,7 +695,7 @@ const NoteMedia = props => {
                   </View>
                 </View>
               </Modal>
-              <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <TouchableOpacity onPress={() => setImage7ZoomIn(true)}>
                 <Image source={{uri: image7}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -732,9 +732,9 @@ const NoteMedia = props => {
             </View>
           ) : (
             <View>
-              <Modal visible={image1ZoomIn === true} animated>
+              <Modal visible={image8ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
-                  <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <TouchableOpacity onPress={() => setImage8ZoomIn(false)}>
                     <Icons icon={'exit'} size={33} color={'white'}/>
                   </TouchableOpacity>
                 </View>
@@ -753,7 +753,7 @@ const NoteMedia = props => {
                   </View>
                 </View>
               </Modal>
-              <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <TouchableOpacity onPress={() => setImage8ZoomIn(true)}>
                 <Image source={{uri: image8}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -790,9 +790,9 @@ const NoteMedia = props => {
             </View>
           ) : (
             <View>
-              <Modal visible={image1ZoomIn === true} animated>
+              <Modal visible={image9ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
-                  <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <TouchableOpacity onPress={() => setImage9ZoomIn(false)}>
                     <Icons icon={'exit'} size={33} color={'white'}/>
                   </TouchableOpacity>
                 </View>
@@ -811,7 +811,7 @@ const NoteMedia = props => {
                   </View>
                 </View>
               </Modal>
-              <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <TouchableOpacity onPress={() => setImage9ZoomIn(true)}>
                 <Image source={{uri: image9}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -848,9 +848,9 @@ const NoteMedia = props => {
             </View>
           ) : (
             <View>
-              <Modal visible={image1ZoomIn === true} animated>
+              <Modal visible={image10ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
-                  <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <TouchableOpacity onPress={() => setImage10ZoomIn(false)}>
                     <Icons icon={'exit'} size={33} color={'white'}/>
                   </TouchableOpacity>
                 </View>
@@ -872,7 +872,7 @@ const NoteMedia = props => {
                   </View>
                 </View>
               </Modal>
-              <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <TouchableOpacity onPress={() => setImage10ZoomIn(true)}>
                 <Image source={{uri: image10}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -909,9 +909,9 @@ const NoteMedia = props => {
             </View>
           ) : (
             <View>
-              <Modal visible={image1ZoomIn === true} animated>
+              <Modal visible={image11ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
-                  <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <TouchableOpacity onPress={() => setImage11ZoomIn(false)}>
                     <Icons icon={'exit'} size={33} color={'white'}/>
                   </TouchableOpacity>
                 </View>
@@ -933,7 +933,7 @@ const NoteMedia = props => {
                   </View>
                 </View>
               </Modal>
-              <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <TouchableOpacity onPress={() => setImage11ZoomIn(true)}>
                 <Image source={{uri: image11}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -970,9 +970,9 @@ const NoteMedia = props => {
             </View>
           ) : (
             <View>
-              <Modal visible={image1ZoomIn === true} animated>
+              <Modal visible={image12ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
-                  <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <TouchableOpacity onPress={() => setImage12ZoomIn(false)}>
                     <Icons icon={'exit'} size={33} color={'white'}/>
                   </TouchableOpacity>
                 </View>
@@ -994,7 +994,7 @@ const NoteMedia = props => {
                   </View>
                 </View>
               </Modal>
-              <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <TouchableOpacity onPress={() => setImage12ZoomIn(true)}>
                 <Image source={{uri: image12}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -1031,9 +1031,9 @@ const NoteMedia = props => {
             </View>
           ) : (
             <View>
-              <Modal visible={image1ZoomIn === true} animated>
+              <Modal visible={image13ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
-                  <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <TouchableOpacity onPress={() => setImage13ZoomIn(false)}>
                     <Icons icon={'exit'} size={33} color={'white'}/>
                   </TouchableOpacity>
                 </View>
@@ -1055,7 +1055,7 @@ const NoteMedia = props => {
                   </View>
                 </View>
               </Modal>
-              <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <TouchableOpacity onPress={() => setImage13ZoomIn(true)}>
                 <Image source={{uri: image13}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -1092,9 +1092,9 @@ const NoteMedia = props => {
             </View>
           ) : (
             <View>
-              <Modal visible={image1ZoomIn === true} animated>
+              <Modal visible={image14ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
-                  <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <TouchableOpacity onPress={() => setImage14ZoomIn(false)}>
                     <Icons icon={'exit'} size={33} color={'white'}/>
                   </TouchableOpacity>
                 </View>
@@ -1116,7 +1116,7 @@ const NoteMedia = props => {
                   </View>
                 </View>
               </Modal>
-              <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <TouchableOpacity onPress={() => setImage14ZoomIn(true)}>
                 <Image source={{uri: image14}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -1153,9 +1153,9 @@ const NoteMedia = props => {
             </View>
           ) : (
             <View>
-              <Modal visible={image1ZoomIn === true} animated>
+              <Modal visible={image15ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
-                  <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <TouchableOpacity onPress={() => setImage15ZoomIn(false)}>
                     <Icons icon={'exit'} size={33} color={'white'}/>
                   </TouchableOpacity>
                 </View>
@@ -1177,7 +1177,7 @@ const NoteMedia = props => {
                   </View>
                 </View>
               </Modal>
-              <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <TouchableOpacity onPress={() => setImage15ZoomIn(true)}>
                 <Image source={{uri: image15}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -1214,9 +1214,9 @@ const NoteMedia = props => {
             </View>
           ) : (
             <View>
-              <Modal visible={image1ZoomIn === true} animated>
+              <Modal visible={image16ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
-                  <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <TouchableOpacity onPress={() => setImage16ZoomIn(false)}>
                     <Icons icon={'exit'} size={33} color={'white'}/>
                   </TouchableOpacity>
                 </View>
@@ -1238,7 +1238,7 @@ const NoteMedia = props => {
                   </View>
                 </View>
               </Modal>
-              <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <TouchableOpacity onPress={() => setImage16ZoomIn(true)}>
                 <Image source={{uri: image16}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -1275,9 +1275,9 @@ const NoteMedia = props => {
             </View>
           ) : (
             <View>
-              <Modal visible={image1ZoomIn === true} animated>
+              <Modal visible={image17ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
-                  <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <TouchableOpacity onPress={() => setImage17ZoomIn(false)}>
                     <Icons icon={'exit'} size={33} color={'white'}/>
                   </TouchableOpacity>
                 </View>
@@ -1299,7 +1299,7 @@ const NoteMedia = props => {
                   </View>
                 </View>
               </Modal>
-              <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <TouchableOpacity onPress={() => setImage17ZoomIn(true)}>
                 <Image source={{uri: image17}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -1336,9 +1336,9 @@ const NoteMedia = props => {
             </View>
           ) : (
             <View>
-              <Modal visible={image1ZoomIn === true} animated>
+              <Modal visible={image18ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
-                  <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <TouchableOpacity onPress={() => setImage18ZoomIn(false)}>
                     <Icons icon={'exit'} size={33} color={'white'}/>
                   </TouchableOpacity>
                 </View>
@@ -1360,7 +1360,7 @@ const NoteMedia = props => {
                   </View>
                 </View>
               </Modal>
-              <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <TouchableOpacity onPress={() => setImage18ZoomIn(true)}>
                 <Image source={{uri: image18}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -1397,9 +1397,9 @@ const NoteMedia = props => {
             </View>
           ) : (
             <View>
-              <Modal visible={image1ZoomIn === true} animated>
+              <Modal visible={image19ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
-                  <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <TouchableOpacity onPress={() => setImage19ZoomIn(false)}>
                     <Icons icon={'exit'} size={33} color={'white'}/>
                   </TouchableOpacity>
                 </View>
@@ -1421,7 +1421,7 @@ const NoteMedia = props => {
                   </View>
                 </View>
               </Modal>
-              <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <TouchableOpacity onPress={() => setImage19ZoomIn(true)}>
                 <Image source={{uri: image19}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -1458,9 +1458,9 @@ const NoteMedia = props => {
             </View>
           ) : (
             <View>
-              <Modal visible={image1ZoomIn === true} animated>
+              <Modal visible={image20ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
-                  <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
+                  <TouchableOpacity onPress={() => setImage20ZoomIn(false)}>
                     <Icons icon={'exit'} size={33} color={'white'}/>
                   </TouchableOpacity>
                 </View>
@@ -1482,7 +1482,7 @@ const NoteMedia = props => {
                   </View>
                 </View>
               </Modal>
-              <TouchableOpacity onPress={() => setImage1ZoomIn(true)}>
+              <TouchableOpacity onPress={() => setImage20ZoomIn(true)}>
                 <Image source={{uri: image20}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>

@@ -21,8 +21,8 @@ import {
   SafeAreaView,
   TextInput,
   Image,
-  TouchableOpacity,
-} from 'react-native';
+  TouchableOpacity, ScrollView,
+} from "react-native";
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import {
   addCustomer,
@@ -65,7 +65,9 @@ const EditTimerInfoScreen = props => {
         />
         <Text style={styles.addInfoScreenTitle}>Edit Timer</Text>
       </View>
-      <View style={styles.addInfoContainer}>
+      <View style={{ height: '50%' }}>
+        <View style={styles.longDividerWithSpacing}/>
+        <ScrollView >
         <View style={styles.infoChildContainer}>
           <Icons icon={'timer'} width={25} height={25} />
           <Text style={styles.labelText}> Type: </Text>
@@ -147,7 +149,10 @@ const EditTimerInfoScreen = props => {
             onChangeText={text => setCurrentYearInstalled(text)}
           />
         </View>
-        <View style={styles.addTextFieldDivider} />
+        </ScrollView>
+        <View style={styles.longDividerWithSpacing} />
+      </View>
+      <View>
         <View style={styles.submitDataButtonContainer}>
           <TouchableOpacity
             onPress={() =>
@@ -184,9 +189,10 @@ const EditTimerInfoScreen = props => {
                 currentTimerType,
                 currentLocation,
                 currentInsideOutside,
+                currentYearInstalled,
                 currentNumPrograms,
                 currentNumZones,
-                navigation,
+                props.navigation,
               )
             }
             style={styles.generalButtonStyle}>
