@@ -108,6 +108,7 @@ const NoteMedia = props => {
   let bouncyCheckboxRef20: BouncyCheckbox | null = null;
 
   const [imagesToDelete, setImagesToDelete] = useState([]);
+  const employeeName = props.employeeName;
   const customer = props.customer;
   const utilityType = props.utilityType;
   const utility = props.utility;
@@ -1589,6 +1590,7 @@ const NoteMedia = props => {
                       note,
                       utilityType,
                       utility,
+                      employeeName,
                       navigation,
                     )
                   }

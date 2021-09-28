@@ -375,6 +375,7 @@ const EditNote = props => {
             navigation={props.navigation}
             utilityType={utilityType}
             utility={utility}
+            employeeName={employeeName}
           />
         </View>
       </View>

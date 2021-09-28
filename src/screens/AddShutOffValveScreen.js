@@ -28,8 +28,8 @@ import {submitShutOffInfo} from '../../api/ShutOffValveApi';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {submitTimerInfo} from '../../api/TimerApi';
-import { styles } from "../../api/stylesApi";
-import Icons from "../components/Icons";
+import {styles} from '../../api/stylesApi';
+import Icons from '../components/Icons';
 
 // Start of Add Timer Screen Display
 const AddShutOffValveScreen = props => {
@@ -53,14 +53,12 @@ const AddShutOffValveScreen = props => {
   return (
     <SafeAreaView>
       <View style={styles.addInfoScreenHeader}>
-        <Image
-          style={{width: 40, height: 35}}
-          source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/Shut-OffValve.png')}
-        />
+        <Icons icon={'shutOff'} width={40} height={35} />
         <Text style={styles.addInfoScreenTitle}>Add Shut-Off</Text>
       </View>
       <View style={styles.addInfoContainer}>
         <View style={styles.infoChildContainer}>
+          <Icons icon={'shutOff'} width={30} height={25} />
           <Text style={styles.labelText}> Type: </Text>
           <TextInput
             style={styles.infoText}
@@ -71,6 +69,7 @@ const AddShutOffValveScreen = props => {
         </View>
         <View style={styles.addTextFieldDivider} />
         <View style={styles.infoChildContainer}>
+          <Icons icon={'utilitySize'} size={20} />
           <Text style={styles.labelText}> Size: </Text>
           <TextInput
             style={styles.infoText}
@@ -81,7 +80,7 @@ const AddShutOffValveScreen = props => {
         </View>
         <View style={styles.addTextFieldDivider} />
         <View style={styles.infoChildContainer}>
-          <Icons icon={'location'} size={20}/>
+          <Icons icon={'location'} size={20} />
           <Text style={styles.labelText}> Location: </Text>
           <TextInput
             style={styles.infoText}
@@ -96,7 +95,7 @@ const AddShutOffValveScreen = props => {
         </View>
         <View style={styles.addTextFieldDivider} />
         <View style={styles.infoChildContainer}>
-          <Icons icon={'backFlow'} size={20}/>
+          <Icons icon={'backFlow'} size={20} />
           <Text style={styles.labelText}> Backflow: </Text>
           <TextInput
             style={styles.infoText}
@@ -111,7 +110,7 @@ const AddShutOffValveScreen = props => {
         </View>
         <View style={styles.addTextFieldDivider} />
         <View style={styles.infoChildContainer}>
-          <Icons icon={'calendar'} size={20}/>
+          <Icons icon={'calendar'} size={20} />
           <Text style={styles.labelText}> Year Installed: </Text>
           <TextInput
             style={styles.infoText}

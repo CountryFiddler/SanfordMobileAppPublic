@@ -38,6 +38,7 @@ import {styles} from '../../api/stylesApi';
 const DeleteNoteMediaScreen = props => {
   const [index, setIndex] = useState(-1);
   const customer = props.navigation.getParam('customer');
+  const employeeName = props.navigation.getParam('employeeName');
   const utilityType = props.navigation.getParam('utilityType');
   const utility = props.navigation.getParam('utility');
   const note = props.navigation.getParam('note');
@@ -58,6 +59,7 @@ const DeleteNoteMediaScreen = props => {
       <View>
         <NoteMedia
           customer={customer}
+          employeeName={employeeName}
           utilityType={utilityType}
           utility={utility}
           note={note}

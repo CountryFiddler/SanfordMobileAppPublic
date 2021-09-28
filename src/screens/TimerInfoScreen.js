@@ -58,6 +58,9 @@ const TimerInfoScreen = props => {
   if (timer.insideOutside === '') {
     timer.insideOutside = 'Not Provided';
   }
+  if (timer.yearInstalled === '') {
+    timer.yearInstalled = 'Not Provided';
+  }
   return (
     <View>
       <View style={styles.iconHeader}>

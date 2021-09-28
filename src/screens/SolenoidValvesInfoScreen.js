@@ -45,7 +45,7 @@ const SolenoidValvesInfoScreen = props => {
   const solenoidValveNotes = getNotes(
     customer,
     solenoidValves,
-    'SolenoidValvesNotes',
+    'SolenoidValveNotes',
   );
   const findSolenoidValveNotes = getNotes(
     customer,
@@ -58,6 +58,12 @@ const SolenoidValvesInfoScreen = props => {
   }
   if (solenoidValves.zoneNumbers === '') {
     solenoidValves.zoneNumbers = 'No Text Provided';
+  }
+  if (solenoidValves.size === '') {
+    solenoidValves.size = 'No Text Provided';
+  }
+  if (solenoidValves.yearInstalled === '') {
+    solenoidValves.yearInstalled = 'No Text Provided';
   }
   console.log(solenoidValves);
   return (

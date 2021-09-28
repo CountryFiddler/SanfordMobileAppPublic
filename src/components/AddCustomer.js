@@ -103,12 +103,13 @@ const AddCustomer = props => {
     ) {
       // Call addCustomer and set the data fields of firstName, lastName,
       // and address.
+      var finalCustomerPhoneNumber = 1 + customerPhoneNumber;
       console.log(customerFirstName);
       addCustomer({
         firstName: customerFirstName,
         lastName: customerLastName,
         address: customerAddress,
-        phoneNumber: customerPhoneNumber,
+        phoneNumber: finalCustomerPhoneNumber,
       });
       // Go back to the home page after adding the customer to the database
       props.navigation.navigate('Home');

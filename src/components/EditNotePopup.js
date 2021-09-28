@@ -10,6 +10,7 @@ import {
   Dimensions,
   FlatList,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import {styles} from '../../api/stylesApi';
@@ -99,13 +100,19 @@ class EditNotePopup extends Component {
           <TouchableOpacity
             onPress={() => (
               this.setState({show: false}),
-                this.props.navigation.navigate('DeleteNoteMedia', {
-                  customer: this.props.customer,
-                  note: this.props.note,
-                  navigation: this.props.navigation,
-                  utilityType: this.props.utilityType,
-                  utility: this.props.utility,
-                })
+              this.props.employeeName !== ''
+                ? this.props.navigation.navigate('DeleteNoteMedia', {
+                    customer: this.props.customer,
+                    note: this.props.note,
+                    navigation: this.props.navigation,
+                    utilityType: this.props.utilityType,
+                    employeeName: this.props.employeeName,
+                    utility: this.props.utility,
+                  })
+                : Alert.alert(
+                    'Please Enter Your Name',
+                    'Please enter your name to delete photos',
+                  )
             )}
             style={styles.editNotePopUpButtonContainer}>
             <FontAwesomeIcon icon={faImage} size={30} color={'#26660b'} />
@@ -135,6 +142,7 @@ class EditNotePopup extends Component {
                 utility: this.props.utility,
                 utilityNote: this.props.note,
                 contentToDelete: this.props.note.title,
+                employeeName: this.props.employeeName,
                 prevScreen: 'EditNote',
               })
             )}

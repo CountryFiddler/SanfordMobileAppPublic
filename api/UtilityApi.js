@@ -8,6 +8,7 @@ export function deleteNoteMedia(
   utilityNote,
   utilityType,
   utility,
+  employeeName,
   navigation,
 ) {
   console.log('Deleting Images ' + utilityNote.noteType);
@@ -40,8 +41,8 @@ export function deleteNoteMedia(
     utilityNote,
     utilityNote.imageRefs,
     utilityNote.numImages,
-    utilityNote.videoRefs,
-    utilityNote.numVideos,
+    employeeName,
+
   );
   if (utilityType === 'Timers') {
     navigation.navigate('TimerInfo', {

@@ -23,8 +23,8 @@ import {
   Text,
   SafeAreaView,
   TextInput,
-  TouchableOpacity,
-} from 'react-native';
+  TouchableOpacity, Alert,
+} from "react-native";
 import React, {Component, useState} from 'react';
 import {addCustomer, updateCustomer} from '../../api/FirestoreApi';
 import PhoneInput from 'react-native-phone-number-input';
@@ -119,7 +119,7 @@ const EditCustomer = props => {
     customer.address,
   );
   const [currentCustomerPhoneNumber, setCurrentCustomerPhoneNumber] = useState(
-    customer.phoneNumber,
+    customer.phoneNumber.slice(1),
   );
   const [currentCustomerID, setCurrentCustomerID] = useState(customer.id);
   const [
@@ -171,11 +171,12 @@ const EditCustomer = props => {
       !checkForNullTextEntries() &&
       checkValidPhoneNumber(currentCustomerPhoneNumber)
     ) {
+      var finalPhoneNumber = 1 + currentCustomerPhoneNumber;
       updateCustomer({
         firstName: currentCustomerFirstName,
         lastName: currentCustomerLastName,
         address: currentCustomerAddress,
-        phoneNumber: currentCustomerPhoneNumber,
+        phoneNumber: finalPhoneNumber,
         id: customer.id,
       });
       // Go back to the home page after adding the customer to the database
@@ -191,7 +192,7 @@ const EditCustomer = props => {
       customer.firstName = currentCustomerFirstName;
       customer.lastName = currentCustomerLastName;
       customer.address = currentCustomerAddress;
-      customer.phoneNumber = currentCustomerPhoneNumber;
+      customer.phoneNumber = finalPhoneNumber;
       customer.id = customer.id;
       customer.searchText =
         currentCustomerFirstName +
@@ -222,6 +223,9 @@ const EditCustomer = props => {
     }
     if (currentCustomerPhoneNumber === '') {
       setCurrentCustomerPhoneNumber('');
+    }
+    if (currentCustomerAddress === '' || currentCustomerLastName === '') {
+      Alert.alert('Please Enter a Last Name and Address');
     }
     return textError;
   }
