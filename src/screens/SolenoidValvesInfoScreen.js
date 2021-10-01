@@ -67,7 +67,7 @@ const SolenoidValvesInfoScreen = props => {
   }
   console.log(solenoidValves);
   return (
-    <View style={solenoidValveInfoStyles.solenoidValveInfoScrollContainer}>
+    <View style={styles.screenBackground}>
       <View style={styles.iconHeader}>
         <Image
           style={{width: 36, height: 40}}
@@ -187,7 +187,7 @@ const SolenoidValvesInfoScreen = props => {
             })
           }
           style={styles.generalButtonStyle}>
-          <Icons icon={'solenoidValve'} width={27} height={30} />
+          <Icons icon={'solenoidValve'} width={28} height={32} />
           <Text style={styles.buttonText}>Valve List</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -209,6 +209,7 @@ const SolenoidValvesInfoScreen = props => {
         </TouchableOpacity>
       </View>
       <View style={styles.longDivider} />
+      <View style={styles.spaceHolder}/>
     </View>
   );
 };
@@ -223,7 +224,7 @@ const solenoidValveInfoStyles = StyleSheet.create({
     borderBottomColor: '#26660b',
     borderTopWidth: 3,
     borderTopColor: '#26660b',
-    height: '50%',
+
 
     marginLeft: '1.5%',
     marginRight: '1.5%',
@@ -238,7 +239,7 @@ const solenoidValveInfoStyles = StyleSheet.create({
     height: '17%',
   },
   spaceHolder: {
-    marginBottom: '70%',
+    marginBottom: '10%',
     //height: 250,
   },
 });

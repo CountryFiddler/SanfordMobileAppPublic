@@ -54,7 +54,7 @@ const UtilitySelectionScreen = props => {
   //console.log(iconPath);
   //const timers = getTimers(customer);
   return (
-    <View>
+    <View style={styles.screenBackground}>
       <View style={styles.navigatorScreenHeader}>
         <Icons icon={headerIcon} size={'medium'} />
         <Text style={styles.navigatorScreenTitle}>

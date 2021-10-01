@@ -23,6 +23,7 @@ import {
   Image,
   Text,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import {submitShutOffInfo} from '../../api/ShutOffValveApi';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -51,79 +52,82 @@ const AddShutOffValveScreen = props => {
     }
   }
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.screenBackground}>
       <View style={styles.addInfoScreenHeader}>
         <Icons icon={'shutOff'} width={40} height={35} />
         <Text style={styles.addInfoScreenTitle}>Add Shut-Off</Text>
       </View>
-      <View style={styles.addInfoContainer}>
-        <View style={styles.infoChildContainer}>
-          <Icons icon={'shutOff'} width={30} height={25} />
-          <Text style={styles.labelText}> Type: </Text>
-          <TextInput
-            style={styles.infoText}
-            placeholder={'Shut-Off Type'}
-            value={shutoffType}
-            onChangeText={text => setShutOffType(text)}
-          />
-        </View>
-        <View style={styles.addTextFieldDivider} />
-        <View style={styles.infoChildContainer}>
-          <Icons icon={'utilitySize'} size={20} />
-          <Text style={styles.labelText}> Size: </Text>
-          <TextInput
-            style={styles.infoText}
-            placeholder={'Shut-Off Valve Size'}
-            value={size}
-            onChangeText={text => setSize(text)}
-          />
-        </View>
-        <View style={styles.addTextFieldDivider} />
-        <View style={styles.infoChildContainer}>
-          <Icons icon={'location'} size={20} />
-          <Text style={styles.labelText}> Location: </Text>
-          <TextInput
-            style={styles.infoText}
-            // Text Input Box for the customer's first name
-            placeholder={'Location'}
-            value={location}
-            // Displays the value that the user is entering into the text input
-            // For example, if the typed 'Bob', then 'Bob' is displayed in the
-            // Text Input Box
-            onChangeText={text => setLocation(text)}
-          />
-        </View>
-        <View style={styles.addTextFieldDivider} />
-        <View style={styles.infoChildContainer}>
-          <Icons icon={'backFlow'} size={20} />
-          <Text style={styles.labelText}> Backflow: </Text>
-          <TextInput
-            style={styles.infoText}
-            // Text Input Box for the customer's first name
-            placeholder={'Yes/No'}
-            value={backFlow}
-            // Displays the value that the user is entering into the text input
-            // For example, if the typed 'Bob', then 'Bob' is displayed in the
-            // Text Input Box
-            onChangeText={text => setBackFlow(text)}
-          />
-        </View>
-        <View style={styles.addTextFieldDivider} />
-        <View style={styles.infoChildContainer}>
-          <Icons icon={'calendar'} size={20} />
-          <Text style={styles.labelText}> Year Installed: </Text>
-          <TextInput
-            style={styles.infoText}
-            // Text Input Box for the customer's first name
-            placeholder={'Year Installed'}
-            value={yearInstalled}
-            // Displays the value that the user is entering into the text input
-            // For example, if the typed 'Bob', then 'Bob' is displayed in the
-            // Text Input Box
-            onChangeText={text => setYearInstalled(text)}
-          />
-        </View>
-        <View style={styles.addTextFieldDivider} />
+      <View style={{ height: '70%' }}>
+        <View style={styles.longDividerWithSpacing} />
+        <ScrollView>
+          <View style={styles.infoChildContainer}>
+            <Icons icon={'shutOff'} width={30} height={25} />
+            <Text style={styles.labelText}> Type: </Text>
+            <TextInput
+              style={styles.infoText}
+              placeholder={'Shut-Off Type'}
+              value={shutoffType}
+              onChangeText={text => setShutOffType(text)}
+            />
+          </View>
+          <View style={styles.addTextFieldDivider} />
+          <View style={styles.infoChildContainer}>
+            <Icons icon={'utilitySize'} size={20} />
+            <Text style={styles.labelText}> Size: </Text>
+            <TextInput
+              style={styles.infoText}
+              placeholder={'Shut-Off Valve Size'}
+              value={size}
+              onChangeText={text => setSize(text)}
+            />
+          </View>
+          <View style={styles.addTextFieldDivider} />
+          <View style={styles.infoChildContainer}>
+            <Icons icon={'location'} size={20} />
+            <Text style={styles.labelText}> Location: </Text>
+            <TextInput
+              style={styles.infoText}
+              // Text Input Box for the customer's first name
+              placeholder={'Location'}
+              value={location}
+              // Displays the value that the user is entering into the text input
+              // For example, if the typed 'Bob', then 'Bob' is displayed in the
+              // Text Input Box
+              onChangeText={text => setLocation(text)}
+            />
+          </View>
+          <View style={styles.addTextFieldDivider} />
+          <View style={styles.infoChildContainer}>
+            <Icons icon={'backFlow'} size={20} />
+            <Text style={styles.labelText}> Backflow: </Text>
+            <TextInput
+              style={styles.infoText}
+              // Text Input Box for the customer's first name
+              placeholder={'Yes/No'}
+              value={backFlow}
+              // Displays the value that the user is entering into the text input
+              // For example, if the typed 'Bob', then 'Bob' is displayed in the
+              // Text Input Box
+              onChangeText={text => setBackFlow(text)}
+            />
+          </View>
+          <View style={styles.addTextFieldDivider} />
+          <View style={styles.infoChildContainer}>
+            <Icons icon={'calendar'} size={20} />
+            <Text style={styles.labelText}> Year Installed: </Text>
+            <TextInput
+              style={styles.infoText}
+              // Text Input Box for the customer's first name
+              placeholder={'Year Installed'}
+              value={yearInstalled}
+              // Displays the value that the user is entering into the text input
+              // For example, if the typed 'Bob', then 'Bob' is displayed in the
+              // Text Input Box
+              onChangeText={text => setYearInstalled(text)}
+            />
+          </View>
+        </ScrollView>
+        <View style={styles.longDividerWithSpacing}/>
         <View style={styles.submitDataButtonContainer}>
           <TouchableOpacity
             onPress={() =>

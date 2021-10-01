@@ -48,7 +48,7 @@ const DeleteNoteMediaScreen = props => {
   // console.log(note.images[0].imageRef);
   // getURLS();
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.screenBackground}>
       <View style={styles.iconHeader}>
         <Icons icon={'stickyNote'} size={'medium'} />
       </View>

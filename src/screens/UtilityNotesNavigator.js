@@ -39,7 +39,7 @@ const UtilityNotesNavigatorScreen = props => {
   const noteIconTitle = props.navigation.getParam('noteIconTitle');
   console.log(utilityNotes);
   return (
-    <View>
+    <View style={styles.screenBackground}>
       <View style={styles.navigatorScreenHeader}>
         <Icons icon={headerIcon} size={'medium'} />
         <Text style={styles.navigatorScreenTitle}>{screenTitle}</Text>

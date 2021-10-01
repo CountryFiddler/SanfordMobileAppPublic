@@ -50,7 +50,7 @@ const EditShutOffValveInfoScreen = props => {
     shutoffValve.yearInstalled,
   );
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.screenBackground}>
       <View style={styles.addInfoScreenHeader}>
         <Image
           style={{width: 40, height: 35}}
@@ -60,7 +60,7 @@ const EditShutOffValveInfoScreen = props => {
       </View>
       <View >
         <View style={styles.longDividerWithSpacing} />
-        <ScrollView style={{height: '48%'}}>
+        <ScrollView style={{height: '43%'}}>
         <View style={styles.infoChildContainer}>
           <Text style={styles.labelText}> Type: </Text>
           <TextInput

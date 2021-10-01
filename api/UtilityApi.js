@@ -1,5 +1,5 @@
 import firebase, {firestore} from 'react-native-firebase';
-import storage from '@react-native-firebase/storage';
+import {storage} from 'react-native-firebase';
 import {Alert} from 'react-native';
 
 export function deleteNoteMedia(
@@ -42,7 +42,6 @@ export function deleteNoteMedia(
     utilityNote.imageRefs,
     utilityNote.numImages,
     employeeName,
-
   );
   if (utilityType === 'Timers') {
     navigation.navigate('TimerInfo', {
@@ -331,9 +330,9 @@ export function updateNote(
   if (today.getHours() >= 12) {
     meridiam = 'pm';
     if (today.getHours() === 12) {
-      currentHour = (today.getHours());
+      currentHour = today.getHours();
     } else {
-      currentHour = (today.getHours() % 12);
+      currentHour = today.getHours() % 12;
     }
   } else {
     meridiam = 'am';
@@ -360,8 +359,7 @@ export function updateNote(
         month: today.getMonth() + 1,
         day: today.getDate(),
         year: today.getFullYear(),
-        time:
-          currentHour + ':' + today.getMinutes() + ' ' + meridiam,
+        time: currentHour + ':' + today.getMinutes() + ' ' + meridiam,
         timeWithSeconds:
           today.getHours() +
           ':' +
@@ -377,8 +375,7 @@ export function updateNote(
         month: today.getMonth() + 1,
         day: today.getDate(),
         year: today.getFullYear(),
-        time:
-          currentHour + ':' + today.getMinutes() + ' ' + meridiam,
+        time: currentHour + ':' + today.getMinutes() + ' ' + meridiam,
         timeWithSeconds:
           today.getHours() +
           ':' +
@@ -434,7 +431,9 @@ export function getNotes(customer, utility, noteType) {
           numImages: doc.data().numImages,
           imageRefs: doc.data().imageRefs,
           noteType: noteType,
-          employeeNameAndTimeHistory: doc.data().employeeNameAndTimeHistory.reverse(),
+          employeeNameAndTimeHistory: doc
+            .data()
+            .employeeNameAndTimeHistory.reverse(),
           createdAt: doc.data().createdAt,
         });
       });

@@ -300,10 +300,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef1?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef1?.onPress()}>
                 <Image source={{uri: image1}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -312,7 +309,7 @@ const NoteMedia = props => {
               <Modal visible={image1ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage1ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -358,10 +355,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef2?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef2?.onPress()}>
                 <Image source={{uri: image2}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -370,7 +364,7 @@ const NoteMedia = props => {
               <Modal visible={image2ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage2ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -434,10 +428,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef3?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef3?.onPress()}>
                 <Image source={{uri: image3}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -446,7 +437,7 @@ const NoteMedia = props => {
               <Modal visible={image3ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage3ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -492,10 +483,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef4?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef4?.onPress()}>
                 <Image source={{uri: image4}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -504,7 +492,7 @@ const NoteMedia = props => {
               <Modal visible={image4ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage4ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -550,10 +538,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef5?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef5?.onPress()}>
                 <Image source={{uri: image5}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -562,7 +547,7 @@ const NoteMedia = props => {
               <Modal visible={image5ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage5ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -608,10 +593,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef6?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef6?.onPress()}>
                 <Image source={{uri: image6}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -620,7 +602,7 @@ const NoteMedia = props => {
               <Modal visible={image6ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage6ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -666,10 +648,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef7?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef7?.onPress()}>
                 <Image source={{uri: image7}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -678,7 +657,7 @@ const NoteMedia = props => {
               <Modal visible={image7ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage7ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -724,10 +703,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef8?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef8?.onPress()}>
                 <Image source={{uri: image8}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -736,7 +712,7 @@ const NoteMedia = props => {
               <Modal visible={image8ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage8ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -782,10 +758,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef9?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef9?.onPress()}>
                 <Image source={{uri: image9}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -794,7 +767,7 @@ const NoteMedia = props => {
               <Modal visible={image9ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage9ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -840,10 +813,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef10?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef10?.onPress()}>
                 <Image source={{uri: image10}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -852,7 +822,7 @@ const NoteMedia = props => {
               <Modal visible={image10ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage10ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -901,10 +871,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef11?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef11?.onPress()}>
                 <Image source={{uri: image11}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -913,7 +880,7 @@ const NoteMedia = props => {
               <Modal visible={image11ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage11ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -962,10 +929,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef12?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef12?.onPress()}>
                 <Image source={{uri: image12}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -974,7 +938,7 @@ const NoteMedia = props => {
               <Modal visible={image12ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage12ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -1023,10 +987,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef13?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef13?.onPress()}>
                 <Image source={{uri: image13}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -1035,7 +996,7 @@ const NoteMedia = props => {
               <Modal visible={image13ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage13ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -1084,10 +1045,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef14?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef14?.onPress()}>
                 <Image source={{uri: image14}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -1096,7 +1054,7 @@ const NoteMedia = props => {
               <Modal visible={image14ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage14ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -1145,10 +1103,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef15?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef15?.onPress()}>
                 <Image source={{uri: image15}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -1157,7 +1112,7 @@ const NoteMedia = props => {
               <Modal visible={image15ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage15ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -1206,10 +1161,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef16?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef16?.onPress()}>
                 <Image source={{uri: image16}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -1218,7 +1170,7 @@ const NoteMedia = props => {
               <Modal visible={image16ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage16ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -1267,10 +1219,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef17?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef17?.onPress()}>
                 <Image source={{uri: image17}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -1279,7 +1228,7 @@ const NoteMedia = props => {
               <Modal visible={image17ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage17ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -1328,10 +1277,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef18?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef18?.onPress()}>
                 <Image source={{uri: image18}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -1340,7 +1286,7 @@ const NoteMedia = props => {
               <Modal visible={image18ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage18ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -1389,10 +1335,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef19?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef19?.onPress()}>
                 <Image source={{uri: image19}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -1401,7 +1344,7 @@ const NoteMedia = props => {
               <Modal visible={image19ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage19ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -1450,10 +1393,7 @@ const NoteMedia = props => {
                   )}
                 />
               </View>
-              <TouchableOpacity
-                onPress={() => (
-                  bouncyCheckboxRef20?.onPress()
-                )}>
+              <TouchableOpacity onPress={() => bouncyCheckboxRef20?.onPress()}>
                 <Image source={{uri: image20}} style={styles.noteImage} />
               </TouchableOpacity>
             </View>
@@ -1462,7 +1402,7 @@ const NoteMedia = props => {
               <Modal visible={image20ZoomIn === true} animated>
                 <View style={styles.modalExitButton}>
                   <TouchableOpacity onPress={() => setImage20ZoomIn(false)}>
-                    <Icons icon={'exit'} size={33} color={'white'}/>
+                    <Icons icon={'exit'} size={33} color={'white'} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.noteImageModalContainer}>
@@ -1610,43 +1550,53 @@ const NoteMedia = props => {
         <ScrollView style={styles.noteImageContainer}>
           <View style={styles.noteImageSubContainer}>
             <View>{displayImage1()}</View>
-            <View>{displayImage2()}</View>
+            {note.imageRefs.length > 1 ? <View>{displayImage2()}</View> : null}
           </View>
           <View style={styles.noteImageSubContainer}>
             <View>{displayImage3()}</View>
-            <View>{displayImage4()}</View>
+            {note.imageRefs.length > 3 ? <View>{displayImage4()}</View> : null}
           </View>
           <View style={styles.noteImageSubContainer}>
             <View>{displayImage5()}</View>
-            <View>{displayImage6()}</View>
+            {note.imageRefs.length > 5 ? <View>{displayImage6()}</View> : null}
           </View>
           <View style={styles.noteImageSubContainer}>
             <View>{displayImage7()}</View>
-            <View>{displayImage8()}</View>
+            {note.imageRefs.length > 7 ? <View>{displayImage8()}</View> : null}
           </View>
           <View style={styles.noteImageSubContainer}>
             <View>{displayImage9()}</View>
-            <View>{displayImage10()}</View>
+            {note.imageRefs.length > 9 ? <View>{displayImage10()}</View> : null}
           </View>
           <View style={styles.noteImageSubContainer}>
             <View>{displayImage11()}</View>
-            <View>{displayImage12()}</View>
+            {note.imageRefs.length > 11 ? (
+              <View>{displayImage12()}</View>
+            ) : null}
           </View>
           <View style={styles.noteImageSubContainer}>
             <View>{displayImage13()}</View>
-            <View>{displayImage14()}</View>
+            {note.imageRefs.length > 13 ? (
+              <View>{displayImage14()}</View>
+            ) : null}
           </View>
           <View style={styles.noteImageSubContainer}>
             <View>{displayImage15()}</View>
-            <View>{displayImage16()}</View>
+            {note.imageRefs.length > 15 ? (
+              <View>{displayImage16()}</View>
+            ) : null}
           </View>
           <View style={styles.noteImageSubContainer}>
             <View>{displayImage17()}</View>
-            <View>{displayImage18()}</View>
+            {note.imageRefs.length > 17 ? (
+              <View>{displayImage18()}</View>
+            ) : null}
           </View>
           <View style={styles.noteImageSubContainer}>
             <View>{displayImage19()}</View>
-            <View>{displayImage20()}</View>
+            {note.imageRefs.length > 19 ? (
+              <View>{displayImage20()}</View>
+            ) : null}
           </View>
         </ScrollView>
       )}

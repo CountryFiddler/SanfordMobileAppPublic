@@ -36,6 +36,7 @@ import {storage} from 'react-native-firebase';
 import EditNotePopup from '../components/EditNotePopup';
 import AddOrEditNote from '../components/AddOrEditNote';
 import EditNote from "../components/EditNote";
+import { styles } from "../../api/stylesApi";
 // Start of Home Screen Display
 const EditNoteScreen = props => {
   const note = props.navigation.getParam('note');
@@ -44,7 +45,7 @@ const EditNoteScreen = props => {
   const utility = props.navigation.getParam('utility');
   const utilityNotes = props.navigation.getParam('utilityNotes');
   return (
-    <View>
+    <View style={styles.screenBackground}>
         <EditNote
           customer={customer}
           note={note}
@@ -65,48 +66,6 @@ const EditNoteScreen = props => {
 };
 // End of Home Screen Display
 
-const styles = StyleSheet.create({
-  container: {
-    // Dont have flex 1, this messes up Android
-    //flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#bbded6',
-  },
-  selectButton: {
-    borderRadius: 5,
-    width: 150,
-    height: 50,
-    backgroundColor: '#8ac6d1',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  uploadButton: {
-    borderRadius: 5,
-    width: 150,
-    height: 50,
-    backgroundColor: '#ffb6b9',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  imageContainer: {
-    marginTop: 30,
-    marginBottom: 50,
-    alignItems: 'center',
-  },
-  progressBarContainer: {
-    marginTop: 20,
-  },
-  imageBox: {
-    width: 300,
-    height: 300,
-  },
-});
 // End of Home Screen Display
 
 export default EditNoteScreen;

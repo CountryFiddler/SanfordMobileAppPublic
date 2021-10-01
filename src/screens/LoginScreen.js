@@ -53,7 +53,7 @@ class LoginScreen extends Component {
   render() {
     return (
       // Start of the display for adding or editing a customer
-      <SafeAreaView>
+      <SafeAreaView style={styles.screenBackground}>
         <View style={styles.addInfoScreenHeader}>
           <Icons icon={'signIn'} size={'medium'}/>
           <Text style={styles.addInfoScreenTitle}>Login</Text>

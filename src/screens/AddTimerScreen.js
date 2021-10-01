@@ -20,14 +20,23 @@ import {
   Button,
   TextInput,
   SafeAreaView,
-  Alert, TouchableOpacity, Image,
-} from "react-native";
+  Alert,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+} from 'react-native';
 import CustomerSearchBar from '../components/CustomerSearchBar';
 import {submitTimerInfo} from '../../api/TimerApi';
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faAddressBook, faCheck, faIdBadge, faPhoneAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { styles } from "../../api/stylesApi";
-import Icons from "../components/Icons";
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+  faAddressBook,
+  faCheck,
+  faIdBadge,
+  faPhoneAlt,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons';
+import {styles} from '../../api/stylesApi';
+import Icons from '../components/Icons';
 
 // Start of Add Timer Screen Display
 const AddTimerScreen = props => {
@@ -48,99 +57,100 @@ const AddTimerScreen = props => {
     }
   }
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.screenBackground}>
       <View style={styles.addInfoScreenHeader}>
         <Image
           style={{width: 30, height: 30}}
           source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/iu-1.png')}
         />
-        <Text style={styles.addInfoScreenTitle}>
-          Add Timer
-        </Text>
+        <Text style={styles.addInfoScreenTitle}>Add Timer</Text>
       </View>
-      <View style={styles.addInfoContainer}>
-        <View style={styles.infoChildContainer}>
-          <Icons icon={'timer'} width={25} height={25}/>
-          <Text style={styles.labelText}> Type: </Text>
-          <TextInput
-            style={styles.infoText}
-            // Text Input Box for the customer's first name
-            placeholder={'Timer Type'}
-            value={timerType}
-            // Displays the value that the user is entering into the text input
-            // For example, if the typed 'Bob', then 'Bob' is displayed in the
-            // Text Input Box
-            onChangeText={text => setTimerType(text)}
-          />
-        </View>
-        <View style={styles.addTextFieldDivider} />
-        <View style={styles.infoChildContainer}>
-          <Icons icon={'location'} size={20}/>
-          <Text style={styles.labelText}> Location: </Text>
-          <TextInput
-            style={styles.infoText}
-            // Text Input Box for the customer's first name
-            placeholder={'Location'}
-            value={location}
-            // Displays the value that the user is entering into the text input
-            // For example, if the typed 'Bob', then 'Bob' is displayed in the
-            // Text Input Box
-            onChangeText={text => setLocation(text)}
-          />
-        </View>
-        <View style={styles.addTextFieldDivider} />
-        <View style={styles.infoChildContainer}>
-          <Icons icon={'insideOutside'} size={20}/>
-          <Text style={styles.labelText}> Inside/Outside: </Text>
-          <TextInput
-            style={styles.infoText}
-            // Text Input Box for the customer's first name
-            placeholder={'Inside/Outside'}
-            value={insideOutside}
-            // Displays the value that the user is entering into the text input
-            // For example, if the typed 'Bob', then 'Bob' is displayed in the
-            // Text Input Box
-            onChangeText={text => setInsideOutside(text)}
-          />
-        </View>
-        <View style={styles.addTextFieldDivider} />
-        <View style={styles.infoChildContainer}>
-          <Text style={styles.labelText}> # Programs: </Text>
-          <TextInput
-            style={styles.infoText}
-            // Text Input Box for the customer's last name
-            placeholder={'Number of Programs'}
-            value={numPrograms}
-            onChangeText={text => setNumPrograms(text)}
-          />
-        </View>
-        <View style={styles.addTextFieldDivider} />
-        <View style={styles.infoChildContainer}>
-          <Text style={styles.labelText}> # Zones: </Text>
-          <TextInput
-            style={styles.infoText}
-            // Text Input Box for the customer's address
-            placeholder={'Number of Zones'}
-            value={numZones}
-            onChangeText={text => setNumZones(text)}
-          />
-        </View>
-        <View style={styles.addTextFieldDivider} />
-        <View style={styles.infoChildContainer}>
-          <Icons icon={'calendar'} size={20}/>
-          <Text style={styles.labelText}> Year Installed: </Text>
-          <TextInput
-            style={styles.infoText}
-            // Text Input Box for the customer's first name
-            placeholder={'Year Installed'}
-            value={yearInstalled}
-            // Displays the value that the user is entering into the text input
-            // For example, if the typed 'Bob', then 'Bob' is displayed in the
-            // Text Input Box
-            onChangeText={text => setYearInstalled(text)}
-          />
-        </View>
-        <View style={styles.addTextFieldDivider} />
+      <View style={{ height: '70%' }}>
+        <View style={styles.longDividerWithSpacing}/>
+        <ScrollView>
+          <View style={styles.infoChildContainer}>
+            <Icons icon={'timer'} width={25} height={25} />
+            <Text style={styles.labelText}> Type: </Text>
+            <TextInput
+              style={styles.infoText}
+              // Text Input Box for the customer's first name
+              placeholder={'Timer Type'}
+              value={timerType}
+              // Displays the value that the user is entering into the text input
+              // For example, if the typed 'Bob', then 'Bob' is displayed in the
+              // Text Input Box
+              onChangeText={text => setTimerType(text)}
+            />
+          </View>
+          <View style={styles.addTextFieldDivider} />
+          <View style={styles.infoChildContainer}>
+            <Icons icon={'location'} size={20} />
+            <Text style={styles.labelText}> Location: </Text>
+            <TextInput
+              style={styles.infoText}
+              // Text Input Box for the customer's first name
+              placeholder={'Location'}
+              value={location}
+              // Displays the value that the user is entering into the text input
+              // For example, if the typed 'Bob', then 'Bob' is displayed in the
+              // Text Input Box
+              onChangeText={text => setLocation(text)}
+            />
+          </View>
+          <View style={styles.addTextFieldDivider} />
+          <View style={styles.infoChildContainer}>
+            <Icons icon={'insideOutside'} size={20} />
+            <Text style={styles.labelText}> Inside/Outside: </Text>
+            <TextInput
+              style={styles.infoText}
+              // Text Input Box for the customer's first name
+              placeholder={'Inside/Outside'}
+              value={insideOutside}
+              // Displays the value that the user is entering into the text input
+              // For example, if the typed 'Bob', then 'Bob' is displayed in the
+              // Text Input Box
+              onChangeText={text => setInsideOutside(text)}
+            />
+          </View>
+          <View style={styles.addTextFieldDivider} />
+          <View style={styles.infoChildContainer}>
+            <Text style={styles.labelText}> # Programs: </Text>
+            <TextInput
+              style={styles.infoText}
+              // Text Input Box for the customer's last name
+              placeholder={'Number of Programs'}
+              value={numPrograms}
+              onChangeText={text => setNumPrograms(text)}
+            />
+          </View>
+          <View style={styles.addTextFieldDivider} />
+          <View style={styles.infoChildContainer}>
+            <Text style={styles.labelText}> # Zones: </Text>
+            <TextInput
+              style={styles.infoText}
+              // Text Input Box for the customer's address
+              placeholder={'Number of Zones'}
+              value={numZones}
+              onChangeText={text => setNumZones(text)}
+            />
+          </View>
+          <View style={styles.addTextFieldDivider} />
+          <View style={styles.infoChildContainer}>
+            <Icons icon={'calendar'} size={20} />
+            <Text style={styles.labelText}> Year Installed: </Text>
+            <TextInput
+              style={styles.infoText}
+              // Text Input Box for the customer's first name
+              placeholder={'Year Installed'}
+              value={yearInstalled}
+              // Displays the value that the user is entering into the text input
+              // For example, if the typed 'Bob', then 'Bob' is displayed in the
+              // Text Input Box
+              onChangeText={text => setYearInstalled(text)}
+            />
+          </View>
+        </ScrollView>
+        <View style={styles.longDividerWithSpacing}/>
         <View style={styles.submitDataButtonContainer}>
           <TouchableOpacity
             onPress={() =>

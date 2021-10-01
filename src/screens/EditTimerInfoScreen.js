@@ -57,7 +57,7 @@ const EditTimerInfoScreen = props => {
   const [currentNumZones, setNumZones] = useState(timer.numZones);
   return (
     // Start of the display for adding or editing a customer
-    <SafeAreaView>
+    <SafeAreaView style={styles.screenBackground}>
       <View style={styles.addInfoScreenHeader}>
         <Image
           style={{width: 30, height: 30}}

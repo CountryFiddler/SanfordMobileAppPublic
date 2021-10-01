@@ -26,12 +26,13 @@ import {
 import React, {Component} from 'react';
 import AddOrEditCustomer from '../components/AddOrEditCustomer';
 import AddCustomer from "../components/AddCustomer";
+import { styles } from "../../api/stylesApi";
 
 const AddCustomerScreen = props => {
   // Start of the display for Add Customer Screen
   return (
-    <SafeAreaView>
-      <View>
+    <SafeAreaView style={styles.screenBackground}>
+      <View >
         <AddCustomer navigation={props.navigation} />
       </View>
     </SafeAreaView>

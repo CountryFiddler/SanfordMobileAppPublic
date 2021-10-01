@@ -25,8 +25,8 @@ import {
   TextInput,
   render,
   TouchableOpacity,
-  Image,
-} from 'react-native';
+  Image, ScrollView,
+} from "react-native";
 import React, {Component, useState} from 'react';
 import {addCustomer, updateCustomer} from '../../api/FirestoreApi';
 import PhoneInput from 'react-native-phone-number-input';
@@ -170,16 +170,19 @@ const AddCustomer = props => {
   console.log(customerPhoneNumber);
   return (
     // Start of the display for adding or editing a customer
-    <SafeAreaView>
+    <SafeAreaView >
       <View style={styles.addInfoScreenHeader}>
         <FontAwesomeIcon icon={faUserPlus} size={33}/>
         <Text style={styles.addInfoScreenTitle}>
           Add Customer
         </Text>
       </View>
+      <View style={styles.longDividerWithSpacing}/>
       <View style={styles.addInfoContainer}>
+        <ScrollView >
         <View style={styles.infoChildContainer}>
           <FontAwesomeIcon icon={faIdBadge} size={17} style={styles.icons} />
+          <Text style={styles.labelText}> First Name: </Text>
           <TextInput
             style={styles.infoText}
             // Text Input Box for the customer's first name
@@ -194,6 +197,7 @@ const AddCustomer = props => {
         <View style={styles.addTextFieldDivider} />
         <View style={styles.infoChildContainer}>
           <FontAwesomeIcon icon={faIdBadge} size={17} style={styles.icons} />
+          <Text style={styles.labelText}> Last Name: </Text>
           <TextInput
             style={styles.infoText}
             // Text Input Box for the customer's last name
@@ -209,6 +213,7 @@ const AddCustomer = props => {
             size={17}
             style={styles.icons}
           />
+          <Text style={styles.labelText}> Address: </Text>
           <TextInput
             style={styles.infoText}
             // Text Input Box for the customer's address
@@ -220,6 +225,7 @@ const AddCustomer = props => {
         <View style={styles.addTextFieldDivider} />
         <View style={styles.infoChildContainer}>
           <FontAwesomeIcon icon={faPhoneAlt} size={17} style={styles.icons} />
+          <Text style={styles.labelText}> Phone: </Text>
           <TextInput
             style={styles.infoText}
             placeholder={customerPhoneNumPlaceholder}
@@ -229,8 +235,10 @@ const AddCustomer = props => {
             }}
           />
         </View>
-        <View style={styles.addTextFieldDivider} />
-        <View style={styles.submitDataButtonContainer}>
+          <View style={styles.longDividerWithSpacing}/>
+        </ScrollView>
+
+        <View style={styles.addCustomerSubmitDataButtonContainer}>
           <TouchableOpacity
             onPress={() => props.navigation.navigate('Home')}
             style={styles.generalButtonStyle}>

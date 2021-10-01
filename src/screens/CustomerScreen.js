@@ -72,7 +72,7 @@ const CustomerScreen = props => {
   console.log(parsedPhoneNumInt);
   // Start of the display for Customer Screen
   return (
-    <ScrollView style={{paddingBottom: 100}} persistentScrollbar={false}>
+    <ScrollView style={styles.screenBackground} persistentScrollbar={false}>
       <View style={styles.iconHeader}>
         <FontAwesomeIcon icon={faUser} size={25} />
       </View>

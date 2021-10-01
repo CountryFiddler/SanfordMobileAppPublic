@@ -49,7 +49,7 @@ const DeleteContentScreen = props => {
   const solenoidValves = props.navigation.getParam('solenoidValves');
 
   return (
-    <View>
+    <View style={styles.screenBackground}>
       <View style={styles.iconHeader}>
         <Icons icon={'trash'} size={'medium'} />
       </View>

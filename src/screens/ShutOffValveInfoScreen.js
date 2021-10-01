@@ -65,7 +65,7 @@ const ShutOffValveInfoScreen = props => {
     shutoffValve.yearInstalled = 'Not Provided';
   }
   return (
-    <View>
+    <View style={styles.screenBackground}>
       <View style={styles.iconHeader}>
         <Image
           style={{width: 40, height: 35}}
@@ -202,6 +202,7 @@ const ShutOffValveInfoScreen = props => {
         </TouchableOpacity>
       </View>
       <View style={styles.longDivider} />
+      <View style={styles.spaceHolder}/>
     </View>
   );
 };

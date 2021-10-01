@@ -64,7 +64,7 @@ const UtilityNoteScreen = props => {
   // console.log(note.images[0].imageRef);
   // getURLS();
   return (
-    <View>
+    <View style={styles.screenBackground}>
       <View style={styles.iconHeader}>
         <Icons icon={'stickyNote'} size={'medium'} />
       </View>
@@ -215,6 +215,7 @@ const UtilityNoteScreen = props => {
           </View>
         </View>
       </Modal>
+      <View style={styles.spaceHolder}/>
     </View>
   );
 };

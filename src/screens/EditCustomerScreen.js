@@ -18,11 +18,12 @@ import React, {useState} from 'react';
 import {Text, StyleSheet, View, Button} from 'react-native';
 import AddOrEditCustomer from '../components/AddOrEditCustomer';
 import EditCustomer from '../components/EditCustomer';
+import { styles } from "../../api/stylesApi";
 
 const EditCustomerScreen = props => {
   // Start of the display for Edit Customer Screen
   return (
-    <View style={styles.homePageContainer}>
+    <View style={styles.screenBackground}>
       <EditCustomer
         // Pass the customer as a prop as well as navigation
         customer={props.customer}
@@ -38,24 +39,7 @@ const EditCustomerScreen = props => {
 // End of the display for Edit Customer Screen
 
 // Start of stylesheet
-const styles = StyleSheet.create({
-  headerStyle: {
-    borderWidth: 1,
-    borderColor: 'black',
-  },
-  homePageContainer: {
-    flex: 1,
-  },
-  textStyle: {
-    fontSize: 30,
-    textAlign: 'center',
-    //alignSelf: 'center',
-  },
-  addCustomerButton: {
-    //position: 'absolute',
-    marginTop: 50,
-  },
-});
+
 // End of stylesheet
 
 export default EditCustomerScreen;

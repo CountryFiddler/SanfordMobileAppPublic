@@ -54,7 +54,7 @@ const EditSolenoidValvesInfoScreen = props => {
     solenoidValves.yearInstalled,
   );
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.screenBackground}>
       <View style={styles.addSolenoidValveDataScreenHeader}>
         <View style={styles.iconHeader}>
           <Image
@@ -66,9 +66,9 @@ const EditSolenoidValvesInfoScreen = props => {
           Edit Solenoid Valve
         </Text>
       </View>
-      <View style={styles.addInfoContainer}>
+      <View style={{ height: '70%' }}>
         <View style={styles.longDividerWithSpacing} />
-        <ScrollView style={{height: '50%'}}>
+        <ScrollView >
         <View style={styles.infoChildContainer}>
           <FontAwesomeIcon icon={faMapMarkerAlt} size={20} />
           <Text style={styles.labelText}> Location: </Text>

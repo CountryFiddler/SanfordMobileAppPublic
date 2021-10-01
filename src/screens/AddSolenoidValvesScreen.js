@@ -19,15 +19,24 @@ import {
   Button,
   TextInput,
   SafeAreaView,
-  Alert, Image, Text, TouchableOpacity,
-} from "react-native";
+  Alert,
+  Image,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import {submitShutOffInfo} from '../../api/ShutOffValveApi';
 import {submitSolenoidValvesInfo} from '../../api/SolenoidValveApi';
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCheck, faMapMarkerAlt, faRuler, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { submitTimerInfo } from "../../api/TimerApi";
-import { styles } from "../../api/stylesApi";
-import { faCalendarAlt } from "@fortawesome/free-regular-svg-icons";
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+  faCheck,
+  faMapMarkerAlt,
+  faRuler,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons';
+import {submitTimerInfo} from '../../api/TimerApi';
+import {styles} from '../../api/stylesApi';
+import {faCalendarAlt} from '@fortawesome/free-regular-svg-icons';
 
 // Start of Add Timer Screen Display
 const AddSolenoidValvesScreen = props => {
@@ -55,7 +64,7 @@ const AddSolenoidValvesScreen = props => {
     }
   }
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.screenBackground}>
       <View style={styles.addSolenoidValveDataScreenHeader}>
         <View style={styles.iconHeader}>
           <Image
@@ -63,92 +72,93 @@ const AddSolenoidValvesScreen = props => {
             source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/SolenoidValve.png')}
           />
         </View>
-        <Text style={styles.addInfoScreenTitle}>
-          Add Solenoid Valve
-        </Text>
+        <Text style={styles.addInfoScreenTitle}>Add Solenoid Valve</Text>
       </View>
-      <View style={styles.addInfoContainer}>
-        <View style={styles.infoChildContainer}>
-          <FontAwesomeIcon icon={faMapMarkerAlt} size={20} />
-          <Text style={styles.labelText}> Location: </Text>
-          <TextInput
-            style={styles.infoText}
-            // Text Input Box for the customer's first name
-            placeholder={'Valves Location'}
-            value={location}
-            // Displays the value that the user is entering into the text input
-            // For example, if the typed 'Bob', then 'Bob' is displayed in the
-            // Text Input Box
-            onChangeText={text => setLocation(text)}
-          />
-        </View>
-        <View style={styles.addTextFieldDivider} />
-        <View style={styles.infoChildContainer}>
-          <Image
-            style={{width: 26, height: 30}}
-            source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/SolenoidValve.png')}
-          />
-          <Text style={styles.labelText}> Type: </Text>
-          <TextInput
-            style={styles.infoText}
-            // Text Input Box for the customer's first name
-            placeholder={'Valve Type'}
-            value={solenoidValvesType}
-            // Displays the value that the user is entering into the text input
-            // For example, if the typed 'Bob', then 'Bob' is displayed in the
-            // Text Input Box
-            onChangeText={text => setSolenoidValvesType(text)}
-          />
-        </View>
-        <View style={styles.addTextFieldDivider} />
-        <View style={styles.infoChildContainer}>
-          <FontAwesomeIcon icon={faRuler} size={20} />
-          <Text style={styles.labelText}> Size: </Text>
-          <TextInput
-            style={styles.infoText}
-            // Text Input Box for the customer's last name
-            placeholder={'Valve Size'}
-            value={size}
-            onChangeText={text => setSize(text)}
-          />
-        </View>
-        <View style={styles.addTextFieldDivider} />
-        <View style={styles.infoChildContainer}>
-          <Text style={styles.labelText}>#</Text>
-          <Text style={styles.labelText}> Valves: </Text>
-          <TextInput
-            style={styles.infoText}
-            // Text Input Box for the customer's last name
-            placeholder={'Number of Valves'}
-            value={numValves}
-            onChangeText={text => setNumValves(text)}
-          />
-        </View>
-        <View style={styles.addTextFieldDivider} />
-        <View style={styles.infoChildContainer}>
-          <Text style={styles.labelText}>#</Text>
-          <Text style={styles.labelText}> Zones Controlled: </Text>
-          <TextInput
-            style={styles.infoText}
-            // Text Input Box for the customer's last name
-            placeholder={'(Ex. Zones 1-4)'}
-            value={zoneNumbers}
-            onChangeText={text => setZoneNumbers(text)}
-          />
-        </View>
-        <View style={styles.addTextFieldDivider} />
-        <View style={styles.infoChildContainer}>
-          <FontAwesomeIcon icon={faCalendarAlt} size={20} />
-          <Text style={styles.labelText}> Year Installed: </Text>
-          <TextInput
-            style={styles.infoText}
-            // Text Input Box for the customer's last name
-            placeholder={'Year Installed'}
-            value={yearInstalled}
-            onChangeText={text => setYearInstalled(text)}
-          />
-        </View>
-        <View style={styles.addTextFieldDivider} />
+      <View style={{ height: '70%' }}>
+        <View style={styles.longDividerWithSpacing} />
+        <ScrollView>
+          <View style={styles.infoChildContainer}>
+            <FontAwesomeIcon icon={faMapMarkerAlt} size={20} />
+            <Text style={styles.labelText}> Location: </Text>
+            <TextInput
+              style={styles.infoText}
+              // Text Input Box for the customer's first name
+              placeholder={'Valves Location'}
+              value={location}
+              // Displays the value that the user is entering into the text input
+              // For example, if the typed 'Bob', then 'Bob' is displayed in the
+              // Text Input Box
+              onChangeText={text => setLocation(text)}
+            />
+          </View>
+          <View style={styles.addTextFieldDivider} />
+          <View style={styles.infoChildContainer}>
+            <Image
+              style={{width: 26, height: 30}}
+              source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/SolenoidValve.png')}
+            />
+            <Text style={styles.labelText}> Type: </Text>
+            <TextInput
+              style={styles.infoText}
+              // Text Input Box for the customer's first name
+              placeholder={'Valve Type'}
+              value={solenoidValvesType}
+              // Displays the value that the user is entering into the text input
+              // For example, if the typed 'Bob', then 'Bob' is displayed in the
+              // Text Input Box
+              onChangeText={text => setSolenoidValvesType(text)}
+            />
+          </View>
+          <View style={styles.addTextFieldDivider} />
+          <View style={styles.infoChildContainer}>
+            <FontAwesomeIcon icon={faRuler} size={20} />
+            <Text style={styles.labelText}> Size: </Text>
+            <TextInput
+              style={styles.infoText}
+              // Text Input Box for the customer's last name
+              placeholder={'Valve Size'}
+              value={size}
+              onChangeText={text => setSize(text)}
+            />
+          </View>
+          <View style={styles.addTextFieldDivider} />
+          <View style={styles.infoChildContainer}>
+            <Text style={styles.labelText}>#</Text>
+            <Text style={styles.labelText}> Valves: </Text>
+            <TextInput
+              style={styles.infoText}
+              // Text Input Box for the customer's last name
+              placeholder={'Number of Valves'}
+              value={numValves}
+              onChangeText={text => setNumValves(text)}
+            />
+          </View>
+          <View style={styles.addTextFieldDivider} />
+          <View style={styles.infoChildContainer}>
+            <Text style={styles.labelText}>#</Text>
+            <Text style={styles.labelText}> Zones Controlled: </Text>
+            <TextInput
+              style={styles.infoText}
+              // Text Input Box for the customer's last name
+              placeholder={'(Ex. Zones 1-4)'}
+              value={zoneNumbers}
+              onChangeText={text => setZoneNumbers(text)}
+            />
+          </View>
+          <View style={styles.addTextFieldDivider} />
+          <View style={styles.infoChildContainer}>
+            <FontAwesomeIcon icon={faCalendarAlt} size={20} />
+            <Text style={styles.labelText}> Year Installed: </Text>
+            <TextInput
+              style={styles.infoText}
+              // Text Input Box for the customer's last name
+              placeholder={'Year Installed'}
+              value={yearInstalled}
+              onChangeText={text => setYearInstalled(text)}
+            />
+          </View>
+        </ScrollView>
+        <View style={styles.longDividerWithSpacing} />
         <View style={styles.submitDataButtonContainer}>
           <TouchableOpacity
             onPress={() =>

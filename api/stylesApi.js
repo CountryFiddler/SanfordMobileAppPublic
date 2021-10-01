@@ -2,6 +2,10 @@ import {Dimensions, StyleSheet} from 'react-native';
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
 export const styles = StyleSheet.create({
+  screenBackground: {
+    backgroundColor: 'white',
+    flex: 1,
+  },
   screenHeader: {
     alignItems: 'center',
     justifyContent: 'space-around',
@@ -48,6 +52,13 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    fontSize: 17,
+  },
+  addUtilityDataFieldsContainer: {
+    margin: '5%',
+    marginLeft: '1.5%',
+    flexDirection: 'row',
+
     fontSize: 17,
   },
   screenTitle: {
@@ -150,6 +161,15 @@ export const styles = StyleSheet.create({
     marginLeft: '1.5%',
     marginRight: '1.5%',
   },
+  addCustomerSubmitDataButtonContainer: {
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginBottom: '7%',
+
+    marginLeft: '1.5%',
+    marginRight: '1.5%',
+  },
 
   utilityButtonContainer: {
     justifyContent: 'space-around',
@@ -224,7 +244,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   addInfoContainer: {
-    height: '80%',
+    height: '78%',
   },
   cancelButtonText: {
     color: '#cc0000',
@@ -271,9 +291,12 @@ export const styles = StyleSheet.create({
   navigatorItemView: {
     //backgroundColor: '#26660b',
     backgroundColor: 'white',
-    borderBottomWidth: 3,
-    borderBottomColor: '#26660b',
+    borderWidth: 3,
+    borderColor: '#26660b',
+    //borderLeftWidth: 3,
+    //borderLeftColor: '#26660b',
     height: 70,
+    marginTop: '2%',
     //width: '90%',
     flexDirection: 'row',
     //marginBottom: 10,
@@ -513,7 +536,7 @@ export const styles = StyleSheet.create({
     height: 300,
   },
   spaceHolder: {
-    marginBottom: '20%',
+    marginBottom: '10%',
   },
   dividerWithSpacing: {
     borderTopWidth: 3,
