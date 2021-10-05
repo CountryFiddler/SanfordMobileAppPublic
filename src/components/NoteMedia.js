@@ -86,6 +86,27 @@ const NoteMedia = props => {
   const [image19ZoomIn, setImage19ZoomIn] = useState(false);
   const [image20ZoomIn, setImage20ZoomIn] = useState(false);
 
+  const [image1Render, setImage1Render] = useState(false);
+  const [image2Render, setImage2Render] = useState(false);
+  const [image3Render, setImage3Render] = useState(false);
+  const [image4Render, setImage4Render] = useState(false);
+  const [image5Render, setImage5Render] = useState(false);
+  const [image6Render, setImage6Render] = useState(false);
+  const [image7Render, setImage7Render] = useState(false);
+  const [image8Render, setImage8Render] = useState(false);
+  const [image9Render, setImage9Render] = useState(false);
+  const [image10Render, setImage10Render] = useState(false);
+  const [image11Render, setImage11Render] = useState(false);
+  const [image12Render, setImage12Render] = useState(false);
+  const [image13Render, setImage13Render] = useState(false);
+  const [image14Render, setImage14Render] = useState(false);
+  const [image15Render, setImage15Render] = useState(false);
+  const [image16Render, setImage16Render] = useState(false);
+  const [image17Render, setImage17Render] = useState(false);
+  const [image18Render, setImage18Render] = useState(false);
+  const [image19Render, setImage19Render] = useState(false);
+  const [image20Render, setImage20Render] = useState(false);
+
   let bouncyCheckboxRef1: BouncyCheckbox | null = null;
   let bouncyCheckboxRef2: BouncyCheckbox | null = null;
   let bouncyCheckboxRef3: BouncyCheckbox | null = null;
@@ -119,40 +140,52 @@ const NoteMedia = props => {
   //console.log('numImages = ' + numImages);
   // toString might be just it
 
-  if (note.imageRefs.length > 0) {
-    //console.log('adljkdsafjkldfsjkldfs');
+  if (note.imageRefs.length > 0 && !image1Render) {
+    setImage1Render(true);
     var imageRef1 = storage()
       .ref('/' + note.imageRefs[0].imageRef)
       .getDownloadURL()
       .then(url => {
+        console.log('URL: ' + url);
+        console.log('Image1Render ' + image1Render);
         setImage1(url);
       });
   }
-  if (note.imageRefs.length > 1) {
+  if (note.imageRefs.length > 1 && !image2Render) {
+    setImage2Render(true);
     var imageRef2 = storage()
       .ref('/' + note.imageRefs[1].imageRef)
       .getDownloadURL()
       .then(url => {
+        console.log('URL: ' + url);
+        console.log('Image2Render ' + image2Render);
         setImage2(url);
       });
   }
-  if (note.imageRefs.length > 2) {
+  if (note.imageRefs.length > 2 && !image3Render) {
+    setImage3Render(true);
     var imageRef3 = storage()
       .ref('/' + note.imageRefs[2].imageRef)
       .getDownloadURL()
       .then(url => {
+        console.log('URL: ' + url);
+        console.log('Image3Render ' + image3Render);
         setImage3(url);
       });
   }
-  if (note.imageRefs.length > 3) {
+  if (note.imageRefs.length > 3 && !image4Render) {
+    setImage4Render(true);
     var imageRef = storage()
       .ref('/' + note.imageRefs[3].imageRef)
       .getDownloadURL()
       .then(url => {
+        console.log('URL: ' + url);
+        console.log('Image4Render ' + image4Render);
         setImage4(url);
       });
   }
-  if (note.imageRefs.length > 4) {
+  if (note.imageRefs.length > 4 && !image5Render) {
+    setImage5Render(true);
     var imageRef = storage()
       .ref('/' + note.imageRefs[4].imageRef)
       .getDownloadURL()
@@ -160,7 +193,8 @@ const NoteMedia = props => {
         setImage5(url);
       });
   }
-  if (note.imageRefs.length > 5) {
+  if (note.imageRefs.length > 5 && !image6Render) {
+    setImage6Render(true);
     var imageRef = storage()
       .ref('/' + note.imageRefs[5].imageRef)
       .getDownloadURL()
@@ -168,7 +202,8 @@ const NoteMedia = props => {
         setImage6(url);
       });
   }
-  if (note.imageRefs.length > 6) {
+  if (note.imageRefs.length > 6 && !image7Render) {
+    setImage7Render(true);
     var imageRef = storage()
       .ref('/' + note.imageRefs[6].imageRef)
       .getDownloadURL()
@@ -176,7 +211,8 @@ const NoteMedia = props => {
         setImage7(url);
       });
   }
-  if (note.imageRefs.length > 7) {
+  if (note.imageRefs.length > 7 && !image8Render) {
+    setImage8Render(true);
     var imageRef = storage()
       .ref('/' + note.imageRefs[7].imageRef)
       .getDownloadURL()
@@ -184,7 +220,8 @@ const NoteMedia = props => {
         setImage8(url);
       });
   }
-  if (note.imageRefs.length > 8) {
+  if (note.imageRefs.length > 8 && !image9Render) {
+    setImage9Render(true);
     var imageRef = storage()
       .ref('/' + note.imageRefs[8].imageRef)
       .getDownloadURL()
@@ -192,7 +229,8 @@ const NoteMedia = props => {
         setImage9(url);
       });
   }
-  if (note.imageRefs.length > 9) {
+  if (note.imageRefs.length > 9 && !image10Render) {
+    setImage10Render(true);
     var imageRef = storage()
       .ref('/' + note.imageRefs[9].imageRef)
       .getDownloadURL()
@@ -200,7 +238,8 @@ const NoteMedia = props => {
         setImage10(url);
       });
   }
-  if (note.imageRefs.length > 10) {
+  if (note.imageRefs.length > 10 && !image11Render) {
+    setImage11Render(true);
     var imageRef = storage()
       .ref('/' + note.imageRefs[10].imageRef)
       .getDownloadURL()
@@ -208,7 +247,8 @@ const NoteMedia = props => {
         setImage11(url);
       });
   }
-  if (note.imageRefs.length > 11) {
+  if (note.imageRefs.length > 11 && !image12Render) {
+    setImage12Render(true);
     var imageRef = storage()
       .ref('/' + note.imageRefs[11].imageRef)
       .getDownloadURL()
@@ -216,7 +256,8 @@ const NoteMedia = props => {
         setImage12(url);
       });
   }
-  if (note.imageRefs.length > 12) {
+  if (note.imageRefs.length > 12 && !image13Render) {
+    setImage13Render(true);
     var imageRef = storage()
       .ref('/' + note.imageRefs[12].imageRef)
       .getDownloadURL()
@@ -224,7 +265,8 @@ const NoteMedia = props => {
         setImage13(url);
       });
   }
-  if (note.imageRefs.length > 13) {
+  if (note.imageRefs.length > 13 && !image14Render) {
+    setImage14Render(true);
     var imageRef = storage()
       .ref('/' + note.imageRefs[13].imageRef)
       .getDownloadURL()
@@ -232,7 +274,8 @@ const NoteMedia = props => {
         setImage14(url);
       });
   }
-  if (note.imageRefs.length > 14) {
+  if (note.imageRefs.length > 14 && !image15Render) {
+    setImage15Render(true);
     var imageRef = storage()
       .ref('/' + note.imageRefs[14].imageRef)
       .getDownloadURL()
@@ -240,7 +283,8 @@ const NoteMedia = props => {
         setImage15(url);
       });
   }
-  if (note.imageRefs.length > 15) {
+  if (note.imageRefs.length > 15 && !image16Render) {
+    setImage16Render(true);
     var imageRef = storage()
       .ref('/' + note.imageRefs[15].imageRef)
       .getDownloadURL()
@@ -248,7 +292,8 @@ const NoteMedia = props => {
         setImage16(url);
       });
   }
-  if (note.imageRefs.length > 16) {
+  if (note.imageRefs.length > 16 && !image17Render) {
+    setImage17Render(true);
     var imageRef = storage()
       .ref('/' + note.imageRefs[16].imageRef)
       .getDownloadURL()
@@ -256,7 +301,8 @@ const NoteMedia = props => {
         setImage17(url);
       });
   }
-  if (note.imageRefs.length > 17) {
+  if (note.imageRefs.length > 17 && !image18Render) {
+    setImage18Render(true);
     var imageRef = storage()
       .ref('/' + note.imageRefs[17].imageRef)
       .getDownloadURL()
@@ -264,7 +310,8 @@ const NoteMedia = props => {
         setImage18(url);
       });
   }
-  if (note.imageRefs.length > 18) {
+  if (note.imageRefs.length > 18 && !image19Render) {
+    setImage19Render(true);
     var imageRef = storage()
       .ref('/' + note.imageRefs[18].imageRef)
       .getDownloadURL()
@@ -272,7 +319,8 @@ const NoteMedia = props => {
         setImage19(url);
       });
   }
-  if (note.imageRefs.length > 19) {
+  if (note.imageRefs.length > 19 && !image20Render) {
+    setImage20Render(true);
     var imageRef = storage()
       .ref('/' + note.imageRefs[19].imageRef)
       .getDownloadURL()
