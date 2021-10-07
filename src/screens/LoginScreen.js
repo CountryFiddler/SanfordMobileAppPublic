@@ -10,7 +10,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from "react-native";
+} from 'react-native';
 import {styles} from '../../api/stylesApi';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
@@ -55,12 +55,12 @@ class LoginScreen extends Component {
       // Start of the display for adding or editing a customer
       <SafeAreaView style={styles.screenBackground}>
         <View style={styles.addInfoScreenHeader}>
-          <Icons icon={'signIn'} size={'medium'}/>
+          <Icons icon={'signIn'} size={'medium'} />
           <Text style={styles.addInfoScreenTitle}>Login</Text>
         </View>
         <View style={styles.addInfoContainer}>
           <View style={styles.infoChildContainer}>
-            <Icons icon={'email'} size={17} style={styles.icons}/>
+            <Icons icon={'email'} size={17} style={styles.icons} />
             <TextInput
               style={styles.infoText}
               // Text Input Box for the customer's first name
@@ -78,7 +78,7 @@ class LoginScreen extends Component {
           </View>
           <View style={styles.addTextFieldDivider} />
           <View style={styles.infoChildContainer}>
-            <Icons icon={'password'} size={17} style={styles.icons}/>
+            <Icons icon={'password'} size={17} style={styles.icons} />
             <TextInput
               style={styles.infoText}
               placeholder={'Password'}
@@ -96,7 +96,7 @@ class LoginScreen extends Component {
           <View style={styles.submitDataButtonContainer}>
             <TouchableOpacity
               onPress={this.SignIn}
-            style={styles.loginButtonContainer}>
+              style={styles.loginButtonContainer}>
               <Text style={styles.loginButtonText}>Login</Text>
             </TouchableOpacity>
           </View>

@@ -10,7 +10,7 @@ import {
   Image,
 } from 'react-native';
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
-import storage from '@react-native-firebase/storage';
+//import storage from '@react-native-firebase/storage';
 import {UploadMedia} from '../../api/FirestoreApi';
 //import * as Progress from 'react-native-progress';
 

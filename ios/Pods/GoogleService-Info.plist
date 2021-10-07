@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>32675392484-rhho3lt5bvr1hi1i344vjeancpkmocqa.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.32675392484-rhho3lt5bvr1hi1i344vjeancpkmocqa</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBkPttqTUhzs-weP9ywtq1cmmwJS-coMZ8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>32675392484</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>SanfordIrrigationiOSApp</string>
+	<key>PROJECT_ID</key>
+	<string>sanfordirrigationmobileapp</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sanfordirrigationmobileapp.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:32675392484:ios:18102dc42d5bfa764bf5f1</string>
+</dict>
+</plist>
