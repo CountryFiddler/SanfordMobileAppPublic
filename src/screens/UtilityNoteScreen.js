@@ -71,7 +71,7 @@ const UtilityNoteScreen = props => {
       <View style={styles.noteHeaderBar}>
         <View style={styles.noteHistoryIcon}>
           <TouchableOpacity onPress={() => setShowNoteHistory(true)}>
-            <Icons icon={'history'} size={'25'} />
+            <Icons icon={'history'} size={25} />
           </TouchableOpacity>
         </View>
         <View style={styles.noteTitle}>

@@ -1,14 +1,15 @@
 import firebase from 'firebase/app';
 //import '@firebase/firestore';
 //import '@firebase/auth';
-var firebaseConfig = {
-  apiKey: 'AIzaSyARlBxspfdjBzCEno_O35e3KjWW3kt_-pU',
-  authDomain: 'sanfordirrigationmobileapp.firebaseapp.com',
-  projectId: 'sanfordirrigationmobileapp',
-  storageBucket: 'sanfordirrigationmobileapp.appspot.com',
-  messagingSenderId: '32675392484',
-  appId: '1:32675392484:web:bed5a3c12f2061304bf5f1',
-  measurementId: 'G-PTX6M5TDHY',
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyBneUCQ-DAI1q33Zw_xpJOqM02ZQLw590o',
+  authDomain: 'sanfordirrigationmobilea-da7b2.firebaseapp.com',
+  projectId: 'sanfordirrigationmobilea-da7b2',
+  storageBucket: 'sanfordirrigationmobilea-da7b2.appspot.com',
+  messagingSenderId: '480471990050',
+  appId: '1:480471990050:web:6e7d695a081570b452af7b',
+  measurementId: 'G-6MTQBHLN1H',
 };
 
 // Initialize Firebase

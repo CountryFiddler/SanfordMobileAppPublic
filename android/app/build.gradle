@@ -158,10 +158,10 @@ android {
             keyPassword 'android'
         }
           release {
-            storeFile file('test_app.keystore')
-            storePassword 'password123'
-            keyAlias 'test_app_alias'
-            keyPassword 'password123'
+            storeFile file('sanford_android_app.keystore')
+            storePassword 'FunnyPipe=$20'
+            keyAlias 'sanford_android_app_alias'
+            keyPassword 'FunnyPipe=$20'
            }
     }
     buildTypes {
@@ -197,7 +197,9 @@ android {
 dependencies {
     implementation 'com.android.support:multidex:2.0.1' //enter the latest version
     implementation project(':react-native-firebase')
-    implementation platform('com.google.firebase:firebase-bom:28.1.0')
+    // This is an old implementation, revert to it if the new one does not work
+    //implementation platform('com.google.firebase:firebase-bom:28.1.0')
+    implementation platform('com.google.firebase:firebase-bom:28.4.2')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.google.firebase:firebase-storage'

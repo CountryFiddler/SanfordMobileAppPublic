@@ -3,32 +3,32 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>32675392484-rhho3lt5bvr1hi1i344vjeancpkmocqa.apps.googleusercontent.com</string>
+	<string>480471990050-nrj8qurvvjfg712neare2f9vvcip5hfq.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.32675392484-rhho3lt5bvr1hi1i344vjeancpkmocqa</string>
+	<string>com.googleusercontent.apps.480471990050-nrj8qurvvjfg712neare2f9vvcip5hfq</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBkPttqTUhzs-weP9ywtq1cmmwJS-coMZ8</string>
+	<string>AIzaSyA2nEfZAUS-ubOWEFhiiZlbrJBtOS7maVY</string>
 	<key>GCM_SENDER_ID</key>
-	<string>32675392484</string>
+	<string>480471990050</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>SanfordIrrigationiOSApp</string>
 	<key>PROJECT_ID</key>
-	<string>sanfordirrigationmobileapp</string>
+	<string>sanfordirrigationmobilea-da7b2</string>
 	<key>STORAGE_BUCKET</key>
-	<string>sanfordirrigationmobileapp.appspot.com</string>
+	<string>sanfordirrigationmobilea-da7b2.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:32675392484:ios:18102dc42d5bfa764bf5f1</string>
+	<string>1:480471990050:ios:493b0e52f518981552af7b</string>
 </dict>
 </plist>
