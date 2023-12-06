@@ -1,35 +1,7 @@
-/**
- * File Name: AddOrEditCustomer.js
- *
- * Author: Ethan Gordash
- * Date: July 1st, 2021
- * Sanford Irrigation Mobile App
- *
- * Description: This class provides the functionality for a user to either
- * add a customer to the database or edit an existing customer in the database.
- * The information that the user can edit will pertain to the customers name
- * and address. An important part of this class is the props AddScreen and EditScreen.
- * If AddScreen is true, then this class performs the operations to add a customer
- * to the database. However, if EditScreen is true, then the class performs
- * operations to edit an existing customer in the database.
- *
- * Purpose: Allows users to add or edit customers in the firestore database
- */
-// Import Statements
-import {
-  StyleSheet,
-  Button,
-  View,
-  Text,
-  SafeAreaView,
-  TextInput,
-  render,
-} from 'react-native';
+import {Button, View, SafeAreaView, TextInput} from 'react-native';
 import React, {Component} from 'react';
 import {addCustomer, updateCustomer} from '../../api/FirestoreApi';
 import PhoneInput from 'react-native-phone-number-input';
-import PhoneInputWithCountryDefault from 'react-phone-number-input/modules/PhoneInputWithCountryDefault';
-import PhoneInputWithCountry from 'react-phone-number-input/modules/PhoneInputWithCountry';
 
 class AddOrEditCustomer extends Component {
   /**
@@ -48,8 +20,6 @@ class AddOrEditCustomer extends Component {
    *
    * Return: None
    *
-   * Functions Called: getCustomers(this.customerRetrieved),
-   * updateCustomer(customer), and checkForNullTextEntries(customer)
    *
    */
   submitCustomerInfo(navigation, AddScreen, EditScreen, customer) {
@@ -101,7 +71,7 @@ class AddOrEditCustomer extends Component {
    *
    * Description: This function is used to see if the data fields are null
    * when the customer submits information to create a new customer or update
-   * an existing customer in the database. This funciton is called in
+   * an existing customer in the database. This function is called in
    * submitCustomerInfo().
    *
    * Parameters: customer, AddScreen, EditScreen
@@ -308,12 +278,8 @@ class AddOrEditCustomer extends Component {
       <SafeAreaView>
         <View>
           <TextInput
-            // Text Input Box for the customer's first name
             placeholder={this.state.customerFirstNamePlaceholder}
             value={this.state.currentCustomerFirstName}
-            // Displays the value that the user is entering into the text input
-            // For example, if the typed 'Bob', then 'Bob' is displayed in the
-            // Text Input Box
             onChange={text =>
               this.setState({
                 currentCustomerFirstName: text,
@@ -321,7 +287,6 @@ class AddOrEditCustomer extends Component {
             }
           />
           <TextInput
-            // Text Input Box for the customer's last name
             placeholder={this.state.customerLastNamePlaceholder}
             value={this.state.currentCustomerLastName}
             onChangeText={text =>
@@ -331,7 +296,6 @@ class AddOrEditCustomer extends Component {
             }
           />
           <TextInput
-            // Text Input Box for the customer's address
             placeholder={this.state.customerAddressPlaceholder}
             value={this.state.currentCustomerAddress}
             onChangeText={text =>
@@ -363,7 +327,6 @@ class AddOrEditCustomer extends Component {
         </View>
       </SafeAreaView>
     );
-    // End of the display for adding or editing a customer
   }
 }
 export default AddOrEditCustomer;

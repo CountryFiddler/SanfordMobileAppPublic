@@ -1,41 +1,11 @@
-/**
- * Home Screen
- * 7-1-21
- * The page contains a search bar to search for customers and a link
- * to go to the Add Customers Page. */
-
-// Import Statements
-import React, {Component, useState} from 'react';
-import {
-  Text,
-  StyleSheet,
-  View,
-  Button,
-  Alert,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
-import CustomerSearchBar from '../components/CustomerSearchBar';
-import {getTimerInfo} from '../../api/TimerApi';
-import {getTimers} from '../../api/FirestoreApi';
-import {
-  faUser,
-  faAddressBook,
-  faPhoneAlt,
-  faPencilAlt,
-  faClock,
-  faUserPlus,
-  faSignOutAlt,
-  faHome,
-  faPlus,
-} from '@fortawesome/free-solid-svg-icons';
-import {faStickyNote, fa} from '@fortawesome/free-regular-svg-icons';
+import React from 'react';
+import {Text, View, TouchableOpacity} from 'react-native';
+import {faUser, faHome, faPlus} from '@fortawesome/free-solid-svg-icons';
 import UtilitySelection from '../components/UtilitySelection';
 import {styles} from '../../api/stylesApi';
 import Icons from '../components/Icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 
-// Start of Home Screen Display
 const UtilitySelectionScreen = props => {
   const customer = props.navigation.getParam('customer');
   const headerIcon = props.navigation.getParam('headerIcon');
@@ -50,9 +20,7 @@ const UtilitySelectionScreen = props => {
   const utilityInfoScreenTitle = props.navigation.getParam(
     'utilityInfoScreenTitle',
   );
-  //var iconPath = headerIcon.toString();
-  //console.log(iconPath);
-  //const timers = getTimers(customer);
+
   return (
     <View style={styles.screenBackground}>
       <View style={styles.navigatorScreenHeader}>
@@ -103,12 +71,9 @@ const UtilitySelectionScreen = props => {
           <Text style={styles.buttonText}>Customer</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.longDivider}/>
+      <View style={styles.longDivider} />
     </View>
   );
 };
-// End of Home Screen Display
-
-// Start of StylingSheet
 
 export default UtilitySelectionScreen;

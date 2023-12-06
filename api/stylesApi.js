@@ -39,8 +39,6 @@ export const styles = StyleSheet.create({
     borderTopWidth: 3,
     borderTopColor: '#26660b',
     height: '50%',
-    //alignItems: 'flex-start',
-    //justifyContent: 'center',
     marginLeft: '1.5%',
     marginRight: '1.5%',
     borderRadius: 20,
@@ -68,7 +66,6 @@ export const styles = StyleSheet.create({
     marginLeft: '12%',
   },
   navigatorScreenTitle: {
-    //flex: 1,
     marginTop: '2%',
     fontSize: 20,
     fontWeight: 'bold',
@@ -76,6 +73,7 @@ export const styles = StyleSheet.create({
   },
   infoText: {
     fontSize: 17,
+    color: 'black',
   },
   textInputContainer: {
     marginTop: '5%',
@@ -105,6 +103,7 @@ export const styles = StyleSheet.create({
     marginRight: '5%',
     marginTop: '-5%',
     marginLeft: '1%',
+    color: 'black',
   },
   labelText: {
     fontStyle: 'italic',
@@ -120,13 +119,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     paddingTop: 10,
-    //marginBottom: '7%',
     paddingBottom: 10,
-    // marginLeft: '3%',
-    //marginRight: '5%',
-    //width: '90%',
-    //borderBottomWidth: 3,
-    //borderBottomColor: '#26660b',
     marginLeft: '1.5%',
     marginRight: '1.5%',
   },
@@ -144,7 +137,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     paddingBottom: 10,
-    //marginTop: '5%',
     marginLeft: '1.5%',
     marginRight: '1.5%',
   },
@@ -228,9 +220,7 @@ export const styles = StyleSheet.create({
   addSolenoidValveDataScreenHeader: {
     alignItems: 'center',
     justifyContent: 'space-around',
-    //flexDirection: 'row',
     width: '100%',
-    //marginTop: '5%',
   },
   iconHeader: {
     marginTop: '5%',
@@ -277,7 +267,6 @@ export const styles = StyleSheet.create({
 
   utilityNavigatorContainer: {
     height: '65%',
-    //justifyContent: 'space-around',
     marginTop: '5%',
     marginLeft: '5%',
     marginRight: '5%',
@@ -289,22 +278,14 @@ export const styles = StyleSheet.create({
   },
 
   navigatorItemView: {
-    //backgroundColor: '#26660b',
     backgroundColor: 'white',
     borderWidth: 3,
     borderColor: '#26660b',
-    //borderLeftWidth: 3,
-    //borderLeftColor: '#26660b',
     height: 70,
     marginTop: '2%',
-    //width: '90%',
     flexDirection: 'row',
-    //marginBottom: 10,
-    //justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    //marginLeft: '2%',
-    //flex: 1,
   },
   navigatorItemText: {
     color: 'black',
@@ -330,14 +311,11 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    //marginLeft: '5%',
-    // marginRight: '5%',
   },
   noteTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-    //flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -348,7 +326,6 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-    //flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
@@ -374,18 +351,14 @@ export const styles = StyleSheet.create({
     height: '40%',
   },
   editIcon: {
-    //flex: 1,
     resizeMode: 'contain',
     marginRight: '4%',
-    //alignItems: 'flex-end',
-    //resizeMode: 'contain',
   },
   noteHistoryIcon: {
     resizeMode: 'contain',
     marginLeft: '4%',
   },
   noteImageContainer: {
-    //marginTop: '2%',
   },
   noteImageSubContainer: {
     marginTop: '5%',
@@ -407,17 +380,11 @@ export const styles = StyleSheet.create({
   noteImageModalContainer: {
     flex: 1,
     backgroundColor: 'black',
-    //marginTop: '10%',
-    // height: '100%',
-    // width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
   modalImageContainer: {
-    //marginTop: '20%',
     height: 500,
-    //width: 400,
-    //marginBottom: '30%',
   },
   modalImage: {
     width: 400,
@@ -428,13 +395,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'black',
     paddingTop: 20,
     paddingRight: 20,
-    //position: 'relative',
-    //marginBottom: '5%',
-    //justifyContent: 'flex-end',
     alignItems: 'flex-end',
-    // paddingBottom: 100,
-    //width: '90%',
-    //height: 100,
   },
   historyModalExitButton: {
     backgroundColor: 'transparent',
@@ -464,8 +425,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   noteMessageLabel: {
-    //marginTop: '10%',
-    //marginBottom: '10%',
     marginTop: '2%',
     marginLeft: '2%',
     fontStyle: 'italic',
@@ -493,8 +452,6 @@ export const styles = StyleSheet.create({
     //flex: 1,
     alignItems: 'center',
     backgroundColor: '#bbded6',
-    // height: '50%',
-    //marginTop: '2%',
   },
   selectButton: {
     borderRadius: 5,
@@ -524,7 +481,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   addNoteProgressBarContainer: {
-    //marginTop: '20%',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -576,7 +532,6 @@ export const styles = StyleSheet.create({
   deleteContentScreenTitle: {
     justifyContent: 'center',
     alignItems: 'center',
-    //width: '80%',
     paddingLeft: 20,
     paddingRight: 20,
   },
@@ -584,9 +539,7 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-    //flex: 1,
     flexDirection: 'row',
-    //justifyContent: 'flex-end',
     alignItems: 'center',
   },
   editNoteDivider: {
@@ -604,7 +557,6 @@ export const styles = StyleSheet.create({
     paddingTop: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    //width: '80%',
     paddingLeft: 20,
     paddingRight: 20,
     marginTop: '5%',
@@ -615,9 +567,7 @@ export const styles = StyleSheet.create({
   deleteContentScreenText: {
     fontSize: 18,
     textAlign: 'center',
-    //flex: 1,
     flexDirection: 'row',
-    //justifyContent: 'flex-end',
     alignItems: 'center',
   },
   loginButtonContainer: {

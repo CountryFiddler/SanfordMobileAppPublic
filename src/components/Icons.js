@@ -1,56 +1,17 @@
-/**
- * File Name: AddOrEditCustomer.js
- *
- * Author: Ethan Gordash
- * Date: July 1st, 2021
- * Sanford Irrigation Mobile App
- *
- * Description: This class provides the functionality for a user to either
- * add a customer to the database or edit an existing customer in the database.
- * The information that the user can edit will pertain to the customers name
- * and address. An important part of this class is the props AddScreen and EditScreen.
- * If AddScreen is true, then this class performs the operations to add a customer
- * to the database. However, if EditScreen is true, then the class performs
- * operations to edit an existing customer in the database.
- *
- * Purpose: Allows users to add or edit customers in the firestore database
- */
-// Import Statements
-import {
-  StyleSheet,
-  Button,
-  View,
-  Text,
-  SafeAreaView,
-  TextInput,
-  render,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
-import React, {Component, useState} from 'react';
-import {addCustomer, updateCustomer} from '../../api/FirestoreApi';
-import PhoneInput from 'react-native-phone-number-input';
-import PhoneInputWithCountryDefault from 'react-phone-number-input/modules/PhoneInputWithCountryDefault';
-import PhoneInputWithCountry from 'react-phone-number-input/modules/PhoneInputWithCountry';
-import {Alert} from 'react-native';
-import {styles} from '../../api/stylesApi';
+import {SafeAreaView, Image} from 'react-native';
+import React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
-  faAddressBook,
   faPencilAlt,
-  faPhoneAlt,
-  faUser,
-  faCheck,
-  faTimes,
-  faIdBadge,
-  faUserPlus,
   faSearch,
   faKey,
   faSignInAlt,
   faMapMarkerAlt,
-  faDoorOpen, faRuler, faBackward, faHistory,
-} from "@fortawesome/free-solid-svg-icons";
-import {checkValidPhoneNumber} from '../../api/CustomerApi';
+  faDoorOpen,
+  faRuler,
+  faBackward,
+  faHistory,
+} from '@fortawesome/free-solid-svg-icons';
 import {
   faEnvelope,
   faImage,
@@ -59,10 +20,8 @@ import {
   faTimesCircle,
   faCalendarAlt,
 } from '@fortawesome/free-regular-svg-icons';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 const Icons = props => {
-  // Get the navigation prop
 
   var width = props.width;
   var height = props.height;

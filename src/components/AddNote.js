@@ -1,60 +1,25 @@
-/**
- * File Name: HomeScreen.js
- *
- * Author: Ethan Gordash
- * Date: July 1st, 2021
- * Sanford Irrigation Mobile App
- *
- * Description: This screen allows users to search for an existing customer
- * or navigate to the screen to add a new custoemr to the database.
- *
- * Purpose: Provides users with the ability to search for customers in the
- * database and navigate to the screen to add new customers.
- */
-// Import Statements
 import React, {useState} from 'react';
 import {
   Text,
-  StyleSheet,
   View,
-  Button,
   SafeAreaView,
   TextInput,
   TouchableOpacity,
-  Image,
   ScrollView,
   StatusBar,
-  TouchableWithoutFeedback,
   Alert,
   Platform,
 } from 'react-native';
-import CustomerSearchBar from '../components/CustomerSearchBar';
-import {submitNote, submitTimerInfo} from '../../api/TimerApi';
-import UploadNoteImage from '../components/UploadNoteImage';
-import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 import ImagePicker from 'react-native-image-crop-picker';
-import {
-  addNote,
-  getTimerNotes,
-  updateNote,
-  UploadMedia,
-} from '../../api/UtilityApi';
+import {addNote, updateNote} from '../../api/UtilityApi';
 import {storage} from 'react-native-firebase';
-import EditNotePopup from '../components/EditNotePopup';
 import * as Progress from 'react-native-progress';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {
-  faCheck,
-  faIdBadge,
-  faPencilAlt,
-  faTimes,
-  faUser,
-} from '@fortawesome/free-solid-svg-icons';
+import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {styles} from '../../api/stylesApi';
 import Icons from './Icons';
 import {faImage, faCamera} from '@fortawesome/free-solid-svg-icons';
-import NativeIcons from './NativeIcons';
-// Start of Home Screen Display
+
 const AddNote = props => {
   const customer = props.customer;
   const utilityType = props.utilityType;
@@ -87,15 +52,13 @@ const AddNote = props => {
     noteID,
     noteType,
     employeeName,
-    navigation,
   ) => {
     var utilityNote = {noteTitle, noteText, noteID, noteType, employeeName};
     utilityNote.title = noteTitle;
     utilityNote.noteText = noteText;
     utilityNote.noteID = noteID;
     utilityNote.noteType = noteType;
-    utilityNote.employeeName = employeeName
-    //console.log(videos[0]);
+    utilityNote.employeeName = employeeName;
     utilityNote.noteID = addNote(
       customer,
       utilityType,
@@ -103,12 +66,10 @@ const AddNote = props => {
       utilityNote,
       imageRefs,
       numImages,
-      employeeName
+      employeeName,
     );
-    //console.log(videoRefs[0].videoRef);
-    //console.log(utilityNote.noteID);
+
     for (var i = 0; i < images.length; i++) {
-      //console.log('Brewers Vs. Cardinals');
       const uri = images[i];
       imageRefs[i].imageRef =
         imageRefs[i].imageRef +
@@ -127,10 +88,8 @@ const AddNote = props => {
       numImages,
       employeeName,
     );
-    // Get Single Note
-    // Set The Remaining ImageRefs and VideoRefs
+
     UploadMedia(images, customer, utility, utilityNote);
-    //mediaUploadCounter = 0
   };
 
   const UploadMedia = async (images, customer, utility, utilityNote) => {
@@ -181,8 +140,7 @@ const AddNote = props => {
           )
           .putFile(uploadUri);
       }
-      //  console.log(uploadUri);
-      // set progress state
+
       task.on('state_changed', snapshot => {
         setTransferred(
           Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 10000,
@@ -197,10 +155,6 @@ const AddNote = props => {
       }
 
       counter++;
-      /*Alert.alert(
-        'Photo uploaded!',
-        'Your photo has been uploaded to Firebase Cloud Storage!',
-      );*/
       setUploading(false);
       setMediaUploadCounter(counter + 1);
     }
@@ -259,12 +213,10 @@ const AddNote = props => {
           if (noteType !== 'GeneralNotes') {
             imageRef = imageRef + utility.utilityType + '/' + utility.id + '/';
           }
-          imageRef = imageRef + noteType; // +
-          //'/';
+          imageRef = imageRef + noteType;
 
           if (imageRefs.length < 20) {
             console.log(imageRefs.length);
-            //checkDuplicateRefs(imageRefs, numImages, imageRef)
             if (!checkDuplicateImageRefs(imageRef)) {
               setImagesToUpload(prevItems => [...prevItems, images[i].path]);
               setImageRefs(prevItems => [...prevItems, {imageRef}]);
@@ -287,23 +239,29 @@ const AddNote = props => {
   }
 
   function selectImageFromCamera() {
+    // Use the image picker library to open the device camera
     ImagePicker.openCamera({
       width: 300,
       height: 400,
+      // This allows the user to crop an image after taking a picture
       cropping: true,
-      //multiple: true,
     }).then(image => {
       var numImagesCounter = numImages;
+      /* Create a reference to the image that was taken
+       This is reference gets stored in firestore so that the image can be
+       downloaded from Firebase Storage */
       let imageRef = 'Customers' + '/' + customer.id + '/';
       if (noteType !== 'GeneralNotes') {
         imageRef = imageRef + utility.utilityType + '/' + utility.id + '/';
       }
       imageRef = imageRef + noteType; // +
-      //'/';
       if (imageRefs.length < 20) {
-        console.log('BrewCrew');
+        // Check to make sure there are no duplicate images
         if (!checkDuplicateImageRefs(imageRef)) {
+          // Update the array of images that will be uploaded to Firebase Storage
           setImagesToUpload(prevItems => [...prevItems, image.path]);
+          /* Update the array of image references that will be uploaded
+          to Firebase Firestore */
           setImageRefs(prevItems => [...prevItems, {imageRef}]);
           numImagesCounter++;
           setNumImages(numImagesCounter);
@@ -314,20 +272,6 @@ const AddNote = props => {
       props.onChange?.(image);
     });
   }
-
-  /** Code for displaying images while uploading
-   *             {images.length
-              ? images.map(image => {
-                  return (
-                    <View style={styles.itemView}>
-                      <Image
-                        source={{uri: image.uri}}
-                        style={styles.imageBox}
-                      />
-                    </View>
-                  );
-                })
-              : null}*/
 
   return (
     <SafeAreaView>
@@ -344,13 +288,8 @@ const AddNote = props => {
             textAlignVertical={'top'}
             multiline={true}
             style={styles.textInput}
-            // Text Input Box for the customer's first name
-            // Text Input Box for the customer's first name
             placeholder={'Name'}
             value={employeeName}
-            // Displays the value that the user is entering into the text input
-            // For example, if the typed 'Bob', then 'Bob' is displayed in the
-            // Text Input Box
             onChangeText={text => setEmployeeName(text)}
           />
         </View>
@@ -361,13 +300,8 @@ const AddNote = props => {
             textAlignVertical={'top'}
             multiline={true}
             style={styles.textInput}
-            // Text Input Box for the customer's first name
-            // Text Input Box for the customer's first name
             placeholder={'Note Title'}
             value={noteTitle}
-            // Displays the value that the user is entering into the text input
-            // For example, if the typed 'Bob', then 'Bob' is displayed in the
-            // Text Input Box
             onChangeText={text => setNoteTitle(text)}
           />
         </View>
@@ -378,9 +312,6 @@ const AddNote = props => {
             style={styles.textInput}
             textAlignVertical={'top'}
             multiline={true}
-            // Text Input Box for the customer's first name
-            // Text Input Box for the customer's first name
-            // Text Input Box for the customer's last name
             placeholder={'Message'}
             value={noteText}
             onChangeText={text => setNoteText(text)}
@@ -424,7 +355,7 @@ const AddNote = props => {
                 <Text style={styles.buttonText}>Take a Picture</Text>
               </TouchableOpacity>
             </View>
-            <View style={styles.longDivider}/>
+            <View style={styles.longDivider} />
             <View style={styles.submitDataButtonContainer}>
               <TouchableOpacity
                 onPress={() => props.navigation.goBack()}
@@ -436,7 +367,7 @@ const AddNote = props => {
                 style={styles.generalButtonStyle}
                 onPress={() => {
                   {
-                    (noteTitle !== '' && employeeName !== '')
+                    noteTitle !== '' && employeeName !== ''
                       ? submitNote(
                           customer,
                           numImages,
@@ -467,8 +398,5 @@ const AddNote = props => {
     </SafeAreaView>
   );
 };
-// End of Home Screen Display
-
-// End of Home Screen Display
 
 export default AddNote;

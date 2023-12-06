@@ -1,10 +1,7 @@
-// Import Statements
-import React, {Component, useState} from 'react';
+import React, {Component} from 'react';
 import {
   Text,
-  StyleSheet,
   View,
-  Button,
   Modal,
   TouchableWithoutFeedback,
   Dimensions,
@@ -12,13 +9,10 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import CustomerSearchBar from '../components/CustomerSearchBar';
 import {styles} from '../../api/stylesApi';
-import {faTimes} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faImage, faStickyNote} from '@fortawesome/free-regular-svg-icons';
 
-// Start of Home Screen Display
 const deviceHeight = Dimensions.get('window').height;
 class EditNotePopup extends Component {
   constructor(props) {
@@ -92,9 +86,7 @@ class EditNotePopup extends Component {
         <View
           style={{
             height: 50,
-            //flex: 1,
             alignItems: 'flex-start',
-            //justifyContent: 'center',
             marginLeft: 10,
           }}>
           <TouchableOpacity
@@ -178,7 +170,6 @@ class EditNotePopup extends Component {
           style={{
             flex: 1,
             backgroundColor: '#000000AA',
-            //justifyContent: 'flex-end',
           }}>
           {this.renderOutsideTouchable(onTouchOutside)}
           <View
@@ -198,7 +189,5 @@ class EditNotePopup extends Component {
     );
   }
 }
-
-// End of Home Screen Display
 
 export default EditNotePopup;

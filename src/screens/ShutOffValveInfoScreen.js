@@ -1,41 +1,23 @@
-/**
- * File Name: HomeScreen.js
- *
- * Author: Ethan Gordash
- * Date: July 1st, 2021
- * Sanford Irrigation Mobile App
- *
- * Description: This screen allows users to search for an existing customer
- * or navigate to the screen to add a new custoemr to the database.
- *
- * Purpose: Provides users with the ability to search for customers in the
- * database and navigate to the screen to add new customers.
- */
-// Import Statements
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   Text,
-  StyleSheet,
   View,
-  Button,
   TouchableOpacity,
   Image,
   ScrollView,
 } from 'react-native';
 import {getNotes} from '../../api/UtilityApi';
-import {getShutOffValveNotes} from '../../api/ShutOffValveApi';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
   faHome,
   faPencilAlt,
   faSearch,
   faUser,
-  faRuler,
 } from '@fortawesome/free-solid-svg-icons';
 import {faStickyNote} from '@fortawesome/free-regular-svg-icons';
 import {styles} from '../../api/stylesApi';
 import Icons from '../components/Icons';
-// Start of Home Screen Display
+
 const ShutOffValveInfoScreen = props => {
   const customer = props.navigation.getParam('customer');
   const shutoffValve = props.navigation.getParam('utility');
@@ -141,7 +123,6 @@ const ShutOffValveInfoScreen = props => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
-            // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('UtilityNotesNavigator', {
               headerIcon: 'stickyNote',
               customer: customer,
@@ -166,7 +147,6 @@ const ShutOffValveInfoScreen = props => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={() =>
-            // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('UtilitySelectionScreen', {
               customer: customer,
               headerIcon: 'shutOff',
@@ -206,13 +186,5 @@ const ShutOffValveInfoScreen = props => {
     </View>
   );
 };
-// End of Home Screen Display
-
-// Start of StylingSheet
-const shutOffValveInfoStyles = StyleSheet.create({
-  spaceHolder: {
-    marginBottom: '30%',
-  },
-});
 
 export default ShutOffValveInfoScreen;

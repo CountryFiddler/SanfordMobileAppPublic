@@ -1,19 +1,3 @@
-/**
- * File Name: CustomerSearchBar.js
- *
- * Author: Ethan Gordash
- * Date: July 1st, 2021
- * Sanford Irrigation Mobile App
- *
- * Description: This class is a search bar to search for customers.
- * It conatins methods to retrieve information from the database and filter
- * the customers based on the text the user types into the search bar. This
- * class also conatins and instance of the DropDownSearch class, which displays
- * a list of customers based on the text typed into the search bar.
- *
- * Purpose: Provides users with the ability to search for customers in the
- * database.
- */
 import React, {Component} from 'react';
 import {StyleSheet, View, TextInput, ScrollView} from 'react-native';
 import {getCustomers} from '../../api/FirestoreApi';
@@ -55,7 +39,6 @@ class CustomerSearchBar extends Component {
    */
   componentDidMount() {
     getCustomers(this.customersRetrieved).catch(error => console.log(error));
-    //console.log(this.state.customersList.length);
   }
 
   /**
@@ -76,37 +59,24 @@ class CustomerSearchBar extends Component {
    *
    */
   searchUser(textToSearch) {
-    // If the user starts typing into the search bar, enter into this condition
     if (textToSearch) {
       this.setState({searching: true});
-      //console.log(this.state.customersList.length);
-      // Filter the customers. Also make the text lower case so it does not
-      // matter if the user types in upper case or lower case.
       this.setState({
         filteredCustomers: this.state.customersList.filter(customer =>
-          // searchText is of the form: firstName + " " + lastName + "\n"
-          // + address. What the customer types in must match searchText.
-          // The customer can type the customer's name or address
           customer.searchText
             .toLowerCase()
             .includes(textToSearch.toLowerCase()),
         ),
       });
-      //console.log(this.state.customersList.length);
-      // If the user is not typing, set searching to false
     } else {
       this.setState({searching: false});
     }
   }
 
-  // Start of displaying the customer search bar
   render() {
-    //console.log(this.state.customersList.length);
-    //alert(this.state.customersList.length);
     return (
       <View style={styles.container}>
         <TextInput
-          // This is the actual search bar
           style={styles.textInput}
           placeholder="Search Customer"
           placeholderTextColor="white"
@@ -117,7 +87,6 @@ class CustomerSearchBar extends Component {
         {this.state.searching && (
           <ScrollView>
             <DropDownSearch
-              // This the drop down search that appears as a user is searching
               customerList={this.state.filteredCustomers}
               navigation={this.props.navigation}
             />
@@ -126,14 +95,11 @@ class CustomerSearchBar extends Component {
       </View>
     );
   }
-  // End of displaying the customer search bar
 }
 
 // Start of stylesheet
 const styles = StyleSheet.create({
   container: {
-    // justifyContent: 'center',
-    //alignItems: 'flex-start',
     marginTop: '25%',
     width: '90%',
     flex: 1,

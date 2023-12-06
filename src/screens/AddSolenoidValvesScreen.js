@@ -1,22 +1,6 @@
-/**
- * File Name: HomeScreen.js
- *
- * Author: Ethan Gordash
- * Date: July 1st, 2021
- * Sanford Irrigation Mobile App
- *
- * Description: This screen allows users to search for an existing customer
- * or navigate to the screen to add a new custoemr to the database.
- *
- * Purpose: Provides users with the ability to search for customers in the
- * database and navigate to the screen to add new customers.
- */
-// Import Statements
 import React, {useState} from 'react';
 import {
-  StyleSheet,
   View,
-  Button,
   TextInput,
   SafeAreaView,
   Alert,
@@ -25,7 +9,6 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import {submitShutOffInfo} from '../../api/ShutOffValveApi';
 import {submitSolenoidValvesInfo} from '../../api/SolenoidValveApi';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
@@ -33,12 +16,10 @@ import {
   faMapMarkerAlt,
   faRuler,
   faTimes,
-} from '@fortawesome/free-solid-svg-icons';
-import {submitTimerInfo} from '../../api/TimerApi';
+} from '@fortawesome/free-solid-svg-icons';;
 import {styles} from '../../api/stylesApi';
 import {faCalendarAlt} from '@fortawesome/free-regular-svg-icons';
 
-// Start of Add Timer Screen Display
 const AddSolenoidValvesScreen = props => {
   const customer = props.navigation.getParam('customer');
   const solenoidValves = props.navigation.getParam('utilities');
@@ -82,12 +63,8 @@ const AddSolenoidValvesScreen = props => {
             <Text style={styles.labelText}> Location: </Text>
             <TextInput
               style={styles.infoText}
-              // Text Input Box for the customer's first name
               placeholder={'Valves Location'}
               value={location}
-              // Displays the value that the user is entering into the text input
-              // For example, if the typed 'Bob', then 'Bob' is displayed in the
-              // Text Input Box
               onChangeText={text => setLocation(text)}
             />
           </View>
@@ -100,12 +77,8 @@ const AddSolenoidValvesScreen = props => {
             <Text style={styles.labelText}> Type: </Text>
             <TextInput
               style={styles.infoText}
-              // Text Input Box for the customer's first name
               placeholder={'Valve Type'}
               value={solenoidValvesType}
-              // Displays the value that the user is entering into the text input
-              // For example, if the typed 'Bob', then 'Bob' is displayed in the
-              // Text Input Box
               onChangeText={text => setSolenoidValvesType(text)}
             />
           </View>
@@ -115,7 +88,6 @@ const AddSolenoidValvesScreen = props => {
             <Text style={styles.labelText}> Size: </Text>
             <TextInput
               style={styles.infoText}
-              // Text Input Box for the customer's last name
               placeholder={'Valve Size'}
               value={size}
               onChangeText={text => setSize(text)}
@@ -127,7 +99,6 @@ const AddSolenoidValvesScreen = props => {
             <Text style={styles.labelText}> Valves: </Text>
             <TextInput
               style={styles.infoText}
-              // Text Input Box for the customer's last name
               placeholder={'Number of Valves'}
               value={numValves}
               onChangeText={text => setNumValves(text)}
@@ -139,7 +110,6 @@ const AddSolenoidValvesScreen = props => {
             <Text style={styles.labelText}> Zones Controlled: </Text>
             <TextInput
               style={styles.infoText}
-              // Text Input Box for the customer's last name
               placeholder={'(Ex. Zones 1-4)'}
               value={zoneNumbers}
               onChangeText={text => setZoneNumbers(text)}
@@ -151,7 +121,6 @@ const AddSolenoidValvesScreen = props => {
             <Text style={styles.labelText}> Year Installed: </Text>
             <TextInput
               style={styles.infoText}
-              // Text Input Box for the customer's last name
               placeholder={'Year Installed'}
               value={yearInstalled}
               onChangeText={text => setYearInstalled(text)}
@@ -162,7 +131,6 @@ const AddSolenoidValvesScreen = props => {
         <View style={styles.submitDataButtonContainer}>
           <TouchableOpacity
             onPress={() =>
-              // Pass navigation and customer as props to the Edit Customer Screen
               props.navigation.navigate('UtilitySelectionScreen', {
                 customer: customer,
                 utilityType: 'SolenoidValves',
@@ -201,8 +169,5 @@ const AddSolenoidValvesScreen = props => {
     </SafeAreaView>
   );
 };
-// End of Home Screen Display
-
-// Start of StylingSheet
 
 export default AddSolenoidValvesScreen;

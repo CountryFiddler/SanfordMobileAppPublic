@@ -1,24 +1,7 @@
-/**
- * File Name: CustomerScreen.js
- *
- * Author: Ethan Gordash
- * Date: July 1st, 2021
- * Sanford Irrigation Mobile App
- *
- * Description: This screen is the page in which users can view information about
- * a customer (name and address), and click on links to take them to view other
- * information about the customers system such as their timer, shut-off valves,
- * electric solenoid valves, and other notes about the system.
- *
- * Purpose: Allows users to view information about the customer.
- */
-// Import Statements
 import React, {useState} from 'react';
 import {
   Text,
-  StyleSheet,
   View,
-  Button,
   TouchableOpacity,
   Image,
   ScrollView,
@@ -33,18 +16,12 @@ import {
   faAddressBook,
   faPhoneAlt,
   faPencilAlt,
-  faClock,
-  faUserPlus,
-  faSignOutAlt,
   faHome,
 } from '@fortawesome/free-solid-svg-icons';
 import {faStickyNote, fa} from '@fortawesome/free-regular-svg-icons';
 import {styles} from '../../api/stylesApi';
-import {Icon} from 'native-base';
 
 const CustomerScreen = props => {
-  // Get the customer the user selected from the drop down menu when they
-  // searched for a customer
   const customer = props.navigation.getParam('customer');
   const timers = getTimers(customer);
   const shutoffValves = getShutOffs(customer);
@@ -70,7 +47,6 @@ const CustomerScreen = props => {
   }
   console.log(parsedPhoneNumStr);
   console.log(parsedPhoneNumInt);
-  // Start of the display for Customer Screen
   return (
     <ScrollView style={styles.screenBackground} persistentScrollbar={false}>
       <View style={styles.iconHeader}>
@@ -80,7 +56,6 @@ const CustomerScreen = props => {
         <Text style={styles.screenTitle}>Customer Information</Text>
         <TouchableOpacity
           onPress={() =>
-            // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('EditCustomer', {
               customer: customer,
               timers: timers,
@@ -118,7 +93,6 @@ const CustomerScreen = props => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={() =>
-            // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('UtilitySelectionScreen', {
               customer: customer,
               headerIcon:
@@ -141,7 +115,6 @@ const CustomerScreen = props => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
-            // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('UtilitySelectionScreen', {
               customer: customer,
               headerIcon:
@@ -159,14 +132,12 @@ const CustomerScreen = props => {
           <Image
             style={{width: 50, height: 42}}
             source={require('../icons/Shut-OffValve.png')}
-            //source={{uri: '/icons/Shut-OffValve.png'}}
           />
           <Text style={styles.buttonText}>Shut-Off</Text>
           <Text>Valves</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
-            // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('UtilitySelectionScreen', {
               customer: customer,
               headerIcon:
@@ -190,7 +161,6 @@ const CustomerScreen = props => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
-            // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('UtilityNotesNavigator', {
               customer: customer,
               utility: '',
@@ -220,18 +190,6 @@ const CustomerScreen = props => {
       <View style={styles.longDivider}/>
     </ScrollView>
   );
-  // End of the display for Customer Screen
 };
-const customerScreenStyles = StyleSheet.create({
-  spaceHolder: {
-    //height: 500,
-    height: 70,
-  },
-  homeButton: {
-    marginBottom: '20%',
-  },
-  footer: {
-    //height: 25,
-  },
-});
+
 export default CustomerScreen;

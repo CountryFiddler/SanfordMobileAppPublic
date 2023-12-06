@@ -1,48 +1,12 @@
-/**
- * File Name: HomeScreen.js
- *
- * Author: Ethan Gordash
- * Date: July 1st, 2021
- * Sanford Irrigation Mobile App
- *
- * Description: This screen allows users to search for an existing customer
- * or navigate to the screen to add a new custoemr to the database.
- *
- * Purpose: Provides users with the ability to search for customers in the
- * database and navigate to the screen to add new customers.
- */
-// Import Statements
 import React, {useState} from 'react';
-import {
-  Text,
-  StyleSheet,
-  View,
-  Button,
-  Image,
-  ScrollView,
-  render,
-  StatusBar,
-  SafeAreaView,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-  Modal,
-  Dimensions,
-} from 'react-native';
+import {Text, View, ScrollView, TouchableOpacity, Modal} from 'react-native';
 
-import CustomerSearchBar from '../components/CustomerSearchBar';
-import {firestore, storage} from 'react-native-firebase';
-import {getImageURL} from '../../api/FirestoreApi';
-import EditNotePopup from '../components/EditNotePopup';
-import Video from 'react-native-video';
 import NoteMedia from '../components/NoteMedia';
 import {styles} from '../../api/stylesApi';
 import Icons from '../components/Icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faHome, faPlus, faUser} from '@fortawesome/free-solid-svg-icons';
-//Media Controls to control Play/Pause/Seek and full screen
-//import MediaControls, {PLAYER_STATES} from 'react-native-media-controls';
+import {faHome, faUser} from '@fortawesome/free-solid-svg-icons';
 
-// Start of Home Screen Display
 const UtilityNoteScreen = props => {
   const customer = props.navigation.getParam('customer');
   const note = props.navigation.getParam('note');
@@ -58,11 +22,6 @@ const UtilityNoteScreen = props => {
   const noteIcon = props.navigation.getParam('noteIcon');
   const noteIconTitle = props.navigation.getParam('noteIconTitle');
   const [showNoteHistory, setShowNoteHistory] = useState(false);
-  //const utilityType = props.navigation.getParam('utilityType');
-  //console.log(testImage);
-  //imageURL = getImageURL(note.images[0].imageRef);
-  // console.log(note.images[0].imageRef);
-  // getURLS();
   return (
     <View style={styles.screenBackground}>
       <View style={styles.iconHeader}>
@@ -104,7 +63,6 @@ const UtilityNoteScreen = props => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={() =>
-            // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('UtilityNotesNavigator', {
               customer: customer,
               utilityNotes: noteList,
@@ -190,20 +148,22 @@ const UtilityNoteScreen = props => {
                           key={history.timeWithSeconds}
                           style={{marginTop: '5%', marginLeft: '2%'}}>
                           <View style={styles.noteHistoryInfoContainer}>
-                            <Text style={styles.noteHistoryLabel}>Employee: </Text>
+                            <Text style={styles.noteHistoryLabel}>
+                              Employee:{' '}
+                            </Text>
                             <Text>{history.employeeName}</Text>
                           </View>
                           <View style={styles.noteHistoryInfoContainer}>
                             <Text style={styles.noteHistoryLabel}>Date: </Text>
                             <Text>
-                            {history.month +
-                              '-' +
-                              history.day +
-                              '-' +
-                              history.year +
-                              ' ' +
-                              history.time}
-                          </Text>
+                              {history.month +
+                                '-' +
+                                history.day +
+                                '-' +
+                                history.year +
+                                ' ' +
+                                history.time}
+                            </Text>
                           </View>
                         </View>
                         <View style={styles.longDivider} />
@@ -215,10 +175,9 @@ const UtilityNoteScreen = props => {
           </View>
         </View>
       </Modal>
-      <View style={styles.spaceHolder}/>
+      <View style={styles.spaceHolder} />
     </View>
   );
 };
-// End of Home Screen Display
 
 export default UtilityNoteScreen;

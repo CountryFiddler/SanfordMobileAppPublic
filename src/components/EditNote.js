@@ -1,44 +1,16 @@
-/**
- * File Name: HomeScreen.js
- *
- * Author: Ethan Gordash
- * Date: July 1st, 2021
- * Sanford Irrigation Mobile App
- *
- * Description: This screen allows users to search for an existing customer
- * or navigate to the screen to add a new custoemr to the database.
- *
- * Purpose: Provides users with the ability to search for customers in the
- * database and navigate to the screen to add new customers.
- */
-// Import Statements
 import React, {useState} from 'react';
 import {
   Text,
-  StyleSheet,
   View,
-  Button,
-  SafeAreaView,
   TextInput,
   TouchableOpacity,
-  Image,
   ScrollView,
   StatusBar,
-  TouchableWithoutFeedback,
   Alert,
   Platform,
 } from 'react-native';
-import CustomerSearchBar from '../components/CustomerSearchBar';
-import {submitNote, submitTimerInfo} from '../../api/TimerApi';
-import UploadNoteImage from '../components/UploadNoteImage';
-import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 import ImagePicker from 'react-native-image-crop-picker';
-import {
-  addNote,
-  getTimerNotes,
-  updateNote,
-  UploadMedia,
-} from '../../api/UtilityApi';
+import {updateNote} from '../../api/UtilityApi';
 import {storage} from 'react-native-firebase';
 import EditNotePopup from '../components/EditNotePopup';
 import * as Progress from 'react-native-progress';
@@ -52,7 +24,6 @@ import {
   faTimes,
   faCheck,
 } from '@fortawesome/free-solid-svg-icons';
-// Start of Home Screen Display
 const EditNote = props => {
   const customer = props.customer;
   const utilityType = props.utilityType;
@@ -60,7 +31,6 @@ const EditNote = props => {
   const [noteType, setNoteType] = useState(props.noteType);
   const [noteID, setNoteID] = useState(props.noteID);
   const note = props.note;
-  //const utilityNotes = props.utilityNotes;
   const utilityNotes = props.utilityNotes;
   const [employeeName, setEmployeeName] = useState('');
   const [uploading, setUploading] = useState(false);
@@ -76,7 +46,6 @@ const EditNote = props => {
   const [imageRefs, setImageRefs] = useState(props.note.imageRefs);
   const [noteTitlePlaceholder, setNoteTitlePlaceholder] = useState('Title');
   const [noteTextPlaceholder, setNoteTextPlaceholder] = useState('Message');
-  //setOldNote(props.note);
   const submitNote = (
     customer,
     numImages,
@@ -95,7 +64,6 @@ const EditNote = props => {
     utilityNote.noteText = noteText;
     utilityNote.noteID = noteID;
     utilityNote.noteType = noteType;
-    //console.log(videos[0]);
     updateNote(
       customer,
       utilityType,
@@ -106,17 +74,11 @@ const EditNote = props => {
       navigation,
     );
     UploadMedia(images, customer, utility, utilityNote);
-    //mediaUploadCounter = 0
   };
 
   const UploadMedia = async (images, customer, utility, utilityNote) => {
     console.log(uploading);
-    //console.log(media[counter].source);
     var counter = 0;
-    //const [image, setImage] = useState(null);
-    //const [uploading, setUploading] = useState(false);
-    // const [transferred, setTransferred] = useState(0);
-    //console.log(images);
     setMediaType('Image');
     setNumMediaToUpload(images.length);
     setMediaUploadCounter(1);
@@ -124,7 +86,6 @@ const EditNote = props => {
       setTransferred(0);
 
       setUploading(true);
-      //console.log(uploading);
       const uri = images[counter];
       const filename = uri.substring(uri.lastIndexOf('/') + 1);
       const uploadUri =
@@ -163,7 +124,6 @@ const EditNote = props => {
           )
           .putFile(uploadUri);
       }
-      //  console.log(uploadUri);
       // set progress state
       task.on('state_changed', snapshot => {
         setTransferred(
@@ -179,17 +139,10 @@ const EditNote = props => {
       }
 
       counter++;
-     /* Alert.alert(
-        'Photo uploaded!',
-        'Your photo has been uploaded to Firebase Cloud Storage!',
-      );*/
       setUploading(false);
       setMediaUploadCounter(counter + 1);
     }
-
-    //setUploading(false);
     console.log('Done Adding Media');
-    // setImage(null);
     console.log(utilityType);
     console.log(utilityType === 'Timers');
     if (utilityType === 'Timers') {
@@ -228,8 +181,6 @@ const EditNote = props => {
     return contains;
   }
 
-  //const [uploading, setUploading] = useState(false);
-  //const [transferred, setTransferred] = useState(0);
   function selectImage() {
     var areImagesAdded = addedImages;
     ImagePicker.openPicker({
@@ -256,7 +207,6 @@ const EditNote = props => {
             images[i].path.substring(images[i].path.lastIndexOf('/') + 1);
           if (imageRefs.length < 20) {
             console.log(imageRefs.length);
-            //checkDuplicateRefs(imageRefs, numImages, imageRef)
             if (!checkDuplicateImageRefs(imageRef)) {
               setImagesToUpload(prevItems => [...prevItems, images[i].path]);
               setImageRefs(prevItems => [...prevItems, {imageRef}]);
@@ -284,15 +234,13 @@ const EditNote = props => {
       width: 300,
       height: 400,
       cropping: true,
-      //multiple: true,
     }).then(image => {
       var numImagesCounter = numImages;
       let imageRef = 'Customers' + '/' + customer.id + '/';
       if (noteType !== 'GeneralNotes') {
         imageRef = imageRef + utility.utilityType + '/' + utility.id + '/';
       }
-      imageRef = imageRef + noteType; // +
-      //'/';
+      imageRef = imageRef + noteType;
 
       imageRef =
         imageRef +
@@ -337,19 +285,6 @@ const EditNote = props => {
     popupRef.close();
   };
 
-  /** Code for displaying images while uploading
-   *             {images.length
-              ? images.map(image => {
-                  return (
-                    <View style={styles.itemView}>
-                      <Image
-                        source={{uri: image.uri}}
-                        style={styles.imageBox}
-                      />
-                    </View>
-                  );
-                })
-              : null}*/
   console.log(customer.id);
 
   return (
@@ -387,13 +322,8 @@ const EditNote = props => {
             textAlignVertical={'top'}
             multiline={true}
             style={styles.textInput}
-            // Text Input Box for the customer's first name
-            // Text Input Box for the customer's first name
             placeholder={'Name'}
             value={employeeName}
-            // Displays the value that the user is entering into the text input
-            // For example, if the typed 'Bob', then 'Bob' is displayed in the
-            // Text Input Box
             onChangeText={text => setEmployeeName(text)}
           />
         </View>
@@ -404,8 +334,6 @@ const EditNote = props => {
             textAlignVertical={'top'}
             multiline={true}
             style={styles.textInput}
-            // Text Input Box for the customer's first name
-            // Text Input Box for the customer's first name
             placeholder={noteTitlePlaceholder}
             value={noteTitle}
             onChangeText={text => setNoteTitle(text)}
@@ -418,9 +346,6 @@ const EditNote = props => {
             style={styles.textInput}
             textAlignVertical={'top'}
             multiline={true}
-            // Text Input Box for the customer's first name
-            // Text Input Box for the customer's first name
-            // Text Input Box for the customer's last name
             placeholder={noteTextPlaceholder}
             value={noteText}
             onChangeText={text => setNoteText(text)}
@@ -434,10 +359,14 @@ const EditNote = props => {
         <Text style={styles.infoText}>{numImages}</Text>
       </View>
       <StatusBar barStyle={'dark-content'} />
-      <View >
+      <View>
         {uploading ? (
           <View style={styles.editNoteProgressBarContainer}>
-            <Progress.Bar progress={transferred} width={300} color={'#26660b'}/>
+            <Progress.Bar
+              progress={transferred}
+              width={300}
+              color={'#26660b'}
+            />
             <Text style={styles.labelText}>
               {' '}
               {mediaType} {mediaUploadCounter} out of {numMediaToUpload} is
@@ -460,7 +389,7 @@ const EditNote = props => {
                 <Text style={styles.buttonText}>Take a Picture</Text>
               </TouchableOpacity>
             </View>
-            <View style={styles.longDivider}/>
+            <View style={styles.longDivider} />
             <View style={styles.submitDataButtonContainer}>
               <TouchableOpacity
                 onPress={() => props.navigation.goBack()}
@@ -471,12 +400,9 @@ const EditNote = props => {
               <TouchableOpacity
                 style={styles.generalButtonStyle}
                 onPress={() => {
-                  //console.log(noteTitle);
                   {
-                    (noteTitle !== '' && employeeName !== '')
-                      ? //console.log(noteTitle),
-                        //  console.log(currNote.videoRefs[0].videoRef),
-                        submitNote(
+                    noteTitle !== '' && employeeName !== ''
+                      ? submitNote(
                           customer,
                           numImages,
                           imagesToUpload,
@@ -491,24 +417,20 @@ const EditNote = props => {
                           props.navigation,
                         )
                       : Alert.alert(
-                      'Please Enter a Name and a Title',
-                      'All notes must have a name and title',
-                      );
+                          'Please Enter a Name and a Title',
+                          'All notes must have a name and title',
+                        );
                   }
                 }}>
                 <FontAwesomeIcon icon={faCheck} size={40} color={'#26660b'} />
                 <Text style={styles.submitButtonText}>Submit</Text>
               </TouchableOpacity>
             </View>
-
           </ScrollView>
         )}
       </View>
     </View>
   );
 };
-// End of Home Screen Display
-
-// End of Home Screen Display
 
 export default EditNote;

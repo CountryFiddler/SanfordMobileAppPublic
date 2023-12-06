@@ -60,7 +60,6 @@ export function submitTimerChanges(
   });
 }
 
-// Start of Timer adding and getting functions
 export function addTimer(customer, timer, addComplete) {
   const docRef = firebase
     .firestore()
@@ -99,7 +98,6 @@ export function updateTimers(customer, timer) {
       numZones: timer.numZones,
       yearInstalled: timer.yearInstalled,
     })
-    // I think this updates the database quicker???
     .then(snapshot => snapshot.get())
     .catch(error => console.log(error));
 }

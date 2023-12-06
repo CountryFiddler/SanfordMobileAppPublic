@@ -1,48 +1,23 @@
-/**
- * File Name: HomeScreen.js
- *
- * Author: Ethan Gordash
- * Date: July 1st, 2021
- * Sanford Irrigation Mobile App
- *
- * Description: This screen allows users to search for an existing customer
- * or navigate to the screen to add a new custoemr to the database.
- *
- * Purpose: Provides users with the ability to search for customers in the
- * database and navigate to the screen to add new customers.
- */
-// Import Statements
 import React, {useState} from 'react';
 import {
   Text,
   StyleSheet,
   View,
-  Button,
   SafeAreaView,
   TextInput,
   TouchableOpacity,
-  Image,
   ScrollView,
   StatusBar,
   TouchableWithoutFeedback,
   Alert,
   Platform,
 } from 'react-native';
-import CustomerSearchBar from '../components/CustomerSearchBar';
-import {submitNote, submitTimerInfo} from '../../api/TimerApi';
-import UploadNoteImage from '../components/UploadNoteImage';
-import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 import ImagePicker from 'react-native-image-crop-picker';
-import {
-  addNote,
-  getTimerNotes,
-  updateNote,
-  UploadMedia,
-} from '../../api/UtilityApi';
+import {addNote, updateNote} from '../../api/UtilityApi';
 import {storage} from 'react-native-firebase';
 import EditNotePopup from '../components/EditNotePopup';
 import * as Progress from 'react-native-progress';
-// Start of Home Screen Display
+
 const AddOrEditNote = props => {
   const currNote = {
     numImages: 0,
@@ -64,7 +39,6 @@ const AddOrEditNote = props => {
   const noteType = props.noteType;
   const noteID = props.noteID;
   const note = props.note;
-  //const utilityNotes = props.utilityNotes;
   const utilityNotes = props.utilityNotes;
   const [uploading, setUploading] = useState(false);
   const [transferred, setTransferred] = useState(0);
@@ -86,7 +60,6 @@ const AddOrEditNote = props => {
   const [testURI, setTestURI] = useState('');
   const [source, setSource] = useState('');
   if (!isAddNote) {
-    //setOldNote(props.note);
     currNote.numImages = props.note.numImages;
     currNote.numVideos = props.note.numVideos;
     currNote.titlePlaceholder = props.note.title;
@@ -121,7 +94,6 @@ const AddOrEditNote = props => {
     utilityNote.noteText = noteText;
     utilityNote.noteID = noteID;
     utilityNote.noteType = noteType;
-    //console.log(videos[0]);
     if (isAddNote) {
       utilityNote.noteID = addNote(
         customer,
@@ -134,10 +106,7 @@ const AddOrEditNote = props => {
         numVideos,
         navigation,
       );
-      //console.log(videoRefs[0].videoRef);
-      //console.log(utilityNote.noteID);
       for (var i = 0; i < images.length; i++) {
-        //console.log('Brewers Vs. Cardinals');
         const uri = images[i];
         imageRefs[i].imageRef =
           imageRefs[i].imageRef +
@@ -168,8 +137,6 @@ const AddOrEditNote = props => {
         numVideos,
         navigation,
       );
-      // Get Single Note
-      // Set The Remaining ImageRefs and VideoRefs
     } else {
       updateNote(
         customer,
@@ -184,7 +151,6 @@ const AddOrEditNote = props => {
       );
     }
     UploadMedia(images, videos, customer, utility, utilityNote);
-    //mediaUploadCounter = 0
   };
 
   const UploadMedia = async (
@@ -195,12 +161,7 @@ const AddOrEditNote = props => {
     utilityNote,
   ) => {
     console.log(uploading);
-    //console.log(media[counter].source);
     var counter = 0;
-    //const [image, setImage] = useState(null);
-    //const [uploading, setUploading] = useState(false);
-    // const [transferred, setTransferred] = useState(0);
-    //console.log(images);
     setMediaType('Image');
     setNumMediaToUpload(images.length);
     setMediaUploadCounter(1);
@@ -208,7 +169,6 @@ const AddOrEditNote = props => {
       setTransferred(0);
 
       setUploading(true);
-      //console.log(uploading);
       const uri = images[counter];
       const filename = uri.substring(uri.lastIndexOf('/') + 1);
       const uploadUri =
@@ -247,8 +207,6 @@ const AddOrEditNote = props => {
           )
           .putFile(uploadUri);
       }
-      //  console.log(uploadUri);
-      // set progress state
       task.on('state_changed', snapshot => {
         setTransferred(
           Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 10000,
@@ -272,10 +230,6 @@ const AddOrEditNote = props => {
     }
 
     counter = 0;
-    //const [image, setImage] = useState(null);
-    //const [uploading, setUploading] = useState(false);
-    // const [transferred, setTransferred] = useState(0);
-    //console.log(images);
     setMediaType('Video');
     setNumMediaToUpload(videos.length);
     setMediaUploadCounter(1);
@@ -283,7 +237,6 @@ const AddOrEditNote = props => {
       setTransferred(0);
 
       setUploading(true);
-      //  console.log(uploading);
       const uri = videos[counter];
       const filename = uri.substring(uri.lastIndexOf('/') + 1);
       const uploadUri =
@@ -305,14 +258,11 @@ const AddOrEditNote = props => {
             filename,
         )
         .putFile(uploadUri);
-      // console.log(uploadUri);
-      // set progress state
       task.on('state_changed', snapshot => {
         setTransferred(
           Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 10000,
         );
       });
-      // console.log(uploading);
       try {
         await task;
       } catch (e) {
@@ -328,9 +278,7 @@ const AddOrEditNote = props => {
       setUploading(false);
       setMediaUploadCounter(counter + 1);
     }
-    //setUploading(false);
     console.log('Done Adding Media');
-    // setImage(null);
     console.log(utilityType);
     console.log(utilityType === 'Timers');
     if (utilityType === 'Timers') {
@@ -401,7 +349,6 @@ const AddOrEditNote = props => {
       currNote.numImages = numImages;
       console.log(currNote.numImages);
     }
-    //console.log(videoRefs[0].videoRef);
     if (addedVideos) {
       currNote.videoRefs = videoRefs;
       currNote.numVideos = numVideos;
@@ -410,8 +357,6 @@ const AddOrEditNote = props => {
     console.log(imagesToUpload.length);
     currNote.videos = videosToUpload;
   }
-  //const [uploading, setUploading] = useState(false);
-  //const [transferred, setTransferred] = useState(0);
   function selectImage() {
     var areImagesAdded = addedImages;
     ImagePicker.openPicker({
@@ -428,8 +373,7 @@ const AddOrEditNote = props => {
           if (noteType !== 'GeneralNotes') {
             imageRef = imageRef + utility.utilityType + '/' + utility.id + '/';
           }
-          imageRef = imageRef + noteType; // +
-          //'/';
+          imageRef = imageRef + noteType;
           if (!isAddNote) {
             imageRef =
               imageRef +
@@ -448,7 +392,6 @@ const AddOrEditNote = props => {
           }
           if (imageRefs.length < 20) {
             console.log(imageRefs.length);
-            //checkDuplicateRefs(imageRefs, numImages, imageRef)
             if (!checkDuplicateImageRefs(imageRef)) {
               setImagesToUpload(prevItems => [...prevItems, images[i].path]);
               setImageRefs(prevItems => [...prevItems, {imageRef}]);
@@ -476,7 +419,6 @@ const AddOrEditNote = props => {
       mediaType: 'video',
       width: 300,
       height: 400,
-      //cropping: true,
       multiple: true,
     })
       .then(videos => {
@@ -491,8 +433,7 @@ const AddOrEditNote = props => {
             '/' +
             utility.id +
             '/' +
-            noteType; // +
-          //'/';
+            noteType;
           if (!isAddNote) {
             videoRef =
               videoRef +
@@ -511,7 +452,6 @@ const AddOrEditNote = props => {
           }
           if (videoRefs.length < 20) {
             console.log(videoRefs.length);
-            //checkDuplicateRefs(imageRefs, numImages, imageRef)
             if (!checkDuplicateVideoRefs(videoRef) && !isAddNote) {
               console.log('Brewers');
               setVideosToUpload(prevItems => [...prevItems, videos[i].path]);
@@ -539,15 +479,13 @@ const AddOrEditNote = props => {
       width: 300,
       height: 400,
       cropping: true,
-      //multiple: true,
     }).then(image => {
       var numImagesCounter = numImages;
       let imageRef = 'Customers' + '/' + customer.id + '/';
       if (noteType !== 'GeneralNotes') {
         imageRef = imageRef + utility.utilityType + '/' + utility.id + '/';
       }
-      imageRef = imageRef + noteType; // +
-      //'/';
+      imageRef = imageRef + noteType;
       if (!isAddNote) {
         imageRef =
           imageRef +
@@ -583,8 +521,6 @@ const AddOrEditNote = props => {
       mediaType: 'video',
       width: 300,
       height: 400,
-      //cropping: true,
-      //multiple: true,
     }).then(video => {
       var numVideosCounter = props.numVideos;
       setVideosToUpload(prevItems => [...prevItems, video.path]);
@@ -597,8 +533,7 @@ const AddOrEditNote = props => {
         '/' +
         utility.id +
         '/' +
-        noteType; // +
-      //'/';
+        noteType;
       if (!isAddNote) {
         videoRef =
           videoRef +
@@ -618,133 +553,11 @@ const AddOrEditNote = props => {
         numVideosCounter++;
         setNumImages(numVideosCounter);
         setAddedVideos(true);
-        //console.log(addedImages);
       }
       props.onChange?.(video);
     });
   }
-  /*const selectImageFromCamera = () => {
-    const options = {
-      maxWidth: 2000,
-      maxHeight: 2000,
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
-    };
-    launchCamera(options, response => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        const source = {uri: response.assets[0].uri};
-        const {uri} = source;
-        setImagesToUpload(prevItems => [...prevItems, {source}]);
-        //TODO Change Image Ref to have the utility/utility notes
-        let imageRef =
-          'Customers' +
-          '/' +
-          customer.id +
-          '/' +
-          utility.utilityType +
-          '/' +
-          utility.id +
-          '/' +
-          noteType; // +
-        //'/';
-        if (!isAddNote) {
-          imageRef =
-            imageRef +
-            '/' +
-            noteID +
-            '/' +
-            uri.substring(uri.lastIndexOf('/') + 1);
-        }
-        //if (!addedImages && props.note.images )
-        if (!isAddNote) {
-          if (!addedImages && props.note.imageRefs.length > 0) {
-            setImageRefs(props.note.imageRefs);
-            //setNumImages(numImages + props.note.numImages);
-            console.log('Joey Tomatoes');
-            console.log(numImages);
-            setAddedImages(true);
-          }
-        }
-        if (imagesToUpload.length < 20) {
-          setImageRefs(prevItems => [...prevItems, {imageRef}]);
-          //currNote.imageRefs = prevItems => [...prevItems, {imageRef}];
-          setNumImages(numImages + 1);
-          //console.log(numImages);
-          setAddedImages(true);
-        }
-      }
-    });
-  };*/
 
-  /*const selectVideo = () => {
-    const options = {
-      maxWidth: 2000,
-      maxHeight: 2000,
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
-    };
-    launchImageLibrary({mediaType: 'video'}, response => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        const source = {uri: response.assets[0].uri};
-        const {uri} = source;
-        setVideosToUpload(prevItems => [...prevItems, response.assets[0].uri]);
-        //TODO Change Image Ref to have the utility/utility notes
-        let videoRef =
-          'Customers' +
-          '/' +
-          customer.id +
-          '/' +
-          utility.utilityType +
-          '/' +
-          utility.id +
-          '/' +
-          noteType; // +
-        //'/';
-        if (!isAddNote) {
-          videoRef =
-            videoRef +
-            '/' +
-            noteID +
-            '/' +
-            uri.substring(uri.lastIndexOf('/') + 1);
-        }
-        if (!isAddNote) {
-          if (!addedVideos && props.note.videoRefs !== null) {
-            setVideoRefs(props.note.videoRefs);
-            //setNumVideos(props.note.numVideos);
-            setAddedVideos(true);
-          }
-        }
-        if (videosToUpload.length < 20) {
-          setVideoRefs(prevItems => [...prevItems, {videoRef}]);
-          setNumVideos(numVideos + 1);
-          console.log(numVideos);
-          setAddedVideos(true);
-          //currNote.videoRefs = prevItems => [...prevItems, {videoRef}];
-          //currNote.numVideos = currNote.numVideos + 1;
-          //console.log(currNote.videoRefs);
-        }
-      }
-    });
-  };*/
-  // Start of Add Timer Screen Display
-  //const [numZones, setNumZones] = useState(null);
   const popupList = [
     {
       id: 1,
@@ -767,34 +580,15 @@ const AddOrEditNote = props => {
     popupRef.close();
   };
 
-  /** Code for displaying images while uploading
-   *             {images.length
-              ? images.map(image => {
-                  return (
-                    <View style={styles.itemView}>
-                      <Image
-                        source={{uri: image.uri}}
-                        style={styles.imageBox}
-                      />
-                    </View>
-                  );
-                })
-              : null}*/
-
   return (
     <ScrollView>
       <View>
         <TextInput
-          // Text Input Box for the customer's first name
           placeholder={currNote.titlePlaceholder}
           value={noteTitle}
-          // Displays the value that the user is entering into the text input
-          // For example, if the typed 'Bob', then 'Bob' is displayed in the
-          // Text Input Box
           onChangeText={text => setNoteTitle(text)}
         />
         <TextInput
-          // Text Input Box for the customer's last name
           placeholder={currNote.noteTextPlaceholder}
           value={noteText}
           onChangeText={text => setNoteText(text)}
@@ -822,9 +616,7 @@ const AddOrEditNote = props => {
             ))
           : null}
         <SafeAreaView style={styles.container}>
-          <TouchableOpacity
-            style={styles.selectButton}
-            onPress={selectImage}>
+          <TouchableOpacity style={styles.selectButton} onPress={selectImage}>
             <Text style={styles.buttonText}>Pick an image</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -846,16 +638,13 @@ const AddOrEditNote = props => {
               <TouchableOpacity
                 style={styles.uploadButton}
                 onPress={() => {
-                  //console.log(noteTitle);
                   {
                     (currNote.title = noteTitle),
                       currNote.title !== '' || !isAddNote
-                        ? //console.log(noteTitle),
+                        ?
                           (checkNullEntries(),
-                          //setUploading(true),
                           console.log('Giants' + addedVideos),
                           setMedia(),
-                          //  console.log(currNote.videoRefs[0].videoRef),
                           submitNote(
                             isAddNote,
                             customer,
@@ -888,12 +677,9 @@ const AddOrEditNote = props => {
     </ScrollView>
   );
 };
-// End of Home Screen Display
 
 const styles = StyleSheet.create({
   container: {
-    // Dont have flex 1, this messes up Android
-    //flex: 1,
     alignItems: 'center',
     backgroundColor: '#bbded6',
   },
@@ -932,6 +718,5 @@ const styles = StyleSheet.create({
     height: 300,
   },
 });
-// End of Home Screen Display
 
 export default AddOrEditNote;

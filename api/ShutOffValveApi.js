@@ -53,8 +53,7 @@ export function submitShutOffChanges(
     navigation: navigation,
   });
 }
-
-// Start of Timer adding and getting functions
+s
 export function addShutOff(customer, shutoff, addComplete) {
   const docRef = firebase.firestore().collection('Customers').doc(customer.id);
   console.log(customer.id);
@@ -88,7 +87,6 @@ export function updateShutOffs(customer, shutoff) {
       backFlow: shutoff.backFlow,
       yearInstalled: shutoff.yearInstalled,
     })
-    // I think this updates the database quicker???
     .then(snapshot => snapshot.get())
     .catch(error => console.log(error));
 }

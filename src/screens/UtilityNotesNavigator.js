@@ -1,29 +1,11 @@
-/**
- * File Name: HomeScreen.js
- *
- * Author: Ethan Gordash
- * Date: July 1st, 2021
- * Sanford Irrigation Mobile App
- *
- * Description: This screen allows users to search for an existing customer
- * or navigate to the screen to add a new custoemr to the database.
- *
- * Purpose: Provides users with the ability to search for customers in the
- * database and navigate to the screen to add new customers.
- */
-// Import Statements
-import React, {useState} from 'react';
-import {Text, StyleSheet, View, Button, TouchableOpacity} from 'react-native';
-import CustomerSearchBar from '../components/CustomerSearchBar';
+import React from 'react';
+import {Text, View, TouchableOpacity} from 'react-native';
 import NotesNavigator from '../components/NotesNavigator';
 import Icons from '../components/Icons';
-import UtilitySelection from '../components/UtilitySelection';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faHome, faPlus, faUser} from '@fortawesome/free-solid-svg-icons';
 import {styles} from '../../api/stylesApi';
-import {faStickyNote} from '@fortawesome/free-regular-svg-icons';
 
-// Start of Home Screen Display
 const UtilityNotesNavigatorScreen = props => {
   const headerIcon = props.navigation.getParam('headerIcon');
   const utilityIcon = props.navigation.getParam('utilityIcon');
@@ -65,7 +47,6 @@ const UtilityNotesNavigatorScreen = props => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={() =>
-            // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('AddNote', {
               customer: customer,
               utilityType: utility.utilityType,
@@ -119,5 +100,4 @@ const UtilityNotesNavigatorScreen = props => {
     </View>
   );
 };
-// End of Home Screen Display
 export default UtilityNotesNavigatorScreen;

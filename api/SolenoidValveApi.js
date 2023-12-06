@@ -60,17 +60,20 @@ export function submitSolenoidValvesChanges(
   });
 }
 
-// Start of Timer adding and getting functions
 export function addSolenoidValves(customer, solenoidValves, addComplete) {
+  // Create a reference to a document that contains the id of the customer being
+  // looked up in the database.
   const docRef = firebase
     .firestore()
     .collection('Customers')
     .doc(customer.id);
   console.log(customer.id);
+  // navigate to the SolenoidValves collection
   docRef
     .collection('SolenoidValves')
     .doc()
     .set({
+      // generate a new set of solenoid valves in firebase
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       location: solenoidValves.location,
       type: solenoidValves.type,
@@ -81,6 +84,7 @@ export function addSolenoidValves(customer, solenoidValves, addComplete) {
     })
     .then(snapshot => snapshot.get())
     .then(customerData => addComplete(customerData.data()))
+    // Catches any error and logs what the error is to the console.
     .catch(error => console.log(error));
 }
 
@@ -99,7 +103,6 @@ export function updateSolenoidValves(customer, solenoidValves) {
       zoneNumbers: solenoidValves.zoneNumbers,
       yearInstalled: solenoidValves.yearInstalled,
     })
-    // I think this updates the database quicker???
     .then(snapshot => snapshot.get())
     .catch(error => console.log(error));
 }

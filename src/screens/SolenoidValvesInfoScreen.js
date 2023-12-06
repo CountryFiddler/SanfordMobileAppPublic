@@ -1,42 +1,24 @@
-/**
- * File Name: HomeScreen.js
- *
- * Author: Ethan Gordash
- * Date: July 1st, 2021
- * Sanford Irrigation Mobile App
- *
- * Description: This screen allows users to search for an existing customer
- * or navigate to the screen to add a new custoemr to the database.
- *
- * Purpose: Provides users with the ability to search for customers in the
- * database and navigate to the screen to add new customers.
- */
-// Import Statements
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   Text,
   StyleSheet,
   View,
-  Button,
   TouchableOpacity,
   Image,
   ScrollView,
 } from 'react-native';
 import {getNotes} from '../../api/UtilityApi';
-import {getSolenoidValvesNotes} from '../../api/SolenoidValveApi';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
   faHome,
   faPencilAlt,
   faSearch,
   faUser,
-  faMapMarkerAlt,
   faRuler,
 } from '@fortawesome/free-solid-svg-icons';
-import {faStickyNote, faCalendarAlt} from '@fortawesome/free-regular-svg-icons';
+import {faStickyNote} from '@fortawesome/free-regular-svg-icons';
 import {styles} from '../../api/stylesApi';
 import Icons from '../components/Icons';
-// Start of Home Screen Display
 const SolenoidValvesInfoScreen = props => {
   const customer = props.navigation.getParam('customer');
   const solenoidValves = props.navigation.getParam('utility');
@@ -148,7 +130,6 @@ const SolenoidValvesInfoScreen = props => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
-            // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('UtilityNotesNavigator', {
               headerIcon: 'stickyNote',
               customer: customer,
@@ -173,7 +154,6 @@ const SolenoidValvesInfoScreen = props => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={() =>
-            // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('UtilitySelectionScreen', {
               customer: customer,
               headerIcon: 'solenoidValve',
@@ -218,8 +198,6 @@ const SolenoidValvesInfoScreen = props => {
 // Start of StylingSheet
 const solenoidValveInfoStyles = StyleSheet.create({
   solenoidValveInfoContainer: {
-    //    paddingTop: 120,
-    //paddingBottom: 120,
     borderBottomWidth: 3,
     borderBottomColor: '#26660b',
     borderTopWidth: 3,
@@ -240,7 +218,6 @@ const solenoidValveInfoStyles = StyleSheet.create({
   },
   spaceHolder: {
     marginBottom: '10%',
-    //height: 250,
   },
 });
 

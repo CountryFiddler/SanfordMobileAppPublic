@@ -1,31 +1,11 @@
-/**
- * File Name: HomeScreen.js
- *
- * Author: Ethan Gordash
- * Date: July 1st, 2021
- * Sanford Irrigation Mobile App
- *
- * Description: This screen allows users to search for an existing customer
- * or navigate to the screen to add a new custoemr to the database.
- *
- * Purpose: Provides users with the ability to search for customers in the
- * database and navigate to the screen to add new customers.
- */
-// Import Statements
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   Text,
-  StyleSheet,
   View,
-  Button,
   ScrollView,
   TouchableOpacity,
   Image,
 } from 'react-native';
-import CustomerSearchBar from '../components/CustomerSearchBar';
-import BackHandler from 'react-native/Libraries/Utilities/BackHandler';
-import useFocusEffect from '@react-navigation/native';
-import {getTimerNotes} from '../../api/TimerApi';
 import {getNotes} from '../../api/UtilityApi';
 import {styles} from '../../api/stylesApi';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -37,7 +17,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {faStickyNote} from '@fortawesome/free-regular-svg-icons';
 import Icons from '../components/Icons';
-// Start of Home Screen Display
+
 const TimerInfoScreen = props => {
   const customer = props.navigation.getParam('customer');
   const timer = props.navigation.getParam('utility');
@@ -139,7 +119,6 @@ const TimerInfoScreen = props => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
-            // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('UtilityNotesNavigator', {
               headerIcon: 'stickyNote',
               utilityIcon: 'timer',
@@ -164,7 +143,6 @@ const TimerInfoScreen = props => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={() =>
-            // Pass navigation and customer as props to the Edit Customer Screen
             props.navigation.navigate('UtilitySelectionScreen', {
               customer: customer,
               headerIcon: 'timer',
@@ -204,29 +182,5 @@ const TimerInfoScreen = props => {
     </View>
   );
 };
-// End of Home Screen Display
-
-// Start of StylingSheet
-const timerInfoStyles = StyleSheet.create({
-  headerStyle: {
-    borderWidth: 1,
-    borderColor: 'black',
-  },
-  homePageContainer: {
-    flex: 1,
-  },
-  textStyle: {
-    fontSize: 30,
-    textAlign: 'center',
-    //alignSelf: 'center',
-  },
-  addCustomerButton: {
-    //position: 'absolute',
-    marginTop: 50,
-  },
-  spaceHolder: {
-    // marginBottom: '20%',
-  },
-});
 
 export default TimerInfoScreen;

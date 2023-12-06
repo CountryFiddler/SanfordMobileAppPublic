@@ -1,39 +1,14 @@
-/**
- * File Name: HomeScreen.js
- *
- * Author: Ethan Gordash
- * Date: July 1st, 2021
- * Sanford Irrigation Mobile App
- *
- * Description: This screen allows users to search for an existing customer
- * or navigate to the screen to add a new custoemr to the database.
- *
- * Purpose: Provides users with the ability to search for customers in the
- * database and navigate to the screen to add new customers.
- */
-// Import Statements
 import React, {useState} from 'react';
 import {
   Text,
-  StyleSheet,
   View,
-  Button,
   Image,
   ScrollView,
-  render,
-  StatusBar,
-  SafeAreaView,
-  TouchableWithoutFeedback,
   Modal,
   TouchableOpacity,
 } from 'react-native';
-import CustomerSearchBar from '../components/CustomerSearchBar';
 import {firestore, storage} from 'react-native-firebase';
-import {getImageURL, updateNote} from '../../api/FirestoreApi';
-import EditNotePopup from '../components/EditNotePopup';
 import {deleteNoteMedia} from '../../api/UtilityApi';
-import Video from 'react-native-video';
-import CheckBox from 'react-native-checkbox';
 import {ReactNativeZoomableView} from '@dudigital/react-native-zoomable-view';
 import {styles} from '../../api/stylesApi';
 import Icons from './Icons';
@@ -42,7 +17,6 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCheck, faTimes, faTrash} from '@fortawesome/free-solid-svg-icons';
 import {faTrashAlt} from '@fortawesome/free-regular-svg-icons';
 
-// Start of Home Screen Display
 const NoteMedia = props => {
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
@@ -136,9 +110,6 @@ const NoteMedia = props => {
   const note = props.note;
   const isDeleteMedia = props.isDeleteMedia;
   const navigation = props.navigation;
-  // const numImages = props.numImages;
-  //console.log('numImages = ' + numImages);
-  // toString might be just it
 
   if (note.imageRefs.length > 0 && !image1Render) {
     setImage1Render(true);
@@ -330,7 +301,6 @@ const NoteMedia = props => {
   }
 
   function displayImage1() {
-    //<Image source={{uri: image1}} style={{width: 20, height: 300}} />
     if (note.imageRefs.length > 0) {
       return (
         <View>
@@ -385,7 +355,6 @@ const NoteMedia = props => {
     }
   }
   function displayImage2() {
-    //<Image source={{uri: image2}} style={{width: 200, height: 300}} />
     if (note.imageRefs.length > 1) {
       return (
         <View>
@@ -438,28 +407,9 @@ const NoteMedia = props => {
         </View>
       );
     }
-    /*
-              <Modal visible={zoomIn === true} animated>
-            <View>
-              <ReactNativeZoomableView
-                maxZoom={1.5}
-                minZoom={1}
-                zoomStep={0.5}
-                initialZoom={1}
-                bindToBorders={true}
-                captureEvent={true}>
-                <Image
-                  source={require('/Users/alexandergordash/WebstormProjects/SanfordIrrigationMobileApp/src/icons/933845EB-50DC-4C71-B619-8AAE39168A86_1_105_c.jpeg')}
-                  style={{width: 200, height: 200}}
-                />
-              </ReactNativeZoomableView>
-            </View>
-          </Modal>
-     */
   }
   function displayImage3() {
     if (note.imageRefs.length > 2) {
-      //<Image source={{uri: image3}} style={{width: 200, height: 300}} />
       return (
         <View>
           {isDeleteMedia ? (
@@ -513,7 +463,6 @@ const NoteMedia = props => {
     }
   }
   function displayImage4() {
-    //<Image source={{uri: image4}} style={{width: 200, height: 300}} />;
     if (note.imageRefs.length > 3) {
       return (
         <View>
@@ -568,7 +517,6 @@ const NoteMedia = props => {
     }
   }
   function displayImage5() {
-    //<Image source={{uri: image5}} style={{width: 200, height: 300}} />
     if (note.imageRefs.length > 4) {
       return (
         <View>
@@ -623,7 +571,6 @@ const NoteMedia = props => {
     }
   }
   function displayImage6() {
-    //<Image source={{uri: image6}} style={{width: 200, height: 300}} />
     if (note.imageRefs.length > 5) {
       return (
         <View>
@@ -678,7 +625,6 @@ const NoteMedia = props => {
     }
   }
   function displayImage7() {
-    //<Image source={{uri: image7}} style={{width: 200, height: 300}} />
     if (note.imageRefs.length > 6) {
       return (
         <View>
@@ -733,7 +679,6 @@ const NoteMedia = props => {
     }
   }
   function displayImage8() {
-    //<Image source={{uri: image8}} style={{width: 200, height: 300}} />
     if (note.imageRefs.length > 7) {
       return (
         <View>
@@ -788,7 +733,6 @@ const NoteMedia = props => {
     }
   }
   function displayImage9() {
-    //<Image source={{uri: image9}} style={{width: 200, height: 300}} />
     if (note.imageRefs.length > 8) {
       return (
         <View>
@@ -843,7 +787,6 @@ const NoteMedia = props => {
     }
   }
   function displayImage10() {
-    //<Image source={{uri: image10}} style={{width: 200, height: 300}} />
     if (note.imageRefs.length > 9) {
       return (
         <View>
@@ -901,7 +844,6 @@ const NoteMedia = props => {
     }
   }
   function displayImage11() {
-    // <Image source={{uri: image11}} style={{width: 200, height: 300}} />
     if (note.imageRefs.length > 10) {
       return (
         <View>
@@ -959,7 +901,6 @@ const NoteMedia = props => {
     }
   }
   function displayImage12() {
-    //<Image source={{uri: image12}} style={{width: 200, height: 300}} />
     if (note.imageRefs.length > 11) {
       return (
         <View>
@@ -1017,7 +958,6 @@ const NoteMedia = props => {
     }
   }
   function displayImage13() {
-    //<Image source={{uri: image13}} style={{width: 200, height: 300}} />
     if (note.imageRefs.length > 12) {
       return (
         <View>
@@ -1075,7 +1015,6 @@ const NoteMedia = props => {
     }
   }
   function displayImage14() {
-    //<Image source={{uri: image14}} style={{width: 200, height: 300}} />
     if (note.imageRefs.length > 13) {
       return (
         <View>
@@ -1133,7 +1072,6 @@ const NoteMedia = props => {
     }
   }
   function displayImage15() {
-    //<Image source={{uri: image15}} style={{width: 200, height: 300}} />
     if (note.imageRefs.length > 14) {
       return (
         <View>
@@ -1191,7 +1129,6 @@ const NoteMedia = props => {
     }
   }
   function displayImage16() {
-    //<Image source={{uri: image16}} style={{width: 200, height: 300}} />
     if (note.imageRefs.length > 15) {
       return (
         <View>
@@ -1249,7 +1186,6 @@ const NoteMedia = props => {
     }
   }
   function displayImage17() {
-    //<Image source={{uri: image17}} style={{width: 200, height: 300}} />
     if (note.imageRefs.length > 16) {
       return (
         <View>
@@ -1307,7 +1243,6 @@ const NoteMedia = props => {
     }
   }
   function displayImage18() {
-    //<Image source={{uri: image18}} style={{width: 200, height: 300}} />
     if (note.imageRefs.length > 17) {
       return (
         <View>
@@ -1365,7 +1300,6 @@ const NoteMedia = props => {
     }
   }
   function displayImage19() {
-    //<Image source={{uri: image19}} style={{width: 200, height: 300}} />
     if (note.imageRefs.length > 18) {
       return (
         <View>
@@ -1423,7 +1357,6 @@ const NoteMedia = props => {
     }
   }
   function displayImage20() {
-    //<Image source={{uri: image20}} style={{width: 200, height: 300}} />
     if (note.imageRefs.length > 19) {
       return (
         <View>
@@ -1487,7 +1420,6 @@ const NoteMedia = props => {
       if (imageRef === imagesToDelete[i]) {
         console.log('Undelete');
         imagesToDelete.splice(i, 1);
-        //console.log(imagesToDelete.length);
         isInImagesToDelete = true;
       }
     }
@@ -1495,25 +1427,7 @@ const NoteMedia = props => {
       setImagesToDelete(prevItems => [...prevItems, imageRef]);
       console.log('Delete ' + imagesToDelete.length);
     }
-    //console.log('Brewers ' + imagesToDelete.length);
-    /*isInImagesToDelete = false;
-    for (var i = 0; i < imagesToDelete.length; i++) {
-      if (imageRef === note.videos[i].videoRef) {
-        imagesToDelete.splice(i, 1, imageRef);
-        isInImagesToDelete = true;
-      }
-    }
-    if (!isInImagesToDelete) {
-      setImagesToDelete(prevItems => [...prevItems, imageRef]);
-      //console.log(imagesToDelete);
-    }*/
   }
-
-  //console.log(testImage);
-  //imageURL = getImageURL(note.images[0].imageRef);
-  // console.log(note.images[0].imageRef);
-  // getURLS();
-  //console.log('Num Image Refs: ' + note.imageRefs.length);
   return (
     <View>
       {isDeleteMedia ? (
@@ -1651,6 +1565,5 @@ const NoteMedia = props => {
     </View>
   );
 };
-// End of Home Screen Display
 
 export default NoteMedia;

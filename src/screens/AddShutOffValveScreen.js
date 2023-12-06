@@ -1,26 +1,9 @@
-/**
- * File Name: HomeScreen.js
- *
- * Author: Ethan Gordash
- * Date: July 1st, 2021
- * Sanford Irrigation Mobile App
- *
- * Description: This screen allows users to search for an existing customer
- * or navigate to the screen to add a new custoemr to the database.
- *
- * Purpose: Provides users with the ability to search for customers in the
- * database and navigate to the screen to add new customers.
- */
-// Import Statements
 import React, {useState} from 'react';
 import {
-  StyleSheet,
   View,
-  Button,
   TextInput,
   SafeAreaView,
   Alert,
-  Image,
   Text,
   TouchableOpacity,
   ScrollView,
@@ -28,11 +11,9 @@ import {
 import {submitShutOffInfo} from '../../api/ShutOffValveApi';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons';
-import {submitTimerInfo} from '../../api/TimerApi';
 import {styles} from '../../api/stylesApi';
 import Icons from '../components/Icons';
 
-// Start of Add Timer Screen Display
 const AddShutOffValveScreen = props => {
   const customer = props.navigation.getParam('customer');
   const shutOffs = props.navigation.getParam('utilities');
@@ -87,12 +68,8 @@ const AddShutOffValveScreen = props => {
             <Text style={styles.labelText}> Location: </Text>
             <TextInput
               style={styles.infoText}
-              // Text Input Box for the customer's first name
               placeholder={'Location'}
               value={location}
-              // Displays the value that the user is entering into the text input
-              // For example, if the typed 'Bob', then 'Bob' is displayed in the
-              // Text Input Box
               onChangeText={text => setLocation(text)}
             />
           </View>
@@ -102,12 +79,8 @@ const AddShutOffValveScreen = props => {
             <Text style={styles.labelText}> Backflow: </Text>
             <TextInput
               style={styles.infoText}
-              // Text Input Box for the customer's first name
               placeholder={'Yes/No'}
               value={backFlow}
-              // Displays the value that the user is entering into the text input
-              // For example, if the typed 'Bob', then 'Bob' is displayed in the
-              // Text Input Box
               onChangeText={text => setBackFlow(text)}
             />
           </View>
@@ -117,12 +90,8 @@ const AddShutOffValveScreen = props => {
             <Text style={styles.labelText}> Year Installed: </Text>
             <TextInput
               style={styles.infoText}
-              // Text Input Box for the customer's first name
               placeholder={'Year Installed'}
               value={yearInstalled}
-              // Displays the value that the user is entering into the text input
-              // For example, if the typed 'Bob', then 'Bob' is displayed in the
-              // Text Input Box
               onChangeText={text => setYearInstalled(text)}
             />
           </View>
@@ -131,7 +100,6 @@ const AddShutOffValveScreen = props => {
         <View style={styles.submitDataButtonContainer}>
           <TouchableOpacity
             onPress={() =>
-              // Pass navigation and customer as props to the Edit Customer Screen
               props.navigation.navigate('UtilitySelectionScreen', {
                 customer: customer,
                 utilityType: 'Timers',
@@ -169,8 +137,5 @@ const AddShutOffValveScreen = props => {
     </SafeAreaView>
   );
 };
-// End of Home Screen Display
-
-// Start of StylingSheet
 
 export default AddShutOffValveScreen;

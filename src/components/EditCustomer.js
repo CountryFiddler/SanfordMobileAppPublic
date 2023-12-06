@@ -1,35 +1,13 @@
-/**
- * File Name: AddOrEditCustomer.js
- *
- * Author: Ethan Gordash
- * Date: July 1st, 2021
- * Sanford Irrigation Mobile App
- *
- * Description: This class provides the functionality for a user to either
- * add a customer to the database or edit an existing customer in the database.
- * The information that the user can edit will pertain to the customers name
- * and address. An important part of this class is the props AddScreen and EditScreen.
- * If AddScreen is true, then this class performs the operations to add a customer
- * to the database. However, if EditScreen is true, then the class performs
- * operations to edit an existing customer in the database.
- *
- * Purpose: Allows users to add or edit customers in the firestore database
- */
-// Import Statements
 import {
-  StyleSheet,
-  Button,
   View,
   Text,
   SafeAreaView,
   TextInput,
-  TouchableOpacity, Alert,
-} from "react-native";
-import React, {Component, useState} from 'react';
-import {addCustomer, updateCustomer} from '../../api/FirestoreApi';
-import PhoneInput from 'react-native-phone-number-input';
-import PhoneInputWithCountryDefault from 'react-phone-number-input/modules/PhoneInputWithCountryDefault';
-import PhoneInputWithCountry from 'react-phone-number-input/modules/PhoneInputWithCountry';
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
+import React, {useState} from 'react';
+import {updateCustomer} from '../../api/FirestoreApi';
 import {styles} from '../../api/stylesApi';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
@@ -42,7 +20,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {checkValidPhoneNumber} from '../../api/CustomerApi';
 import Icons from './Icons';
-import {getSolenoidValvesNotes} from '../../api/SolenoidValveApi';
 import {getNotes} from '../../api/UtilityApi';
 
 const EditCustomer = props => {
@@ -52,26 +29,19 @@ const EditCustomer = props => {
   const solenoidValvesList = props.navigation.getParam('solenoidValves');
   const generalNotes = props.navigation.getParam('generalNotes');
   console.log(generalNotes);
-  //const [timerCollection, setTimerCollection] = useState([]);
-  //const [shutOffCollection, setShutOffCollection] = useState([]);
-  //const [solenoidValveCollection, setSolenoidValveCollection] = useState([]);
-  //const [generalNoteCollection, setGeneralNoteCollection] = useState([]);
   var timerCollection = [];
   var shutOffCollection = [];
   var solenoidValveCollection = [];
   var generalNoteCollection = [];
-  //console.log(timerCollection.length);
   console.log(shutOffs.length);
   console.log(solenoidValvesList.length);
   for (var i = 0; i < timers.length; i++) {
     var timerNotes = getNotes(customer, timers[i], 'TimerNotes');
     var findTimerNotes = getNotes(customer, timers[i], 'FindTimerNotes');
-    //setTimerCollection(
     timerCollection.push({
       utility: timers[i],
       noteCollection: [timerNotes, findTimerNotes],
     });
-    // );
   }
   for (var j = 0; j < shutOffs.length; j++) {
     var shutOffNotes = getNotes(customer, shutOffs[j], 'ShutOffValveNotes');
@@ -80,12 +50,10 @@ const EditCustomer = props => {
       shutOffs[j],
       'FindShutOffValveNotes',
     );
-    //setShutOffCollection(
     shutOffCollection.push({
       utility: shutOffs[j],
       noteCollection: [shutOffNotes, findShutOffNotes],
     });
-    // );
   }
   for (var k = 0; k < solenoidValvesList.length; k++) {
     var solenoidValveNotes = getNotes(
@@ -98,12 +66,10 @@ const EditCustomer = props => {
       solenoidValvesList[k],
       'FindSolenoidValvesNotes',
     );
-    //setSolenoidValveCollection(
     solenoidValveCollection.push({
       utility: solenoidValvesList[k],
       noteCollection: [solenoidValveNotes, findSolenoidValveNotes],
     });
-    //);
   }
   console.log(customer.id);
   // Get the navigation prop
@@ -154,8 +120,6 @@ const EditCustomer = props => {
    *
    * Return: None
    *
-   * Functions Called: getCustomers(this.customerRetrieved),
-   * updateCustomer(customer), and checkForNullTextEntries(customer)
    *
    */
   function submitCustomerInfo() {
@@ -179,16 +143,6 @@ const EditCustomer = props => {
         phoneNumber: finalPhoneNumber,
         id: customer.id,
       });
-      // Go back to the home page after adding the customer to the database
-      /*props.navigation.navigate('Customer', {
-        customer: {
-          firstName: currentCustomerFirstName,
-          lastName: currentCustomerLastName,
-          address: currentCustomerAddress,
-          phoneNumber: currentCustomerPhoneNumber,
-        },
-        navigation: props.navigation,
-      });*/
       customer.firstName = currentCustomerFirstName;
       customer.lastName = currentCustomerLastName;
       customer.address = currentCustomerAddress;
@@ -232,7 +186,6 @@ const EditCustomer = props => {
   function parsePhoneNumber(text) {
     setCurrentCustomerPhoneNumber(text.replace(/[^0-9]/g, ''));
   }
-  //console.log(this.state.currentCustomerPhoneNumber);
   return (
     <SafeAreaView>
       <View style={styles.addInfoScreenHeader}>
@@ -244,12 +197,8 @@ const EditCustomer = props => {
           <FontAwesomeIcon icon={faIdBadge} size={17} style={styles.icons} />
           <TextInput
             style={styles.infoText}
-            // Text Input Box for the customer's first name
             placeholder={customerFirstNamePlaceholder}
             value={currentCustomerFirstName}
-            // Displays the value that the user is entering into the text input
-            // For example, if the typed 'Bob', then 'Bob' is displayed in the
-            // Text Input Box
             onChangeText={text => setCurrentCustomerFirstName(text)}
           />
         </View>
@@ -258,7 +207,6 @@ const EditCustomer = props => {
           <FontAwesomeIcon icon={faIdBadge} size={17} style={styles.icons} />
           <TextInput
             style={styles.infoText}
-            // Text Input Box for the customer's last name
             placeholder={customerLastNamePlaceholder}
             value={currentCustomerLastName}
             onChangeText={text => setCurrentCustomerLastName(text)}
@@ -273,7 +221,6 @@ const EditCustomer = props => {
           />
           <TextInput
             style={styles.infoText}
-            // Text Input Box for the customer's address
             placeholder={customerAddressPlaceholder}
             value={currentCustomerAddress}
             onChangeText={text => setCurrentCustomerAddress(text)}
@@ -331,8 +278,6 @@ const EditCustomer = props => {
         </View>
       </View>
     </SafeAreaView>
-    // Start of the display for adding or editing a customer
   );
-  // End of the display for adding or editing a customer
 };
 export default EditCustomer;

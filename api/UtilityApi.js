@@ -1,6 +1,5 @@
 import firebase, {firestore} from 'react-native-firebase';
 import {storage} from 'react-native-firebase';
-import {Alert} from 'react-native';
 
 export function deleteNoteMedia(
   imagesToBeDeleted,
@@ -22,17 +21,6 @@ export function deleteNoteMedia(
         console.log(utilityNote.title);
       }
     }
-    //  console.log(utilityNote.videoRefs[0].videoRef);
-    //console.log(imagesToBeDeleted[0]);
-    /*for (var j = 0; j < utilityNote.videoRefs.length; j++) {
-      if (imagesToBeDeleted[i] === utilityNote.videoRefs[j].videoRef) {
-        utilityNote.numVideos = utilityNote.numVideos - 1;
-        utilityNote.videoRefs.splice(j, 1);
-        deleteImage(imagesToBeDeleted[i]);
-        console.log('image deleted');
-        console.log(utilityNote.title);
-      }
-    }*/
   }
   updateNote(
     customer,
@@ -73,17 +61,12 @@ export function deleteCustomer(
   generalNotes,
   navigation,
 ) {
-  //console.log('Deleting Timers');
   deleteUtilities(customer, timerCollection);
-  //console.log('Deleting ShutOffs');
   deleteUtilities(customer, shutOffCollection);
-  //console.log('Deleting SolenoidValves');
   deleteUtilities(customer, solenoidValveCollection);
-  //console.log('Deleting General Notes');
   deleteGeneralNotes(customer, generalNotes);
   var docRef = firestore()
     .collection('Customers')
-    // Is customer.id needed here?
     .doc(customer.id)
     .delete()
     .then(() => {
@@ -97,9 +80,7 @@ export function deleteCustomer(
 
 export function deleteUtilities(customer, utilityCollection) {
   console.log('Deleting Utilities');
-  // console.log('Delete Utilities: ' + utilityCollection[0].noteCollection.length);
   for (var i = 0; i < utilityCollection.length; i++) {
-    //console.log(utilityCollection[i].noteCollection.length);
     deleteUtility(
       customer,
       utilityCollection[i].utility,
@@ -116,7 +97,6 @@ export function deleteUtility(customer, utility, noteCollection, navigation) {
   }
   var docRef = firestore()
     .collection('Customers')
-    // Is customer.id needed here?
     .doc(customer.id)
     .collection(utility.utilityType)
     .doc(utility.id)
@@ -231,7 +211,6 @@ export function deleteContent(
   utility,
   utilityNote,
   navigation,
-  navigationScreen,
 ) {
   if (isDeleteCustomer) {
     // Call Delete Customer
@@ -269,7 +248,6 @@ export function deleteContent(
   }
 }
 
-// Start of Timer adding and getting functions
 export function addNote(
   customer,
   utilityType,
@@ -308,7 +286,6 @@ export function addNote(
   return docRef.id;
 }
 
-// Start of Timer adding and getting functions
 export function updateNote(
   customer,
   utilityType,
@@ -326,7 +303,6 @@ export function updateNote(
     date =
       today.getMonth() + 1 + '-' + today.getDate() + '-' + today.getFullYear();
 
-  //console.log(imageRefs);
   if (today.getHours() >= 12) {
     meridiam = 'pm';
     if (today.getHours() === 12) {
@@ -341,7 +317,6 @@ export function updateNote(
   var docRef = firebase
     .firestore()
     .collection('Customers')
-    // Is customer.id needed here?
     .doc(customer.id);
   if (utilityNote.noteType !== 'GeneralNotes') {
     docRef = docRef.collection(utilityType).doc(utility.id);

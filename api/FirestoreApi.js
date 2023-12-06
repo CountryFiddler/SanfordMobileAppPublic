@@ -1,9 +1,5 @@
 
 import firebase, {firestore} from 'react-native-firebase';
-import {Alert, Platform} from 'react-native';
-//import storage from 'react-native-firebase/storage';
-import {useState} from 'react';
-import {err} from 'react-native-svg/lib/typescript/xml';
 
 export function addCustomer(
   customer, addComplete
@@ -11,7 +7,6 @@ export function addCustomer(
   const docRef = firebase
     .firestore()
     .collection('Customers')
-    // Is customer.id needed here?
     .doc();
 
   docRef
@@ -35,9 +30,7 @@ export function addCustomer(
 
 export async function getCustomers(customersRetrieved) {
   var customers = [];
-  //const customer = Customer;
-  // Need to use firestore(). firebase().firestore() only read the docs,
-  // it did not store them in customerList
+  // Need to use firestore(). firebase().firestore() only read the docs
   firestore()
     .collection('Customers')
     .get()
@@ -77,7 +70,6 @@ export function updateCustomer(customer) {
       lastName: customer.lastName,
       address: customer.address,
       phoneNumber: customer.phoneNumber,
-      //searchText: customer.searchText,
       addressHistory: firebase.firestore.FieldValue.arrayUnion(
         customer.address,
       ),
@@ -85,7 +77,7 @@ export function updateCustomer(customer) {
         customer.firstName + ' ' + customer.lastName,
       ),
     })
-    // I think this updates the database quicker???
+    // This updates the database quicker
     .then(snapshot => snapshot.get())
     .catch(error => console.log(error));
 }
